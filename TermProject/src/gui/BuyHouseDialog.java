@@ -4,13 +4,10 @@ package edu.ncsu.monopoly.gui;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import termproject.Player;
 
 
@@ -18,7 +15,7 @@ public class BuyHouseDialog extends JDialog {
 	private JComboBox cboMonopoly;
 	private JComboBox cboNumber;
 
-	private Player player;
+	private final Player player;
 
 	public BuyHouseDialog(Player player) {
 		this.player = player;
@@ -36,11 +33,9 @@ public class BuyHouseDialog extends JDialog {
 
 	private JButton buildCancelButton() {
 		JButton btn = new JButton("Cancel");
-		btn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				cancelClicked();
-			}
-		});
+		btn.addActionListener((ActionEvent e) -> {
+                    cancelClicked();
+                });
 		return btn;
 	}
 
@@ -61,11 +56,9 @@ public class BuyHouseDialog extends JDialog {
 
 	private JButton buildOKButton() {
 		JButton btn = new JButton("OK");
-		btn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				okClicked();
-			}
-		});
+		btn.addActionListener((ActionEvent e) -> {
+                    okClicked();
+                });
 		return btn;
 	}
 	

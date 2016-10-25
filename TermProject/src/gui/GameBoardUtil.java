@@ -3,13 +3,12 @@ package edu.ncsu.monopoly.gui;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-
 import termproject.GameBoard;
 
 public class GameBoardUtil {
     
 	public static Dimension calculateDimension(int i) {
-		i = i - 4;
+		i -= 4;
 		int shortSide = i / 4;
 		int longSide = (i - (shortSide * 2)) / 2;
 		return new Dimension(longSide, shortSide);

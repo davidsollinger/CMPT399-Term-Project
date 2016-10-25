@@ -1,19 +1,18 @@
 package edu.ncsu.monopoly.gui;
 
-import termproject.GameMaster;
-import termproject.Player;
-import termproject.Cell;
 import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import termproject.Cell;
+import termproject.GameMaster;
+import termproject.Player;
 
 
 public class GUICell extends JPanel {
 
-	private Cell cell;
+	private final Cell cell;
 	private JLabel lblInfo;
-	private JLabel[] lblPlayers = new JLabel[GameMaster.MAX_PLAYER];
+	private final JLabel[] lblPlayers = new JLabel[GameMaster.MAX_PLAYER];
 	
     public GUICell(Cell cell) {
         this.cell = cell;
