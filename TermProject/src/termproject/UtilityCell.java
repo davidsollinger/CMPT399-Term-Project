@@ -6,24 +6,26 @@ public class UtilityCell extends Cell {
     private static int PRICE;
 
     public static void setPrice(int price) {
-        UtilityCell.PRICE = price;
+        PRICE = price;
     }
 
+    @Override
     public int getPrice() {
-        return UtilityCell.PRICE;
+        return PRICE;
     }
 
     public int getRent(int diceRoll) {
-        if (player.numberOfUtil() == 1) {
-            return diceRoll * 4;
-        } else if (player.numberOfUtil() >= 2) {
+        if (player.numberOfUtil() >= 2) {
             return diceRoll * 10;
+        } else if (player.numberOfUtil() == 1) {
+            return diceRoll * 4;
         }
         return 0;
     }
 
+    @Override
     public void playAction() {
-        Player currentPlayer = null;
+        Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameMaster.instance().getCurrentPlayer();
             if (player != currentPlayer) {

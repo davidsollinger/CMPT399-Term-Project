@@ -1,6 +1,13 @@
 package termproject;
 
 import junit.framework.TestCase;
+import termproject.Cell;
+import termproject.GameBoard;
+import termproject.GameMaster;
+import termproject.MockGUI;
+import termproject.Player;
+import termproject.PropertyCell;
+import termproject.SimpleGameBoard;
 
 public class PlayerTest extends TestCase {
 

@@ -7,11 +7,11 @@ public abstract class Cell {
     protected Player player;
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     public int getPrice() {
@@ -19,10 +19,12 @@ public abstract class Cell {
     }
 
     public boolean isAvailable() {
-        return available;
+        return this.available;
     }
 
-    public abstract void playAction();
+    protected void playAction() {
+        
+    }
 
     public void setAvailable(boolean available) {
         this.available = available;

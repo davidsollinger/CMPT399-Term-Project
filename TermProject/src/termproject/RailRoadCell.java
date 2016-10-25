@@ -14,6 +14,7 @@ public class RailRoadCell extends Cell {
         RailRoadCell.price = price;
     }
 
+    @Override
     public int getPrice() {
         return RailRoadCell.price;
     }
@@ -21,9 +22,10 @@ public class RailRoadCell extends Cell {
     public int getRent() {
         return RailRoadCell.baseRent * (int) Math.pow(2, player.numberOfRR() - 1);
     }
-
+    
+    @Override
     public void playAction() {
-        Player currentPlayer = null;
+        Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameMaster.instance().getCurrentPlayer();
             if (player != currentPlayer) {
