@@ -1,17 +1,19 @@
-package edu.ncsu.monopoly.gui;
+package gui;
 
 import termproject.Cell;
 import termproject.Player;
 import termproject.PropertyCell;
 
 public class PropertyCellInfoFormatter implements CellInfoFormatter {
+
+    @Override
     public String format(Cell cell) {
-        PropertyCell c = (PropertyCell)cell;
-        StringBuffer buf = new StringBuffer();
+        PropertyCell c = (PropertyCell) cell;
+        StringBuilder buf = new StringBuilder();
         Player owner = cell.getPlayer();
         String ownerName = "";
-        if(owner != null) {
-        	ownerName = owner.getName();
+        if (owner != null) {
+            ownerName = owner.getName();
         }
         buf.append("<html><b><font color='")
                 .append(c.getColorGroup())
@@ -19,8 +21,8 @@ public class PropertyCellInfoFormatter implements CellInfoFormatter {
                 .append(cell.getName())
                 .append("</font></b><br>")
                 .append("$").append(c.getPrice())
-				.append("<br>Owner: ").append(ownerName)
-				.append("<br>* ").append(c.getNumHouses())
+                .append("<br>Owner: ").append(ownerName)
+                .append("<br>* ").append(c.getNumHouses())
                 .append("</html>");
         return buf.toString();
     }
