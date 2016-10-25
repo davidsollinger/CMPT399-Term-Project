@@ -7,3 +7,7 @@
 *.jar
 *.war
 *.ear
+
+# Build Files
+*.properties
+*.xml
