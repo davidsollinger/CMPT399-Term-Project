@@ -1,7 +1,8 @@
-package edu.ncsu.monopoly.gui;
+package gui;
 
 import termproject.Cell;
 
 public interface CellInfoFormatter {
+
     public String format(Cell cell);
 }
