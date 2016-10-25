@@ -1,40 +1,41 @@
 package termproject;
 
 public abstract class Cell {
-	private boolean available = true;
-	private String name;
-	protected Player player;
 
-	public String getName() {
-		return name;
-	}
+    private boolean available = true;
+    private String name;
+    protected Player player;
 
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public int getPrice() {
-		return 0;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public boolean isAvailable() {
-		return available;
-	}
-	
-	public abstract void playAction();
+    public Player getPlayer() {
+        return player;
+    }
 
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
-	
-	void setName(String name) {
-		this.name = name;
-	}
+    public int getPrice() {
+        return 0;
+    }
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-    
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public abstract void playAction();
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public String toString() {
         return name;
     }

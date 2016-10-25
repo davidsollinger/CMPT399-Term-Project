@@ -1,6 +1,7 @@
 package termproject;
 
 public class MockRespondDialog implements RespondDialog {
+
     public MockRespondDialog(TradeDeal deal) {
     }
 
