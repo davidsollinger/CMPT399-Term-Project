@@ -4,5 +4,4 @@
 - The program crashes with an error when the player does not give a name after selecting how many players are in the game
 - names can be numbers (intentional?)
 - player colour does not change if there are multiple characters
-- change the text colour for the chance and community chest boxes
-  --- or change the background
+- change the text colour for the chance and community chest boxes (or change the background)
