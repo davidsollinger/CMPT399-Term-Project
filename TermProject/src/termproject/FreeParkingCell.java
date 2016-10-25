@@ -2,11 +2,11 @@ package termproject;
 
 public class FreeParkingCell extends Cell {
 
-	public FreeParkingCell() {
-		setName("Free Parking");
-	}
+    public FreeParkingCell() {
+        super.setName("Free Parking");
+    }
 
-	public void playAction() {
-		return;
-	}
+    @Override
+    public void playAction() {
+    }
 }

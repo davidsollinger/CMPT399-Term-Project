@@ -11,21 +11,23 @@ import termproject.GameMaster;
 
 public class UtilDiceRoll extends JDialog {
 
+    private static final long serialVersionUID = 1L;
+
     public static int showDialog() {
         UtilDiceRoll dialog = new UtilDiceRoll();
-        dialog.show();
+        dialog.setVisible(true);
         return dialog.diceValue;
     }
-    JButton btnDice = new JButton("Roll the Dice!");
+    private final JButton btnDice = new JButton("Roll the Dice!");
     private final JButton btnOK = new JButton("OK");
-    private int diceValue;
+    public int diceValue;
     private final JLabel lblPrompt = new JLabel();
 
     public UtilDiceRoll() {
-        setModal(true);
+        super.setModal(true);
         btnOK.setEnabled(false);
         lblPrompt.setText("Please roll the dice to determine your utility bill.");
-        Container contentPane = getContentPane();
+        Container contentPane = super.getContentPane();
         JPanel pnlButtons = new JPanel();
         pnlButtons.add(btnDice);
         pnlButtons.add(btnOK);
@@ -38,7 +40,7 @@ public class UtilDiceRoll extends JDialog {
         btnOK.addActionListener((ActionEvent arg0) -> {
             okClicked();
         });
-        this.pack();
+        super.pack();
     }
 
     public void okClicked() {

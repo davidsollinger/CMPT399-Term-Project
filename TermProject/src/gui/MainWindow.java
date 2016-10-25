@@ -25,13 +25,15 @@ import termproject.TradeDialog;
 
 public class MainWindow extends JFrame implements MonopolyGUI {
 
-    JPanel eastPanel = new JPanel();
-    ArrayList guiCells = new ArrayList();
+    private static final long serialVersionUID = 1L;
 
-    JPanel northPanel = new JPanel();
-    PlayerPanel[] playerPanels;
-    JPanel southPanel = new JPanel();
-    JPanel westPanel = new JPanel();
+    private final JPanel eastPanel = new JPanel();
+    private final List<GUICell> guiCells = new ArrayList<>();
+
+    private final JPanel northPanel = new JPanel();
+    private PlayerPanel[] playerPanels;
+    private final JPanel southPanel = new JPanel();
+    private final JPanel westPanel = new JPanel();
 
     public MainWindow() {
         northPanel.setBorder(new LineBorder(Color.BLACK));
@@ -39,17 +41,16 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         westPanel.setBorder(new LineBorder(Color.BLACK));
         eastPanel.setBorder(new LineBorder(Color.BLACK));
 
-        Container c = getContentPane();
-        //setSize(800, 600);
+        Container c = super.getContentPane();
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
-        setSize(d);
+        super.setSize(d);
         c.add(northPanel, BorderLayout.NORTH);
         c.add(southPanel, BorderLayout.SOUTH);
         c.add(eastPanel, BorderLayout.EAST);
         c.add(westPanel, BorderLayout.WEST);
 
-        this.addWindowListener(new WindowAdapter() {
+        super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
@@ -57,10 +58,10 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         });
     }
 
-    private void addCells(JPanel panel, List cells) {
+    private void addCells(JPanel panel, List<Cell> cells) {
         for (int x = 0; x < cells.size(); x++) {
-            GUICell cell = new GUICell((Cell) cells.get(x));
-            panel.add(cell);
+            GUICell cell = new GUICell(cells.get(x));
+            panel.add(cell);            
             guiCells.add(cell);
         }
     }
@@ -98,7 +99,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     @Override
     public int[] getDiceRoll() {
         TestDiceRollDialog dialog = new TestDiceRollDialog(this);
-        dialog.show();
+        dialog.setVisible(true);
         return dialog.getDiceRoll();
     }
 
@@ -137,21 +138,21 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     public RespondDialog openRespondDialog(TradeDeal deal) {
         GUIRespondDialog dialog = new GUIRespondDialog();
         dialog.setDeal(deal);
-        dialog.show();
+        dialog.setVisible(true);
         return dialog;
     }
 
     @Override
     public TradeDialog openTradeDialog() {
         GUITradeDialog dialog = new GUITradeDialog(this);
-        dialog.show();
+        dialog.setVisible(true);
         return dialog;
     }
 
     private GUICell queryCell(int index) {
         Cell cell = GameMaster.instance().getGameBoard().getCell(index);
         for (int x = 0; x < guiCells.size(); x++) {
-            GUICell guiCell = (GUICell) guiCells.get(x);
+            GUICell guiCell = guiCells.get(x);
             if (guiCell.getCell() == cell) {
                 return guiCell;
             }
@@ -216,7 +217,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     @Override
     public void showBuyHouseDialog(Player currentPlayer) {
         BuyHouseDialog dialog = new BuyHouseDialog(currentPlayer);
-        dialog.show();
+        dialog.setVisible(true);
     }
 
     @Override
@@ -243,7 +244,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
             playerPanel.displayInfo();
         }
         for (int j = 0; j < guiCells.size(); j++) {
-            GUICell cell = (GUICell) guiCells.get(j);
+            GUICell cell = guiCells.get(j);
             cell.displayInfo();
         }
     }
