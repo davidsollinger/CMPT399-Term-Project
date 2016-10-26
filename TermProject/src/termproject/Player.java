@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Player {
-    //the key of colorGroups is the name of the color group.
 
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private boolean inJail;
     private int money;
     private String name;
-
     private Cell position;
     private List<PropertyCell> properties = new ArrayList<>();
     private List<RailRoadCell> railroads = new ArrayList<>();

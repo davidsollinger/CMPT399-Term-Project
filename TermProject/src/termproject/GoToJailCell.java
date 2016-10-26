@@ -9,7 +9,7 @@ public class GoToJailCell extends Cell {
     @Override
     public void playAction() {
         Player currentPlayer = GameMaster.instance().getCurrentPlayer();
-        JailCell jail = (JailCell) (GameMaster.instance().getGameBoard().queryCell("Jail"));
+//        JailCell jail = (JailCell) (GameMaster.instance().getGameBoard().queryCell("Jail"));
         GameMaster.instance().sendToJail(currentPlayer);
     }
 }

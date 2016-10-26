@@ -1,7 +1,7 @@
 package termproject;
 
-import edu.ncsu.monopoly.gui.GoCellInfoFormatter;
-import edu.ncsu.monopoly.gui.InfoFormatter;
+import gui.GoCellInfoFormatter;
+import gui.InfoFormatter;
 import junit.framework.TestCase;
 
 public class CellInfoFormatterTest extends TestCase {

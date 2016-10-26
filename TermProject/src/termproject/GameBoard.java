@@ -12,7 +12,6 @@ public class GameBoard {
     //the key of colorGroups is the name of the color group.
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private final List<Card> communityChestCards = new ArrayList<>();
-    private GameMaster gameMaster;
 
     public GameBoard() {
         Cell go = new GoCell();

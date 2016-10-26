@@ -14,7 +14,7 @@ public class MovePlayerCard extends Card {
     public void applyAction() {
         Player currentPlayer = GameMaster.instance().getCurrentPlayer();
         Cell currentPosition = currentPlayer.getPosition();
-        int newCell = GameMaster.instance().getGameBoard().queryCellIndex(destination);
+        int newCell = GameMaster.instance().getGameBoard().queryCellIndex(this.destination);
         int currentCell = GameMaster.instance().getGameBoard().queryCellIndex(currentPosition.getName());
         int diceValue = 0;
         if (currentCell > newCell) {
@@ -29,12 +29,12 @@ public class MovePlayerCard extends Card {
 
     @Override
     public int getCardType() {
-        return type;
+        return this.type;
     }
 
     @Override
     public String getLabel() {
-        return "Go to " + destination;
+        return "Go to " + this.destination;
     }
 
 }
