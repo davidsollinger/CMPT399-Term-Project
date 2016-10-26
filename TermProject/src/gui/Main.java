@@ -6,7 +6,7 @@ import termproject.GameBoardFull;
 import termproject.GameMaster;
 
 public class Main {
-
+    
     private static int inputNumberOfPlayers(MainWindow window) {
         int numPlayers = 0;
         while (numPlayers <= 0 || numPlayers > GameMaster.MAX_PLAYER) {
@@ -37,7 +37,7 @@ public class Main {
                 master.setTestMode(true);
             }
             try {
-                Class c = Class.forName(args[1]);
+                Class<?> c = Class.forName(args[1]);
                 gameBoard = (GameBoard) c.newInstance();
             } catch (ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(window, "Class Not Found.  Program will exit");
@@ -71,7 +71,7 @@ public class Main {
             GameMaster.instance().getPlayer(i).setName(name);
         }
         window.setupGameBoard(gameBoard);
-        window.show();
+        window.setVisible(true);
         master.setGUI(window);
         master.startGame();
     }

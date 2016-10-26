@@ -5,7 +5,6 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,18 +20,20 @@ import termproject.TradeDialog;
 
 public class GUITradeDialog extends JDialog implements TradeDialog {
 
-    private JButton btnOK, btnCancel;
-    private JComboBox cboSellers, cboProperties;
+    private static final long serialVersionUID = 1L;
 
+    private JButton btnOK, btnCancel;
+    private JComboBox<Player> cboSellers;
+    private JComboBox<Cell> cboProperties;
     private TradeDeal deal;
     private JTextField txtAmount;
 
     public GUITradeDialog(Frame parent) {
         super(parent);
 
-        setTitle("Trade Property");
-        cboSellers = new JComboBox();
-        cboProperties = new JComboBox();
+        super.setTitle("Trade Property");
+        cboSellers = new JComboBox<>();
+        cboProperties = new JComboBox<>();
         txtAmount = new JTextField();
         btnOK = new JButton("OK");
         btnCancel = new JButton("Cancel");
@@ -40,9 +41,9 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         btnOK.setEnabled(false);
 
         buildSellersCombo();
-        setModal(true);
+        super.setModal(true);
 
-        Container contentPane = getContentPane();
+        Container contentPane = super.getContentPane();
         contentPane.setLayout(new GridLayout(4, 2));
         contentPane.add(new JLabel("Sellers"));
         contentPane.add(cboSellers);
@@ -54,7 +55,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         contentPane.add(btnCancel);
 
         btnCancel.addActionListener((ActionEvent e) -> {
-            GUITradeDialog.this.hide();
+            GUITradeDialog.this.setVisible(false);
         });
 
         cboSellers.addItemListener((ItemEvent e) -> {
@@ -63,7 +64,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         });
 
         btnOK.addActionListener((ActionEvent e) -> {
-            int amount = 0;
+            int amount;
             try {
                 amount = Integer.parseInt(txtAmount.getText());
             } catch (NumberFormatException nfe) {
@@ -83,20 +84,19 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
                 deal.setPropertyName(cell.getName());
                 deal.setSellerIndex(GameMaster.instance().getPlayerIndex(player));
             }
-            hide();
+            setVisible(false);
         });
 
-        this.pack();
+        super.pack();
     }
 
     private void buildSellersCombo() {
-        List sellers = GameMaster.instance().getSellerList();
-        for (Iterator iter = sellers.iterator(); iter.hasNext();) {
-            Player player = (Player) iter.next();
+        List<Player> sellers = GameMaster.instance().getSellerList();
+        sellers.stream().forEach((player) -> {
             cboSellers.addItem(player);
-        }
+        });
         if (sellers.size() > 0) {
-            updatePropertiesCombo((Player) sellers.get(0));
+            updatePropertiesCombo(sellers.get(0));
         }
     }
 

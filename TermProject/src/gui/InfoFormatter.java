@@ -1,6 +1,7 @@
 package gui;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import termproject.CardCell;
 import termproject.Cell;
 import termproject.FreeParkingCell;
@@ -13,11 +14,11 @@ import termproject.UtilityCell;
 
 public class InfoFormatter {
 
-    static Hashtable cellInfoFormatters = null;
+    static Map<Class, CellInfoFormatter> cellInfoFormatters = null;
 
     static {
         if (cellInfoFormatters == null) {
-            cellInfoFormatters = new Hashtable();
+            cellInfoFormatters = new HashMap<>();
             addFormatters();
         }
     }
@@ -42,8 +43,7 @@ public class InfoFormatter {
     }
 
     public static String cellInfo(Cell cell) {
-        CellInfoFormatter formatter
-                = (CellInfoFormatter) cellInfoFormatters.get(cell.getClass());
+        CellInfoFormatter formatter = cellInfoFormatters.get(cell.getClass());
         return formatter.format(cell);
     }
 

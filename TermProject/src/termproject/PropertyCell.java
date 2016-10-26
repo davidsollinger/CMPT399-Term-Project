@@ -19,7 +19,7 @@ public class PropertyCell extends Cell {
     public int getNumHouses() {
         return numHouses;
     }
-    
+
     @Override
     public int getPrice() {
         return sellPrice;
@@ -29,10 +29,10 @@ public class PropertyCell extends Cell {
         int rentToCharge = rent;
         String[] monopolies = player.getMonopolies();
         for (String monopolie : monopolies) {
-                if (monopolie.equals(colorGroup)) {
-                    rentToCharge = rent * 2;
-                }
+            if (monopolie.equals(colorGroup)) {
+                rentToCharge = rent * 2;
             }
+        }
         if (numHouses > 0) {
             rentToCharge = rent * (numHouses + 1);
         }

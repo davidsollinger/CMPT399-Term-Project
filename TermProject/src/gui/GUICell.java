@@ -13,22 +13,24 @@ import termproject.Player;
 
 public class GUICell extends JPanel {
 
+    private static final long serialVersionUID = 1L;
+
     private final Cell cell;
     private JLabel lblInfo;
     private final JLabel[] lblPlayers = new JLabel[GameMaster.MAX_PLAYER];
 
     public GUICell(Cell cell) {
         this.cell = cell;
-        setLayout(new OverlayLayout(this));
-        setBorder(new BevelBorder(BevelBorder.LOWERED));
+        super.setLayout(new OverlayLayout(this));
+        super.setBorder(new BevelBorder(BevelBorder.LOWERED));
         JPanel pnlPlayer = new JPanel();
         pnlPlayer.setLayout(new GridLayout(2, 4));
         pnlPlayer.setOpaque(false);
         createPlayerLabels(pnlPlayer);
-        add(pnlPlayer);
-        setPreferredSize(new Dimension(100, 100));
+        super.add(pnlPlayer);
+        super.setPreferredSize(new Dimension(100, 100));
         addCellInfo();
-        this.doLayout();
+        super.doLayout();
     }
 
     private void addCellInfo() {

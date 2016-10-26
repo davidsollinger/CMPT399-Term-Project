@@ -11,14 +11,16 @@ import termproject.Player;
 
 public class BuyHouseDialog extends JDialog {
 
-    private JComboBox cboMonopoly;
-    private JComboBox cboNumber;
+    private static final long serialVersionUID = 1L;
+
+    private JComboBox<String> cboMonopoly;
+    private JComboBox<Integer> cboNumber;
 
     private final Player player;
 
     public BuyHouseDialog(Player player) {
         this.player = player;
-        Container c = this.getContentPane();
+        Container c = super.getContentPane();
         c.setLayout(new GridLayout(3, 2));
         c.add(new JLabel("Select monopoly"));
         c.add(buildMonopolyComboBox());
@@ -27,7 +29,7 @@ public class BuyHouseDialog extends JDialog {
         c.add(buildOKButton());
         c.add(buildCancelButton());
         c.doLayout();
-        this.pack();
+        super.pack();
     }
 
     private JButton buildCancelButton() {
@@ -38,18 +40,14 @@ public class BuyHouseDialog extends JDialog {
         return btn;
     }
 
-    private JComboBox buildMonopolyComboBox() {
-        cboMonopoly = new JComboBox(player.getMonopolies());
+    private JComboBox<String> buildMonopolyComboBox() {
+        cboMonopoly = new JComboBox<>(player.getMonopolies());
         return cboMonopoly;
     }
 
-    private JComboBox buildNumberComboBox() {
-        cboNumber = new JComboBox(new Integer[]{
-            new Integer(1),
-            new Integer(2),
-            new Integer(3),
-            new Integer(4),
-            new Integer(5)});
+    private JComboBox<Integer> buildNumberComboBox() {
+        cboNumber = new JComboBox<>(new Integer[]{
+            1, 2, 3, 4, 5});
         return cboNumber;
     }
 

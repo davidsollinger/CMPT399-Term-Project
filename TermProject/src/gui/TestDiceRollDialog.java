@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -12,6 +13,8 @@ import javax.swing.JTextField;
 
 public class TestDiceRollDialog extends JDialog {
 
+    private static final long serialVersionUID = 1L;
+
     private JButton btnOK, btnCancel;
     private JTextField txtDiceRoll;
     private int[] diceRoll;
@@ -19,14 +22,14 @@ public class TestDiceRollDialog extends JDialog {
     public TestDiceRollDialog(Frame parent) {
         super(parent);
 
-        setTitle("Dice Roll Dialog");
+        super.setTitle("Dice Roll Dialog");
         txtDiceRoll = new JTextField(2);
         btnOK = new JButton("OK");
         btnCancel = new JButton("Cancel");
 
-        setModal(true);
+        super.setModal(true);
 
-        Container contentPane = getContentPane();
+        Container contentPane = super.getContentPane();
         contentPane.setLayout(new GridLayout(2, 2));
         contentPane.add(new JLabel("Amount"));
         contentPane.add(txtDiceRoll);
@@ -34,7 +37,7 @@ public class TestDiceRollDialog extends JDialog {
         contentPane.add(btnCancel);
 
         btnCancel.addActionListener((ActionEvent e) -> {
-            TestDiceRollDialog.this.hide();
+            setVisible(false);
             diceRoll = new int[2];
             diceRoll[0] = 0;
             diceRoll[1] = 0;
@@ -59,13 +62,13 @@ public class TestDiceRollDialog extends JDialog {
                     diceRoll[1] = (amount / 2) + 1;
                 }
             }
-            hide();
+            setVisible(false);
         });
 
-        this.pack();
+        super.pack();
     }
 
     public int[] getDiceRoll() {
-        return diceRoll;
+        return Arrays.copyOf(diceRoll, diceRoll.length);
     }
 }

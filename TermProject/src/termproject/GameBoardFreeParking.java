@@ -7,9 +7,9 @@ public class GameBoardFreeParking extends GameBoard {
         JailCell jail = new JailCell();
         FreeParkingCell freeParking = new FreeParkingCell();
         GoToJailCell goToJail = new GoToJailCell();
-        addCell(jail);
-        addCell(freeParking);
-        addCell(goToJail);
+        super.addCell(jail);
+        super.addCell(freeParking);
+        super.addCell(goToJail);
 
     }
 }

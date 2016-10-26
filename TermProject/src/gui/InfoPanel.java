@@ -6,6 +6,8 @@ import termproject.GameMaster;
 
 public class InfoPanel extends JPanel {
 
+    private static final long serialVersionUID = 1L;
+
     public void displayInfo() {
         GameMaster master = GameMaster.instance();
         setLayout(new GridLayout(1, master.getNumberOfPlayers()));

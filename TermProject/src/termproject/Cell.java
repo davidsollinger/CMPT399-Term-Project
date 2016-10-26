@@ -23,7 +23,6 @@ public abstract class Cell {
     }
 
     protected void playAction() {
-        
     }
 
     public void setAvailable(boolean available) {
@@ -38,6 +37,7 @@ public abstract class Cell {
         this.player = player;
     }
 
+    @Override
     public String toString() {
         return name;
     }

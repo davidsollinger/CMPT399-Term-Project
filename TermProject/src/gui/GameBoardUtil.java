@@ -3,55 +3,57 @@ package gui;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+import termproject.Cell;
 import termproject.GameBoard;
 
 public class GameBoardUtil {
 
-    public static Dimension calculateDimension(int i) {
-        i -= 4;
-        int shortSide = i / 4;
-        int longSide = (i - (shortSide * 2)) / 2;
+    public static Dimension calculateDimension(int cellNumber) {
+        int aCellNumber = cellNumber;
+        aCellNumber -= 4;
+        int shortSide = aCellNumber / 4;
+        int longSide = (aCellNumber - (shortSide * 2)) / 2;
         return new Dimension(longSide, shortSide);
     }
 
-    public static List getEastCells(GameBoard board) {
+    public static List<Cell> getEastCells(GameBoard board) {
         Dimension d = calculateDimension(board.getCellNumber());
         int longSide = d.width;
         int shortSide = d.height;
-        List cells = new ArrayList();
+        List<Cell> cells = new ArrayList<>();
         for (int i = board.getCellNumber() - shortSide; i <= board.getCellNumber() - 1; i++) {
             cells.add(board.getCell(i));
         }
         return cells;
     }
 
-    public static List getNorthCells(GameBoard board) {
+    public static List<Cell> getNorthCells(GameBoard board) {
         Dimension d = calculateDimension(board.getCellNumber());
         int longSide = d.width;
         int shortSide = d.height;
-        List cells = new ArrayList();
+        List<Cell> cells = new ArrayList<>();
         for (int i = longSide + 2 + shortSide; i <= longSide + 2 + shortSide + longSide + 1; i++) {
             cells.add(board.getCell(i));
         }
         return cells;
     }
 
-    public static List getSouthCells(GameBoard board) {
+    public static List<Cell> getSouthCells(GameBoard board) {
         Dimension d = calculateDimension(board.getCellNumber());
         int longSide = d.width;
         int shortSide = d.height;
-        List cells = new ArrayList();
+        List<Cell> cells = new ArrayList<>();
         for (int i = longSide + 1; i >= 0; i--) {
             cells.add(board.getCell(i));
         }
         return cells;
     }
 
-    public static List getWestCells(GameBoard board) {
+    public static List<Cell> getWestCells(GameBoard board) {
         Dimension d = calculateDimension(board.getCellNumber());
         int longSide = d.width;
         int shortSide = d.height;
-        List cells = new ArrayList();
+        List<Cell> cells = new ArrayList<>();
         for (int i = longSide + 1 + shortSide; i > longSide + 1; i--) {
             cells.add(board.getCell(i));
         }

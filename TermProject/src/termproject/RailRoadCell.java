@@ -22,7 +22,7 @@ public class RailRoadCell extends Cell {
     public int getRent() {
         return RailRoadCell.baseRent * (int) Math.pow(2, player.numberOfRR() - 1);
     }
-    
+
     @Override
     public void playAction() {
         Player currentPlayer;

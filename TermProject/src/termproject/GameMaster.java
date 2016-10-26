@@ -1,17 +1,17 @@
 package termproject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 public class GameMaster {
 
     private static GameMaster gameMaster;
     static final public int MAX_PLAYER = 8;
-    private Die[] dice;
+    private final Die[] dice;
     private GameBoard gameBoard;
     private MonopolyGUI gui;
     private int initAmountOfMoney;
-    private ArrayList players = new ArrayList();
+    private final List<Player> players = new ArrayList<>();
     private int turn = 0;
     private int utilDiceRoll;
     private boolean testMode;
@@ -35,7 +35,7 @@ public class GameMaster {
     public Card btnDrawCardClicked() {
         gui.setDrawCardEnabled(false);
         CardCell cell = (CardCell) getCurrentPlayer().getPosition();
-        Card card = null;
+        Card card;
         if (cell.getType() == Card.TYPE_CC) {
             card = getGameBoard().drawCCCard();
             card.applyAction();
@@ -94,7 +94,7 @@ public class GameMaster {
         if ((rolls[0] + rolls[1]) > 0) {
             Player player = getCurrentPlayer();
             gui.setRollDiceEnabled(false);
-            StringBuffer msg = new StringBuffer();
+            StringBuilder msg = new StringBuilder();
             msg.append(player.getName())
                     .append(", you rolled ")
                     .append(rolls[0])
@@ -162,21 +162,18 @@ public class GameMaster {
     }
 
     public Player getPlayer(int index) {
-        return (Player) players.get(index);
+        return players.get(index);
     }
 
     public int getPlayerIndex(Player player) {
         return players.indexOf(player);
     }
 
-    public ArrayList getSellerList() {
-        ArrayList sellers = new ArrayList();
-        for (Iterator iter = players.iterator(); iter.hasNext();) {
-            Player player = (Player) iter.next();
-            if (player != getCurrentPlayer()) {
-                sellers.add(player);
-            }
-        }
+    public List<Player> getSellerList() {
+        List<Player> sellers = new ArrayList<>();
+        players.stream().filter((player) -> (player != getCurrentPlayer())).forEach((player) -> {
+            sellers.add(player);
+        });
         return sellers;
     }
 
@@ -189,7 +186,7 @@ public class GameMaster {
     }
 
     public void movePlayer(int playerIndex, int diceValue) {
-        Player player = (Player) players.get(playerIndex);
+        Player player = players.get(playerIndex);
         movePlayer(player, diceValue);
     }
 
@@ -225,7 +222,7 @@ public class GameMaster {
 
     public void reset() {
         for (int i = 0; i < getNumberOfPlayers(); i++) {
-            Player player = (Player) players.get(i);
+            Player player = players.get(i);
             player.setPosition(gameBoard.getCell(0));
         }
         if (gameBoard != null) {

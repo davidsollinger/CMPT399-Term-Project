@@ -11,7 +11,6 @@ public class GameBoardCCJail extends GameBoard {
         CardCell chance1 = new CardCell(Card.TYPE_CHANCE, "Chance 1");
 
         Card ccCard1 = new JailCard(Card.TYPE_CC);
-        Card chanceCard1 = new JailCard(Card.TYPE_CHANCE);
 
         blue1.setName("Blue 1");
         blue2.setName("Blue 2");
@@ -28,13 +27,12 @@ public class GameBoardCCJail extends GameBoard {
         blue1.setHousePrice(50);
         blue2.setHousePrice(50);
 
-        addCard(ccCard1);
-
-        addCell(cc1);
-        addCell(blue1);
-        addCell(jail);
-        addCell(blue2);
-        addCell(chance1);
+        super.addCard(ccCard1);
+        super.addCell(cc1);
+        super.addCell(blue1);
+        super.addCell(jail);
+        super.addCell(blue2);
+        super.addCell(chance1);
 
     }
 }

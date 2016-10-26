@@ -50,16 +50,16 @@ public class GameBoardUtility extends GameBoard {
         green1.setHousePrice(70);
         green2.setHousePrice(70);
 
-        addCell(rr1);
-        addCell(blue1);
-        addCell(jail);
-        addCell(u1);
-        addCell(blue2);
-        addCell(freeParking);
-        addCell(green1);
-        addCell(rr3);
-        addCell(goToJail);
-        addCell(green2);
-        addCell(u2);
+        super.addCell(rr1);
+        super.addCell(blue1);
+        super.addCell(jail);
+        super.addCell(u1);
+        super.addCell(blue2);
+        super.addCell(freeParking);
+        super.addCell(green1);
+        super.addCell(rr3);
+        super.addCell(goToJail);
+        super.addCell(green2);
+        super.addCell(u2);
     }
 }

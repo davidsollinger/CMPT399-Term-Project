@@ -17,6 +17,8 @@ import termproject.Player;
 
 public class PlayerPanel extends JPanel {
 
+    private static final long serialVersionUID = 1L;
+
     private final JButton btnBuyHouse;
     private final JButton btnDrawCard;
     private final JButton btnEndTurn;
@@ -75,11 +77,11 @@ public class PlayerPanel extends JPanel {
         pnlInfo.doLayout();
         pnlName.doLayout();
         pnlProperties.doLayout();
-        this.doLayout();
+        super.doLayout();
 
-        setLayout(new BorderLayout());
-        add(pnlInfo, BorderLayout.CENTER);
-        add(pnlAction, BorderLayout.SOUTH);
+        super.setLayout(new BorderLayout());
+        super.add(pnlInfo, BorderLayout.CENTER);
+        super.add(pnlAction, BorderLayout.SOUTH);
 
         btnRollDice.setEnabled(false);
         btnPurchaseProperty.setEnabled(false);
@@ -89,7 +91,7 @@ public class PlayerPanel extends JPanel {
         btnDrawCard.setEnabled(false);
         btnTrade.setEnabled(false);
 
-        setBorder(new BevelBorder(BevelBorder.RAISED));
+        super.setBorder(new BevelBorder(BevelBorder.RAISED));
 
         btnRollDice.addActionListener((ActionEvent e) -> {
             GameMaster.instance().btnRollDiceClicked();
