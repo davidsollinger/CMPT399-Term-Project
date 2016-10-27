@@ -5,3 +5,5 @@
 - names can be numbers (intentional?)
 - player colour does not change if there are multiple characters
 - change the text colour for the chance and community chest boxes (or change the background)
+- make project into MVC
+- (possibly modify project to javafx)
