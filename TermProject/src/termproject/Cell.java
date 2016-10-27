@@ -1,6 +1,6 @@
 package termproject;
 
-public abstract class Cell {
+public class Cell {
 
     private boolean available = true;
     private String name;

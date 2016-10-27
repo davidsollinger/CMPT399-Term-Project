@@ -8,8 +8,4 @@ public class JailCell extends Cell {
         super.setName("Jail");
     }
 
-    @Override
-    public void playAction() {
-
-    }
 }
