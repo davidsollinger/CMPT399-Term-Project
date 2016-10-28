@@ -19,12 +19,12 @@ public class TradeDeal {
     }
 
     public String makeMessage() {
-        String message = GameMaster.instance().getCurrentPlayer()
+        String message = GameMaster.INSTANCE.getCurrentPlayer()
                 + " wishes to purchase "
                 + propertyName + " from "
-                + GameMaster.instance().getPlayer(playerIndex)
+                + GameMaster.INSTANCE.getPlayer(playerIndex)
                 + " for " + amount + ".  "
-                + GameMaster.instance().getPlayer(playerIndex)
+                + GameMaster.INSTANCE.getPlayer(playerIndex)
                 + ", do you wish to trade your property?";
         return message;
     }

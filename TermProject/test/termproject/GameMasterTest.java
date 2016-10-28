@@ -9,7 +9,7 @@ public class GameMasterTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        gameMaster = GameMaster.instance();
+        gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardFull());
         gameMaster.setNumberOfPlayers(2);
         gameMaster.getPlayer(0).setName("Player 1");

@@ -67,7 +67,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     private void buildPlayerPanels() {
-        GameMaster master = GameMaster.instance();
+        GameMaster master = GameMaster.INSTANCE;
         JPanel infoPanel = new JPanel();
         int players = master.getNumberOfPlayers();
         infoPanel.setLayout(new GridLayout(2, (players + 1) / 2));
@@ -105,19 +105,19 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     @Override
     public boolean isDrawCardButtonEnabled() {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         return playerPanels[currentPlayerIndex].isDrawCardButtonEnabled();
     }
 
     @Override
     public boolean isEndTurnButtonEnabled() {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         return playerPanels[currentPlayerIndex].isEndTurnButtonEnabled();
     }
 
     @Override
     public boolean isGetOutOfJailButtonEnabled() {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         return playerPanels[currentPlayerIndex].isGetOutOfJailButtonEnabled();
     }
 
@@ -150,7 +150,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     private GUICell queryCell(int index) {
-        Cell cell = GameMaster.instance().getGameBoard().getCell(index);
+        Cell cell = GameMaster.INSTANCE.getGameBoard().getCell(index);
         for (int x = 0; x < guiCells.size(); x++) {
             GUICell guiCell = guiCells.get(x);
             if (guiCell.getCell() == cell) {
@@ -162,37 +162,37 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     @Override
     public void setBuyHouseEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         playerPanels[currentPlayerIndex].setBuyHouseEnabled(b);
     }
 
     @Override
     public void setDrawCardEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         playerPanels[currentPlayerIndex].setDrawCardEnabled(b);
     }
 
     @Override
     public void setEndTurnEnabled(boolean enabled) {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         playerPanels[currentPlayerIndex].setEndTurnEnabled(enabled);
     }
 
     @Override
     public void setGetOutOfJailEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         playerPanels[currentPlayerIndex].setGetOutOfJailEnabled(b);
     }
 
     @Override
     public void setPurchasePropertyEnabled(boolean enabled) {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         playerPanels[currentPlayerIndex].setPurchasePropertyEnabled(enabled);
     }
 
     @Override
     public void setRollDiceEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.instance().getCurrentPlayerIndex();
+        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
         playerPanels[currentPlayerIndex].setRollDiceEnabled(b);
     }
 
@@ -232,7 +232,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     @Override
     public void startGame() {
-        int numberOfPlayers = GameMaster.instance().getNumberOfPlayers();
+        int numberOfPlayers = GameMaster.INSTANCE.getNumberOfPlayers();
         for (int i = 0; i < numberOfPlayers; i++) {
             movePlayer(i, 0, 0);
         }
