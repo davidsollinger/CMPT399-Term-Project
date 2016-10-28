@@ -1,12 +1,11 @@
 package termproject;
 
 import java.util.List;
-
 import junit.framework.TestCase;
 
 public class GameMasterTest extends TestCase {
 
-    GameMaster gameMaster;
+    private GameMaster gameMaster;
 
     @Override
     protected void setUp() throws Exception {
