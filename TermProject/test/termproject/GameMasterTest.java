@@ -1,16 +1,15 @@
 package termproject;
 
 import java.util.List;
-
 import junit.framework.TestCase;
 
 public class GameMasterTest extends TestCase {
 
-    GameMaster gameMaster;
+    private GameMaster gameMaster;
 
     @Override
     protected void setUp() throws Exception {
-        gameMaster = GameMaster.instance();
+        gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardFull());
         gameMaster.setNumberOfPlayers(2);
         gameMaster.getPlayer(0).setName("Player 1");

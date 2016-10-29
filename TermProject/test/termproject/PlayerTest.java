@@ -1,20 +1,14 @@
 package termproject;
 
 import junit.framework.TestCase;
-import termproject.Cell;
-import termproject.GameBoard;
-import termproject.GameMaster;
-import termproject.MockGUI;
-import termproject.Player;
-import termproject.PropertyCell;
-import termproject.SimpleGameBoard;
 
 public class PlayerTest extends TestCase {
 
-    GameMaster gameMaster;
+    private GameMaster gameMaster;
 
+    @Override
     protected void setUp() throws Exception {
-        gameMaster = GameMaster.instance();
+        gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new SimpleGameBoard());
         gameMaster.setGUI(new MockGUI());
         gameMaster.setTestMode(true);

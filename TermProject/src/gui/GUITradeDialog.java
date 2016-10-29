@@ -77,12 +77,12 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
                 return;
             }
             Player player = (Player) cboSellers.getSelectedItem();
-            Player currentPlayer = GameMaster.instance().getCurrentPlayer();
+            Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
             if (currentPlayer.getMoney() > amount) {
                 deal = new TradeDeal();
                 deal.setAmount(amount);
                 deal.setPropertyName(cell.getName());
-                deal.setSellerIndex(GameMaster.instance().getPlayerIndex(player));
+                deal.setSellerIndex(GameMaster.INSTANCE.getPlayerIndex(player));
             }
             setVisible(false);
         });
@@ -91,7 +91,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
     }
 
     private void buildSellersCombo() {
-        List<Player> sellers = GameMaster.instance().getSellerList();
+        List<Player> sellers = GameMaster.INSTANCE.getSellerList();
         sellers.stream().forEach((player) -> {
             cboSellers.addItem(player);
         });

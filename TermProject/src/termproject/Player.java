@@ -17,7 +17,7 @@ public class Player {
     private List<UtilityCell> utilities = new ArrayList<>();
 
     public Player() {
-        GameBoard gb = GameMaster.instance().getGameBoard();
+        GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         inJail = false;
         if (gb != null) {
             position = gb.queryCell("Go");
@@ -33,13 +33,11 @@ public class Player {
         }
         if (property instanceof RailRoadCell) {
             RailRoadCell cell = (RailRoadCell) property;
-//            railroads.add(property);
             railroads.add(cell);
             colorGroups.put(RailRoadCell.COLOR_GROUP, getPropertyNumberForColor(RailRoadCell.COLOR_GROUP) + 1);
         }
         if (property instanceof UtilityCell) {
             UtilityCell cell = (UtilityCell) property;
-//            utilities.add(property);
             utilities.add(cell);
             colorGroups.put(UtilityCell.COLOR_GROUP, getPropertyNumberForColor(UtilityCell.COLOR_GROUP) + 1);
         }
@@ -90,15 +88,12 @@ public class Player {
 
     public String[] getMonopolies() {
         List<String> monopolies = new ArrayList<>();
-//        Enumeration colors = colorGroups.keys();
         List<String> colors = new ArrayList<>(colorGroups.keySet());
-//        while (colors.hasMoreElements()) {
         while (!colors.isEmpty()) {
-//            String color = (String) colors.nextElement();
             String color = colors.remove(0);
             if (!(color.equals(RailRoadCell.COLOR_GROUP)) && !(color.equals(UtilityCell.COLOR_GROUP))) {
                 Integer num = colorGroups.get(color);
-                GameBoard gameBoard = GameMaster.instance().getGameBoard();
+                GameBoard gameBoard = GameMaster.INSTANCE.getGameBoard();
                 if (num == gameBoard.getPropertyNumberForColor(color)) {
                     monopolies.add(color);
                 }
@@ -118,7 +113,7 @@ public class Player {
             exchangeProperty(null);
         }
         inJail = false;
-        GameMaster.instance().updateGUI();
+        GameMaster.INSTANCE.updateGUI();
     }
 
     public Cell getPosition() {
@@ -191,7 +186,7 @@ public class Player {
     }
 
     public void purchaseHouse(String selectedMonopoly, int houses) {
-        GameBoard gb = GameMaster.instance().getGameBoard();
+        GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         PropertyCell[] cells = gb.getPropertiesInMonopoly(selectedMonopoly);
         if ((money >= (cells.length * (cells[0].getHousePrice() * houses)))) {
             for (PropertyCell cell : cells) {
@@ -199,7 +194,7 @@ public class Player {
                 if (newNumber <= 5) {
                     cell.setNumHouses(newNumber);
                     this.setMoney(money - (cell.getHousePrice() * houses));
-                    GameMaster.instance().updateGUI();
+                    GameMaster.INSTANCE.updateGUI();
                 }
             }
         }

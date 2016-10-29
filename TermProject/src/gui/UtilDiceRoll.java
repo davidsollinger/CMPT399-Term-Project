@@ -48,7 +48,7 @@ public class UtilDiceRoll extends JDialog {
     }
 
     public void rollDice() {
-        int[] diceRoll = GameMaster.instance().rollDice();
+        int[] diceRoll = GameMaster.INSTANCE.rollDice();
         this.diceValue = diceRoll[0] + diceRoll[1];
         lblPrompt.setText("You rolled " + diceValue);
         btnDice.setEnabled(false);
