@@ -4,7 +4,7 @@ import termproject.Cell;
 import termproject.Player;
 import termproject.PropertyCell;
 
-public class PropertyCellInfoFormatter implements CellInfoFormatter {
+public class PropertyCellInfoFormatter extends CellInfoFormatter {
 
     @Override
     public String format(Cell cell) {

@@ -4,7 +4,7 @@ import termproject.Cell;
 import termproject.Player;
 import termproject.RailRoadCell;
 
-public class RRCellInfoFormatter implements CellInfoFormatter {
+public class RRCellInfoFormatter extends CellInfoFormatter {
 
     @Override
     public String format(Cell cell) {

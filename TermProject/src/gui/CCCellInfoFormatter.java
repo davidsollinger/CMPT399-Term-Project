@@ -2,7 +2,7 @@ package gui;
 
 import termproject.Cell;
 
-public class CCCellInfoFormatter implements CellInfoFormatter {
+public class CCCellInfoFormatter extends CellInfoFormatter {
 
     @Override
     public String format(Cell cell) {
