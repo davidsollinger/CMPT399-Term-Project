@@ -16,6 +16,7 @@ public class InfoFormatter {
 
     private static Map<Class<?>, CellInfoFormatter> cellInfoFormatters = null;
 
+
     static {
         if (cellInfoFormatters == null) {
             cellInfoFormatters = new HashMap<>();
@@ -24,22 +25,24 @@ public class InfoFormatter {
     }
 
     private static void addFormatters() {
+        CellInfoFormatterFactory cellInfoFormatterFactory = new CellInfoFormatterFactory();
+        
         cellInfoFormatters.put(
-                PropertyCell.class, new PropertyCellInfoFormatter());
+                PropertyCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Property"));
         cellInfoFormatters.put(
-                GoCell.class, new GoCellInfoFormatter());
+                GoCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Go"));
         cellInfoFormatters.put(
-                JailCell.class, new JailCellInfoFormatter());
+                JailCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Jail"));
         cellInfoFormatters.put(
-                GoToJailCell.class, new GotoJailCellInfoFormatter());
+                GoToJailCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Go To Jail"));
         cellInfoFormatters.put(
-                FreeParkingCell.class, new FreeParkingCellInfoFormatter());
+                FreeParkingCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Free Parking"));
         cellInfoFormatters.put(
-                RailRoadCell.class, new RRCellInfoFormatter());
+                RailRoadCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Rail Road"));
         cellInfoFormatters.put(
-                UtilityCell.class, new UtilCellInfoFormatter());
+                UtilityCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Utility"));
         cellInfoFormatters.put(
-                CardCell.class, new CCCellInfoFormatter());
+                CardCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Community Chest"));
     }
 
     public static String cellInfo(Cell cell) {
