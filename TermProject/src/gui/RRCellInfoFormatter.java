@@ -5,6 +5,10 @@ import termproject.Player;
 import termproject.RailRoadCell;
 
 public class RRCellInfoFormatter extends CellInfoFormatter {
+    
+    public RRCellInfoFormatter (String color) {
+        super(color);
+    }
 
     @Override
     public String format(Cell cell) {
@@ -15,7 +19,9 @@ public class RRCellInfoFormatter extends CellInfoFormatter {
         if (owner != null) {
             ownerName = owner.getName();
         }
-        buf.append("<html><b><font color='lime'>")
+        buf.append("<html><b><font color='") 
+                .append(super.getColor())
+                .append("'>")
                 .append(cell.getName())
                 .append("</font></b><br>")
                 .append("$").append(c.getPrice())

@@ -7,13 +7,13 @@ public class CellInfoFormatterFactory {
             case "Property":
                 return new PropertyCellInfoFormatter();
             case "Rail Road":
-                return new RRCellInfoFormatter();
+                return new RRCellInfoFormatter("lime");
             case "Utility":
-                return new UtilCellInfoFormatter();
+                return new UtilCellInfoFormatter("olive");
             case "Chance":
-                return new ChanceCellInfoFormatter();
+                return new CellInfoFormatter("teal");
             case "Community Chest":
-                return new CCCellInfoFormatter();
+                return new CellInfoFormatter("teal");
             case "Jail":
                 return new CellInfoFormatter();
             case "Go To Jail":
