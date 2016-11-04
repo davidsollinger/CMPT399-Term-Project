@@ -14,7 +14,8 @@ import termproject.UtilityCell;
 
 public class InfoFormatter {
 
-    private static Map<Class, CellInfoFormatter> cellInfoFormatters = null;
+    private static Map<Class<?>, CellInfoFormatter> cellInfoFormatters = null;
+
 
     static {
         if (cellInfoFormatters == null) {

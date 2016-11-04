@@ -3,10 +3,9 @@ package termproject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameMaster {
+public enum GameMaster {
+    INSTANCE;
 
-    private static GameMaster gameMaster;
-    static final public int MAX_PLAYER = 8;
     private final Die[] dice;
     private GameBoard gameBoard;
     private MonopolyGUI gui;
@@ -16,14 +15,9 @@ public class GameMaster {
     private int utilDiceRoll;
     private boolean testMode;
 
-    public static GameMaster instance() {
-        if (gameMaster == null) {
-            gameMaster = new GameMaster();
-        }
-        return gameMaster;
-    }
+    public static final int MAX_PLAYER = 8;
 
-    public GameMaster() {
+    private GameMaster() {
         initAmountOfMoney = 1500;
         dice = new Die[]{new Die(), new Die()};
     }

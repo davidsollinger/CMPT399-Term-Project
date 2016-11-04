@@ -43,7 +43,7 @@ public class GUICell extends JPanel {
     }
 
     public void addPlayer(int index) {
-        Player player = GameMaster.instance().getPlayer(index);
+        Player player = GameMaster.INSTANCE.getPlayer(index);
         lblPlayers[index].setText(player.getName().substring(0, 1));
         lblPlayers[index].setOpaque(true);
     }

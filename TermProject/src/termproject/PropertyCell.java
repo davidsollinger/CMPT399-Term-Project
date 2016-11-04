@@ -43,7 +43,7 @@ public class PropertyCell extends Cell {
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
-            currentPlayer = GameMaster.instance().getCurrentPlayer();
+            currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
             if (player != currentPlayer) {
                 currentPlayer.payRentTo(player, getRent());
             }

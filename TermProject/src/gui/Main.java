@@ -22,14 +22,14 @@ public class Main {
             if (numPlayers <= 0 || numPlayers > GameMaster.MAX_PLAYER) {
                 JOptionPane.showMessageDialog(window, "Please input a number between one and eight");
             } else {
-                GameMaster.instance().setNumberOfPlayers(numPlayers);
+                GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
             }
         }
         return numPlayers;
     }
 
     public static void main(String[] args) {
-        GameMaster master = GameMaster.instance();
+        GameMaster master = GameMaster.INSTANCE;
         MainWindow window = new MainWindow();
         GameBoard gameBoard = null;
         if (args.length > 0) {
@@ -68,7 +68,7 @@ public class Main {
         for (int i = 0; i < numPlayers; i++) {
             String name
                     = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
-            GameMaster.instance().getPlayer(i).setName(name);
+            GameMaster.INSTANCE.getPlayer(i).setName(name);
         }
         window.setupGameBoard(gameBoard);
         window.setVisible(true);

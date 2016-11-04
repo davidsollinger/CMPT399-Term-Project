@@ -94,34 +94,34 @@ public class PlayerPanel extends JPanel {
         super.setBorder(new BevelBorder(BevelBorder.RAISED));
 
         btnRollDice.addActionListener((ActionEvent e) -> {
-            GameMaster.instance().btnRollDiceClicked();
+            GameMaster.INSTANCE.btnRollDiceClicked();
         });
 
         btnEndTurn.addActionListener((ActionEvent e) -> {
-            GameMaster.instance().btnEndTurnClicked();
+            GameMaster.INSTANCE.btnEndTurnClicked();
         });
 
         btnPurchaseProperty.addActionListener((ActionEvent e) -> {
-            GameMaster.instance().btnPurchasePropertyClicked();
+            GameMaster.INSTANCE.btnPurchasePropertyClicked();
         });
 
         btnBuyHouse.addActionListener((ActionEvent e) -> {
-            GameMaster.instance().btnBuyHouseClicked();
+            GameMaster.INSTANCE.btnBuyHouseClicked();
         });
 
         btnGetOutOfJail.addActionListener((ActionEvent e) -> {
-            GameMaster.instance().btnGetOutOfJailClicked();
+            GameMaster.INSTANCE.btnGetOutOfJailClicked();
         });
 
         btnDrawCard.addActionListener((ActionEvent e) -> {
-            Card card = GameMaster.instance().btnDrawCardClicked();
+            Card card = GameMaster.INSTANCE.btnDrawCardClicked();
             JOptionPane
                     .showMessageDialog(PlayerPanel.this, card.getLabel());
             displayInfo();
         });
 
         btnTrade.addActionListener((ActionEvent e) -> {
-            GameMaster.instance().btnTradeClicked();
+            GameMaster.INSTANCE.btnTradeClicked();
         });
     }
 
