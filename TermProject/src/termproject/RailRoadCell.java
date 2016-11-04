@@ -2,9 +2,10 @@ package termproject;
 
 public class RailRoadCell extends Cell {
 
-    static private int baseRent;
-    static public final String COLOR_GROUP = "RAILROAD";
-    static private int price;
+    private static int baseRent;
+    private static int price;
+    
+    public static final String COLOR_GROUP = "RAILROAD";
 
     public static void setBaseRent(int baseRent) {
         RailRoadCell.baseRent = baseRent;
@@ -20,7 +21,7 @@ public class RailRoadCell extends Cell {
     }
 
     public int getRent() {
-        return RailRoadCell.baseRent * (int) Math.pow(2, player.numberOfRR() - 1);
+        return RailRoadCell.baseRent * (int) Math.pow(2, getPlayer().numberOfRR() - 1);
     }
 
     @Override
@@ -28,8 +29,8 @@ public class RailRoadCell extends Cell {
         Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-            if (player != currentPlayer) {
-                currentPlayer.payRentTo(player, getRent());
+            if (!isCurrentPlayer(currentPlayer)) {
+                currentPlayer.payRentTo(getPlayer(), getRent());
             }
         }
     }

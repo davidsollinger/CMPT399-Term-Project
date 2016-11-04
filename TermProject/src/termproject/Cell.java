@@ -4,7 +4,7 @@ public class Cell {
 
     private boolean available = true;
     private String name;
-    protected Player player;
+    private Player player;
 
     public String getName() {
         return this.name;
@@ -14,31 +14,35 @@ public class Cell {
         return this.player;
     }
 
-    public int getPrice() {
+    protected int getPrice() {
         return 0;
     }
 
-    public boolean isAvailable() {
+    protected boolean isAvailable() {
         return this.available;
     }
 
     protected void playAction() {
     }
 
-    public void setAvailable(boolean available) {
+    protected void setAvailable(boolean available) {
         this.available = available;
     }
 
-    void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
-    public void setPlayer(Player player) {
+    protected void setPlayer(Player player) {
         this.player = player;
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    protected boolean isCurrentPlayer(Player currentPlayer) {
+        return getPlayer() != currentPlayer;
     }
 }
