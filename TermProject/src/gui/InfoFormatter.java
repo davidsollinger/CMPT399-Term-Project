@@ -16,7 +16,6 @@ public class InfoFormatter {
 
     private static Map<Class<?>, CellInfoFormatter> cellInfoFormatters = null;
 
-
     static {
         if (cellInfoFormatters == null) {
             cellInfoFormatters = new HashMap<>();
