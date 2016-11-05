@@ -1,14 +1,16 @@
 package termproject;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
-public class CardsTest extends TestCase {
+public class CardsTest {
 
     private Card ccCard, chanceCard;
     private GameMaster gameMaster;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardCCGainMoney());
         gameMaster.setNumberOfPlayers(1);
@@ -19,10 +21,13 @@ public class CardsTest extends TestCase {
         gameMaster.getGameBoard().addCard(ccCard);
     }
 
-    public void testCardType() {
-        Card card = gameMaster.drawCCCard();
+    @Test
+    public void testCardTypeCC() {
         assertEquals(Card.TYPE_CC, ccCard.getCardType());
-        card = gameMaster.drawChanceCard();
+    }
+    
+    @Test
+    public void testCardTypeCHANCE() {
         assertEquals(Card.TYPE_CHANCE, chanceCard.getCardType());
     }
 }
