@@ -43,6 +43,6 @@ public class Cell {
     }
 
     protected boolean isCurrentPlayer(Player currentPlayer) {
-        return getPlayer() != currentPlayer;
+        return getPlayer() == currentPlayer;
     }
 }

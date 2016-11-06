@@ -1,13 +1,15 @@
 package termproject;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
-public class PropertyCellTest extends TestCase {
+public class PropertyCellTest {
 
     private GameMaster gameMaster;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new SimpleGameBoard());
         gameMaster.setNumberOfPlayers(2);
@@ -15,6 +17,7 @@ public class PropertyCellTest extends TestCase {
         gameMaster.setGUI(new MockGUI());
     }
 
+    @Test
     public void testPlayerAction() {
         PropertyCell cell
                 = (PropertyCell) gameMaster.getGameBoard().queryCell("Blue 3");
@@ -24,11 +27,7 @@ public class PropertyCellTest extends TestCase {
         gameMaster.switchTurn();
         gameMaster.movePlayer(1, cellIndex);
         cell.playAction();
-        assertEquals(
-                1500 - cell.getRent(),
-                gameMaster.getPlayer(1).getMoney());
-        assertEquals(
-                1380 + cell.getRent(),
-                gameMaster.getPlayer(0).getMoney());
+        assertEquals(1500 - cell.getRent(), gameMaster.getPlayer(1).getMoney());
+        assertEquals(1380 + cell.getRent(), gameMaster.getPlayer(0).getMoney());
     }
 }

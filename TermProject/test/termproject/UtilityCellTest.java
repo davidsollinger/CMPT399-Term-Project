@@ -1,13 +1,16 @@
 package termproject;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import org.junit.Before;
+import org.junit.Test;
 
-public class UtilityCellTest extends TestCase {
+public class UtilityCellTest {
 
     private GameMaster gameMaster;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardUtility());
         gameMaster.setNumberOfPlayers(2);
@@ -15,6 +18,7 @@ public class UtilityCellTest extends TestCase {
         gameMaster.setGUI(new MockGUI());
     }
 
+    @Test
     public void testMonopoly() {
         int u1CellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, u1CellIndex);
@@ -25,6 +29,7 @@ public class UtilityCellTest extends TestCase {
         assertFalse(gameMaster.getPlayer(0).canBuyHouse());
     }
 
+    @Test
     public void testPlayerAction() {
         UtilityCell cell
                 = (UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");
@@ -35,14 +40,11 @@ public class UtilityCellTest extends TestCase {
         gameMaster.movePlayer(1, cellIndex);
         cell.playAction();
         int diceRoll = gameMaster.getUtilDiceRoll();
-        assertEquals(
-                1500 - cell.getRent(diceRoll),
-                gameMaster.getPlayer(1).getMoney());
-        assertEquals(
-                1350 + cell.getRent(diceRoll),
-                gameMaster.getPlayer(0).getMoney());
+        assertEquals(1500 - cell.getRent(diceRoll), gameMaster.getPlayer(1).getMoney());
+        assertEquals(1350 + cell.getRent(diceRoll), gameMaster.getPlayer(0).getMoney());
     }
 
+    @Test
     public void testPurchaseUtility() {
         assertEquals(0, gameMaster.getPlayer(0).numberOfUtil());
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
@@ -52,6 +54,7 @@ public class UtilityCellTest extends TestCase {
         assertEquals(1, gameMaster.getPlayer(0).numberOfUtil());
     }
 
+    @Test
     public void testRent() {
         UtilityCell u1
                 = (UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");

@@ -68,10 +68,15 @@ public class Player {
                 cell.setNumHouses(0);
             } else {
                 player.properties.add(cell);
+//                player.addProperty(cell);
                 colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
             }
         }
         properties.clear();
+    }
+    
+    private void addProperty(PropertyCell propertyCell) {
+        properties.add(propertyCell);
     }
 
     public Cell[] getAllProperties() {
@@ -154,16 +159,20 @@ public class Player {
 
     public void payRentTo(Player owner, int rentValue) {
         if (money < rentValue) {
-            owner.money += money;
+            owner.addMoney(money);
             money -= rentValue;
         } else {
             money -= rentValue;
-            owner.money += rentValue;
+            owner.addMoney(rentValue);
         }
         if (isBankrupt()) {
             money = 0;
             exchangeProperty(owner);
         }
+    }
+    
+    public void addMoney(int amount) {
+        money += amount;
     }
 
     public void purchase() {

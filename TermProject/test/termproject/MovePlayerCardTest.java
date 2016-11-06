@@ -1,14 +1,18 @@
 package termproject;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
-public class MovePlayerCardTest extends TestCase {
+public class MovePlayerCardTest {
 
     private GameMaster gameMaster;
     private Card movePlayerCard;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardCCMovePlayer());
         gameMaster.setNumberOfPlayers(1);
@@ -18,10 +22,12 @@ public class MovePlayerCardTest extends TestCase {
         gameMaster.getGameBoard().addCard(movePlayerCard);
     }
 
+    @Test
     public void testJailCardLabel() {
         assertEquals("Go to Blue 1", movePlayerCard.getLabel());
     }
 
+    @Test
     public void testMovePlayerCardAction() {
         Card card = gameMaster.drawCCCard();
         assertEquals(movePlayerCard, card);
@@ -30,6 +36,7 @@ public class MovePlayerCardTest extends TestCase {
         assertEquals(gameMaster.getGameBoard().queryCell("Blue 1"), cell);
     }
 
+    @Test
     public void testMovePlayerCardUI() {
         gameMaster.movePlayer(0, 2);
         assertTrue(gameMaster.getGUI().isDrawCardButtonEnabled());

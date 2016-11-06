@@ -1,17 +1,20 @@
 package termproject;
 
-//import gui.GoCellInfoFormatter;
 import gui.InfoFormatter;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
-public class CellInfoFormatterTest extends TestCase {
+public class CellInfoFormatterTest {
 
-    public void testGoCellTest() {
-        GoCell cell = new GoCell();
-        //String goLabel = GoCellInfoFormatter.GO_CELL_LABEL;
-        //assertEquals(goLabel, InfoFormatter.cellInfo(cell));
-    }
-
+//    @Test
+//    public void testGoCellTest() { // Not fully implemented
+//        GoCell cell = new GoCell();
+////        String goLabel = GoCellInfoFormatter.GO_CELL_LABEL;
+//        String goLabel = "<html><b>Go</b></html>";
+//        assertEquals(goLabel, InfoFormatter.cellInfo(cell));
+//    }
+//
+    @Test
     public void testPropertyCellText() {
         String propertyName = "Blue 1";
         String propertyColor = "blue";

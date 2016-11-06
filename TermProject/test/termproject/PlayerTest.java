@@ -1,20 +1,25 @@
 package termproject;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
-public class PlayerTest extends TestCase {
+public class PlayerTest {
 
     private GameMaster gameMaster;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new SimpleGameBoard());
         gameMaster.setGUI(new MockGUI());
         gameMaster.setTestMode(true);
         gameMaster.reset();
     }
-
+    
+    @Test
     public void testPurchaseProperty() {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.movePlayer(0, 3);
@@ -27,6 +32,7 @@ public class PlayerTest extends TestCase {
         assertSame(player, cell.getPlayer());
     }
 
+    @Test
     public void testSameGoCell() {
         GameBoard gameboard = gameMaster.getGameBoard();
         Player player1 = new Player();
@@ -36,7 +42,8 @@ public class PlayerTest extends TestCase {
         assertSame(go, player2.getPosition());
     }
 
-    public void testPayRentTo() {
+    @Test
+    public void testPayRentTo() { // Not working
         gameMaster.setNumberOfPlayers(2);
         gameMaster.movePlayer(0, 4);
         gameMaster.getCurrentPlayer().purchase();
@@ -47,6 +54,7 @@ public class PlayerTest extends TestCase {
         assertEquals(2800, gameMaster.getPlayer(0).getMoney());
     }
 
+    @Test
     public void testExchangeProperty() {
         gameMaster.setNumberOfPlayers(2);
         gameMaster.movePlayer(0, 3);
@@ -73,6 +81,7 @@ public class PlayerTest extends TestCase {
         assertEquals(880, gameMaster.getCurrentPlayer().getMoney());
     }
 
+    @Test
     public void testResetProperty() {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.movePlayer(0, 1);

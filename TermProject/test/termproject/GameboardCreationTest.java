@@ -3,10 +3,13 @@ package termproject;
 import gui.GameBoardUtil;
 import java.awt.Dimension;
 import java.util.List;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import org.junit.Test;
 
-public class GameboardCreationTest extends TestCase {
+public class GameboardCreationTest {
 
+    @Test
     public void testCellAddOrder() {
         GameBoard board = new SimpleGameBoard();
         List<Cell> northCells = GameBoardUtil.getNorthCells(board);
@@ -25,6 +28,7 @@ public class GameboardCreationTest extends TestCase {
         assertEquals(0, eastCells.size());
     }
 
+    @Test
     public void testCellAddOrder14() {
         GameBoard board = new GameBoard14();
         List<Cell> northCells = GameBoardUtil.getNorthCells(board);
@@ -51,6 +55,7 @@ public class GameboardCreationTest extends TestCase {
         assertSame(board.queryCell("Yellow 2"), eastCells.get(1));
     }
 
+    @Test
     public void testGameboardLayout() {
         assertEquals(
                 new Dimension(1, 0), GameBoardUtil.calculateDimension(6));

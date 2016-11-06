@@ -25,7 +25,7 @@ public class CardsTest {
     public void testCardTypeCC() {
         assertEquals(Card.TYPE_CC, ccCard.getCardType());
     }
-    
+
     @Test
     public void testCardTypeCHANCE() {
         assertEquals(Card.TYPE_CHANCE, chanceCard.getCardType());

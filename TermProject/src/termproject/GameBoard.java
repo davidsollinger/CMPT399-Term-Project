@@ -36,7 +36,7 @@ public class GameBoard {
     }
     
     private void setPropertyCellColor (PropertyCell cell) {
-        final int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
+        int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
         colorGroups.put(cell.getColorGroup(), propertyNumber + 1);
     }
 
