@@ -3,6 +3,7 @@ package debugging;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import javax.swing.JButton;
@@ -44,12 +45,8 @@ public class DiceRollDialog extends JDialog {
         });
 
         btnOK.addActionListener((ActionEvent e) -> {
-            int amount;
-            try {
-                amount = Integer.parseInt(txtDiceRoll.getText());
-            } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(DiceRollDialog.this,
-                        "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+            int amount = tryToGetInt();
+            if (amount == -1) {
                 return;
             }
             if (amount > 0) {
@@ -66,6 +63,16 @@ public class DiceRollDialog extends JDialog {
         });
 
         super.pack();
+    }
+
+    private int tryToGetInt() throws HeadlessException {
+        try {
+            return Integer.parseInt(txtDiceRoll.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(DiceRollDialog.this,
+                    "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
     }
 
     public int[] getDiceRoll() {

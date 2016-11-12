@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import termproject.GameBoard;
 import termproject.GameBoardFull;
@@ -14,16 +15,21 @@ public class Main {
             if (numberOfPlayers == null) {
                 System.exit(0);
             }
-            try {
-                numPlayers = Integer.parseInt(numberOfPlayers);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(window, "Please input a number");
-            }
+            numPlayers = tryToGetInt(numPlayers, numberOfPlayers, window);
             if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
                 JOptionPane.showMessageDialog(window, "Please input a number between two and eight");
             } else {
                 GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
             }
+        }
+        return numPlayers;
+    }
+
+    private static int tryToGetInt(int numPlayers, String numberOfPlayers, MainWindow window) throws HeadlessException {
+        try {
+            return Integer.parseInt(numberOfPlayers);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(window, "Please input a number");
         }
         return numPlayers;
     }
@@ -36,19 +42,7 @@ public class Main {
             if (args[0].equals("test")) {
                 master.setTestMode(true);
             }
-            try {
-                Class<?> c = Class.forName(args[1]);
-                gameBoard = (GameBoard) c.newInstance();
-            } catch (ClassNotFoundException e) {
-                JOptionPane.showMessageDialog(window, "Class Not Found.  Program will exit");
-                System.exit(0);
-            } catch (IllegalAccessException e) {
-                JOptionPane.showMessageDialog(window, "Illegal Access of Class.  Program will exit");
-                System.exit(0);
-            } catch (InstantiationException e) {
-                JOptionPane.showMessageDialog(window, "Class Cannot be Instantiated.  Program will exit");
-                System.exit(0);
-            }
+            gameBoard = tryToGetArgClass(args, window);
         }
 
 //      GameBoard gameBoard = new GameBoardFull();
@@ -72,5 +66,23 @@ public class Main {
         window.setVisible(true);
         master.setGUI(window);
         master.startGame();
+    }
+
+    private static GameBoard tryToGetArgClass(String[] args, MainWindow window) throws HeadlessException {
+        GameBoard gameBoard = new GameBoardFull();
+        try {
+            Class<?> c = Class.forName(args[1]);
+            gameBoard = (GameBoard) c.newInstance();
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(window, "Class Not Found.  Program will exit");
+            System.exit(0);
+        } catch (IllegalAccessException e) {
+            JOptionPane.showMessageDialog(window, "Illegal Access of Class.  Program will exit");
+            System.exit(0);
+        } catch (InstantiationException e) {
+            JOptionPane.showMessageDialog(window, "Class Cannot be Instantiated.  Program will exit");
+            System.exit(0);
+        }
+        return gameBoard;
     }
 }

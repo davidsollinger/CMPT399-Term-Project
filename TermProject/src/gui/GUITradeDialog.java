@@ -3,6 +3,7 @@ package gui;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.util.List;
@@ -64,12 +65,8 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         });
 
         btnOK.addActionListener((ActionEvent e) -> {
-            int amount;
-            try {
-                amount = Integer.parseInt(txtAmount.getText());
-            } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(GUITradeDialog.this,
-                        "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+            int amount = tryToGetInt();
+            if (amount == -1) {
                 return;
             }
             Cell cell = (Cell) cboProperties.getSelectedItem();
@@ -88,6 +85,16 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         });
 
         super.pack();
+    }
+
+    private int tryToGetInt() throws HeadlessException {
+        try {
+            return Integer.parseInt(txtAmount.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(GUITradeDialog.this,
+                    "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
     }
 
     private void buildSellersCombo() {
