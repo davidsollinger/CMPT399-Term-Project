@@ -1,6 +1,7 @@
 package termproject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,10 @@ import java.util.Map;
 public class GameBoard {
 
     private final List<Cell> cells = new ArrayList<>();
-    private final List<Card> chanceCards = new ArrayList<>();
     //the key of colorGroups is the name of the color group.
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private final List<Card> communityChestCards = new ArrayList<>();
+    private final List<Card> chanceCards = new ArrayList<>();
 
     public GameBoard() {
         Cell go = new GoCell();
@@ -109,5 +110,10 @@ public class GameBoard {
 
     protected void removeCards() {
         communityChestCards.clear();
+    }
+    
+    protected void shuffleCardPiles() {
+        Collections.shuffle(communityChestCards);
+        Collections.shuffle(chanceCards);
     }
 }
