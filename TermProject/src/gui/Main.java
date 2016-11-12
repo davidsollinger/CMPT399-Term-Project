@@ -9,7 +9,7 @@ public class Main {
     
     private static int inputNumberOfPlayers(MainWindow window) {
         int numPlayers = 0;
-        while (numPlayers <= 0 || numPlayers > GameMaster.MAX_PLAYER) {
+        while (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
             String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players");
             if (numberOfPlayers == null) {
                 System.exit(0);
@@ -20,7 +20,7 @@ public class Main {
                 JOptionPane.showMessageDialog(window, "Please input a number");
             }
             if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
-                JOptionPane.showMessageDialog(window, "Please input a number between one and eight");
+                JOptionPane.showMessageDialog(window, "Please input a number between two and eight");
             } else {
                 GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
             }
