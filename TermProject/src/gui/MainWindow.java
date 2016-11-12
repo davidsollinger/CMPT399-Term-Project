@@ -1,5 +1,6 @@
 package gui;
 
+import debugging.DiceRollDialog;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -98,7 +99,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     @Override
     public int[] getDiceRoll() {
-        TestDiceRollDialog dialog = new TestDiceRollDialog(this);
+        DiceRollDialog dialog = new DiceRollDialog(this);
         dialog.setVisible(true);
         return dialog.getDiceRoll();
     }

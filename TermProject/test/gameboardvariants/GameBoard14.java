@@ -1,4 +1,4 @@
-package GameBoardVariants;
+package gameboardvariants;
 
 import termproject.GameBoard;
 import termproject.PropertyCell;

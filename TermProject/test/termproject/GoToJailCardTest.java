@@ -1,6 +1,6 @@
 package termproject;
 
-import GameBoardVariants.GameBoardCCJail;
+import gameboardvariants.GameBoardCCJail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

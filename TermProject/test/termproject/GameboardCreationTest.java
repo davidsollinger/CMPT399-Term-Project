@@ -1,6 +1,6 @@
 package termproject;
 
-import GameBoardVariants.GameBoard14;
+import gameboardvariants.GameBoard14;
 import gui.GameBoardUtil;
 import java.awt.Dimension;
 import java.util.List;

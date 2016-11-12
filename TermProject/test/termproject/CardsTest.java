@@ -1,6 +1,6 @@
 package termproject;
 
-import GameBoardVariants.GameBoardCCGainMoney;
+import gameboardvariants.GameBoardCCGainMoney;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

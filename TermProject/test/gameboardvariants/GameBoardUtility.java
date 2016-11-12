@@ -1,4 +1,4 @@
-package GameBoardVariants;
+package gameboardvariants;
 
 import termproject.FreeParkingCell;
 import termproject.GameBoard;
