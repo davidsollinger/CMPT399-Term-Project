@@ -1,4 +1,11 @@
-package termproject;
+package GameBoardVariants;
+
+import termproject.FreeParkingCell;
+import termproject.GameBoard;
+import termproject.GoToJailCell;
+import termproject.JailCell;
+import termproject.PropertyCell;
+import termproject.RailRoadCell;
 
 public class GameBoardRailRoad extends GameBoard {
 

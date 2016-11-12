@@ -31,7 +31,7 @@ public class Main {
     public static void main(String[] args) {
         GameMaster master = GameMaster.INSTANCE;
         MainWindow window = new MainWindow();
-        GameBoard gameBoard = null;
+        GameBoard gameBoard = new GameBoardFull();
         if (args.length > 0) {
             if (args[0].equals("test")) {
                 master.setTestMode(true);
@@ -49,8 +49,6 @@ public class Main {
                 JOptionPane.showMessageDialog(window, "Class Cannot be Instantiated.  Program will exit");
                 System.exit(0);
             }
-        } else {
-            gameBoard = new GameBoardFull();
         }
 
 //      GameBoard gameBoard = new GameBoardFull();

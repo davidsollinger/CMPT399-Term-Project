@@ -1,4 +1,11 @@
-package termproject;
+package GameBoardVariants;
+
+import termproject.Card;
+import termproject.CardCell;
+import termproject.GameBoard;
+import termproject.JailCard;
+import termproject.JailCell;
+import termproject.PropertyCell;
 
 public class GameBoardCCJail extends GameBoard {
 

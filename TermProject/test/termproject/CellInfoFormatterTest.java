@@ -13,7 +13,7 @@ public class CellInfoFormatterTest {
 //        String goLabel = "<html><b>Go</b></html>";
 //        assertEquals(goLabel, InfoFormatter.cellInfo(cell));
 //    }
-//
+
     @Test
     public void testPropertyCellText() {
         String propertyName = "Blue 1";

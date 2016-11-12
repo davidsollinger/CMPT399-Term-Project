@@ -1,4 +1,7 @@
-package termproject;
+package GameBoardVariants;
+
+import termproject.GameBoard;
+import termproject.PropertyCell;
 
 public class GameBoard14 extends GameBoard {
 

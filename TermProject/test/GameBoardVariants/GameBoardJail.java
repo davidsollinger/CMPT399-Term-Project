@@ -1,4 +1,9 @@
-package termproject;
+package GameBoardVariants;
+
+import termproject.GameBoard;
+import termproject.GoToJailCell;
+import termproject.JailCell;
+import termproject.PropertyCell;
 
 public class GameBoardJail extends GameBoard { // Not used?
 

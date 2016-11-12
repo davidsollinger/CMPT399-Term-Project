@@ -1,4 +1,11 @@
-package termproject;
+package GameBoardVariants;
+
+import termproject.Card;
+import termproject.CardCell;
+import termproject.GameBoard;
+import termproject.JailCell;
+import termproject.MovePlayerCard;
+import termproject.PropertyCell;
 
 public class GameBoardCCMovePlayer extends GameBoard { // Not used?
 

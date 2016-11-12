@@ -43,7 +43,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPayRentTo() { // Not working
+    public void testPayRentTo() {
         gameMaster.setNumberOfPlayers(2);
         gameMaster.movePlayer(0, 4);
         gameMaster.getCurrentPlayer().purchase();
