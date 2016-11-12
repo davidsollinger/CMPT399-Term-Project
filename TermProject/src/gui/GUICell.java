@@ -58,8 +58,8 @@ public class GUICell extends JPanel {
 
     public void displayInfo() {
         lblInfo.setText(InfoFormatter.cellInfo(cell));
-        this.invalidate();
-        this.repaint();
+        invalidate();
+        repaint();
     }
 
     public Cell getCell() {
@@ -69,6 +69,6 @@ public class GUICell extends JPanel {
     public void removePlayer(int index) {
         lblPlayers[index].setText("");
         lblPlayers[index].setOpaque(false);
-        this.repaint();
+        repaint();
     }
 }

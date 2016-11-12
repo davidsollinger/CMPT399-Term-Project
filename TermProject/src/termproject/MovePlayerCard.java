@@ -19,7 +19,7 @@ public class MovePlayerCard extends Card {
     }
 
     private int calculateDiceValue(Cell currentPosition) {
-        int newCell = GameMaster.INSTANCE.getGameBoard().queryCellIndex(this.destination);
+        int newCell = GameMaster.INSTANCE.getGameBoard().queryCellIndex(destination);
         int currentCell = GameMaster.INSTANCE.getGameBoard().queryCellIndex(currentPosition.getName());
         if (iscurrentCellGreaterThanNewCell(currentCell, newCell)) {
             int boardCell = GameMaster.INSTANCE.getGameBoard().getCellNumber();
@@ -34,12 +34,12 @@ public class MovePlayerCard extends Card {
 
     @Override
     public int getCardType() {
-        return this.type;
+        return type;
     }
 
     @Override
     public String getLabel() {
-        return "Go to " + this.destination;
+        return "Go to " + destination;
     }
 
 }

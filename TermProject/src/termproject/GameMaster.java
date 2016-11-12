@@ -178,7 +178,7 @@ public enum GameMaster {
     }
 
     public int getUtilDiceRoll() {
-        return this.utilDiceRoll;
+        return utilDiceRoll;
     }
 
     public void movePlayer(int playerIndex, int diceValue) {
@@ -260,7 +260,7 @@ public enum GameMaster {
     }
 
     public void setGameBoard(GameBoard board) {
-        this.gameBoard = board;
+        gameBoard = board;
     }
 
     public void setGUI(MonopolyGUI gui) {
@@ -268,7 +268,7 @@ public enum GameMaster {
     }
 
     public void setInitAmountOfMoney(int money) {
-        this.initAmountOfMoney = money;
+        initAmountOfMoney = money;
     }
 
     public void setNumberOfPlayers(int number) {
@@ -281,7 +281,7 @@ public enum GameMaster {
     }
 
     public void setUtilDiceRoll(int diceRoll) {
-        this.utilDiceRoll = diceRoll;
+        utilDiceRoll = diceRoll;
     }
 
     public void startGame() {
@@ -306,7 +306,7 @@ public enum GameMaster {
     }
 
     public void utilRollDice() {
-        this.utilDiceRoll = gui.showUtilDiceRoll();
+        utilDiceRoll = gui.showUtilDiceRoll();
     }
 
     public void setTestMode(boolean b) {

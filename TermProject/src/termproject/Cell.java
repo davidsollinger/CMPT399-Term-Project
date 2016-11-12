@@ -7,11 +7,11 @@ public class Cell {
     private Player player;
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public Player getPlayer() {
-        return this.player;
+        return player;
     }
 
     protected int getPrice() {
@@ -19,9 +19,10 @@ public class Cell {
     }
 
     protected boolean isAvailable() {
-        return this.available;
+        return available;
     }
 
+    // Used as override
     protected void playAction() {
     }
 

@@ -15,10 +15,10 @@ public class CellInfoFormatter {
     }
     
     public String getColor() {
-        return this.color;
+        return color;
     }
 
     public String format(Cell cell) {
-        return "<html><font color='" + this.color + "'><b>" + cell.getName() + "</b></font></html>";
+        return "<html><font color='" + color + "'><b>" + cell.getName() + "</b></font></html>";
     }
 }

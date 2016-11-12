@@ -88,7 +88,7 @@ public class Player {
     }
 
     public int getMoney() {
-        return this.money;
+        return money;
     }
 
     public String[] getMonopolies() {
@@ -122,7 +122,7 @@ public class Player {
     }
 
     public Cell getPosition() {
-        return this.position;
+        return position;
     }
 
     public PropertyCell getProperty(int index) {
@@ -202,7 +202,7 @@ public class Player {
                 int newNumber = cell.getNumHouses() + houses;
                 if (newNumber <= 5) {
                     cell.setNumHouses(newNumber);
-                    this.setMoney(money - (cell.getHousePrice() * houses));
+                    setMoney(money - (cell.getHousePrice() * houses));
                     GameMaster.INSTANCE.updateGUI();
                 }
             }
