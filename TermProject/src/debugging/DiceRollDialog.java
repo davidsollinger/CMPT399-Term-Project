@@ -1,4 +1,4 @@
-package gui;
+package debugging;
 
 import java.awt.Container;
 import java.awt.Frame;
@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class TestDiceRollDialog extends JDialog {
+public class DiceRollDialog extends JDialog {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class TestDiceRollDialog extends JDialog {
     private JTextField txtDiceRoll;
     private int[] diceRoll;
 
-    public TestDiceRollDialog(Frame parent) {
+    public DiceRollDialog(Frame parent) {
         super(parent);
 
         super.setTitle("Dice Roll Dialog");
@@ -44,11 +44,11 @@ public class TestDiceRollDialog extends JDialog {
         });
 
         btnOK.addActionListener((ActionEvent e) -> {
-            int amount = 0;
+            int amount;
             try {
                 amount = Integer.parseInt(txtDiceRoll.getText());
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(TestDiceRollDialog.this,
+                JOptionPane.showMessageDialog(DiceRollDialog.this,
                         "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
