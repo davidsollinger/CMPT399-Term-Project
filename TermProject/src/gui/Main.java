@@ -19,7 +19,7 @@ public class Main {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(window, "Please input a number");
             }
-            if (numPlayers <= 0 || numPlayers > GameMaster.MAX_PLAYER) {
+            if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
                 JOptionPane.showMessageDialog(window, "Please input a number between one and eight");
             } else {
                 GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
