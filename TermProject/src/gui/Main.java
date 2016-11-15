@@ -8,7 +8,7 @@ import termproject.GameMaster;
 
 public class Main {
     
-    private static int inputNumberOfPlayers(MainWindow window) {
+    private static int getNumberOfPlayers(MainWindow window) {
         int numPlayers = 0;
         while (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
             String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players");
@@ -56,7 +56,7 @@ public class Main {
 //		GameBoard gameBoard = new GameBoardJail();
 //		GameBoard gameBoard = new GameBoardFreeParking();
         master.setGameBoard(gameBoard);
-        int numPlayers = inputNumberOfPlayers(window);
+        int numPlayers = getNumberOfPlayers(window);
         for (int i = 0; i < numPlayers; i++) {
             String name
                     = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
