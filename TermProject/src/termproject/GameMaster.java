@@ -6,19 +6,19 @@ import java.util.List;
 public enum GameMaster {
     INSTANCE;
 
+    public static final int MAX_PLAYER = 8;
+    
+    private final int INITAMOUNTOFMONEY = 1500;
+    
     private final Die[] dice;
     private GameBoard gameBoard;
     private MonopolyGUI gui;
-    private int initAmountOfMoney;
     private final List<Player> players = new ArrayList<>();
     private int turn = 0;
     private int utilDiceRoll;
     private boolean testMode;
 
-    public static final int MAX_PLAYER = 8;
-
     private GameMaster() {
-        initAmountOfMoney = 1500;
         dice = new Die[]{new Die(), new Die()};
     }
 
@@ -146,7 +146,7 @@ public enum GameMaster {
     }
 
     public int getInitAmountOfMoney() {
-        return initAmountOfMoney;
+        return INITAMOUNTOFMONEY;
     }
 
     public int getNumberOfPlayers() {
@@ -267,15 +267,11 @@ public enum GameMaster {
         this.gui = gui;
     }
 
-    public void setInitAmountOfMoney(int money) {
-        initAmountOfMoney = money;
-    }
-
     public void setNumberOfPlayers(int number) {
         players.clear();
         for (int i = 0; i < number; i++) {
             Player player = new Player();
-            player.setMoney(initAmountOfMoney);
+            player.setMoney(INITAMOUNTOFMONEY);
             players.add(player);
         }
     }
