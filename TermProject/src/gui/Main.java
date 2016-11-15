@@ -12,9 +12,6 @@ public class Main {
         int numPlayers = 0;
         while (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
             String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players");
-            if (numberOfPlayers == null) {
-                System.exit(0);
-            }
             numPlayers = tryToGetInt(numPlayers, numberOfPlayers, window);
             if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
                 JOptionPane.showMessageDialog(window, "Please input a number between two and eight");
