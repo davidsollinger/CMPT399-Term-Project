@@ -5,23 +5,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Player {
+public class Player implements Nullable {
 
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private boolean inJail;
     private int money;
-    private String name;
+    protected String name;
     private Cell position;
     private List<PropertyCell> properties = new ArrayList<>();
     private List<RailRoadCell> railroads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
 
-    public Player() {
+    protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         inJail = false;
         if (gb != null) {
             position = gb.queryCell("Go");
         }
+    }
+    
+    public static Player nullPlayer() {
+        return new NullPlayer();
     }
 
     public void buyProperty(Cell property, int amount) {
@@ -74,7 +78,7 @@ public class Player {
         }
         properties.clear();
     }
-    
+
     private void addProperty(PropertyCell propertyCell) {
         properties.add(propertyCell);
     }
@@ -170,7 +174,7 @@ public class Player {
             exchangeProperty(owner);
         }
     }
-    
+
     public void addMoney(int amount) {
         money += amount;
     }
@@ -222,7 +226,7 @@ public class Player {
     }
 
     public void sellProperty(Cell property, int amount) {
-        property.setPlayer(null);
+        property.setPlayer(new NullPlayer());
         if (property instanceof PropertyCell) {
             properties.remove(property);
         }
@@ -260,5 +264,10 @@ public class Player {
         properties = new ArrayList<>();
         railroads = new ArrayList<>();
         utilities = new ArrayList<>();
+    }
+
+    @Override
+    public boolean isNull() {
+        return false;
     }
 }

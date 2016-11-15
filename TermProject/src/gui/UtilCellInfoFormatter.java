@@ -15,17 +15,13 @@ public class UtilCellInfoFormatter extends CellInfoFormatter {
         UtilityCell c = (UtilityCell) cell;
         StringBuilder buf = new StringBuilder();
         Player owner = cell.getPlayer();
-        String ownerName = "";
-        if (owner != null) {
-            ownerName = owner.getName();
-        }
         buf.append("<html><b><font color='")
                 .append(super.getColor())
                 .append("'>")
                 .append(cell.getName())
                 .append("</font></b><br>")
                 .append("$").append(c.getPrice())
-                .append("<br>Owner: ").append(ownerName)
+                .append("<br>Owner: ").append(owner.getName())
                 .append("</html>");
         return buf.toString();
     }
