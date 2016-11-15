@@ -24,7 +24,7 @@ public class Player implements Nullable {
         }
     }
     
-    public static Player nullPlayer() {
+    public static Player createNullPlayer() {
         return new NullPlayer();
     }
 

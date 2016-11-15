@@ -11,7 +11,7 @@ public class Cell {
     }
 
     public Player getPlayer() {
-        return (player == null) ? Player.nullPlayer(): player;
+        return (player == null) ? Player.createNullPlayer(): player;
     }
 
     protected int getPrice() {
