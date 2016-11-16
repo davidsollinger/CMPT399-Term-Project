@@ -19,11 +19,9 @@ public class Player implements Nullable {
     protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         inJail = false;
-        if (gb != null) {
-            position = gb.queryCell("Go");
-        }
+        position = gb.queryCell("Go");
     }
-    
+
     public static Player createNullPlayer() {
         return new NullPlayer();
     }
@@ -119,7 +117,7 @@ public class Player implements Nullable {
         money -= JailCell.BAIL;
         if (isBankrupt()) {
             money = 0;
-            exchangeProperty(null);
+            exchangeProperty(new NullPlayer());
         }
         inJail = false;
         GameMaster.INSTANCE.updateGUI();
