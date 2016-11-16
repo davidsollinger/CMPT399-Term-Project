@@ -230,12 +230,8 @@ public enum GameMaster {
     public int[] rollDice() {
         if (testMode) {
             return gui.getDiceRoll();
-        } else {
-            return new int[]{
-                dice[0].getRoll(),
-                dice[1].getRoll()
-            };
         }
+        return new int[]{dice[0].getRoll(), dice[1].getRoll()};
     }
 
     public void sendToJail(Player player) {
@@ -243,10 +239,7 @@ public enum GameMaster {
         player.setPosition(gameBoard.queryCell("Jail"));
         player.setInJail(true);
         int jailIndex = gameBoard.queryCellIndex("Jail");
-        gui.movePlayer(
-                getPlayerIndex(player),
-                oldPosition,
-                jailIndex);
+        gui.movePlayer(getPlayerIndex(player), oldPosition, jailIndex);
     }
 
     private void setAllButtonEnabled(boolean enabled) {
