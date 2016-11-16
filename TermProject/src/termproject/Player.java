@@ -71,7 +71,6 @@ public class Player implements Nullable {
                 cell.setAvailable(true);
                 cell.setNumHouses(0);
             } else {
-//                player.properties.add(cell);
                 player.addProperty(cell);
                 colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
             }
