@@ -95,7 +95,7 @@ public class GameBoard {
                 return temp;
             }
         }
-        return null;
+        return new NullCell();
     }
 
     protected int queryCellIndex(String string) {

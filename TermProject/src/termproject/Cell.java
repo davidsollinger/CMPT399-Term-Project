@@ -1,6 +1,6 @@
 package termproject;
 
-public class Cell {
+public class Cell implements Nullable {
 
     private boolean available = true;
     private String name;
@@ -11,7 +11,7 @@ public class Cell {
     }
 
     public Player getPlayer() {
-        return (player == null) ? Player.createNullPlayer(): player;
+        return (player == null) ? Player.createNullPlayer() : player;
     }
 
     protected int getPrice() {
@@ -45,5 +45,10 @@ public class Cell {
 
     protected boolean isCurrentPlayer(Player currentPlayer) {
         return getPlayer() == currentPlayer;
+    }
+
+    @Override
+    public boolean isNull() {
+        return false;
     }
 }
