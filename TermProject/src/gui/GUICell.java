@@ -9,9 +9,10 @@ import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
 import termproject.Cell;
 import termproject.GameMaster;
+import termproject.Nullable;
 import termproject.Player;
 
-public class GUICell extends JPanel {
+public class GUICell extends JPanel implements Nullable {
 
     private static final long serialVersionUID = 1L;
 
@@ -70,5 +71,10 @@ public class GUICell extends JPanel {
         lblPlayers[index].setText("");
         lblPlayers[index].setOpaque(false);
         repaint();
+    }
+
+    @Override
+    public boolean isNull() {
+        return true;
     }
 }

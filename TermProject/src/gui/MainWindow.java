@@ -158,7 +158,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
                 return guiCell;
             }
         }
-        return null;
+        return new NullGUICell(cell);
     }
 
     @Override
