@@ -7,9 +7,9 @@ public enum GameMaster {
     INSTANCE;
 
     public static final int MAX_PLAYER = 8;
-    
+
     private final int INITAMOUNTOFMONEY = 1500;
-    
+
     private final Die[] dice;
     private GameBoard gameBoard;
     private MonopolyGUI gui;
@@ -52,7 +52,7 @@ public enum GameMaster {
             updateGUI();
         }
     }
-    
+
     private void setButtonPropertiesFalse() {
         gui.setBuyHouseEnabled(false);
         gui.setDrawCardEnabled(false);
@@ -71,8 +71,8 @@ public enum GameMaster {
             playerIsOutOfJail();
         }
     }
-    
-    private void playerIsOutOfJail () {
+
+    private void playerIsOutOfJail() {
         gui.setRollDiceEnabled(true);
         gui.setBuyHouseEnabled(getCurrentPlayer().canBuyHouse());
         gui.setGetOutOfJailEnabled(getCurrentPlayer().isInJail());
@@ -221,9 +221,7 @@ public enum GameMaster {
             Player player = players.get(i);
             player.setPosition(gameBoard.getCell(0));
         }
-        if (gameBoard != null) {
-            gameBoard.removeCards();
-        }
+        gameBoard.removeCards();
         turn = 0;
     }
 
