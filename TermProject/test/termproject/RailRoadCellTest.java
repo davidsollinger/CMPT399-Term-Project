@@ -1,13 +1,16 @@
 package termproject;
 
-import junit.framework.TestCase;
+import gameboardvariants.GameBoardRailRoad;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
-public class RailRoadCellTest extends TestCase {
+public class RailRoadCellTest {
 
     private GameMaster gameMaster;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardRailRoad());
         gameMaster.setNumberOfPlayers(2);
@@ -15,6 +18,7 @@ public class RailRoadCellTest extends TestCase {
         gameMaster.setGUI(new MockGUI());
     }
 
+    @Test
     public void testPlayerAction() {
         RailRoadCell cell
                 = (RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad A");
@@ -24,14 +28,11 @@ public class RailRoadCellTest extends TestCase {
         gameMaster.switchTurn();
         gameMaster.movePlayer(1, cellIndex);
         cell.playAction();
-        assertEquals(
-                1500 - cell.getRent(),
-                gameMaster.getPlayer(1).getMoney());
-        assertEquals(
-                1300 + cell.getRent(),
-                gameMaster.getPlayer(0).getMoney());
+        assertEquals(1500 - cell.getRent(), gameMaster.getPlayer(1).getMoney());
+        assertEquals(1300 + cell.getRent(), gameMaster.getPlayer(0).getMoney());
     }
 
+    @Test
     public void testPurchaseRailroad() {
         assertEquals(0, gameMaster.getPlayer(0).numberOfRR());
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
@@ -41,6 +42,7 @@ public class RailRoadCellTest extends TestCase {
         assertEquals(1, gameMaster.getPlayer(0).numberOfRR());
     }
 
+    @Test
     public void testRent() {
         RailRoadCell rr1
                 = (RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad A");

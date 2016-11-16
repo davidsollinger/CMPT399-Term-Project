@@ -40,10 +40,10 @@ public class SimpleGameBoard extends GameBoard {
         green1.setHousePrice(70);
         green2.setHousePrice(70);
 
-        super.addCell(blue1);
-        super.addCell(blue2);
-        super.addCell(blue3);
-        super.addCell(green1);
-        super.addCell(green2);
+        super.addPropertyCell(blue1);
+        super.addPropertyCell(blue2);
+        super.addPropertyCell(blue3);
+        super.addPropertyCell(green1);
+        super.addPropertyCell(green2);
     }
 }

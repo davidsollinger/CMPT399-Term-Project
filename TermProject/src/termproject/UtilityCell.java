@@ -3,24 +3,35 @@ package termproject;
 public class UtilityCell extends Cell {
 
     public static final String COLOR_GROUP = "UTILITY";
-    private static int PRICE;
+    
+    private static int price;
+    private final int ONE_UTILITY = 1;
+    private final int BOTH_UTILITIES = 2;
 
     public static void setPrice(int price) {
-        PRICE = price;
+        UtilityCell.price = price;
     }
 
     @Override
     public int getPrice() {
-        return PRICE;
+        return price;
     }
 
     public int getRent(int diceRoll) {
-        if (player.numberOfUtil() >= 2) {
+        if (ownsAllUtilities()) {
             return diceRoll * 10;
-        } else if (player.numberOfUtil() == 1) {
+        } else if (ownsOneUtility()) {
             return diceRoll * 4;
         }
         return 0;
+    }
+
+    private boolean ownsOneUtility() {
+        return getPlayer().numberOfUtil() == ONE_UTILITY;
+    }
+
+    private boolean ownsAllUtilities() {
+        return getPlayer().numberOfUtil() == BOTH_UTILITIES;
     }
 
     @Override
@@ -28,10 +39,10 @@ public class UtilityCell extends Cell {
         Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-            if (player != currentPlayer) {
+            if (!isCurrentPlayer(currentPlayer)) {
                 GameMaster.INSTANCE.utilRollDice();
                 int diceRoll = GameMaster.INSTANCE.getUtilDiceRoll();
-                currentPlayer.payRentTo(player, getRent(diceRoll));
+                currentPlayer.payRentTo(getPlayer(), getRent(diceRoll));
             }
         }
     }

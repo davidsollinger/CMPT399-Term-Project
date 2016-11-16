@@ -1,44 +1,54 @@
 package termproject;
 
-public class Cell {
+public class Cell implements Nullable {
 
     private boolean available = true;
     private String name;
-    protected Player player;
+    private Player player;
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public Player getPlayer() {
-        return this.player;
+        return (player == null) ? Player.createNullPlayer() : player;
     }
 
-    public int getPrice() {
+    protected int getPrice() {
         return 0;
     }
 
-    public boolean isAvailable() {
-        return this.available;
+    protected boolean isAvailable() {
+        return available;
     }
 
+    // Used as override
     protected void playAction() {
     }
 
-    public void setAvailable(boolean available) {
+    protected void setAvailable(boolean available) {
         this.available = available;
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setPlayer(Player player) {
+    protected void setPlayer(Player player) {
         this.player = player;
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    protected boolean isCurrentPlayer(Player currentPlayer) {
+        return getPlayer() == currentPlayer;
+    }
+
+    @Override
+    public boolean isNull() {
+        return false;
     }
 }

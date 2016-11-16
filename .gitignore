@@ -1,3 +1,4 @@
+build/
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -11,3 +12,4 @@
 # Build Files
 *.properties
 *.xml
+/TermProject/dist/
