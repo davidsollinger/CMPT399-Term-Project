@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import termproject.Cell;
 import termproject.GameMaster;
+import termproject.NullTradeDeal;
 import termproject.Player;
 import termproject.TradeDeal;
 import termproject.TradeDialog;
@@ -33,6 +34,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         super(parent);
 
         super.setTitle("Trade Property");
+        deal = new NullTradeDeal();
         cboSellers = new JComboBox<>();
         cboProperties = new JComboBox<>();
         txtAmount = new JTextField();
@@ -70,7 +72,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
                 return;
             }
             Cell cell = (Cell) cboProperties.getSelectedItem();
-            if (cell == null) {
+            if (cell.isNull()) {
                 return;
             }
             Player player = (Player) cboSellers.getSelectedItem();
