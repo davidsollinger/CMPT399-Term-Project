@@ -43,16 +43,6 @@ public class Main {
             gameBoard = tryToGetArgClass(args, window);
         }
 
-//      GameBoard gameBoard = new GameBoardFull();
-//		GameBoard gameBoard = new GameBoardCCMovePlayer();
-//		GameBoard gameBoard = new GameBoardCCLoseMoney();
-//		GameBoard gameBoard = new GameBoardCCJail();
-//		GameBoard gameBoard = new GameBoardUtility();
-//		GameBoard gameBoard = new GameBoardRailRoad();
-//		GameBoard gameBoard = new GameBoard14();
-//		GameBoard gameBoard = new SimpleGameBoard();
-//		GameBoard gameBoard = new GameBoardJail();
-//		GameBoard gameBoard = new GameBoardFreeParking();
         master.setGameBoard(gameBoard);
         int numPlayers = getNumberOfPlayers(window);
         for (int i = 0; i < numPlayers; i++) {
