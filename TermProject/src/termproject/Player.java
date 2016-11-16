@@ -67,7 +67,7 @@ public class Player implements Nullable {
         for (int i = 0; i < getPropertyNumber(); i++) {
             PropertyCell cell = getProperty(i);
             cell.setPlayer(player);
-            if (player == null) {
+            if (player.isNull()) {
                 cell.setAvailable(true);
                 cell.setNumHouses(0);
             } else {
