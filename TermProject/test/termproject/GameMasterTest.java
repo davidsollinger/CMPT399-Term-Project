@@ -115,8 +115,8 @@ public class GameMasterTest {
         gameMaster.getCurrentPlayer().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.btnTradeClicked();
-        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getAllProperties()[0]);
-        assertEquals(1640, gameMaster.getPlayer(0).getMoney());
-        assertEquals(1300, gameMaster.getPlayer(1).getMoney());
+        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getPlayer(0).getAllProperties()[0]);
+        assertEquals(1440, gameMaster.getPlayer(0).getMoney());
+        assertEquals(1500, gameMaster.getPlayer(1).getMoney());
     }
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameBoard {
+public class GameBoard implements Nullable {
 
     private final List<Cell> cells = new ArrayList<>();
     //the key of colorGroups is the name of the color group.
@@ -35,8 +35,8 @@ public class GameBoard {
         setPropertyCellColor(cell);
         cells.add(cell);
     }
-    
-    private void setPropertyCellColor (PropertyCell cell) {
+
+    private void setPropertyCellColor(PropertyCell cell) {
         int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
         colorGroups.put(cell.getColorGroup(), propertyNumber + 1);
     }
@@ -111,9 +111,14 @@ public class GameBoard {
     protected void removeCards() {
         communityChestCards.clear();
     }
-    
+
     protected void shuffleCardPiles() {
         Collections.shuffle(communityChestCards);
         Collections.shuffle(chanceCards);
+    }
+
+    @Override
+    public boolean isNull() {
+        return false;
     }
 }

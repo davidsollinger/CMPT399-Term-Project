@@ -2,9 +2,16 @@ package termproject;
 
 import gui.InfoFormatter;
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CellInfoFormatterTest {
+    
+    @Before
+    public void setUp() {
+        GameMaster gameMaster = GameMaster.INSTANCE;
+        gameMaster.setGameBoard(new NullGameBoard());
+    }
 
 //    @Test
 //    public void testGoCellTest() { // Not fully implemented

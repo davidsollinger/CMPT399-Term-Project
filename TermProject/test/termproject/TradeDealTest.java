@@ -9,6 +9,7 @@ public class TradeDealTest {
     @Before
     public void setUp() {
         GameMaster gameMaster = GameMaster.INSTANCE;
+        gameMaster.setGameBoard(new NullGameBoard());
         gameMaster.reset();
         gameMaster.setNumberOfPlayers(2);
         gameMaster.getPlayer(0).setName("Buyer");

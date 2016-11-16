@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import termproject.GameBoard;
 import termproject.GameBoardFull;
 import termproject.GameMaster;
+import termproject.NullGameBoard;
 
 public class Main {
     
@@ -66,7 +67,7 @@ public class Main {
     }
 
     private static GameBoard tryToGetArgClass(String[] args, MainWindow window) throws HeadlessException {
-        GameBoard gameBoard = new GameBoardFull();
+        GameBoard gameBoard;
         try {
             Class<?> c = Class.forName(args[1]);
             gameBoard = (GameBoard) c.newInstance();
@@ -80,6 +81,6 @@ public class Main {
             JOptionPane.showMessageDialog(window, "Class Cannot be Instantiated.  Program will exit");
             System.exit(0);
         }
-        return gameBoard;
+        return new NullGameBoard();
     }
 }

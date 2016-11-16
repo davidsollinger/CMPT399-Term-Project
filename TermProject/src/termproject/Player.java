@@ -10,7 +10,7 @@ public class Player implements Nullable {
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private boolean inJail;
     private int money;
-    protected String name;
+    private String name;
     private Cell position;
     private List<PropertyCell> properties = new ArrayList<>();
     private List<RailRoadCell> railroads = new ArrayList<>();
@@ -19,7 +19,9 @@ public class Player implements Nullable {
     protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         inJail = false;
-        position = gb.queryCell("Go");
+        if (!gb.isNull()) {
+            position = gb.queryCell("Go");
+        }
     }
 
     public static Player createNullPlayer() {
@@ -69,8 +71,8 @@ public class Player implements Nullable {
                 cell.setAvailable(true);
                 cell.setNumHouses(0);
             } else {
-                player.properties.add(cell);
-//                player.addProperty(cell);
+//                player.properties.add(cell);
+                player.addProperty(cell);
                 colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
             }
         }
@@ -255,7 +257,7 @@ public class Player implements Nullable {
 
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 
     public void resetProperty() {

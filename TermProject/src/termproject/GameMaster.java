@@ -8,7 +8,7 @@ public enum GameMaster {
 
     public static final int MAX_PLAYER = 8;
 
-    private final int INITAMOUNTOFMONEY = 1500;
+    private final int INIT_AMOUNT_OF_MONEY = 1500;
 
     private final Die[] dice;
     private GameBoard gameBoard;
@@ -146,7 +146,7 @@ public enum GameMaster {
     }
 
     public int getInitAmountOfMoney() {
-        return INITAMOUNTOFMONEY;
+        return INIT_AMOUNT_OF_MONEY;
     }
 
     public int getNumberOfPlayers() {
@@ -221,7 +221,9 @@ public enum GameMaster {
             Player player = players.get(i);
             player.setPosition(gameBoard.getCell(0));
         }
-        gameBoard.removeCards();
+        if (!gameBoard.isNull()) {
+            gameBoard.removeCards();
+        }
         turn = 0;
     }
 
@@ -269,7 +271,7 @@ public enum GameMaster {
         players.clear();
         for (int i = 0; i < number; i++) {
             Player player = new Player();
-            player.setMoney(INITAMOUNTOFMONEY);
+            player.setMoney(INIT_AMOUNT_OF_MONEY);
             players.add(player);
         }
     }
