@@ -2,10 +2,11 @@ package termproject;
 
 public class MovePlayerCard extends Card {
 
-    private final int type;
     private final String destination;
+    private final String type;
 
-    public MovePlayerCard(String destination, int cardType) {
+
+    public MovePlayerCard(String destination, String cardType) {
         this.destination = destination;
         this.type = cardType;
     }
@@ -33,8 +34,8 @@ public class MovePlayerCard extends Card {
     }
 
     @Override
-    public int getCardType() {
-        return type;
+    public String getCardType() {
+        return this.type;
     }
 
     @Override

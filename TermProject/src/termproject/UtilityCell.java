@@ -2,7 +2,7 @@ package termproject;
 
 public class UtilityCell extends Cell {
 
-    public static final String COLOR_GROUP = "UTILITY";
+    private static final String COLOR_GROUP = "UTILITY";
     
     private static int price;
     private final int ONE_UTILITY = 1;
@@ -15,6 +15,10 @@ public class UtilityCell extends Cell {
     @Override
     public int getPrice() {
         return price;
+    }
+    
+    public static String getColorGroup() {
+        return COLOR_GROUP;
     }
 
     public int getRent(int diceRoll) {

@@ -2,10 +2,14 @@ package termproject;
 
 public class JailCell extends Cell {
 
-    public static final int BAIL = 50;
+    private static final int BAIL = 50;
 
     public JailCell() {
         super.setName("Jail");
+    }
+    
+    public static int getBail() {
+        return BAIL;
     }
 
 }
