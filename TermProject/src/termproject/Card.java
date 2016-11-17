@@ -7,7 +7,7 @@ public abstract class Card {
 
     public abstract String getLabel();
 
-    public abstract void applyAction();
+    protected abstract void applyAction();
 
-    public abstract int getCardType();
+    protected abstract int getCardType();
 }

@@ -14,38 +14,37 @@ import termproject.UtilityCell;
 
 public class InfoFormatter {
 
-    private static Map<Class<?>, CellInfoFormatter> cellInfoFormatters = null;
+    private static final Map<Class<?>, CellInfoFormatter> CELLINFOFORMATTERS = new HashMap<>();
 
     static {
-        if (cellInfoFormatters == null) {
-            cellInfoFormatters = new HashMap<>();
+        if (CELLINFOFORMATTERS.isEmpty()) {
             addFormatters();
         }
     }
 
     private static void addFormatters() {
         CellInfoFormatterFactory cellInfoFormatterFactory = new CellInfoFormatterFactory();
-        
-        cellInfoFormatters.put(
+
+        CELLINFOFORMATTERS.put(
                 PropertyCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Property"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 GoCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Go"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 JailCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Jail"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 GoToJailCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Go To Jail"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 FreeParkingCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Free Parking"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 RailRoadCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Rail Road"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 UtilityCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Utility"));
-        cellInfoFormatters.put(
+        CELLINFOFORMATTERS.put(
                 CardCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Community Chest"));
     }
 
     public static String cellInfo(Cell cell) {
-        CellInfoFormatter formatter = cellInfoFormatters.get(cell.getClass());
+        CellInfoFormatter formatter = CELLINFOFORMATTERS.get(cell.getClass());
         return formatter.format(cell);
     }
 

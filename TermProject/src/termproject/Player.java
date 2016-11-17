@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Player {
+public class Player implements Nullable {
 
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private boolean inJail;
@@ -16,12 +16,16 @@ public class Player {
     private List<RailRoadCell> railroads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
 
-    public Player() {
+    protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         inJail = false;
-        if (gb != null) {
+        if (!gb.isNull()) {
             position = gb.queryCell("Go");
         }
+    }
+
+    public static Player createNullPlayer() {
+        return new NullPlayer();
     }
 
     public void buyProperty(Cell property, int amount) {
@@ -63,15 +67,19 @@ public class Player {
         for (int i = 0; i < getPropertyNumber(); i++) {
             PropertyCell cell = getProperty(i);
             cell.setPlayer(player);
-            if (player == null) {
+            if (player.isNull()) {
                 cell.setAvailable(true);
                 cell.setNumHouses(0);
             } else {
-                player.properties.add(cell);
+                player.addProperty(cell);
                 colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
             }
         }
         properties.clear();
+    }
+
+    private void addProperty(PropertyCell propertyCell) {
+        properties.add(propertyCell);
     }
 
     public Cell[] getAllProperties() {
@@ -83,7 +91,7 @@ public class Player {
     }
 
     public int getMoney() {
-        return this.money;
+        return money;
     }
 
     public String[] getMonopolies() {
@@ -110,14 +118,14 @@ public class Player {
         money -= JailCell.BAIL;
         if (isBankrupt()) {
             money = 0;
-            exchangeProperty(null);
+            exchangeProperty(new NullPlayer());
         }
         inJail = false;
         GameMaster.INSTANCE.updateGUI();
     }
 
     public Cell getPosition() {
-        return this.position;
+        return position;
     }
 
     public PropertyCell getProperty(int index) {
@@ -154,16 +162,20 @@ public class Player {
 
     public void payRentTo(Player owner, int rentValue) {
         if (money < rentValue) {
-            owner.money += money;
+            owner.addMoney(money);
             money -= rentValue;
         } else {
             money -= rentValue;
-            owner.money += rentValue;
+            owner.addMoney(rentValue);
         }
         if (isBankrupt()) {
             money = 0;
             exchangeProperty(owner);
         }
+    }
+
+    public void addMoney(int amount) {
+        money += amount;
     }
 
     public void purchase() {
@@ -193,7 +205,7 @@ public class Player {
                 int newNumber = cell.getNumHouses() + houses;
                 if (newNumber <= 5) {
                     cell.setNumHouses(newNumber);
-                    this.setMoney(money - (cell.getHousePrice() * houses));
+                    setMoney(money - (cell.getHousePrice() * houses));
                     GameMaster.INSTANCE.updateGUI();
                 }
             }
@@ -213,7 +225,7 @@ public class Player {
     }
 
     public void sellProperty(Cell property, int amount) {
-        property.setPlayer(null);
+        property.setPlayer(new NullPlayer());
         if (property instanceof PropertyCell) {
             properties.remove(property);
         }
@@ -244,12 +256,17 @@ public class Player {
 
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 
     public void resetProperty() {
         properties = new ArrayList<>();
         railroads = new ArrayList<>();
         utilities = new ArrayList<>();
+    }
+
+    @Override
+    public boolean isNull() {
+        return false;
     }
 }

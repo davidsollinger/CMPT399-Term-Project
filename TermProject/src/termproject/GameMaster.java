@@ -6,19 +6,19 @@ import java.util.List;
 public enum GameMaster {
     INSTANCE;
 
+    public static final int MAX_PLAYER = 8;
+
+    private final int INIT_AMOUNT_OF_MONEY = 1500;
+
     private final Die[] dice;
     private GameBoard gameBoard;
     private MonopolyGUI gui;
-    private int initAmountOfMoney;
     private final List<Player> players = new ArrayList<>();
     private int turn = 0;
     private int utilDiceRoll;
     private boolean testMode;
 
-    public static final int MAX_PLAYER = 8;
-
     private GameMaster() {
-        initAmountOfMoney = 1500;
         dice = new Die[]{new Die(), new Die()};
     }
 
@@ -52,7 +52,7 @@ public enum GameMaster {
             updateGUI();
         }
     }
-    
+
     private void setButtonPropertiesFalse() {
         gui.setBuyHouseEnabled(false);
         gui.setDrawCardEnabled(false);
@@ -71,8 +71,8 @@ public enum GameMaster {
             playerIsOutOfJail();
         }
     }
-    
-    private void playerIsOutOfJail () {
+
+    private void playerIsOutOfJail() {
         gui.setRollDiceEnabled(true);
         gui.setBuyHouseEnabled(getCurrentPlayer().canBuyHouse());
         gui.setGetOutOfJailEnabled(getCurrentPlayer().isInJail());
@@ -105,7 +105,7 @@ public enum GameMaster {
     public void btnTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal();
-        if (deal != null) {
+        if (!deal.isNull()) {
             RespondDialog rDialog = gui.openRespondDialog(deal);
             if (rDialog.getResponse()) {
                 completeTrade(deal);
@@ -146,7 +146,7 @@ public enum GameMaster {
     }
 
     public int getInitAmountOfMoney() {
-        return initAmountOfMoney;
+        return INIT_AMOUNT_OF_MONEY;
     }
 
     public int getNumberOfPlayers() {
@@ -178,7 +178,7 @@ public enum GameMaster {
     }
 
     public int getUtilDiceRoll() {
-        return this.utilDiceRoll;
+        return utilDiceRoll;
     }
 
     public void movePlayer(int playerIndex, int diceValue) {
@@ -221,7 +221,7 @@ public enum GameMaster {
             Player player = players.get(i);
             player.setPosition(gameBoard.getCell(0));
         }
-        if (gameBoard != null) {
+        if (!gameBoard.isNull()) {
             gameBoard.removeCards();
         }
         turn = 0;
@@ -230,12 +230,8 @@ public enum GameMaster {
     public int[] rollDice() {
         if (testMode) {
             return gui.getDiceRoll();
-        } else {
-            return new int[]{
-                dice[0].getRoll(),
-                dice[1].getRoll()
-            };
         }
+        return new int[]{dice[0].getRoll(), dice[1].getRoll()};
     }
 
     public void sendToJail(Player player) {
@@ -243,10 +239,7 @@ public enum GameMaster {
         player.setPosition(gameBoard.queryCell("Jail"));
         player.setInJail(true);
         int jailIndex = gameBoard.queryCellIndex("Jail");
-        gui.movePlayer(
-                getPlayerIndex(player),
-                oldPosition,
-                jailIndex);
+        gui.movePlayer(getPlayerIndex(player), oldPosition, jailIndex);
     }
 
     private void setAllButtonEnabled(boolean enabled) {
@@ -260,28 +253,24 @@ public enum GameMaster {
     }
 
     public void setGameBoard(GameBoard board) {
-        this.gameBoard = board;
+        gameBoard = board;
     }
 
     public void setGUI(MonopolyGUI gui) {
         this.gui = gui;
     }
 
-    public void setInitAmountOfMoney(int money) {
-        this.initAmountOfMoney = money;
-    }
-
     public void setNumberOfPlayers(int number) {
         players.clear();
         for (int i = 0; i < number; i++) {
             Player player = new Player();
-            player.setMoney(initAmountOfMoney);
+            player.setMoney(INIT_AMOUNT_OF_MONEY);
             players.add(player);
         }
     }
 
     public void setUtilDiceRoll(int diceRoll) {
-        this.utilDiceRoll = diceRoll;
+        utilDiceRoll = diceRoll;
     }
 
     public void startGame() {
@@ -306,7 +295,7 @@ public enum GameMaster {
     }
 
     public void utilRollDice() {
-        this.utilDiceRoll = gui.showUtilDiceRoll();
+        utilDiceRoll = gui.showUtilDiceRoll();
     }
 
     public void setTestMode(boolean b) {

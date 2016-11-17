@@ -1,14 +1,19 @@
 package termproject;
 
-import junit.framework.TestCase;
+import gameboardvariants.GameBoardCCLoseMoney;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
-public class LoseMoneyCardTest extends TestCase {
+public class LoseMoneyCardTest {
 
     private GameMaster gameMaster;
     private Card loseMoneyCard;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         gameMaster = GameMaster.INSTANCE;
         gameMaster.setGameBoard(new GameBoardCCLoseMoney());
         gameMaster.setNumberOfPlayers(1);
@@ -18,6 +23,7 @@ public class LoseMoneyCardTest extends TestCase {
         gameMaster.getGameBoard().addCard(loseMoneyCard);
     }
 
+    @Test
     public void testLoseMoneyCardAction() {
         int origMoney = gameMaster.getCurrentPlayer().getMoney();
         Card card = gameMaster.drawCCCard();
@@ -26,6 +32,7 @@ public class LoseMoneyCardTest extends TestCase {
         assertEquals(origMoney - 20, gameMaster.getCurrentPlayer().getMoney());
     }
 
+    @Test
     public void testLoseMoneyCardUI() {
         gameMaster.movePlayer(0, 1);
         assertTrue(gameMaster.getGUI().isDrawCardButtonEnabled());

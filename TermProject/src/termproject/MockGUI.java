@@ -77,26 +77,30 @@ public class MockGUI implements MonopolyGUI {
 
     @Override
     public void setGetOutOfJailEnabled(boolean b) {
-        this.btnGetOutOfJailState = b;
+        btnGetOutOfJailState = b;
     }
 
+    // Ignore override
     @Override
     public void setPurchasePropertyEnabled(boolean enabled) {
     }
 
+    // Ignore override
     @Override
     public void setRollDiceEnabled(boolean b) {
     }
 
     @Override
     public void setTradeEnabled(int index, boolean b) {
-        this.btnTradeState[index] = b;
+        btnTradeState[index] = b;
     }
 
+    // Ignore override
     @Override
     public void showBuyHouseDialog(Player currentPlayer) {
     }
 
+    // Ignore overide
     @Override
     public void showMessage(String string) {
     }
@@ -108,10 +112,12 @@ public class MockGUI implements MonopolyGUI {
         return 10;
     }
 
+    // Ignore override
     @Override
     public void startGame() {
     }
 
+    // Ignore override
     @Override
     public void update() {
     }

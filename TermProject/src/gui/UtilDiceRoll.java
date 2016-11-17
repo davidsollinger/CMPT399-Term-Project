@@ -12,15 +12,9 @@ import termproject.GameMaster;
 public class UtilDiceRoll extends JDialog {
 
     private static final long serialVersionUID = 1L;
-
-    public static int showDialog() {
-        UtilDiceRoll dialog = new UtilDiceRoll();
-        dialog.setVisible(true);
-        return dialog.diceValue;
-    }
     private final JButton btnDice = new JButton("Roll the Dice!");
     private final JButton btnOK = new JButton("OK");
-    public int diceValue;
+    private int diceValue;
     private final JLabel lblPrompt = new JLabel();
 
     public UtilDiceRoll() {
@@ -42,16 +36,26 @@ public class UtilDiceRoll extends JDialog {
         });
         super.pack();
     }
-
+    
+    public static int showDialog() {
+        UtilDiceRoll dialog = new UtilDiceRoll();
+        dialog.setVisible(true);
+        return dialog.getDiceValue();
+    }
+    
     public void okClicked() {
-        this.dispose();
+        dispose();
     }
 
     public void rollDice() {
         int[] diceRoll = GameMaster.INSTANCE.rollDice();
-        this.diceValue = diceRoll[0] + diceRoll[1];
-        lblPrompt.setText("You rolled " + diceValue);
+        diceValue = diceRoll[0] + diceRoll[1];
+        lblPrompt.setText("You rolled " + getDiceValue());
         btnDice.setEnabled(false);
         btnOK.setEnabled(true);
+    }
+
+    public int getDiceValue() {
+        return diceValue;
     }
 }

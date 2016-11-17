@@ -16,16 +16,16 @@ public class MoneyCard extends Card {
     @Override
     public void applyAction() {
         Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-        currentPlayer.setMoney(currentPlayer.getMoney() + this.amount);
+        currentPlayer.setMoney(currentPlayer.getMoney() + amount);
     }
 
     @Override
     public int getCardType() {
-        return this.cardType;
+        return cardType;
     }
 
     @Override
     public String getLabel() {
-        return this.label;
+        return label;
     }
 }

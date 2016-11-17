@@ -23,9 +23,8 @@ public class CellInfoFormatterFactory {
             case "Free Parking":
                 return new CellInfoFormatter();
             default:
-                break;
+                return new NullInfoFormatter();
         }
-        return null;
     }
     
 }

@@ -1,24 +1,25 @@
 package termproject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameBoard {
+public class GameBoard implements Nullable {
 
     private final List<Cell> cells = new ArrayList<>();
-    private final List<Card> chanceCards = new ArrayList<>();
     //the key of colorGroups is the name of the color group.
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private final List<Card> communityChestCards = new ArrayList<>();
+    private final List<Card> chanceCards = new ArrayList<>();
 
     public GameBoard() {
         Cell go = new GoCell();
         addCell(go);
     }
 
-    public void addCard(Card card) {
+    protected void addCard(Card card) {
         if (card.getCardType() == Card.TYPE_CC) {
             communityChestCards.add(card);
         } else {
@@ -26,28 +27,28 @@ public class GameBoard {
         }
     }
 
-    public void addCell(Cell cell) {
+    protected final void addCell(Cell cell) {
         cells.add(cell);
     }
 
-    public void addPropertyCell(PropertyCell cell) {
+    protected void addPropertyCell(PropertyCell cell) {
         setPropertyCellColor(cell);
         cells.add(cell);
     }
-    
-    private void setPropertyCellColor (PropertyCell cell) {
-        final int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
+
+    private void setPropertyCellColor(PropertyCell cell) {
+        int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
         colorGroups.put(cell.getColorGroup(), propertyNumber + 1);
     }
 
-    public Card drawCCCard() {
+    protected Card drawCCCard() {
         Card card = communityChestCards.get(0);
         communityChestCards.remove(0);
         addCard(card);
         return card;
     }
 
-    public Card drawChanceCard() {
+    protected Card drawChanceCard() {
         Card card = chanceCards.get(0);
         chanceCards.remove(0);
         addCard(card);
@@ -62,7 +63,7 @@ public class GameBoard {
         return cells.size();
     }
 
-    public PropertyCell[] getPropertiesInMonopoly(String color) {
+    protected PropertyCell[] getPropertiesInMonopoly(String color) {
         PropertyCell[] monopolyCells
                 = new PropertyCell[getPropertyNumberForColor(color)];
         int counter = 0;
@@ -79,7 +80,7 @@ public class GameBoard {
         return monopolyCells;
     }
 
-    public int getPropertyNumberForColor(String name) {
+    protected int getPropertyNumberForColor(String name) {
         Integer number = colorGroups.get(name);
         if (number != null) {
             return number;
@@ -87,17 +88,17 @@ public class GameBoard {
         return 0;
     }
 
-    public Cell queryCell(String string) {
+    protected Cell queryCell(String string) {
         for (int i = 0; i < cells.size(); i++) {
             Cell temp = cells.get(i);
             if (temp.getName().equals(string)) {
                 return temp;
             }
         }
-        return null;
+        return new NullCell();
     }
 
-    public int queryCellIndex(String string) {
+    protected int queryCellIndex(String string) {
         for (int i = 0; i < cells.size(); i++) {
             Cell temp = cells.get(i);
             if (temp.getName().equals(string)) {
@@ -107,7 +108,17 @@ public class GameBoard {
         return -1;
     }
 
-    public void removeCards() {
+    protected void removeCards() {
         communityChestCards.clear();
+    }
+
+    protected void shuffleCardPiles() {
+        Collections.shuffle(communityChestCards);
+        Collections.shuffle(chanceCards);
+    }
+
+    @Override
+    public boolean isNull() {
+        return false;
     }
 }
