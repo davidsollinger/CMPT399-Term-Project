@@ -5,7 +5,7 @@ public class RailRoadCell extends Cell {
     private static int baseRent;
     private static int price;
     
-    public static final String COLOR_GROUP = "RAILROAD";
+    private static final String COLOR_GROUP = "RAILROAD";
 
     public static void setBaseRent(int baseRent) {
         RailRoadCell.baseRent = baseRent;
@@ -22,6 +22,10 @@ public class RailRoadCell extends Cell {
 
     public int getRent() {
         return RailRoadCell.baseRent * (int) Math.pow(2, getPlayer().numberOfRR() - 1);
+    }
+    
+    public static String getColorGroup () {
+        return COLOR_GROUP;
     }
 
     @Override

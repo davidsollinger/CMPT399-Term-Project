@@ -20,7 +20,7 @@ public class GameBoard implements Nullable {
     }
 
     protected void addCard(Card card) {
-        if (card.getCardType() == Card.TYPE_CC) {
+        if (card.getCardType().equals("Community Chest")) {
             communityChestCards.add(card);
         } else {
             chanceCards.add(card);

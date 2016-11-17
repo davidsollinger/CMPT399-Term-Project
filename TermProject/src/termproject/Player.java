@@ -38,12 +38,12 @@ public class Player implements Nullable {
         if (property instanceof RailRoadCell) {
             RailRoadCell cell = (RailRoadCell) property;
             railroads.add(cell);
-            colorGroups.put(RailRoadCell.COLOR_GROUP, getPropertyNumberForColor(RailRoadCell.COLOR_GROUP) + 1);
+            colorGroups.put(RailRoadCell.getColorGroup(), getPropertyNumberForColor(RailRoadCell.getColorGroup()) + 1);
         }
         if (property instanceof UtilityCell) {
             UtilityCell cell = (UtilityCell) property;
             utilities.add(cell);
-            colorGroups.put(UtilityCell.COLOR_GROUP, getPropertyNumberForColor(UtilityCell.COLOR_GROUP) + 1);
+            colorGroups.put(UtilityCell.getColorGroup(), getPropertyNumberForColor(UtilityCell.getColorGroup()) + 1);
         }
         setMoney(getMoney() - amount);
     }
@@ -99,7 +99,7 @@ public class Player implements Nullable {
         List<String> colors = new ArrayList<>(colorGroups.keySet());
         while (!colors.isEmpty()) {
             String color = colors.remove(0);
-            if (!(color.equals(RailRoadCell.COLOR_GROUP)) && !(color.equals(UtilityCell.COLOR_GROUP))) {
+            if (!(color.equals(RailRoadCell.getColorGroup())) && !(color.equals(UtilityCell.getColorGroup()))) {
                 Integer num = colorGroups.get(color);
                 GameBoard gameBoard = GameMaster.INSTANCE.getGameBoard();
                 if (num == gameBoard.getPropertyNumberForColor(color)) {
@@ -115,7 +115,7 @@ public class Player implements Nullable {
     }
 
     public void getOutOfJail() {
-        money -= JailCell.BAIL;
+        money -= JailCell.getBail();
         if (isBankrupt()) {
             money = 0;
             exchangeProperty(new NullPlayer());
@@ -153,11 +153,11 @@ public class Player implements Nullable {
     }
 
     public int numberOfRR() {
-        return getPropertyNumberForColor(RailRoadCell.COLOR_GROUP);
+        return getPropertyNumberForColor(RailRoadCell.getColorGroup());
     }
 
     public int numberOfUtil() {
-        return getPropertyNumberForColor(UtilityCell.COLOR_GROUP);
+        return getPropertyNumberForColor(UtilityCell.getColorGroup());
     }
 
     public void payRentTo(Player owner, int rentValue) {
