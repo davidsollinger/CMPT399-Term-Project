@@ -1,4 +1,7 @@
-package termproject;
+package Mocks;
+
+import termproject.RespondDialog;
+import termproject.TradeDeal;
 
 public class MockRespondDialog implements RespondDialog {
 

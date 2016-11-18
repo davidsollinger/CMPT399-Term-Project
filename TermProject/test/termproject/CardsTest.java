@@ -1,5 +1,6 @@
 package termproject;
 
+import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCGainMoney;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
