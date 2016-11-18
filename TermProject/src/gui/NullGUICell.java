@@ -9,10 +9,5 @@ public class NullGUICell extends GUICell {
     public NullGUICell(Cell cell) {
         super(cell);
     }
-    
-    @Override
-    public boolean isNull() {
-        return true;
-    }
 
 }

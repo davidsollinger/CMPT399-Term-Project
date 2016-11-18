@@ -1,9 +1,8 @@
 package gui;
 
 import termproject.Cell;
-import termproject.Nullable;
 
-public class CellInfoFormatter implements Nullable {
+public class CellInfoFormatter {
 
     private String color;
 
@@ -23,8 +22,4 @@ public class CellInfoFormatter implements Nullable {
         return "<html><font color='" + color + "'><b>" + cell.getName() + "</b></font></html>";
     }
 
-    @Override
-    public boolean isNull() {
-        return false;
-    }
 }

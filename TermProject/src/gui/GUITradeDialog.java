@@ -72,9 +72,6 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
                 return;
             }
             Cell cell = (Cell) cboProperties.getSelectedItem();
-            if (cell.isNull()) {
-                return;
-            }
             Player player = (Player) cboSellers.getSelectedItem();
             Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
             if (currentPlayer.getMoney() > amount) {
