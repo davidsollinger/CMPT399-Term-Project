@@ -25,16 +25,17 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
 
     private static final long serialVersionUID = 1L;
 
-    private JButton btnOK, btnCancel;
-    private JComboBox<Player> comboSellers;
-    private JComboBox<Cell> comboProperties;
+    private final JButton btnOK, btnCancel;
+    private final JComboBox<Player> comboSellers;
+    private final JComboBox<Cell> comboProperties;
     private TradeDeal deal;
-    private JTextField txtAmount;
+    private final JTextField txtAmount;
 
     public GUITradeDialog(Frame parent) {
         super(parent);
-
         super.setTitle("Trade Property");
+        super.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        
         deal = new NullTradeDeal();
         comboSellers = new JComboBox<>();
         comboProperties = new JComboBox<>();
@@ -44,16 +45,21 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
 
         btnOK.setEnabled(false);
         buildTradeProperty();
-        super.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         buildTradePropertyContentPane();
 
-        btnCancel.addActionListener((ActionEvent e) -> {
-            GUITradeDialog.this.setVisible(false);
-        });
-
+        addActionListeners();
+        
         comboSellers.addItemListener((ItemEvent e) -> {
             Player player = (Player) e.getItem();
             updatePropertiesCombo(player);
+        });
+
+        super.pack();
+    }
+
+    private void addActionListeners() {
+        btnCancel.addActionListener((ActionEvent e) -> {
+            GUITradeDialog.this.setVisible(false);
         });
 
         btnOK.addActionListener((ActionEvent e) -> {
@@ -61,7 +67,6 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             Cell cell = (Cell) comboProperties.getSelectedItem();
             Player player = (Player) comboSellers.getSelectedItem();
             Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-
             if (amount <= 0 || amount > currentPlayer.getMoney()) {
                 JOptionPane.showMessageDialog(GUITradeDialog.this,
                         "Amount should be greater than zero but less than "
@@ -75,8 +80,17 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             }
             setVisible(false);
         });
+    }
 
-        super.pack();
+    private void createTradeDealText(int amount, Cell cell, Player player) {
+        deal = new TradeDeal();
+        deal.setAmount(amount);
+        deal.setPropertyName(cell.getName());
+        deal.setSellerIndex(GameMaster.INSTANCE.getPlayerIndex(player));
+    }
+
+    private boolean curPlayerHasEnough(Player currentPlayer, int amount) {
+        return currentPlayer.getMoney() > amount;
     }
 
     private void buildTradePropertyContentPane() {
