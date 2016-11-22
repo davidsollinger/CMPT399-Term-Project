@@ -55,6 +55,7 @@ public class Main {
         window.setVisible(true);
         window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         master.setGUI(window);
+        master.setTestMode(true);
         master.startGame();
     }
 
