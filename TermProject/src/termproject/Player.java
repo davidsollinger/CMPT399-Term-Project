@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Player implements Nullable {
+public class Player {
 
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private boolean inJail;
@@ -19,9 +19,7 @@ public class Player implements Nullable {
     protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         inJail = false;
-        if (!gb.isNull()) {
-            position = gb.queryCell("Go");
-        }
+        position = gb.queryCell("Go");
     }
 
     public static Player createNullPlayer() {
@@ -67,18 +65,15 @@ public class Player implements Nullable {
         for (int i = 0; i < getPropertyNumber(); i++) {
             PropertyCell cell = getProperty(i);
             cell.setPlayer(player);
-            if (player.isNull()) {
-                cell.setAvailable(true);
-                cell.setNumHouses(0);
-            } else {
-                player.addProperty(cell);
-                colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
-            }
+            player.addProperty(cell);
+            colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
+            cell.setAvailable(true);
+            cell.setNumHouses(0);
         }
         properties.clear();
     }
 
-    private void addProperty(PropertyCell propertyCell) {
+    protected void addProperty(PropertyCell propertyCell) {
         properties.add(propertyCell);
     }
 
@@ -265,8 +260,4 @@ public class Player implements Nullable {
         utilities = new ArrayList<>();
     }
 
-    @Override
-    public boolean isNull() {
-        return false;
-    }
 }

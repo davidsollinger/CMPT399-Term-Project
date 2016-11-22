@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameBoard implements Nullable {
+public class GameBoard {
 
     private final List<Cell> cells = new ArrayList<>();
     //the key of colorGroups is the name of the color group.
@@ -117,8 +117,4 @@ public class GameBoard implements Nullable {
         Collections.shuffle(chanceCards);
     }
 
-    @Override
-    public boolean isNull() {
-        return false;
-    }
 }

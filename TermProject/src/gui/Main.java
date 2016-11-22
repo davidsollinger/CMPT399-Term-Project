@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.HeadlessException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import termproject.GameBoard;
 import termproject.GameBoardFull;
@@ -52,7 +53,9 @@ public class Main {
         }
         window.setupGameBoard(gameBoard);
         window.setVisible(true);
+        window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         master.setGUI(window);
+        master.setTestMode(true);
         master.startGame();
     }
 

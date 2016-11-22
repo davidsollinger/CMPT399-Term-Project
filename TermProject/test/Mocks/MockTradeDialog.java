@@ -1,4 +1,8 @@
-package termproject;
+package Mocks;
+
+import termproject.GameMaster;
+import termproject.TradeDeal;
+import termproject.TradeDialog;
 
 public class MockTradeDialog implements TradeDialog {
 

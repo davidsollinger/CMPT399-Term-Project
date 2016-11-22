@@ -1,5 +1,6 @@
 package termproject;
 
+import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCJail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

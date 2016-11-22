@@ -9,9 +9,4 @@ public class NullInfoFormatter extends CellInfoFormatter {
         return "";
     }
     
-    @Override
-    public boolean isNull() {
-        return true;
-    }
-    
 }

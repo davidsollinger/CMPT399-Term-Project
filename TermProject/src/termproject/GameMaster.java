@@ -105,12 +105,10 @@ public enum GameMaster {
     public void btnTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal();
-        if (!deal.isNull()) {
-            RespondDialog rDialog = gui.openRespondDialog(deal);
-            if (rDialog.getResponse()) {
-                completeTrade(deal);
-                updateGUI();
-            }
+        RespondDialog rDialog = gui.openRespondDialog(deal);
+        if (rDialog.getResponse()) {
+            completeTrade(deal);
+            updateGUI();
         }
     }
 
@@ -221,9 +219,7 @@ public enum GameMaster {
             Player player = players.get(i);
             player.setPosition(gameBoard.getCell(0));
         }
-        if (!gameBoard.isNull()) {
-            gameBoard.removeCards();
-        }
+        gameBoard.removeCards();
         turn = 0;
     }
 

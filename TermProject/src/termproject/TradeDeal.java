@@ -1,6 +1,6 @@
 package termproject;
 
-public class TradeDeal implements Nullable {
+public class TradeDeal {
 
     private int amount;
     private int playerIndex;
@@ -41,8 +41,4 @@ public class TradeDeal implements Nullable {
         this.playerIndex = playerIndex;
     }
 
-    @Override
-    public boolean isNull() {
-        return true;
-    }
 }

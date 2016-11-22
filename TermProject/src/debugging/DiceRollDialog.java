@@ -46,7 +46,7 @@ public class DiceRollDialog extends JDialog {
 
         btnOK.addActionListener((ActionEvent e) -> {
             int amount = tryToGetInt();
-            if (amount == -1) {
+            if (amount == -1 || amount == 0) {
                 return;
             }
             if (amount > 0) {
