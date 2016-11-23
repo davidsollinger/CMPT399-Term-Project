@@ -53,8 +53,9 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             Player player = (Player) e.getItem();
             updatePropertiesCombo(player);
         });
-
+        
         super.pack();
+        super.setLocationRelativeTo(null);
     }
 
     private void addActionListeners() {
