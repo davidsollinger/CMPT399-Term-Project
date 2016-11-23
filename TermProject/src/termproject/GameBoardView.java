@@ -1,48 +1,67 @@
 package termproject;
 
-public class GameBoardFull extends GameBoard {
+import termproject.CardCell;
+import termproject.FreeParkingCell;
+import termproject.GameBoard;
+import termproject.GoToJailCell;
+import termproject.JailCard;
+import termproject.JailCell;
+import termproject.MoneyCard;
+import termproject.MovePlayerCard;
+import termproject.PropertyCell;
+import termproject.RailRoadCell;
+import termproject.UtilityCell;
 
-    public GameBoardFull() {
+public class GameBoardView extends GameBoard {
+
+    public GameBoardView() {
         super();
+        
+        CardCell cc1 = new CardCell(CardType.COMMUNITY, "Community Chest");
+        CardCell c1 = new CardCell(CardType.CHANCE, "Chance");
+        CardCell cc2 = new CardCell(CardType.COMMUNITY, "Community Chest");
+        CardCell c2 = new CardCell(CardType.CHANCE, "Chance");
+        CardCell cc3 = new CardCell(CardType.COMMUNITY, "Community Chest");
+        CardCell c3 = new CardCell(CardType.CHANCE, "Chance");
+        
         PropertyCell dp1 = new PropertyCell();
-        CardCell cc1 = new CardCell(Card.TYPE_CC, "Community Chest 1");
         PropertyCell dp2 = new PropertyCell();
         PropertyCell dp3 = new PropertyCell();
-        RailRoadCell rr1 = new RailRoadCell();
         PropertyCell lb1 = new PropertyCell();
-        CardCell c1 = new CardCell(Card.TYPE_CHANCE, "Chance 1");
         PropertyCell lb2 = new PropertyCell();
         PropertyCell lb3 = new PropertyCell();
-        JailCell jail = new JailCell();
         PropertyCell p1 = new PropertyCell();
-        UtilityCell u1 = new UtilityCell();
         PropertyCell p2 = new PropertyCell();
         PropertyCell p3 = new PropertyCell();
-        RailRoadCell rr2 = new RailRoadCell();
         PropertyCell o1 = new PropertyCell();
-        CardCell cc2 = new CardCell(Card.TYPE_CC, "Community Chest 2");
         PropertyCell o2 = new PropertyCell();
         PropertyCell o3 = new PropertyCell();
-        FreeParkingCell fp = new FreeParkingCell();
         PropertyCell r1 = new PropertyCell();
-        CardCell c2 = new CardCell(Card.TYPE_CHANCE, "Chance 2");
         PropertyCell r2 = new PropertyCell();
         PropertyCell r3 = new PropertyCell();
-        RailRoadCell rr3 = new RailRoadCell();
         PropertyCell y1 = new PropertyCell();
         PropertyCell y2 = new PropertyCell();
-        UtilityCell u2 = new UtilityCell();
         PropertyCell y3 = new PropertyCell();
-        GoToJailCell goToJail = new GoToJailCell();
         PropertyCell g1 = new PropertyCell();
         PropertyCell g2 = new PropertyCell();
-        CardCell cc3 = new CardCell(Card.TYPE_CC, "Community Chest 3");
         PropertyCell g3 = new PropertyCell();
-        RailRoadCell rr4 = new RailRoadCell();
-        CardCell c3 = new CardCell(Card.TYPE_CHANCE, "Chance 3");
         PropertyCell db1 = new PropertyCell();
         PropertyCell db2 = new PropertyCell();
         PropertyCell db3 = new PropertyCell();
+        
+        JailCell jail = new JailCell();
+        
+        UtilityCell u1 = new UtilityCell();
+        UtilityCell u2 = new UtilityCell();
+        
+        FreeParkingCell fp = new FreeParkingCell();
+        
+        GoToJailCell goToJail = new GoToJailCell();
+   
+        RailRoadCell rr1 = new RailRoadCell();
+        RailRoadCell rr2 = new RailRoadCell();
+        RailRoadCell rr3 = new RailRoadCell();
+        RailRoadCell rr4 = new RailRoadCell();
 
         dp1.setPrice(60);
         dp1.setColorGroup("purple");
@@ -240,23 +259,69 @@ public class GameBoardFull extends GameBoard {
         super.addCell(db1);
         super.addCell(db2);
         super.addCell(db3);
+    }
+    
+    private void createPropertyCells() {
+        
+    }
+    
+    private void createRRCells() {
+        
+    }
+    
+    private void createUtilityCells() {
+        
+    }
+    
+    private void createJailCell() {
+        
+    }
+    
+    private void createCardCells() {
+        
+    }
+    
+    private void createCards() {
+        
+    }
+    
+    private void setPropertyCells() {
+        
+    }
+    
+    private void setRRCells() {
+        
+    }
+    
+    private void setUtilityCells() {
+        
+    }
+    
+    private void addJailCell() {
+        
+    }
+    
+    private void addCardCells() {
+        
+    }
+    
+    private void addCard() {
+        super.addCard(new MoneyCard("Win $50", 50, CardType.COMMUNITY));
+        super.addCard(new MoneyCard("Win $20", 20, CardType.COMMUNITY));
+        super.addCard(new MoneyCard("Win $10", 10, CardType.COMMUNITY));
+        super.addCard(new MoneyCard("Lose $100", -100, CardType.COMMUNITY));
+        super.addCard(new MoneyCard("Lose $50", -50, CardType.COMMUNITY));
+        super.addCard(new JailCard(CardType.COMMUNITY));
+        super.addCard(new MovePlayerCard("St. Charles Place", CardType.COMMUNITY));
+        super.addCard(new MovePlayerCard("Boardwalk", CardType.COMMUNITY));
 
-        super.addCard(new MoneyCard("Win $50", 50, Card.TYPE_CC));
-        super.addCard(new MoneyCard("Win $20", 20, Card.TYPE_CC));
-        super.addCard(new MoneyCard("Win $10", 10, Card.TYPE_CC));
-        super.addCard(new MoneyCard("Lose $100", -100, Card.TYPE_CC));
-        super.addCard(new MoneyCard("Lose $50", -50, Card.TYPE_CC));
-        super.addCard(new JailCard(Card.TYPE_CC));
-        super.addCard(new MovePlayerCard("St. Charles Place", Card.TYPE_CC));
-        super.addCard(new MovePlayerCard("Boardwalk", Card.TYPE_CC));
-
-        super.addCard(new MoneyCard("Win $50", 50, Card.TYPE_CHANCE));
-        super.addCard(new MoneyCard("Win $20", 20, Card.TYPE_CHANCE));
-        super.addCard(new MoneyCard("Win $10", 10, Card.TYPE_CHANCE));
-        super.addCard(new MoneyCard("Lose $100", -100, Card.TYPE_CHANCE));
-        super.addCard(new MoneyCard("Lose $50", -50, Card.TYPE_CHANCE));
-        super.addCard(new JailCard(Card.TYPE_CHANCE));
-        super.addCard(new MovePlayerCard("Illinois Avenue", Card.TYPE_CHANCE));
+        super.addCard(new MoneyCard("Win $50", 50, CardType.CHANCE));
+        super.addCard(new MoneyCard("Win $20", 20, CardType.CHANCE));
+        super.addCard(new MoneyCard("Win $10", 10, CardType.CHANCE));
+        super.addCard(new MoneyCard("Lose $100", -100, CardType.CHANCE));
+        super.addCard(new MoneyCard("Lose $50", -50, CardType.CHANCE));
+        super.addCard(new JailCard(CardType.CHANCE));
+        super.addCard(new MovePlayerCard("Illinois Avenue", CardType.CHANCE));
         super.shuffleCardPiles();
     }
 }

@@ -1,15 +1,15 @@
 package termproject;
 
 public class CardCell extends Cell {
+    
+    private final CardType type;
 
-    private final int type;
-
-    public CardCell(int type, String name) {
+    public CardCell(CardType type, String name) {
         super.setName(name);
         this.type = type;
     }
 
-    public int getType() {
+    public CardType getType() {
         return type;
     }
 }

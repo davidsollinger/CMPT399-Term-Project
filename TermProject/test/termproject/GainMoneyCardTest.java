@@ -20,7 +20,7 @@ public class GainMoneyCardTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.reset();
         gameMaster.setGUI(new MockGUI());
-        gainMoneyCard = new MoneyCard("Get 50 dollars", 50, Card.TYPE_CC);
+        gainMoneyCard = new MoneyCard("Get 50 dollars", 50, CardType.COMMUNITY);
         gameMaster.getGameBoard().addCard(gainMoneyCard);
     }
 

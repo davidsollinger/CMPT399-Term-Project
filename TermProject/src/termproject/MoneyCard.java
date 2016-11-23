@@ -3,11 +3,11 @@ package termproject;
 public class MoneyCard extends Card {
 
     private final int amount;
-    private final int cardType;
 
     private final String label;
+    private final CardType cardType;
 
-    public MoneyCard(String label, int amount, int cardType) {
+    public MoneyCard(String label, int amount, CardType cardType) {
         this.label = label;
         this.amount = amount;
         this.cardType = cardType;
@@ -18,9 +18,9 @@ public class MoneyCard extends Card {
         Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
         currentPlayer.setMoney(currentPlayer.getMoney() + amount);
     }
-
+    
     @Override
-    public int getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
 

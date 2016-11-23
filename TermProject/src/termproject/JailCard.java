@@ -2,10 +2,11 @@ package termproject;
 
 public class JailCard extends Card {
 
-    private final int cardType;
+    private final CardType cardType;
 
-    public JailCard(int cardType) {
+    public JailCard(CardType cardType) {
         this.cardType = cardType;
+
     }
 
     @Override
@@ -15,7 +16,7 @@ public class JailCard extends Card {
     }
 
     @Override
-    public int getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
 

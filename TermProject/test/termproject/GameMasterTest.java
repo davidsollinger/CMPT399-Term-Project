@@ -15,7 +15,7 @@ public class GameMasterTest {
     @Before
     public void setUp() throws Exception {
         gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new GameBoardFull());
+        gameMaster.setGameBoard(new GameBoardView());
         gameMaster.setNumberOfPlayers(2);
         gameMaster.getPlayer(0).setName("Player 1");
         gameMaster.getPlayer(1).setName("Player 2");

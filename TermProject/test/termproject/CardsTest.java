@@ -18,18 +18,18 @@ public class CardsTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.reset();
         gameMaster.setGUI(new MockGUI());
-        ccCard = new MoneyCard("Get 50 dollars", 50, Card.TYPE_CC);
-        chanceCard = new MoneyCard("Lose 50 dollars", -50, Card.TYPE_CHANCE);
+        ccCard = new MoneyCard("Get 50 dollars", 50, CardType.COMMUNITY);
+        chanceCard = new MoneyCard("Lose 50 dollars", -50, CardType.CHANCE);
         gameMaster.getGameBoard().addCard(ccCard);
     }
 
     @Test
     public void testCardTypeCC() {
-        assertEquals(Card.TYPE_CC, ccCard.getCardType());
+        assertEquals(CardType.COMMUNITY, ccCard.getCardType());
     }
 
     @Test
     public void testCardTypeCHANCE() {
-        assertEquals(Card.TYPE_CHANCE, chanceCard.getCardType());
+        assertEquals(CardType.CHANCE, chanceCard.getCardType());
     }
 }

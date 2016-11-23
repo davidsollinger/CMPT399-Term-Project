@@ -4,7 +4,7 @@ import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import termproject.GameBoard;
-import termproject.GameBoardFull;
+import termproject.GameBoardView;
 import termproject.GameMaster;
 import termproject.NullGameBoard;
 
@@ -36,7 +36,7 @@ public class Main {
     public static void main(String[] args) {
         GameMaster master = GameMaster.INSTANCE;
         MainWindow window = new MainWindow();
-        GameBoard gameBoard = new GameBoardFull();
+        GameBoard gameBoard = new GameBoardView();
         if (args.length > 0) {
             if (args[0].equals("test")) {
                 master.setTestMode(true);
