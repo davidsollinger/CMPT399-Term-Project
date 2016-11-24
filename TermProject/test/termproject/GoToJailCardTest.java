@@ -11,7 +11,7 @@ import org.junit.Test;
 public class GoToJailCardTest {
 
     private GameMaster gameMaster;
-    private final Card jailCard = new JailCard(Card.TYPE_CC);
+    private final Card jailCard = new JailCard(CardType.COMMUNITY);
 
     @Before
     public void setUp() {

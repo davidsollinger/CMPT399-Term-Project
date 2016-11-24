@@ -2,6 +2,7 @@ package gameboardvariants;
 
 import termproject.Card;
 import termproject.CardCell;
+import termproject.CardType;
 import termproject.GameBoard;
 import termproject.JailCell;
 import termproject.MoneyCard;
@@ -13,11 +14,11 @@ public class GameBoardCCLoseMoney extends GameBoard {
         super();
         PropertyCell blue1 = new PropertyCell();
         PropertyCell blue2 = new PropertyCell();
-        CardCell cc1 = new CardCell(Card.TYPE_CC, "Community Chest 1");
+        CardCell cc1 = new CardCell(CardType.COMMUNITY, "Community Chest 1");
         JailCell jail = new JailCell();
-        CardCell chance1 = new CardCell(Card.TYPE_CHANCE, "Chance 1");
+        CardCell chance1 = new CardCell(CardType.CHANCE, "Chance 1");
 
-        Card ccCard1 = new MoneyCard("Pay $20", -20, Card.TYPE_CC);
+        Card ccCard1 = new MoneyCard("Pay $20", -20, CardType.COMMUNITY);
 
         blue1.setName("Blue 1");
         blue2.setName("Blue 2");

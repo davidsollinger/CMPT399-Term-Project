@@ -30,7 +30,7 @@ public enum GameMaster {
         gui.setDrawCardEnabled(false);
         CardCell cell = (CardCell) getCurrentPlayer().getPosition();
         Card card;
-        if (cell.getType() == Card.TYPE_CC) {
+        if (cell.getType().equals(CardType.COMMUNITY)) {
             card = getGameBoard().drawCCCard();
             card.applyAction();
         } else {
