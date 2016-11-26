@@ -3,7 +3,7 @@ package termproject;
 public class Cell {
 
     private boolean available = true;
-    private String name;
+    protected String name;
     private Player player;
 
     public String getName() {

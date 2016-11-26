@@ -9,11 +9,11 @@ import termproject.GameMaster;
 import termproject.NullGameBoard;
 
 public class Main {
-    
+
     private static int getNumberOfPlayers(MainWindow window) {
         int numPlayers = 0;
         while (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
-            String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players");
+            String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players?");
             numPlayers = tryToGetInt(numPlayers, numberOfPlayers, window);
             if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
                 JOptionPane.showMessageDialog(window, "Please input a number between two and eight");
@@ -23,7 +23,24 @@ public class Main {
         }
         return numPlayers;
     }
-
+    
+    private static void getPlayerName(MainWindow window) {
+        Boolean flag;
+        int numPlayers = getNumberOfPlayers(window);
+        for (int i = 0; i < numPlayers; i++) {
+            flag = false;
+            while (!flag) {
+                String name = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
+                if (name.isEmpty()) {
+                    JOptionPane.showMessageDialog(window, "Please enter a name");
+                } else {
+                    GameMaster.INSTANCE.getPlayer(i).setName(name);
+                    flag = true;
+                }
+            }
+        }
+    }
+    
     private static int tryToGetInt(int numPlayers, String numberOfPlayers, MainWindow window) throws HeadlessException {
         try {
             return Integer.parseInt(numberOfPlayers);
@@ -45,12 +62,8 @@ public class Main {
         }
 
         master.setGameBoard(gameBoard);
-        int numPlayers = getNumberOfPlayers(window);
-        for (int i = 0; i < numPlayers; i++) {
-            String name
-                    = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
-            GameMaster.INSTANCE.getPlayer(i).setName(name);
-        }
+        getPlayerName(window);
+
         window.setupGameBoard(gameBoard);
         window.setVisible(true);
         window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);

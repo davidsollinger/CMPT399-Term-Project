@@ -6,6 +6,10 @@ public class RailRoadCell extends Cell {
     private static int price;
     
     public static final String COLOR_GROUP = "RAILROAD";
+    
+    public RailRoadCell(String name) {
+        setName(name);
+    }
 
     public static void setBaseRent(int baseRent) {
         RailRoadCell.baseRent = baseRent;

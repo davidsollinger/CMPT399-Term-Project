@@ -6,8 +6,20 @@ public class PropertyCell extends Cell {
     private int housePrice;
     private int numHouses;
     private int rent;
-    private int sellPrice;
-
+    private int price;
+    
+    public PropertyCell() {
+        this("", 0, "", 0, 0);
+    }
+    
+    public PropertyCell (String name, int housePrice, String colorGroup, int rent, int price) {
+        setName(name);
+        this.price = price;
+        this.colorGroup = colorGroup;
+        this.rent = rent;
+        this.housePrice = housePrice;
+    }
+    
     public String getColorGroup() {
         return colorGroup;
     }
@@ -19,10 +31,10 @@ public class PropertyCell extends Cell {
     public int getNumHouses() {
         return numHouses;
     }
-
+    
     @Override
     public int getPrice() {
-        return sellPrice;
+        return price;
     }
 
     public int getRent() {
@@ -38,6 +50,26 @@ public class PropertyCell extends Cell {
         }
         return rentToCharge;
     }
+    
+    public void setNumHouses(int numHouses) {
+        this.numHouses = numHouses;
+    }
+    
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    
+    public void setColorGroup(String colorGroup) {
+        this.colorGroup = colorGroup;
+    }
+    
+    public void setHousePrice(int housePrice) {
+        this.housePrice = housePrice;
+    }
+    
+    public void setRent(int rent) {
+        this.rent = rent;
+    }
 
     private boolean ownsHouses() {
         return numHouses > 0;
@@ -52,25 +84,5 @@ public class PropertyCell extends Cell {
                 currentPlayer.payRentTo(getPlayer(), getRent());
             }
         }
-    }
-
-    public void setColorGroup(String colorGroup) {
-        this.colorGroup = colorGroup;
-    }
-
-    public void setHousePrice(int housePrice) {
-        this.housePrice = housePrice;
-    }
-
-    public void setNumHouses(int numHouses) {
-        this.numHouses = numHouses;
-    }
-
-    public void setPrice(int sellPrice) {
-        this.sellPrice = sellPrice;
-    }
-
-    public void setRent(int rent) {
-        this.rent = rent;
     }
 }

@@ -12,4 +12,12 @@ public class CardCell extends Cell {
     public CardType getType() {
         return type;
     }
+    
+    @Override
+    public String getName() {
+        if (name.contains("Community Chest")) {
+            return "Community Chest";
+        }
+        return "Chance";
+    }
 }

@@ -7,6 +7,10 @@ public class UtilityCell extends Cell {
     private static int price;
     private final int ONE_UTILITY = 1;
     private final int BOTH_UTILITIES = 2;
+    
+    public UtilityCell (String name) {
+        setName(name);
+    }
 
     public static void setPrice(int price) {
         UtilityCell.price = price;

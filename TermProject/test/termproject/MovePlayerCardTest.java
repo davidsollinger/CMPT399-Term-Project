@@ -20,7 +20,7 @@ public class MovePlayerCardTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.reset();
         gameMaster.setGUI(new MockGUI());
-        movePlayerCard = new MovePlayerCard("Blue 1", Card.TYPE_CC);
+        movePlayerCard = new MovePlayerCard("Blue 1", CardType.COMMUNITY);
         gameMaster.getGameBoard().addCard(movePlayerCard);
     }
 
