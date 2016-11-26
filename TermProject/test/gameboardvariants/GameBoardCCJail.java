@@ -12,28 +12,13 @@ public class GameBoardCCJail extends GameBoard {
 
     public GameBoardCCJail() {
         super();
-        PropertyCell blue1 = new PropertyCell();
-        PropertyCell blue2 = new PropertyCell();
+        PropertyCell blue1 = new PropertyCell("Blue 1", 50, "blue", 10, 100);
+        PropertyCell blue2 = new PropertyCell("Blue 2", 50, "blue", 10, 100);
         CardCell cc1 = new CardCell(CardType.COMMUNITY, "Community Chest 1");
         JailCell jail = new JailCell();
         CardCell chance1 = new CardCell(CardType.CHANCE, "Chance 1");
 
         Card ccCard1 = new JailCard(CardType.COMMUNITY);
-
-        blue1.setName("Blue 1");
-        blue2.setName("Blue 2");
-
-        blue1.setColorGroup("blue");
-        blue2.setColorGroup("blue");
-
-        blue1.setPrice(100);
-        blue2.setPrice(100);
-
-        blue1.setRent(10);
-        blue2.setRent(10);
-
-        blue1.setHousePrice(50);
-        blue2.setHousePrice(50);
 
         super.addCard(ccCard1);
         super.addCell(cc1);

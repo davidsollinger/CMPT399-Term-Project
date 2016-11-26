@@ -1,311 +1,179 @@
 package termproject;
 
-import termproject.CardCell;
-import termproject.FreeParkingCell;
-import termproject.GameBoard;
-import termproject.GoToJailCell;
-import termproject.JailCard;
-import termproject.JailCell;
-import termproject.MoneyCard;
-import termproject.MovePlayerCard;
-import termproject.PropertyCell;
-import termproject.RailRoadCell;
-import termproject.UtilityCell;
 
 public class GameBoardView extends GameBoard {
-
+    
+    private final Cell[] cellArray = new Cell[39];
+    
+    private JailCell jailCell;
+    private FreeParkingCell freeParkingCell;
+    private GoToJailCell goToJailCell;
+    
     public GameBoardView() {
         super();
-        
-        CardCell cc1 = new CardCell(CardType.COMMUNITY, "Community Chest");
-        CardCell c1 = new CardCell(CardType.CHANCE, "Chance");
-        CardCell cc2 = new CardCell(CardType.COMMUNITY, "Community Chest");
-        CardCell c2 = new CardCell(CardType.CHANCE, "Chance");
-        CardCell cc3 = new CardCell(CardType.COMMUNITY, "Community Chest");
-        CardCell c3 = new CardCell(CardType.CHANCE, "Chance");
-        
-        PropertyCell dp1 = new PropertyCell();
-        PropertyCell dp2 = new PropertyCell();
-        PropertyCell dp3 = new PropertyCell();
-        PropertyCell lb1 = new PropertyCell();
-        PropertyCell lb2 = new PropertyCell();
-        PropertyCell lb3 = new PropertyCell();
-        PropertyCell p1 = new PropertyCell();
-        PropertyCell p2 = new PropertyCell();
-        PropertyCell p3 = new PropertyCell();
-        PropertyCell o1 = new PropertyCell();
-        PropertyCell o2 = new PropertyCell();
-        PropertyCell o3 = new PropertyCell();
-        PropertyCell r1 = new PropertyCell();
-        PropertyCell r2 = new PropertyCell();
-        PropertyCell r3 = new PropertyCell();
-        PropertyCell y1 = new PropertyCell();
-        PropertyCell y2 = new PropertyCell();
-        PropertyCell y3 = new PropertyCell();
-        PropertyCell g1 = new PropertyCell();
-        PropertyCell g2 = new PropertyCell();
-        PropertyCell g3 = new PropertyCell();
-        PropertyCell db1 = new PropertyCell();
-        PropertyCell db2 = new PropertyCell();
-        PropertyCell db3 = new PropertyCell();
-        
-        JailCell jail = new JailCell();
-        
-        UtilityCell u1 = new UtilityCell();
-        UtilityCell u2 = new UtilityCell();
-        
-        FreeParkingCell fp = new FreeParkingCell();
-        
-        GoToJailCell goToJail = new GoToJailCell();
-   
-        RailRoadCell rr1 = new RailRoadCell();
-        RailRoadCell rr2 = new RailRoadCell();
-        RailRoadCell rr3 = new RailRoadCell();
-        RailRoadCell rr4 = new RailRoadCell();
+        createPropertyCells();
+        createRRCells();
+        createUtilityCells();
+        createJailCell();
+        createFreeParkingCell();
+        createGoToJailCell();
+        createCardCells();
 
-        dp1.setPrice(60);
-        dp1.setColorGroup("purple");
-        dp1.setHousePrice(50);
-        dp1.setName("Mediterranean Avenue");
-        dp1.setRent(2);
-
-        dp2.setPrice(60);
-        dp2.setColorGroup("purple");
-        dp2.setHousePrice(50);
-        dp2.setName("Baltic Avenue");
-        dp2.setRent(4);
-
-        dp3.setPrice(60);
-        dp3.setColorGroup("purple");
-        dp3.setHousePrice(50);
-        dp3.setName("Sarah Avenue");
-        dp3.setRent(4);
-
-        lb1.setPrice(100);
-        lb1.setColorGroup("aqua");
-        lb1.setHousePrice(50);
-        lb1.setName("Oriental Avenue");
-        lb1.setRent(6);
-
-        lb2.setPrice(100);
-        lb2.setColorGroup("aqua");
-        lb2.setHousePrice(50);
-        lb2.setName("Vermont Avenue");
-        lb2.setRent(6);
-
-        lb3.setPrice(120);
-        lb3.setColorGroup("aqua");
-        lb3.setHousePrice(50);
-        lb3.setName("Connecticut Avenue");
-        lb3.setRent(8);
-
-        p1.setPrice(140);
-        p1.setColorGroup("fuchsia");
-        p1.setHousePrice(100);
-        p1.setName("St. Charles Place");
-        p1.setRent(10);
-
-        p2.setPrice(140);
-        p2.setColorGroup("fuchsia");
-        p2.setHousePrice(100);
-        p2.setName("States Avenue");
-        p2.setRent(10);
-
-        p3.setPrice(160);
-        p3.setColorGroup("fuchsia");
-        p3.setHousePrice(100);
-        p3.setName("Virginia Avenue");
-        p3.setRent(12);
-
-        o1.setPrice(180);
-        o1.setColorGroup("maroon");
-        o1.setHousePrice(100);
-        o1.setName("St. James Avenue");
-        o1.setRent(14);
-
-        o2.setPrice(180);
-        o2.setColorGroup("maroon");
-        o2.setHousePrice(100);
-        o2.setName("Tennessee Avenue");
-        o2.setRent(14);
-
-        o3.setPrice(200);
-        o3.setColorGroup("maroon");
-        o3.setHousePrice(100);
-        o3.setName("New York Avenue");
-        o3.setRent(16);
-
-        r1.setPrice(220);
-        r1.setColorGroup("red");
-        r1.setHousePrice(150);
-        r1.setName("Kentucky Avenue");
-        r1.setRent(18);
-
-        r2.setPrice(220);
-        r2.setColorGroup("red");
-        r2.setHousePrice(150);
-        r2.setName("Indiana Avenue");
-        r2.setRent(18);
-
-        r3.setPrice(240);
-        r3.setColorGroup("red");
-        r3.setHousePrice(150);
-        r3.setName("Illinois Avenue");
-        r3.setRent(20);
-
-        y1.setPrice(260);
-        y1.setColorGroup("yellow");
-        y1.setHousePrice(150);
-        y1.setName("Atlantic Avenue");
-        y1.setRent(22);
-
-        y2.setPrice(260);
-        y2.setColorGroup("yellow");
-        y2.setHousePrice(150);
-        y2.setName("Ventnor Avenue");
-        y2.setRent(22);
-
-        y3.setPrice(280);
-        y3.setColorGroup("yellow");
-        y3.setHousePrice(150);
-        y3.setName("Marvin Gardens");
-        y3.setRent(24);
-
-        g1.setPrice(300);
-        g1.setColorGroup("green");
-        g1.setHousePrice(200);
-        g1.setName("Pacific Avenue");
-        g1.setRent(26);
-
-        g2.setPrice(300);
-        g2.setColorGroup("green");
-        g2.setHousePrice(200);
-        g2.setName("North Carolina Avenue");
-        g2.setRent(26);
-
-        g3.setPrice(320);
-        g3.setColorGroup("green");
-        g3.setHousePrice(200);
-        g3.setName("Pennsylvania Avenue");
-        g3.setRent(28);
-
-        db1.setPrice(350);
-        db1.setColorGroup("blue");
-        db1.setHousePrice(200);
-        db1.setName("Park Place");
-        db1.setRent(35);
-
-        db2.setPrice(350);
-        db2.setColorGroup("blue");
-        db2.setHousePrice(200);
-        db2.setName("Dright Place");
-        db2.setRent(35);
-
-        db3.setPrice(400);
-        db3.setColorGroup("blue");
-        db3.setHousePrice(200);
-        db3.setName("Boardwalk");
-        db3.setRent(50);
-
-        RailRoadCell.setBaseRent(50);
-        RailRoadCell.setPrice(200);
-
-        rr1.setName("Reading Railroad");
-        rr2.setName("Pennsylvania Railroad");
-        rr3.setName("B. & O. RailRoad");
-        rr4.setName("Short Line");
-
-        UtilityCell.setPrice(150);
-
-        u1.setName("Electric Company");
-        u2.setName("Water Works");
-
-        super.addCell(dp1);
-        super.addCell(cc1);
-        super.addCell(dp2);
-        super.addCell(dp3);
-        super.addCell(rr1);
-        super.addCell(lb1);
-        super.addCell(c1);
-        super.addCell(lb2);
-        super.addCell(lb3);
-        super.addCell(jail);
-        super.addCell(p1);
-        super.addCell(u1);
-        super.addCell(p2);
-        super.addCell(p3);
-        super.addCell(rr2);
-        super.addCell(o1);
-        super.addCell(cc2);
-        super.addCell(o2);
-        super.addCell(o3);
-        super.addCell(fp);
-        super.addCell(r1);
-        super.addCell(c2);
-        super.addCell(r2);
-        super.addCell(r3);
-        super.addCell(rr3);
-        super.addCell(y1);
-        super.addCell(y2);
-        super.addCell(u2);
-        super.addCell(y3);
-        super.addCell(goToJail);
-        super.addCell(g1);
-        super.addCell(g2);
-        super.addCell(cc3);
-        super.addCell(g3);
-        super.addCell(rr4);
-        super.addCell(c3);
-        super.addCell(db1);
-        super.addCell(db2);
-        super.addCell(db3);
+        addJailCell();
+        addFreeParkingCell();
+        addGoToJailCell();
+        addCards();
+        addCells();
     }
     
     private void createPropertyCells() {
+        PropertyCell dp1 = new PropertyCell("Mediterranean Avenue", 50, "purple", 2, 60 );
+        PropertyCell dp2 = new PropertyCell("Baltic Avenue", 50, "purple", 2, 60);
+        PropertyCell dp3 = new PropertyCell("Sarah Avenue", 50, "purple", 4, 80);
         
+        cellArray[0] = dp1;
+        cellArray[2] = dp2;
+        cellArray[3] = dp3;
+        
+        PropertyCell lb1 = new PropertyCell("Oriental Avenue", 50, "aqua", 6, 100);
+        PropertyCell lb2 = new PropertyCell("Vermont Avenue", 50, "aqua", 6, 100);
+        PropertyCell lb3 = new PropertyCell("Connecticut Avenue", 50, "aqua", 8, 120);
+        
+        cellArray[5] = lb1;
+        cellArray[7] = lb2;
+        cellArray[8] = lb3; 
+        
+        PropertyCell p1 = new PropertyCell("St. Charles Place", 100, "fuchsia", 10, 140);
+        PropertyCell p2 = new PropertyCell("States Avenue", 100, "fuchsia", 10, 140);
+        PropertyCell p3 = new PropertyCell("Virginia Avenue", 100, "fuchsia", 12, 160);
+        
+        cellArray[10] = p1;
+        cellArray[12] = p2;
+        cellArray[13] = p3;
+        
+        PropertyCell o1 = new PropertyCell("St. James Avenue", 100, "maroon", 14, 180);
+        PropertyCell o2 = new PropertyCell("Tennessee Avenue", 100, "maroon", 14, 180);
+        PropertyCell o3 = new PropertyCell("New York Avenue", 100, "maroon", 16, 200);
+        
+        cellArray[15] = o1;
+        cellArray[17] = o2;
+        cellArray[18] = o3;
+        
+        PropertyCell r1 = new PropertyCell("Kentucky Avenue", 150, "red", 18, 220);
+        PropertyCell r2 = new PropertyCell("Indiana Avenue", 150, "red", 18, 220);
+        PropertyCell r3 = new PropertyCell("Illinois Avenue", 150, "red", 20, 240);
+        
+        cellArray[20] = r1;
+        cellArray[22] = r2;
+        cellArray[23] = r3;
+
+        PropertyCell y1 = new PropertyCell("Atlantic Avenue", 150, "yellow", 22, 260);
+        PropertyCell y2 = new PropertyCell("Ventnor Avenue", 150, "yellow", 22, 260);
+        PropertyCell y3 = new PropertyCell("Marvin Gardens", 150, "yellow", 24, 280);
+        
+        cellArray[25] = y1;
+        cellArray[26] = y2;
+        cellArray[28] = y3;
+        
+        PropertyCell g1 = new PropertyCell("Pacific Avenue", 200, "green", 26, 300);
+        PropertyCell g2 = new PropertyCell("North Carolina Avenue", 200, "green", 26, 300);
+        PropertyCell g3 = new PropertyCell("Pennsylvania Avenue", 200, "green", 28, 320);
+        
+        cellArray[30] = g1;
+        cellArray[31] = g2;
+        cellArray[33] = g3;
+        
+        PropertyCell db1 = new PropertyCell("Park Place", 200, "blue", 35, 350);
+        PropertyCell db2 = new PropertyCell("Dright Place", 200, "blue", 35, 350);
+        PropertyCell db3 = new PropertyCell("Boardwalk", 200, "blue", 50, 400);
+        
+        cellArray[36] = db1;
+        cellArray[37] = db2;
+        cellArray[38] = db3;
     }
     
     private void createRRCells() {
+        RailRoadCell rr1 = new RailRoadCell("Reading Railroad");
+        RailRoadCell rr2 = new RailRoadCell("Pennsylvania Railroad");
+        RailRoadCell rr3 = new RailRoadCell("B. & O. RailRoad");
+        RailRoadCell rr4 = new RailRoadCell("Short Line");
         
+        setRRCells();
+        
+        cellArray[4] = rr1;
+        cellArray[14] = rr2;
+        cellArray[24] = rr3;
+        cellArray[34] = rr4;
     }
     
     private void createUtilityCells() {
+        UtilityCell u1 = new UtilityCell("Electric Company");
+        UtilityCell u2 = new UtilityCell("Water Works");
         
+        setUtilityCells();
+        
+        cellArray[11] = u1;
+        cellArray[27] = u2;
     }
     
     private void createJailCell() {
-        
+        jailCell = new JailCell();
+    }
+    
+    private void createFreeParkingCell() {
+        freeParkingCell = new FreeParkingCell();
+    }
+    
+    private void createGoToJailCell() {
+        goToJailCell = new GoToJailCell();
     }
     
     private void createCardCells() {
+        CardCell cc1 = new CardCell(CardType.COMMUNITY, "Community Chest 1");
+        CardCell c1 = new CardCell(CardType.CHANCE, "Chance 1");
+        CardCell cc2 = new CardCell(CardType.COMMUNITY, "Community Chest 2");
+        CardCell c2 = new CardCell(CardType.CHANCE, "Chance 2");
+        CardCell cc3 = new CardCell(CardType.COMMUNITY, "Community Chest 3");
+        CardCell c3 = new CardCell(CardType.CHANCE, "Chance 3");
         
-    }
-    
-    private void createCards() {
-        
-    }
-    
-    private void setPropertyCells() {
-        
+        cellArray[1] = cc1;
+        cellArray[16] = cc2;
+        cellArray[32] = cc3;
+        cellArray[6] = c1;
+        cellArray[21] = c2;
+        cellArray[35] = c3;
     }
     
     private void setRRCells() {
-        
+        RailRoadCell.setBaseRent(50);
+        RailRoadCell.setPrice(200);
     }
     
     private void setUtilityCells() {
-        
+        UtilityCell.setPrice(150);
     }
+    
     
     private void addJailCell() {
-        
+        cellArray[9] = jailCell;
     }
     
-    private void addCardCells() {
-        
+    private void addFreeParkingCell() {
+        cellArray[19] = freeParkingCell;
     }
     
-    private void addCard() {
+    private void addGoToJailCell() {
+        cellArray[29] = goToJailCell;
+    }
+    
+    private void addCells() {
+        for (Cell cell : cellArray) {
+            super.addCell(cell);
+        }
+    }
+    
+    private void addCards() {
+
         super.addCard(new MoneyCard("Win $50", 50, CardType.COMMUNITY));
         super.addCard(new MoneyCard("Win $20", 20, CardType.COMMUNITY));
         super.addCard(new MoneyCard("Win $10", 10, CardType.COMMUNITY));
