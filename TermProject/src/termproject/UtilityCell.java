@@ -3,12 +3,12 @@ package termproject;
 public class UtilityCell extends Cell {
 
     public static final String COLOR_GROUP = "UTILITY";
-    
+
     private static int price;
     private final int ONE_UTILITY = 1;
     private final int BOTH_UTILITIES = 2;
-    
-    public UtilityCell (String name) {
+
+    public UtilityCell(String name) {
         setName(name);
     }
 
@@ -31,11 +31,11 @@ public class UtilityCell extends Cell {
     }
 
     private boolean ownsOneUtility() {
-        return getPlayer().numberOfUtil() == ONE_UTILITY;
+        return getPlayer().getProperty().getNumberOfUtil() == ONE_UTILITY;
     }
 
     private boolean ownsAllUtilities() {
-        return getPlayer().numberOfUtil() == BOTH_UTILITIES;
+        return getPlayer().getProperty().getNumberOfUtil() == BOTH_UTILITIES;
     }
 
     @Override

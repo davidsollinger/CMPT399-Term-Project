@@ -48,12 +48,12 @@ public class UtilityCellTest {
 
     @Test
     public void testPurchaseUtility() {
-        assertEquals(0, gameMaster.getPlayer(0).numberOfUtil());
+        assertEquals(0, gameMaster.getPlayer(0).getProperty().getNumberOfUtil());
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, cellIndex);
         gameMaster.getPlayer(0).purchase();
         assertEquals(1350, gameMaster.getPlayer(0).getMoney());
-        assertEquals(1, gameMaster.getPlayer(0).numberOfUtil());
+        assertEquals(1, gameMaster.getPlayer(0).getProperty().getNumberOfUtil());
     }
 
     @Test

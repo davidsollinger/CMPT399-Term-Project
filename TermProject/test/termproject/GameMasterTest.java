@@ -52,7 +52,7 @@ public class GameMasterTest {
         assertFalse(gui.isTradeButtonEnabled(0));
         assertFalse(gui.isTradeButtonEnabled(1));
         gameMaster.getCurrentPlayer().purchase();
-        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getAllProperties()[0]);
+        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
         gameMaster.btnEndTurnClicked();
         TradeDialog dialog = gui.openTradeDialog();
         assertEquals(1, gameMaster.getNumberOfSellers());
@@ -66,8 +66,8 @@ public class GameMasterTest {
         gameMaster.completeTrade(deal);
         assertEquals(1440 + deal.getAmount(), player1.getMoney());
         assertEquals(1500 - deal.getAmount(), player2.getMoney());
-        assertFalse(player1.checkProperty(deal.getPropertyName()));
-        assertTrue(player2.checkProperty(deal.getPropertyName()));
+        assertFalse(player1.getProperty().checkProperty(deal.getPropertyName()));
+        assertTrue(player2.getProperty().checkProperty(deal.getPropertyName()));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class GameMasterTest {
     public void testButtonPurchasePropertyClicked() {
         gameMaster.movePlayer(0, 1);
         gameMaster.btnPurchasePropertyClicked();
-        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getAllProperties()[0]);
+        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
         assertEquals(1440, gameMaster.getCurrentPlayer().getMoney());
     }
 
@@ -116,7 +116,7 @@ public class GameMasterTest {
         gameMaster.getCurrentPlayer().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.btnTradeClicked();
-        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getPlayer(1).getAllProperties()[0]);
+        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getPlayer(1).getProperty().getAllProperties()[0]);
         assertEquals(1640, gameMaster.getPlayer(0).getMoney());
         assertEquals(1300, gameMaster.getPlayer(1).getMoney());
     }

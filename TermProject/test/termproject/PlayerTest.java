@@ -19,7 +19,7 @@ public class PlayerTest {
         gameMaster.setTestMode(true);
         gameMaster.reset();
     }
-    
+
     @Test
     public void testPurchaseProperty() {
         gameMaster.setNumberOfPlayers(1);
@@ -27,7 +27,7 @@ public class PlayerTest {
         Player player = gameMaster.getPlayer(0);
         player.purchase();
         assertEquals(1380, player.getMoney());
-        assertEquals("Blue 3", player.getProperty(0).getName());
+        assertEquals("Blue 3", player.getProperty().getPropertyCell(0).getName());
         PropertyCell cell
                 = (PropertyCell) gameMaster.getGameBoard().queryCell("Blue 3");
         assertSame(player, cell.getPlayer());
@@ -61,8 +61,8 @@ public class PlayerTest {
         gameMaster.movePlayer(0, 3);
         gameMaster.getCurrentPlayer().purchase();
         gameMaster.btnEndTurnClicked();
-        gameMaster.getPlayer(0).exchangeProperty(gameMaster.getPlayer(1));
-        assertEquals(1, gameMaster.getCurrentPlayer().getPropertyNumber());
+        gameMaster.getPlayer(0).getProperty().exchangeProperty(gameMaster.getPlayer(1));
+        assertEquals(1, gameMaster.getCurrentPlayer().getProperty().getPropertyNumber());
     }
 
     public void testPurchaseHouse() {
@@ -77,8 +77,8 @@ public class PlayerTest {
         gameMaster.movePlayer(0, 1);
         gameMaster.getCurrentPlayer().purchase();
         gameMaster.btnEndTurnClicked();
-        gameMaster.getCurrentPlayer().purchaseHouse("blue", 2);
-        assertEquals("blue", gameMaster.getCurrentPlayer().getMonopolies()[0]);
+        gameMaster.getCurrentPlayer().getProperty().purchaseHouse("blue", 2);
+        assertEquals("blue", gameMaster.getCurrentPlayer().getProperty().getMonopolies()[0]);
         assertEquals(880, gameMaster.getCurrentPlayer().getMoney());
     }
 
@@ -87,8 +87,8 @@ public class PlayerTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.movePlayer(0, 1);
         gameMaster.getCurrentPlayer().purchase();
-        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getAllProperties()[0]);
-        gameMaster.getCurrentPlayer().resetProperty();
-        assertEquals(0, gameMaster.getCurrentPlayer().getAllProperties().length);
+        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
+        gameMaster.getCurrentPlayer().getProperty().resetProperty();
+        assertEquals(0, gameMaster.getCurrentPlayer().getProperty().getAllProperties().length);
     }
 }
