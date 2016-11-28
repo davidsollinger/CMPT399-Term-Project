@@ -12,7 +12,7 @@ public class PlayerProperty {
     private List<RailRoadCell> railroads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
 
-    private Player player;
+    private final Player player;
 
     public PlayerProperty(Player player) {
         this.player = player;

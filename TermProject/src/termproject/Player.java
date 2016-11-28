@@ -6,8 +6,8 @@ public class Player {
     private int money;
     private String name;
     private Cell position;
-    private PlayerProperty property;
-    private PlayerActions actions;
+    private final PlayerProperty property;
+    private final PlayerActions actions;
 
     protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
