@@ -69,13 +69,10 @@ public class GameBoard {
         int counter = 0;
         for (int i = 0; i < getCellNumber(); i++) {
             Cell c = getCell(i);
-            if (c instanceof PropertyCell) {
-                PropertyCell pc = (PropertyCell) c;
-                if (pc.getColorGroup().equals(color)) {
-                    monopolyCells[counter] = pc;
+                if (c.getColorGroup().equals(color)) {
+                    monopolyCells[counter] = (PropertyCell) c;
                     counter++;
                 }
-            }
         }
         return monopolyCells;
     }
