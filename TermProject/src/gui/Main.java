@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.HeadlessException;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import termproject.GameBoard;
@@ -10,38 +11,51 @@ import termproject.NullGameBoard;
 
 public class Main {
 
-    private static int getNumberOfPlayers(MainWindow window) {
-        int numPlayers = 0;
-        while (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
-            String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players?");
-            numPlayers = tryToGetInt(numPlayers, numberOfPlayers, window);
-            if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYER) {
-                JOptionPane.showMessageDialog(window, "Please input a number between two and eight");
-            } else {
-                GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
-            }
-        }
-        return numPlayers;
-    }
-    
-    private static void getPlayerName(MainWindow window) {
-        Boolean flag;
-        int numPlayers = getNumberOfPlayers(window);
+    private static MainWindow window;
+    private static GameMaster master;
+
+    private static String getPlayerName() {
+        boolean flag;
+        String playerName = null;
+        int numPlayers = getNumberOfPlayers();
         for (int i = 0; i < numPlayers; i++) {
             flag = false;
             while (!flag) {
-                String name = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
-                if (name.isEmpty()) {
+                playerName = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
+                if ((playerName == null)) {
+                    i = numPlayers;
+                    break;
+                } else if (playerName.isEmpty() || playerName.matches(".*\\d+.*")) {
                     JOptionPane.showMessageDialog(window, "Please enter a name");
                 } else {
-                    GameMaster.INSTANCE.getPlayer(i).setName(name);
+                    master.getPlayer(i).setName(playerName);
                     flag = true;
                 }
             }
         }
+        return playerName;
     }
-    
-    private static int tryToGetInt(int numPlayers, String numberOfPlayers, MainWindow window) throws HeadlessException {
+
+    private static int getNumberOfPlayers() {
+        int numPlayers = 0;
+        while (numPlayers < 2 || numPlayers > master.MAX_PLAYERS) {
+            String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players?");
+            if (numberOfPlayers == null) {
+                break;
+            } else {
+                numPlayers = tryToGetInt(numPlayers, numberOfPlayers);
+            }
+            if (numPlayers < 2 || numPlayers > master.MAX_PLAYERS) {
+                System.out.println("numPlayers: " + numPlayers);
+                JOptionPane.showMessageDialog(window, "Please input a number between two and eight");
+            } else {
+                master.setNumberOfPlayers(numPlayers);
+            }
+        }
+        return numPlayers;
+    }
+
+    private static int tryToGetInt(int numPlayers, String numberOfPlayers) throws HeadlessException {
         try {
             return Integer.parseInt(numberOfPlayers);
         } catch (NumberFormatException e) {
@@ -51,28 +65,31 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        GameMaster master = GameMaster.INSTANCE;
-        MainWindow window = new MainWindow();
+        master = GameMaster.INSTANCE;
+        window = new MainWindow();
         GameBoard gameBoard = new GameBoardView();
         if (args.length > 0) {
             if (args[0].equals("test")) {
                 master.setTestMode(true);
             }
-            gameBoard = tryToGetArgClass(args, window);
+            gameBoard = tryToGetArgClass(args);
         }
 
         master.setGameBoard(gameBoard);
-        getPlayerName(window);
-
-        window.setupGameBoard(gameBoard);
-        window.setVisible(true);
-        window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        master.setGUI(window);
-        master.setTestMode(true);
-        master.startGame();
+        String playerName = getPlayerName();
+        if (playerName == null) {
+            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+        } else {
+            window.setupGameBoard(gameBoard);
+            window.setVisible(true);
+            window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+            master.setGUI(window);
+            master.setTestMode(true);
+            master.startGame();
+        }
     }
 
-    private static GameBoard tryToGetArgClass(String[] args, MainWindow window) throws HeadlessException {
+    private static GameBoard tryToGetArgClass(String[] args) throws HeadlessException {
         GameBoard gameBoard;
         try {
             Class<?> c = Class.forName(args[1]);

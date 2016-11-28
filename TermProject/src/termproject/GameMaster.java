@@ -6,7 +6,7 @@ import java.util.List;
 public enum GameMaster {
     INSTANCE;
 
-    public static final int MAX_PLAYER = 8;
+    public static final int MAX_PLAYERS = 8;
 
     private final int INIT_AMOUNT_OF_MONEY = 1500;
 
@@ -115,8 +115,8 @@ public enum GameMaster {
     public void completeTrade(TradeDeal deal) {
         Player seller = getPlayer(deal.getPlayerIndex());
         Cell property = gameBoard.queryCell(deal.getPropertyName());
-        seller.sellProperty(property, deal.getAmount());
-        getCurrentPlayer().buyProperty(property, deal.getAmount());
+        seller.getProperty().sellProperty(property, deal.getAmount());
+        getCurrentPlayer().getProperty().buyProperty(property, deal.getAmount());
     }
 
     public Card drawCCCard() {

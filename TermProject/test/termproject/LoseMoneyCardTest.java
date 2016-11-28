@@ -20,7 +20,7 @@ public class LoseMoneyCardTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.reset();
         gameMaster.setGUI(new MockGUI());
-        loseMoneyCard = new MoneyCard("Pay 20 dollars", -20, Card.TYPE_CC);
+        loseMoneyCard = new MoneyCard("Pay 20 dollars", -20, CardType.COMMUNITY);
         gameMaster.getGameBoard().addCard(loseMoneyCard);
     }
 

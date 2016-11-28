@@ -121,7 +121,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
 
     private void updatePropertiesCombo(Player player) {
         comboProperties.removeAllItems();
-        Cell[] cells = player.getAllProperties();
+        Cell[] cells = player.getProperty().getAllProperties();
         btnOK.setEnabled(cells.length > 0);
         for (Cell cell : cells) {
             comboProperties.addItem(cell);

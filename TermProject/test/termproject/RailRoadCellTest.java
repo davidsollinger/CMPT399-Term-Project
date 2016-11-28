@@ -35,12 +35,12 @@ public class RailRoadCellTest {
 
     @Test
     public void testPurchaseRailroad() {
-        assertEquals(0, gameMaster.getPlayer(0).numberOfRR());
+        assertEquals(0, gameMaster.getPlayer(0).getProperty().getNumberOfRR());
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
         gameMaster.movePlayer(0, cellIndex);
         gameMaster.getPlayer(0).purchase();
         assertEquals(1300, gameMaster.getPlayer(0).getMoney());
-        assertEquals(1, gameMaster.getPlayer(0).numberOfRR());
+        assertEquals(1, gameMaster.getPlayer(0).getProperty().getNumberOfRR());
     }
 
     @Test
