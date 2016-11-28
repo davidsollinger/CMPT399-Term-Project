@@ -24,7 +24,7 @@ public class PropertyCellTest {
                 = (PropertyCell) gameMaster.getGameBoard().queryCell("Blue 3");
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Blue 3");
         gameMaster.movePlayer(0, cellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         gameMaster.switchTurn();
         gameMaster.movePlayer(1, cellIndex);
         cell.playAction();

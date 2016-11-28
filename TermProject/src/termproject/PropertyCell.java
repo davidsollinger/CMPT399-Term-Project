@@ -81,7 +81,7 @@ public class PropertyCell extends Cell {
         if (!isAvailable()) {
             currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
             if (!isCurrentPlayer(currentPlayer)) {
-                currentPlayer.payRentTo(getPlayer(), getRent());
+                currentPlayer.getActions().payRentTo(getPlayer(), getRent());
             }
         }
     }

@@ -46,7 +46,7 @@ public class UtilityCell extends Cell {
             if (!isCurrentPlayer(currentPlayer)) {
                 GameMaster.INSTANCE.utilRollDice();
                 int diceRoll = GameMaster.INSTANCE.getUtilDiceRoll();
-                currentPlayer.payRentTo(getPlayer(), getRent(diceRoll));
+                currentPlayer.getActions().payRentTo(getPlayer(), getRent(diceRoll));
             }
         }
     }

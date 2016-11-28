@@ -7,12 +7,14 @@ public class Player {
     private String name;
     private Cell position;
     private PlayerProperty property;
+    private PlayerActions actions;
 
     protected Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
-        inJail = false;
+        setInJail(false);
         position = gb.queryCell("Go");
         property = new PlayerProperty(this);
+        actions = new PlayerActions(this);
     }
 
     public static Player createNullPlayer() {
@@ -27,22 +29,16 @@ public class Player {
         return money;
     }
 
-    public void getOutOfJail() {
-        money -= JailCell.BAIL;
-        if (isBankrupt()) {
-            money = 0;
-            property.exchangeProperty(new NullPlayer());
-        }
-        inJail = false;
-        GameMaster.INSTANCE.updateGUI();
-    }
-
     public PlayerProperty getProperty() {
         return property;
     }
 
     public Cell getPosition() {
         return position;
+    }
+
+    public PlayerActions getActions() {
+        return actions;
     }
 
     public void setInJail(boolean inJail) {
@@ -62,7 +58,7 @@ public class Player {
     }
 
     public boolean isBankrupt() {
-        return money <= 0;
+        return getMoney() <= 0;
     }
 
     public boolean isInJail() {
@@ -74,40 +70,7 @@ public class Player {
     }
 
     public void addMoney(int amount) {
-        money += amount;
-    }
-
-    public void payRentTo(Player owner, int rentValue) {
-        if (getMoney() < rentValue) {
-            owner.addMoney(getMoney());
-            setMoney(getMoney() - rentValue);
-        } else {
-            setMoney(getMoney() - rentValue);
-            owner.addMoney(rentValue);
-        }
-        if (isBankrupt()) {
-            setMoney(0);
-            property.exchangeProperty(owner);
-        }
-    }
-
-    public void purchase() {
-        if (getPosition().isAvailable()) {
-            Cell c = getPosition();
-            c.setAvailable(false);
-            if (c instanceof PropertyCell) {
-                PropertyCell cell = (PropertyCell) c;
-                property.buyProperty(cell, cell.getPrice());
-            }
-            if (c instanceof RailRoadCell) {
-                RailRoadCell cell = (RailRoadCell) c;
-                property.buyProperty(cell, cell.getPrice());
-            }
-            if (c instanceof UtilityCell) {
-                UtilityCell cell = (UtilityCell) c;
-                property.buyProperty(cell, cell.getPrice());
-            }
-        }
+        setMoney(getMoney() + amount);
     }
 
     @Override
