@@ -1,10 +1,10 @@
-package termproject;
+package logic.card;
 
 public abstract class Card {
 
     public abstract String getLabel();
 
-    protected abstract void applyAction();
+    public abstract void applyAction();
 
-    protected abstract CardType getCardType();
+    public abstract CardType getCardType();
 }

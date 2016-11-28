@@ -1,4 +1,7 @@
-package termproject;
+package logic.gameBoard;
+
+import logic.cell.Cell;
+import logic.cell.NullCell;
 
 public class NullGameBoard extends GameBoard {
     

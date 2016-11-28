@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import termproject.Player;
+import logic.player.Player;
 
 public class BuyHouseDialog extends JDialog {
 

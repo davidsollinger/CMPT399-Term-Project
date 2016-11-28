@@ -1,7 +1,7 @@
 package Mocks;
 
-import termproject.RespondDialog;
-import termproject.TradeDeal;
+import logic.RespondDialog;
+import logic.trade.TradeDeal;
 
 public class MockRespondDialog implements RespondDialog {
 

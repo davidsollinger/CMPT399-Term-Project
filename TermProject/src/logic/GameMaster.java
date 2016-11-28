@@ -1,5 +1,13 @@
-package termproject;
+package logic;
 
+import logic.gameBoard.GameBoard;
+import logic.player.Player;
+import logic.cell.Cell;
+import logic.trade.TradeDialog;
+import logic.trade.TradeDeal;
+import logic.card.CardType;
+import logic.card.Card;
+import logic.cell.CardCell;
 import java.util.ArrayList;
 import java.util.List;
 

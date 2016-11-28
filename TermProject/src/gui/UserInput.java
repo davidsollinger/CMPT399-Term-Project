@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import termproject.GameMaster;
+import logic.GameMaster;
 
 public class UserInput {
 

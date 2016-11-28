@@ -1,6 +1,6 @@
-package gui;
+package gui.infoFormatter;
 
-import termproject.Cell;
+import logic.cell.Cell;
 
 public class NullInfoFormatter extends CellInfoFormatter {
     

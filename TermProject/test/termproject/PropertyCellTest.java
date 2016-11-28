@@ -1,5 +1,8 @@
 package termproject;
 
+import logic.gameBoard.SimpleGameBoard;
+import logic.GameMaster;
+import logic.cell.PropertyCell;
 import Mocks.MockGUI;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;

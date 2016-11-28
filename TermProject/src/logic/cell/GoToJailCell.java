@@ -1,4 +1,7 @@
-package termproject;
+package logic.cell;
+
+import logic.GameMaster;
+import logic.player.Player;
 
 public class GoToJailCell extends Cell {
 

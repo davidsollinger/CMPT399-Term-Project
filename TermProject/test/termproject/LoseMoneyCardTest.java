@@ -1,5 +1,9 @@
 package termproject;
 
+import logic.card.CardType;
+import logic.card.MoneyCard;
+import logic.card.Card;
+import logic.GameMaster;
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCLoseMoney;
 import static org.junit.Assert.assertEquals;

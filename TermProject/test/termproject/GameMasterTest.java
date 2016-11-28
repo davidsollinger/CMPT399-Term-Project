@@ -1,5 +1,12 @@
 package termproject;
 
+import logic.gameBoard.GameBoardView;
+import logic.player.Player;
+import logic.MonopolyGUI;
+import logic.GameMaster;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
+import logic.RespondDialog;
 import Mocks.MockGUI;
 import java.util.List;
 import static org.junit.Assert.assertEquals;

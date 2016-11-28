@@ -1,4 +1,8 @@
-package termproject;
+package logic;
+
+import logic.player.Player;
+import logic.trade.TradeDialog;
+import logic.trade.TradeDeal;
 
 public interface MonopolyGUI {
 

@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import termproject.Card;
-import termproject.Cell;
-import termproject.GameMaster;
-import termproject.Player;
+import logic.card.Card;
+import logic.cell.Cell;
+import logic.GameMaster;
+import logic.player.Player;
 
 public class PlayerPanel extends JPanel {
 

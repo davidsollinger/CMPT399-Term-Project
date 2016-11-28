@@ -1,4 +1,6 @@
-package termproject;
+package logic.cell;
+
+import logic.player.Player;
 
 public class Cell {
 
@@ -14,24 +16,24 @@ public class Cell {
         return (player == null) ? Player.createNullPlayer() : player;
     }
 
-    protected int getPrice() {
+    public int getPrice() {
         return 0;
     }
 
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return available;
     }
     
     // Used as override
-    protected String getColorGroup() {
+    public String getColorGroup() {
         return "";
     }
 
     // Used as override
-    protected void playAction() {
+    public void playAction() {
     }
 
-    protected void setAvailable(boolean available) {
+    public void setAvailable(boolean available) {
         this.available = available;
     }
 
@@ -39,7 +41,7 @@ public class Cell {
         this.name = name;
     }
 
-    protected void setPlayer(Player player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 

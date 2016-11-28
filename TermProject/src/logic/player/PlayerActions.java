@@ -1,4 +1,11 @@
-package termproject;
+package logic.player;
+
+import logic.GameMaster;
+import logic.cell.Cell;
+import logic.cell.JailCell;
+import logic.cell.PropertyCell;
+import logic.cell.RailRoadCell;
+import logic.cell.UtilityCell;
 
 public class PlayerActions {
 

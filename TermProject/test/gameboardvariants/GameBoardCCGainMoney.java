@@ -1,12 +1,12 @@
 package gameboardvariants;
 
-import termproject.Card;
-import termproject.CardCell;
-import termproject.CardType;
-import termproject.GameBoard;
-import termproject.JailCell;
-import termproject.MoneyCard;
-import termproject.PropertyCell;
+import logic.card.Card;
+import logic.cell.CardCell;
+import logic.card.CardType;
+import logic.gameBoard.GameBoard;
+import logic.cell.JailCell;
+import logic.card.MoneyCard;
+import logic.cell.PropertyCell;
 
 public class GameBoardCCGainMoney extends GameBoard {
 

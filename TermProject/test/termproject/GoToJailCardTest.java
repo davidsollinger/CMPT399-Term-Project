@@ -1,5 +1,10 @@
 package termproject;
 
+import logic.cell.Cell;
+import logic.card.CardType;
+import logic.card.Card;
+import logic.GameMaster;
+import logic.card.JailCard;
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCJail;
 import static org.junit.Assert.assertEquals;

@@ -1,4 +1,4 @@
-package gui;
+package gui.infoFormatter;
 
 public class CellInfoFormatterFactory {
     

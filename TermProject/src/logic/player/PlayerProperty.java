@@ -1,9 +1,15 @@
-package termproject;
+package logic.player;
 
+import logic.cell.Cell;
+import logic.cell.PropertyCell;
+import logic.cell.RailRoadCell;
+import logic.cell.UtilityCell;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import logic.gameBoard.GameBoard;
+import logic.GameMaster;
 
 public class PlayerProperty {
 

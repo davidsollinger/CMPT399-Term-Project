@@ -1,8 +1,8 @@
-package gui;
+package gui.infoFormatter;
 
-import termproject.Cell;
-import termproject.Player;
-import termproject.UtilityCell;
+import logic.cell.Cell;
+import logic.player.Player;
+import logic.cell.UtilityCell;
 
 public class UtilCellInfoFormatter extends CellInfoFormatter {
 

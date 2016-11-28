@@ -1,4 +1,17 @@
-package termproject;
+package logic.gameBoard;
+
+import logic.cell.Cell;
+import logic.card.CardType;
+import logic.card.MoneyCard;
+import logic.card.JailCard;
+import logic.card.MovePlayerCard;
+import logic.cell.FreeParkingCell;
+import logic.cell.CardCell;
+import logic.cell.JailCell;
+import logic.cell.PropertyCell;
+import logic.cell.RailRoadCell;
+import logic.cell.UtilityCell;
+import logic.cell.GoToJailCell;
 
 public class GameBoardView extends GameBoard {
 

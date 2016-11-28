@@ -1,4 +1,8 @@
-package termproject;
+package logic.card;
+
+import logic.cell.Cell;
+import logic.GameMaster;
+import logic.player.Player;
 
 public class MovePlayerCard extends Card {
 

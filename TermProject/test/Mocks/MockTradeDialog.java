@@ -1,8 +1,8 @@
 package Mocks;
 
-import termproject.GameMaster;
-import termproject.TradeDeal;
-import termproject.TradeDialog;
+import logic.GameMaster;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 
 public class MockTradeDialog implements TradeDialog {
 

@@ -1,4 +1,4 @@
-package termproject;
+package logic;
 
 public interface RespondDialog {
 

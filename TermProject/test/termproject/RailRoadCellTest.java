@@ -1,5 +1,7 @@
 package termproject;
 
+import logic.cell.RailRoadCell;
+import logic.GameMaster;
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardRailRoad;
 import static org.junit.Assert.assertEquals;

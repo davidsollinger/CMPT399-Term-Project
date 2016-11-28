@@ -1,4 +1,6 @@
-package termproject;
+package logic.trade;
+
+import logic.GameMaster;
 
 public class TradeDeal {
 

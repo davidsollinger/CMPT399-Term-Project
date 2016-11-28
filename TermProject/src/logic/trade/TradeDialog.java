@@ -1,4 +1,4 @@
-package termproject;
+package logic.trade;
 
 public interface TradeDialog {
 

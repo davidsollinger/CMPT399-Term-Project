@@ -1,4 +1,4 @@
-package termproject;
+package logic.cell;
 
 public class JailCell extends Cell {
 

@@ -1,4 +1,4 @@
-package termproject;
+package logic.cell;
 
 public class FreeParkingCell extends Cell {
 

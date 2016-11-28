@@ -4,10 +4,10 @@ import java.awt.HeadlessException;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import termproject.GameBoard;
-import termproject.GameBoardView;
-import termproject.GameMaster;
-import termproject.NullGameBoard;
+import logic.gameBoard.GameBoard;
+import logic.gameBoard.GameBoardView;
+import logic.GameMaster;
+import logic.gameBoard.NullGameBoard;
 
 public class Main {
 

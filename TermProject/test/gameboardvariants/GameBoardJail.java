@@ -1,9 +1,9 @@
 package gameboardvariants;
 
-import termproject.GameBoard;
-import termproject.GoToJailCell;
-import termproject.JailCell;
-import termproject.PropertyCell;
+import logic.gameBoard.GameBoard;
+import logic.cell.GoToJailCell;
+import logic.cell.JailCell;
+import logic.cell.PropertyCell;
 
 public class GameBoardJail extends GameBoard { // Not used?
 

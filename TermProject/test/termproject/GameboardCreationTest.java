@@ -1,5 +1,8 @@
 package termproject;
 
+import logic.cell.Cell;
+import logic.gameBoard.GameBoard;
+import logic.gameBoard.SimpleGameBoard;
 import gameboardvariants.GameBoard14;
 import gui.GameBoardUtil;
 import java.awt.Dimension;

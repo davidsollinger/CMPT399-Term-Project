@@ -1,4 +1,6 @@
-package termproject;
+package logic.cell;
+
+import logic.card.CardType;
 
 public class CardCell extends Cell {
     

@@ -1,6 +1,6 @@
 package gui;
 
-import termproject.Cell;
+import logic.cell.Cell;
 
 public class NullGUICell extends GUICell {
 

@@ -1,4 +1,4 @@
-package gui;
+package gui.trade;
 
 import java.awt.Container;
 import java.awt.Dialog;
@@ -14,12 +14,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import termproject.Cell;
-import termproject.GameMaster;
-import termproject.NullTradeDeal;
-import termproject.Player;
-import termproject.TradeDeal;
-import termproject.TradeDialog;
+import logic.cell.Cell;
+import logic.GameMaster;
+import logic.trade.NullTradeDeal;
+import logic.player.Player;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 
 public class GUITradeDialog extends JDialog implements TradeDialog {
 

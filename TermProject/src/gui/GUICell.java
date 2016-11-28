@@ -1,5 +1,6 @@
 package gui;
 
+import gui.infoFormatter.InfoFormatter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -7,9 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import termproject.Cell;
-import termproject.GameMaster;
-import termproject.Player;
+import logic.cell.Cell;
+import logic.GameMaster;
+import logic.player.Player;
 
 public class GUICell extends JPanel {
 

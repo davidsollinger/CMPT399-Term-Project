@@ -1,4 +1,8 @@
-package termproject;
+package logic.player;
+
+import logic.gameBoard.GameBoard;
+import logic.GameMaster;
+import logic.cell.Cell;
 
 public class Player {
 
@@ -9,7 +13,7 @@ public class Player {
     private final PlayerProperty property;
     private final PlayerActions actions;
 
-    protected Player() {
+    public Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
         setInJail(false);
         position = gb.queryCell("Go");
@@ -41,7 +45,7 @@ public class Player {
         return actions;
     }
 
-    public void setInJail(boolean inJail) {
+    public final void setInJail(boolean inJail) {
         this.inJail = inJail;
     }
 

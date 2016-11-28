@@ -1,4 +1,4 @@
-package termproject;
+package logic.player;
 
 public class NullPlayer extends Player {
 

@@ -1,16 +1,16 @@
-package gui;
+package gui.infoFormatter;
 
 import java.util.HashMap;
 import java.util.Map;
-import termproject.CardCell;
-import termproject.Cell;
-import termproject.FreeParkingCell;
-import termproject.GoCell;
-import termproject.GoToJailCell;
-import termproject.JailCell;
-import termproject.PropertyCell;
-import termproject.RailRoadCell;
-import termproject.UtilityCell;
+import logic.cell.CardCell;
+import logic.cell.Cell;
+import logic.cell.FreeParkingCell;
+import logic.cell.GoCell;
+import logic.cell.GoToJailCell;
+import logic.cell.JailCell;
+import logic.cell.PropertyCell;
+import logic.cell.RailRoadCell;
+import logic.cell.UtilityCell;
 
 public class InfoFormatter {
 

@@ -1,5 +1,7 @@
 package gui;
 
+import gui.trade.GUITradeDialog;
+import gui.trade.GUIRespondDialog;
 import debugging.DiceRollDialog;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,14 +17,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import termproject.Cell;
-import termproject.GameBoard;
-import termproject.GameMaster;
-import termproject.MonopolyGUI;
-import termproject.Player;
-import termproject.RespondDialog;
-import termproject.TradeDeal;
-import termproject.TradeDialog;
+import logic.cell.Cell;
+import logic.gameBoard.GameBoard;
+import logic.GameMaster;
+import logic.MonopolyGUI;
+import logic.player.Player;
+import logic.RespondDialog;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 
 public class MainWindow extends JFrame implements MonopolyGUI {
 

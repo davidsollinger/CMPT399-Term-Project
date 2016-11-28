@@ -1,4 +1,4 @@
-package gui;
+package gui.trade;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import termproject.RespondDialog;
-import termproject.TradeDeal;
+import logic.RespondDialog;
+import logic.trade.TradeDeal;
 
 public class GUIRespondDialog extends JDialog implements RespondDialog {
     

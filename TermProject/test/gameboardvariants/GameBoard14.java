@@ -1,7 +1,7 @@
 package gameboardvariants;
 
-import termproject.GameBoard;
-import termproject.PropertyCell;
+import logic.gameBoard.GameBoard;
+import logic.cell.PropertyCell;
 
 public class GameBoard14 extends GameBoard {
 

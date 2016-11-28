@@ -1,4 +1,7 @@
-package termproject;
+package logic.card;
+
+import logic.GameMaster;
+import logic.player.Player;
 
 public class JailCard extends Card {
 

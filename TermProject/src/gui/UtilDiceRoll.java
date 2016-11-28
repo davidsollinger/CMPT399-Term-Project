@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import termproject.GameMaster;
+import logic.GameMaster;
 
 public class UtilDiceRoll extends JDialog {
 

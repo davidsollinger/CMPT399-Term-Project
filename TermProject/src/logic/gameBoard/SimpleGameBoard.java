@@ -1,4 +1,6 @@
-package termproject;
+package logic.gameBoard;
+
+import logic.cell.PropertyCell;
 
 public class SimpleGameBoard extends GameBoard {
 
