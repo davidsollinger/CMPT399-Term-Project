@@ -24,10 +24,10 @@ public class UtilityCellTest {
     public void testMonopoly() {
         int u1CellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, u1CellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         int u2CellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 2");
         gameMaster.movePlayer(0, u2CellIndex - u1CellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertFalse(gameMaster.getPlayer(0).canBuyHouse());
     }
 
@@ -37,7 +37,7 @@ public class UtilityCellTest {
                 = (UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, cellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         gameMaster.switchTurn();
         gameMaster.movePlayer(1, cellIndex);
         cell.playAction();
@@ -51,7 +51,7 @@ public class UtilityCellTest {
         assertEquals(0, gameMaster.getPlayer(0).getProperty().getNumberOfUtil());
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, cellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertEquals(1350, gameMaster.getPlayer(0).getMoney());
         assertEquals(1, gameMaster.getPlayer(0).getProperty().getNumberOfUtil());
     }
@@ -62,14 +62,14 @@ public class UtilityCellTest {
                 = (UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");
         int cellIndex1 = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, cellIndex1);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertEquals(40, u1.getRent(10));
 
         UtilityCell u2
                 = (UtilityCell) gameMaster.getGameBoard().queryCell("Utility 2");
         int cellIndex2 = gameMaster.getGameBoard().queryCellIndex("Utility 2");
         gameMaster.movePlayer(0, cellIndex2 - cellIndex1);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertEquals(100, u1.getRent(10));
         assertEquals(100, u2.getRent(10));
     }

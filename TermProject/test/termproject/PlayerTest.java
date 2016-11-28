@@ -25,7 +25,7 @@ public class PlayerTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.movePlayer(0, 3);
         Player player = gameMaster.getPlayer(0);
-        player.purchase();
+        player.getActions().purchase();
         assertEquals(1380, player.getMoney());
         assertEquals("Blue 3", player.getProperty().getPropertyCell(0).getName());
         PropertyCell cell
@@ -47,7 +47,7 @@ public class PlayerTest {
     public void testPayRentTo() {
         gameMaster.setNumberOfPlayers(2);
         gameMaster.movePlayer(0, 4);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.movePlayer(1, 4);
         gameMaster.btnEndTurnClicked();
@@ -59,7 +59,7 @@ public class PlayerTest {
     public void testExchangeProperty() {
         gameMaster.setNumberOfPlayers(2);
         gameMaster.movePlayer(0, 3);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.getPlayer(0).getProperty().exchangeProperty(gameMaster.getPlayer(1));
         assertEquals(1, gameMaster.getCurrentPlayer().getProperty().getPropertyNumber());
@@ -69,13 +69,13 @@ public class PlayerTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.startGame();
         gameMaster.movePlayer(gameMaster.getCurrentPlayerIndex(), 1);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.getCurrentPlayer().getProperty().purchaseHouse("blue", 2);
         assertEquals("blue", gameMaster.getCurrentPlayer().getProperty().getMonopolies()[0]);
@@ -86,7 +86,7 @@ public class PlayerTest {
     public void testResetProperty() {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
         gameMaster.getCurrentPlayer().getProperty().resetProperty();
         assertEquals(0, gameMaster.getCurrentPlayer().getProperty().getAllProperties().length);

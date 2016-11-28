@@ -64,7 +64,7 @@ public enum GameMaster {
     }
 
     public void btnGetOutOfJailClicked() {
-        getCurrentPlayer().getOutOfJail();
+        getCurrentPlayer().getActions().getOutOfJail();
         if (getCurrentPlayer().isBankrupt()) {
             setButtonPropertiesFalse();
         } else {
@@ -80,7 +80,7 @@ public enum GameMaster {
 
     public void btnPurchasePropertyClicked() {
         Player player = getCurrentPlayer();
-        player.purchase();
+        player.getActions().purchase();
         gui.setPurchasePropertyEnabled(false);
         updateGUI();
     }

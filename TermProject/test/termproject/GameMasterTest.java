@@ -51,7 +51,7 @@ public class GameMasterTest {
         gameMaster.movePlayer(0, 1);
         assertFalse(gui.isTradeButtonEnabled(0));
         assertFalse(gui.isTradeButtonEnabled(1));
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
         gameMaster.btnEndTurnClicked();
         TradeDialog dialog = gui.openTradeDialog();
@@ -113,7 +113,7 @@ public class GameMasterTest {
     @Test
     public void testButtonTradeClicked() {
         gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().purchase();
+        gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.btnTradeClicked();
         assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getPlayer(1).getProperty().getAllProperties()[0]);

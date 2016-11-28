@@ -58,13 +58,16 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
 
         btnOK.addActionListener((ActionEvent e) -> {
             int amount = tryToGetInt();
-            if (amount == -1) {
-                return;
-            }
             Cell cell = (Cell) comboProperties.getSelectedItem();
             Player player = (Player) comboSellers.getSelectedItem();
             Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-            if (currentPlayer.getMoney() > amount) {
+
+            if (amount <= 0 || amount > currentPlayer.getMoney()) {
+                JOptionPane.showMessageDialog(GUITradeDialog.this,
+                        "Amount should be greater than zero but less than "
+                        + currentPlayer.getMoney(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
                 deal = new TradeDeal();
                 deal.setAmount(amount);
                 deal.setPropertyName(cell.getName());

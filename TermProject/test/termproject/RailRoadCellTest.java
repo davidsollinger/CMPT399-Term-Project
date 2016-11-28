@@ -25,7 +25,7 @@ public class RailRoadCellTest {
                 = (RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad A");
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
         gameMaster.movePlayer(0, cellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         gameMaster.switchTurn();
         gameMaster.movePlayer(1, cellIndex);
         cell.playAction();
@@ -38,7 +38,7 @@ public class RailRoadCellTest {
         assertEquals(0, gameMaster.getPlayer(0).getProperty().getNumberOfRR());
         int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
         gameMaster.movePlayer(0, cellIndex);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertEquals(1300, gameMaster.getPlayer(0).getMoney());
         assertEquals(1, gameMaster.getPlayer(0).getProperty().getNumberOfRR());
     }
@@ -49,14 +49,14 @@ public class RailRoadCellTest {
                 = (RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad A");
         int cellIndex1 = gameMaster.getGameBoard().queryCellIndex("Railroad A");
         gameMaster.movePlayer(0, cellIndex1);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertEquals(25, rr1.getRent());
 
         RailRoadCell rr2
                 = (RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad B");
         int cellIndex2 = gameMaster.getGameBoard().queryCellIndex("Railroad B");
         gameMaster.movePlayer(0, cellIndex2 - cellIndex1);
-        gameMaster.getPlayer(0).purchase();
+        gameMaster.getPlayer(0).getActions().purchase();
         assertEquals(50, rr1.getRent());
         assertEquals(50, rr2.getRent());
     }
