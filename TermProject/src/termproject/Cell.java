@@ -3,7 +3,7 @@ package termproject;
 public class Cell {
 
     private boolean available = true;
-    protected String name;
+    private String name;
     private Player player;
 
     public String getName() {
@@ -20,6 +20,11 @@ public class Cell {
 
     protected boolean isAvailable() {
         return available;
+    }
+    
+    // Used as override
+    protected String getColorGroup() {
+        return "";
     }
 
     // Used as override
@@ -40,7 +45,7 @@ public class Cell {
 
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 
     protected boolean isCurrentPlayer(Player currentPlayer) {
