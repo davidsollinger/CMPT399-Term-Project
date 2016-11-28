@@ -13,13 +13,14 @@ public class PropertyCell extends Cell {
     }
 
     public PropertyCell(String name, int housePrice, String colorGroup, int rent, int price) {
-        setName(name);
+        super.setName(name);
         this.price = price;
         this.colorGroup = colorGroup;
         this.rent = rent;
         this.housePrice = housePrice;
     }
 
+    @Override
     public String getColorGroup() {
         return colorGroup;
     }

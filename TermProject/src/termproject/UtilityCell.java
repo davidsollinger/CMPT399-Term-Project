@@ -2,14 +2,12 @@ package termproject;
 
 public class UtilityCell extends Cell {
 
-    public static final String COLOR_GROUP = "UTILITY";
-
     private static int price;
     private final int ONE_UTILITY = 1;
     private final int BOTH_UTILITIES = 2;
 
     public UtilityCell(String name) {
-        setName(name);
+        super.setName(name);
     }
 
     public static void setPrice(int price) {
@@ -28,6 +26,11 @@ public class UtilityCell extends Cell {
             return diceRoll * 4;
         }
         return 0;
+    }
+    
+    @Override
+    public String getColorGroup() {
+        return "UTILITY";
     }
 
     private boolean ownsOneUtility() {
