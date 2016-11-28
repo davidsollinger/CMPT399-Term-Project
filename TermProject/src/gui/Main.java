@@ -46,10 +46,9 @@ public class Main {
     }
 
     private static GameBoard tryToGetArgClass(String[] args) throws HeadlessException {
-        GameBoard gameBoard;
         try {
             Class<?> c = Class.forName(args[1]);
-            gameBoard = (GameBoard) c.newInstance();
+            return (GameBoard) c.newInstance();
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(window, "Class Not Found.  Program will exit");
             System.exit(0);
