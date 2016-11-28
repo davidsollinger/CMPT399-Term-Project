@@ -29,9 +29,11 @@ public class PlayerProperty {
     public String[] getMonopolies() {
         List<String> monopolies = new ArrayList<>();
         List<String> colors = new ArrayList<>(colorGroups.keySet());
+        RailRoadCell rrCell = new RailRoadCell("");
+        UtilityCell utilCell = new UtilityCell("");
         while (!colors.isEmpty()) {
             String color = colors.remove(0);
-            if (!(color.equals(RailRoadCell.COLOR_GROUP)) && !(color.equals(UtilityCell.COLOR_GROUP))) {
+            if (!(color.equals(rrCell.getColorGroup())) && !(color.equals(utilCell.getColorGroup()))) {
                 Integer num = colorGroups.get(color);
                 GameBoard gameBoard = GameMaster.INSTANCE.getGameBoard();
                 if (num == gameBoard.getPropertyNumberForColor(color)) {
@@ -51,11 +53,13 @@ public class PlayerProperty {
     }
 
     public int getNumberOfRR() {
-        return getPropertyNumberForColor(RailRoadCell.COLOR_GROUP);
+        RailRoadCell rrCell = new RailRoadCell("");
+        return getPropertyNumberForColor(rrCell.getColorGroup());
     }
 
     public int getNumberOfUtil() {
-        return getPropertyNumberForColor(UtilityCell.COLOR_GROUP);
+        UtilityCell utilCell = new UtilityCell("");
+        return getPropertyNumberForColor(utilCell.getColorGroup());
     }
 
     private int getPropertyNumberForColor(String name) {
@@ -76,12 +80,12 @@ public class PlayerProperty {
         if (property instanceof RailRoadCell) {
             RailRoadCell cell = (RailRoadCell) property;
             railroads.add(cell);
-            colorGroups.put(RailRoadCell.COLOR_GROUP, getPropertyNumberForColor(RailRoadCell.COLOR_GROUP) + 1);
+            colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
         }
         if (property instanceof UtilityCell) {
             UtilityCell cell = (UtilityCell) property;
             utilities.add(cell);
-            colorGroups.put(UtilityCell.COLOR_GROUP, getPropertyNumberForColor(UtilityCell.COLOR_GROUP) + 1);
+            colorGroups.put(cell.getColorGroup(), getPropertyNumberForColor(cell.getColorGroup()) + 1);
         }
         player.setMoney(player.getMoney() - amount);
     }
@@ -130,13 +134,16 @@ public class PlayerProperty {
     public void sellProperty(Cell property, int amount) {
         property.setPlayer(new NullPlayer());
         if (property instanceof PropertyCell) {
-            properties.remove(property);
+            PropertyCell propertyCell = (PropertyCell) property;
+            properties.remove(propertyCell);
         }
         if (property instanceof RailRoadCell) {
-            railroads.remove(property);
+            RailRoadCell rrCell = (RailRoadCell) property;
+            railroads.remove(rrCell);
         }
         if (property instanceof UtilityCell) {
-            utilities.remove(property);
+            UtilityCell utilCell = (UtilityCell) property;
+            utilities.remove(utilCell);
         }
         player.setMoney(player.getMoney() + amount);
     }
