@@ -1,11 +1,11 @@
 package termproject;
 
-import logic.card.CardType;
-import logic.card.MoneyCard;
-import logic.card.Card;
-import logic.GameMaster;
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCGainMoney;
+import logic.GameMaster;
+import logic.card.Card;
+import logic.card.CardType;
+import logic.card.MoneyCard;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

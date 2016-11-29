@@ -1,22 +1,19 @@
 package termproject;
 
-import logic.gameBoard.GameBoardView;
-import logic.player.Player;
-import logic.MonopolyGUI;
-import logic.GameMaster;
-import logic.trade.TradeDeal;
-import logic.trade.TradeDialog;
-import logic.RespondDialog;
 import Mocks.MockGUI;
 import java.util.List;
+import logic.GameMaster;
+import logic.MonopolyGUI;
+import logic.RespondDialog;
+import logic.gameBoard.GameBoardView;
+import logic.player.Player;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class GameMasterTest {
 

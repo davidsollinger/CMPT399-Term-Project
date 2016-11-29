@@ -1,12 +1,12 @@
 package termproject;
 
-import logic.cell.Cell;
-import logic.card.CardType;
-import logic.card.Card;
-import logic.GameMaster;
-import logic.card.JailCard;
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCJail;
+import logic.GameMaster;
+import logic.card.Card;
+import logic.card.CardType;
+import logic.card.JailCard;
+import logic.cell.Cell;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

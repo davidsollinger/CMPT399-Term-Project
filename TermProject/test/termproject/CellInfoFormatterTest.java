@@ -1,10 +1,10 @@
 package termproject;
 
-import logic.gameBoard.NullGameBoard;
-import logic.player.Player;
+import gui.infoFormatter.InfoFormatter;
 import logic.GameMaster;
 import logic.cell.PropertyCell;
-import gui.infoFormatter.InfoFormatter;
+import logic.gameBoard.NullGameBoard;
+import logic.player.Player;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

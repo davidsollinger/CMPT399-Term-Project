@@ -1,12 +1,12 @@
 package termproject;
 
-import logic.cell.Cell;
-import logic.gameBoard.GameBoard;
-import logic.player.Player;
-import logic.gameBoard.SimpleGameBoard;
-import logic.GameMaster;
-import logic.cell.PropertyCell;
 import Mocks.MockGUI;
+import logic.GameMaster;
+import logic.cell.Cell;
+import logic.cell.PropertyCell;
+import logic.gameBoard.GameBoard;
+import logic.gameBoard.SimpleGameBoard;
+import logic.player.Player;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
