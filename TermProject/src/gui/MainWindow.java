@@ -156,8 +156,8 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     private GUICell queryCell(int index) {
         Cell cell = GameMaster.INSTANCE.getGameBoard().getCell(index);
-        for (int x = 0; x < guiCells.size(); x++) {
-            GUICell guiCell = guiCells.get(x);
+        for (int i = 0; i < guiCells.size(); i++) {
+            GUICell guiCell = guiCells.get(i);
             if (guiCell.getCell() == cell) {
                 return guiCell;
             }

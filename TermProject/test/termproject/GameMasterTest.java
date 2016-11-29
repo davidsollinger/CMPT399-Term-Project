@@ -60,6 +60,7 @@ public class GameMasterTest {
         assertFalse(gui.isTradeButtonEnabled(1));
         gameMaster.getCurrentPlayer().getActions().purchase();
         assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
+        
         gameMaster.btnEndTurnClicked();
         TradeDialog dialog = gui.openTradeDialog();
         assertEquals(1, gameMaster.getNumberOfSellers());

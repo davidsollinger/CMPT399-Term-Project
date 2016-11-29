@@ -39,13 +39,13 @@ public class GameboardTest {
 
     @Test
     public void testPropertyNumberForColor() {
-        PropertyCell cell1 = new PropertyCell("Blue 1", 0, "blue", 0, 0);
-        PropertyCell cell2 = new PropertyCell("Blue 2", 0, "blue", 0, 0);
-        PropertyCell cell3 = new PropertyCell("Green 1", 0, "green", 0, 0);
+        PropertyCell blue1 = new PropertyCell("Blue 1", 0, "blue", 0, 0);
+        PropertyCell blue2 = new PropertyCell("Blue 2", 0, "blue", 0, 0);
+        PropertyCell green1 = new PropertyCell("Green 1", 0, "green", 0, 0);
 
-        gameBoard.addPropertyCell(cell1);
-        gameBoard.addPropertyCell(cell2);
-        gameBoard.addPropertyCell(cell3);
+        gameBoard.addPropertyCell(blue1);
+        gameBoard.addPropertyCell(blue2);
+        gameBoard.addPropertyCell(green1);
         assertEquals(2, gameBoard.getPropertyNumberForColor("blue"));
         assertEquals(1, gameBoard.getPropertyNumberForColor("green"));
     }
