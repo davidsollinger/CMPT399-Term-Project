@@ -12,22 +12,25 @@ import logic.GameMaster;
 public class UtilDiceRoll extends JDialog {
 
     private static final long serialVersionUID = 1L;
+    
     private final JButton btnDice = new JButton("Roll the Dice!");
     private final JButton btnOK = new JButton("OK");
+    private final JLabel labelPrompt = new JLabel();
+    
     private int diceValue;
-    private final JLabel lblPrompt = new JLabel();
 
     public UtilDiceRoll() {
         super.setModal(true);
+        
         btnOK.setEnabled(false);
-        lblPrompt.setText("Please roll the dice to determine your utility bill.");
+        labelPrompt.setText("Please roll the dice to determine your utility bill.");
         Container contentPane = super.getContentPane();
-        JPanel pnlButtons = new JPanel();
-        pnlButtons.add(btnDice);
-        pnlButtons.add(btnOK);
+        JPanel panelBtns = new JPanel();
+        panelBtns.add(btnDice);
+        panelBtns.add(btnOK);
         contentPane.setLayout(new BorderLayout());
-        contentPane.add(lblPrompt, BorderLayout.CENTER);
-        contentPane.add(pnlButtons, BorderLayout.SOUTH);
+        contentPane.add(labelPrompt, BorderLayout.CENTER);
+        contentPane.add(panelBtns, BorderLayout.SOUTH);
         btnDice.addActionListener((ActionEvent e) -> {
             rollDice();
         });
@@ -38,9 +41,9 @@ public class UtilDiceRoll extends JDialog {
     }
     
     public static int showDialog() {
-        UtilDiceRoll dialog = new UtilDiceRoll();
-        dialog.setVisible(true);
-        return dialog.getDiceValue();
+        UtilDiceRoll diceRollDialog = new UtilDiceRoll();
+        diceRollDialog.setVisible(true);
+        return diceRollDialog.getDiceValue();
     }
     
     public void okClicked() {
@@ -50,7 +53,7 @@ public class UtilDiceRoll extends JDialog {
     public void rollDice() {
         int[] diceRoll = GameMaster.INSTANCE.rollDice();
         diceValue = diceRoll[0] + diceRoll[1];
-        lblPrompt.setText("You rolled " + getDiceValue());
+        labelPrompt.setText("You rolled " + getDiceValue());
         btnDice.setEnabled(false);
         btnOK.setEnabled(true);
     }

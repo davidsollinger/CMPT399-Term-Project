@@ -1,8 +1,8 @@
 package logic;
 
 import logic.player.Player;
-import logic.trade.TradeDialog;
 import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 
 public interface MonopolyGUI {
 

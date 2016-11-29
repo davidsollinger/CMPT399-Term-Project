@@ -15,6 +15,9 @@ import logic.player.Player;
 public class GUICell extends JPanel {
 
     private static final long serialVersionUID = 1L;
+    private static final Color[] PLAYER_COLORS = {new Color(0, 128, 0, 75), new Color(0, 0, 255, 75), 
+        new Color(255, 165, 0, 75), new Color(255, 0, 0, 75), new Color(255, 255, 0, 75), 
+        new Color(250, 128, 114, 75), new Color(0, 255, 255, 75), new Color(255, 0, 255, 75)};
     
     private final int CELL_ROWS = 2;
     private final int CELL_COLS = 4;
@@ -24,9 +27,6 @@ public class GUICell extends JPanel {
     private final int CELL_HEIGHT = 100;
     private final Cell cell;
     private final JLabel[] playerLabels = new JLabel[GameMaster.MAX_PLAYERS];
-    private static final Color[] playerColors = {new Color(0, 128, 0, 75), new Color(0, 0, 255, 75), 
-        new Color(255, 165, 0, 75), new Color(255, 0, 0, 75), new Color(255, 255, 0, 75), 
-        new Color(250, 128, 114, 75), new Color(0, 255, 255, 75), new Color(255, 0, 255, 75)};
     
     private JLabel infoLabel;
 
@@ -64,7 +64,7 @@ public class GUICell extends JPanel {
     private void createPlayerLabels(JPanel playerPanel) {
         for (int i = 0; i < GameMaster.MAX_PLAYERS; i++) {
             playerLabels[i] = new JLabel();
-            playerLabels[i].setBackground(playerColors[i]);
+            playerLabels[i].setBackground(PLAYER_COLORS[i]);
             playerPanel.add(playerLabels[i]);
         }
     }
@@ -72,12 +72,12 @@ public class GUICell extends JPanel {
     public static void setPlayerColors() {
         for (int i = 0; i < GameMaster.INSTANCE.getNumberOfPlayers(); i++) {
             Player player = GameMaster.INSTANCE.getPlayer(i);
-            player.setPlayerColor(playerColors[i]);
+            player.setPlayerColor(PLAYER_COLORS[i]);
         }
     }
 
     public void displayInfo() {
-        infoLabel.setText(InfoFormatter.cellInfo(cell));
+        infoLabel.setText(InfoFormatter.getCellInfo(cell));
         invalidate();
         repaint();
     }
