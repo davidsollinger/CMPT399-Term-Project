@@ -30,10 +30,10 @@ public class PlayerPanel extends JPanel {
     private final JButton btnPurchaseProperty;
     private final JButton btnRollDice;
     private final JButton btnTrade;
-    private final JLabel lableMoney;
-    private final JLabel lableName;
+    private final JLabel moneyLabel;
+    private final JLabel nameLabel;
     private final Player player;
-    private final JTextArea txtProperty;
+    private final JTextArea propertyText;
 
     public PlayerPanel(Player player) {
         this.player = player;
@@ -44,54 +44,57 @@ public class PlayerPanel extends JPanel {
         btnGetOutOfJail = new JButton("Get Out of Jail");
         btnDrawCard = new JButton("Draw Card");
         btnTrade = new JButton("Trade");
-        lableName = new JLabel();
-        lableMoney = new JLabel();
-        txtProperty = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLS);
-        
-        JPanel pnlAction = new JPanel();
-        JPanel pnlInfo = new JPanel();
-        JPanel pnlName = new JPanel();
-        JPanel pnlProperties = new JPanel();
+        nameLabel = new JLabel();
+        moneyLabel = new JLabel();
+        propertyText = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLS);
+        setUpPanels();
+        propertyText.setEnabled(false);
 
-        txtProperty.setEnabled(false);
-
-        pnlInfo.setLayout(new BorderLayout());
-        pnlInfo.add(pnlName, BorderLayout.NORTH);
-        pnlInfo.add(pnlProperties, BorderLayout.CENTER);
-        
-        pnlProperties.setLayout(new OverlayLayout(pnlProperties));
-
-        pnlName.add(lableName);
-        pnlName.add(lableMoney);
-        pnlProperties.add(txtProperty);
-
-        initPanelAction(pnlAction);
-        pnlInfo.validate();
-        pnlName.validate();
-        pnlProperties.validate();
-        addElementsToJPanel(pnlInfo, pnlAction);
         initPlayerPanelButtons();
         addActionListeners();
     }
+    
+    private void setUpPanels() {
+        JPanel actionPanel = new JPanel();
+        JPanel infoPanel = new JPanel();
+        JPanel namePanel = new JPanel();
+        namePanel.setBackground(player.getPlayerColor());
+        JPanel panelProperties = new JPanel();
+        infoPanel.setLayout(new BorderLayout());
+        infoPanel.add(namePanel, BorderLayout.NORTH);
+        infoPanel.add(panelProperties, BorderLayout.CENTER);
+        
+        panelProperties.setLayout(new OverlayLayout(panelProperties));
 
-    private void addElementsToJPanel(JPanel pnlInfo, JPanel pnlAction) {
+        namePanel.add(nameLabel);
+        namePanel.add(moneyLabel);
+        panelProperties.add(propertyText);
+
+        initPanelAction(actionPanel);
+        infoPanel.validate();
+        namePanel.validate();
+        panelProperties.validate();
+        addElementsToJPanel(infoPanel, actionPanel);
+    }
+
+    private void addElementsToJPanel(JPanel infoPanel, JPanel actionPanel) {
         super.validate();
         super.setLayout(new BorderLayout());
-        super.add(pnlInfo, BorderLayout.CENTER);
-        super.add(pnlAction, BorderLayout.SOUTH);
+        super.add(infoPanel, BorderLayout.CENTER);
+        super.add(actionPanel, BorderLayout.SOUTH);
         super.setBorder(new BevelBorder(BevelBorder.RAISED));
     }
 
-    private void initPanelAction(JPanel pnlAction) {
-        pnlAction.setLayout(new GridLayout(PNL_ACTION_ROWS, PNL_ACTION_COLS));
-        pnlAction.add(btnBuyHouse);
-        pnlAction.add(btnRollDice);
-        pnlAction.add(btnPurchaseProperty);
-        pnlAction.add(btnGetOutOfJail);
-        pnlAction.add(btnEndTurn);
-        pnlAction.add(btnDrawCard);
-        pnlAction.add(btnTrade);
-        pnlAction.validate();
+    private void initPanelAction(JPanel actionPanel) {
+        actionPanel.setLayout(new GridLayout(PNL_ACTION_ROWS, PNL_ACTION_COLS));
+        actionPanel.add(btnBuyHouse);
+        actionPanel.add(btnRollDice);
+        actionPanel.add(btnPurchaseProperty);
+        actionPanel.add(btnGetOutOfJail);
+        actionPanel.add(btnEndTurn);
+        actionPanel.add(btnDrawCard);
+        actionPanel.add(btnTrade);
+        actionPanel.validate();
     }
 
     private void initPlayerPanelButtons() {
@@ -138,14 +141,14 @@ public class PlayerPanel extends JPanel {
     }
 
     public void displayInfo() {
-        lableName.setText(player.getName());
-        lableMoney.setText("$ " + player.getMoney());
+        nameLabel.setText(player.getName());
+        moneyLabel.setText("$ " + player.getMoney());
         StringBuilder buf = new StringBuilder();
         Cell[] cells = player.getProperty().getAllProperties();
         for (Cell cell : cells) {
             buf.append(cell).append("\n");
         }
-        txtProperty.setText(buf.toString());
+        propertyText.setText(buf.toString());
     }
 
     public boolean isBuyHouseButtonEnabled() {

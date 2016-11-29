@@ -17,8 +17,7 @@ public class GameboardTest {
     @Before
     public void setUp() throws Exception {
         gameBoard = new GameBoard();
-        cell = new PropertyCell();
-        cell.setName("TempCell");
+        cell = new PropertyCell("Temp cell", 0, "blue", 0, 0);
     }
 
     @Test
@@ -40,15 +39,9 @@ public class GameboardTest {
 
     @Test
     public void testPropertyNumberForColor() {
-        PropertyCell cell1 = new PropertyCell();
-        cell1.setName("Blue 1");
-        cell1.setColorGroup("blue");
-        PropertyCell cell2 = new PropertyCell();
-        cell2.setName("Blue 2");
-        cell2.setColorGroup("blue");
-        PropertyCell cell3 = new PropertyCell();
-        cell3.setName("Green 1");
-        cell3.setColorGroup("green");
+        PropertyCell cell1 = new PropertyCell("Blue 1", 0, "blue", 0, 0);
+        PropertyCell cell2 = new PropertyCell("Blue 2", 0, "blue", 0, 0);
+        PropertyCell cell3 = new PropertyCell("Green 1", 0, "green", 0, 0);
 
         gameBoard.addPropertyCell(cell1);
         gameBoard.addPropertyCell(cell2);

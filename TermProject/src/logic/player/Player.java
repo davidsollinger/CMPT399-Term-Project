@@ -1,5 +1,6 @@
 package logic.player;
 
+import java.awt.Color;
 import logic.GameMaster;
 import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
@@ -12,6 +13,7 @@ public class Player {
     private Cell position;
     private final PlayerProperty property;
     private final PlayerActions actions;
+    private Color playerColor;
 
     public Player() {
         GameBoard gb = GameMaster.INSTANCE.getGameBoard();
@@ -44,6 +46,10 @@ public class Player {
     public PlayerActions getActions() {
         return actions;
     }
+    
+    public Color getPlayerColor() {
+        return playerColor;
+    }
 
     public final void setInJail(boolean inJail) {
         this.inJail = inJail;
@@ -59,6 +65,10 @@ public class Player {
 
     public void setPosition(Cell newPosition) {
         this.position = newPosition;
+    }
+    
+    public void setPlayerColor(Color playerColor) {
+        this.playerColor = playerColor;
     }
 
     public boolean isBankrupt() {

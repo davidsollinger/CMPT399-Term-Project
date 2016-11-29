@@ -11,11 +11,6 @@ public class PropertyCell extends Cell {
     private int rent;
     private int price;
 
-    // Default?
-    public PropertyCell() {
-        this("", 0, "", 0, 0);
-    }
-
     public PropertyCell(String name, int housePrice, String colorGroup, int rent, int price) {
         super.setName(name);
         this.price = price;

@@ -46,14 +46,14 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         westPanel.setBorder(new LineBorder(Color.BLACK));
         eastPanel.setBorder(new LineBorder(Color.BLACK));
 
-        Container c = super.getContentPane();
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension d = tk.getScreenSize();
-        super.setSize(d);
-        c.add(northPanel, BorderLayout.NORTH);
-        c.add(southPanel, BorderLayout.SOUTH);
-        c.add(eastPanel, BorderLayout.EAST);
-        c.add(westPanel, BorderLayout.WEST);
+        Container container = super.getContentPane();
+        Toolkit toolKit = Toolkit.getDefaultToolkit();
+        Dimension dimension = toolKit.getScreenSize();
+        super.setSize(dimension);
+        container.add(northPanel, BorderLayout.NORTH);
+        container.add(southPanel, BorderLayout.SOUTH);
+        container.add(eastPanel, BorderLayout.EAST);
+        container.add(westPanel, BorderLayout.WEST);
 
         super.addWindowListener(new WindowAdapter() {
             @Override
@@ -207,6 +207,8 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     public void setupGameBoard(GameBoard board) {
+        GUICell.setPlayerColors();
+        
         Dimension dimension = GameBoardUtil.calculateDimension(board.getCellNumber());
         northPanel.setLayout(new GridLayout(ROWS, dimension.width + 2));
         southPanel.setLayout(new GridLayout(ROWS, dimension.width + 2));
