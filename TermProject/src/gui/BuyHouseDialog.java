@@ -16,49 +16,49 @@ public class BuyHouseDialog extends JDialog {
     private final int ROWS = 3;
     private final int COLS = 2;
 
-    private JComboBox<String> cboMonopoly;
-    private JComboBox<Integer> cboNumber;
+    private JComboBox<String> monopolyComboBox;
+    private JComboBox<Integer> numberComboBox;
 
     private final Player player;
 
     public BuyHouseDialog(Player player) {
         this.player = player;
-        Container c = super.getContentPane();
-        c.setLayout(new GridLayout(ROWS, COLS));
-        c.add(new JLabel("Select monopoly"));
-        c.add(buildMonopolyComboBox());
-        c.add(new JLabel("Number of houses"));
-        c.add(buildNumberComboBox());
-        c.add(buildOKButton());
-        c.add(buildCancelButton());
-        c.doLayout();
+        Container container = super.getContentPane();
+        container.setLayout(new GridLayout(ROWS, COLS));
+        container.add(new JLabel("Select monopoly"));
+        container.add(buildMonopolyComboBox());
+        container.add(new JLabel("Number of houses"));
+        container.add(buildNumberComboBox());
+        container.add(buildOKButton());
+        container.add(buildCancelButton());
+        container.doLayout();
         super.pack();
     }
 
     private JButton buildCancelButton() {
-        JButton btn = new JButton("Cancel");
-        btn.addActionListener((ActionEvent e) -> {
+        JButton button =  new JButton("Cancel");
+        button.addActionListener((ActionEvent e) -> {
             cancelClicked();
         });
-        return btn;
+        return button;
     }
 
     private JComboBox<String> buildMonopolyComboBox() {
-        cboMonopoly = new JComboBox<>(player.getProperty().getMonopolies());
-        return cboMonopoly;
+        monopolyComboBox = new JComboBox<>(player.getProperty().getMonopolies());
+        return monopolyComboBox;
     }
 
     private JComboBox<Integer> buildNumberComboBox() {
-        cboNumber = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
-        return cboNumber;
+        numberComboBox = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
+        return numberComboBox;
     }
 
     private JButton buildOKButton() {
-        JButton btn = new JButton("OK");
-        btn.addActionListener((ActionEvent e) -> {
+        JButton button = new JButton("OK");
+        button.addActionListener((ActionEvent e) -> {
             okClicked();
         });
-        return btn;
+        return button;
     }
 
     private void cancelClicked() {
@@ -66,8 +66,8 @@ public class BuyHouseDialog extends JDialog {
     }
 
     private void okClicked() {
-        String monopoly = (String) cboMonopoly.getSelectedItem();
-        int number = cboNumber.getSelectedIndex() + 1;
+        String monopoly = (String) monopolyComboBox.getSelectedItem();
+        int number = numberComboBox.getSelectedIndex() + 1;
         player.getProperty().purchaseHouse(monopoly, number);
         dispose();
     }

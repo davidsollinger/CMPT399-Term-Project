@@ -14,8 +14,10 @@ import logic.cell.UtilityCell;
 import logic.cell.GoToJailCell;
 
 public class GameBoardView extends GameBoard {
-
-    private final Cell[] cellArray = new Cell[39];
+    
+    private final int TOTAL_CELLS = 39;
+    
+    private final Cell[] cells = new Cell[TOTAL_CELLS];
 
     private JailCell jailCell;
     private FreeParkingCell freeParkingCell;
@@ -43,65 +45,65 @@ public class GameBoardView extends GameBoard {
         PropertyCell dp2 = new PropertyCell("Baltic Avenue", 50, "purple", 4, 60);
         PropertyCell dp3 = new PropertyCell("Sarah Avenue", 50, "purple", 4, 60);
 
-        cellArray[0] = dp1;
-        cellArray[2] = dp2;
-        cellArray[3] = dp3;
+        cells[0] = dp1;
+        cells[2] = dp2;
+        cells[3] = dp3;
 
         PropertyCell lb1 = new PropertyCell("Oriental Avenue", 50, "aqua", 6, 100);
         PropertyCell lb2 = new PropertyCell("Vermont Avenue", 50, "aqua", 6, 100);
         PropertyCell lb3 = new PropertyCell("Connecticut Avenue", 50, "aqua", 8, 120);
 
-        cellArray[5] = lb1;
-        cellArray[7] = lb2;
-        cellArray[8] = lb3;
+        cells[5] = lb1;
+        cells[7] = lb2;
+        cells[8] = lb3;
 
         PropertyCell p1 = new PropertyCell("St. Charles Place", 100, "fuchsia", 10, 140);
         PropertyCell p2 = new PropertyCell("States Avenue", 100, "fuchsia", 10, 140);
         PropertyCell p3 = new PropertyCell("Virginia Avenue", 100, "fuchsia", 12, 160);
 
-        cellArray[10] = p1;
-        cellArray[12] = p2;
-        cellArray[13] = p3;
+        cells[10] = p1;
+        cells[12] = p2;
+        cells[13] = p3;
 
         PropertyCell o1 = new PropertyCell("St. James Avenue", 100, "maroon", 14, 180);
         PropertyCell o2 = new PropertyCell("Tennessee Avenue", 100, "maroon", 14, 180);
         PropertyCell o3 = new PropertyCell("New York Avenue", 100, "maroon", 16, 200);
 
-        cellArray[15] = o1;
-        cellArray[17] = o2;
-        cellArray[18] = o3;
+        cells[15] = o1;
+        cells[17] = o2;
+        cells[18] = o3;
 
         PropertyCell r1 = new PropertyCell("Kentucky Avenue", 150, "red", 18, 220);
         PropertyCell r2 = new PropertyCell("Indiana Avenue", 150, "red", 18, 220);
         PropertyCell r3 = new PropertyCell("Illinois Avenue", 150, "red", 20, 240);
 
-        cellArray[20] = r1;
-        cellArray[22] = r2;
-        cellArray[23] = r3;
+        cells[20] = r1;
+        cells[22] = r2;
+        cells[23] = r3;
 
         PropertyCell y1 = new PropertyCell("Atlantic Avenue", 150, "orange", 22, 260);
         PropertyCell y2 = new PropertyCell("Ventnor Avenue", 150, "orange", 22, 260);
         PropertyCell y3 = new PropertyCell("Marvin Gardens", 150, "orange", 24, 280);
 
-        cellArray[25] = y1;
-        cellArray[26] = y2;
-        cellArray[28] = y3;
+        cells[25] = y1;
+        cells[26] = y2;
+        cells[28] = y3;
 
         PropertyCell g1 = new PropertyCell("Pacific Avenue", 200, "green", 26, 300);
         PropertyCell g2 = new PropertyCell("North Carolina Avenue", 200, "green", 26, 300);
         PropertyCell g3 = new PropertyCell("Pennsylvania Avenue", 200, "green", 28, 320);
 
-        cellArray[30] = g1;
-        cellArray[31] = g2;
-        cellArray[33] = g3;
+        cells[30] = g1;
+        cells[31] = g2;
+        cells[33] = g3;
 
         PropertyCell db1 = new PropertyCell("Park Place", 200, "blue", 35, 350);
         PropertyCell db2 = new PropertyCell("Dright Place", 200, "blue", 35, 350);
         PropertyCell db3 = new PropertyCell("Boardwalk", 200, "blue", 50, 400);
 
-        cellArray[36] = db1;
-        cellArray[37] = db2;
-        cellArray[38] = db3;
+        cells[36] = db1;
+        cells[37] = db2;
+        cells[38] = db3;
     }
 
     private void createRRCells() {
@@ -112,10 +114,10 @@ public class GameBoardView extends GameBoard {
 
         setRRCells();
 
-        cellArray[4] = rr1;
-        cellArray[14] = rr2;
-        cellArray[24] = rr3;
-        cellArray[34] = rr4;
+        cells[4] = rr1;
+        cells[14] = rr2;
+        cells[24] = rr3;
+        cells[34] = rr4;
     }
 
     private void createUtilityCells() {
@@ -124,8 +126,8 @@ public class GameBoardView extends GameBoard {
 
         setUtilityCells();
 
-        cellArray[11] = u1;
-        cellArray[27] = u2;
+        cells[11] = u1;
+        cells[27] = u2;
     }
 
     private void createJailCell() {
@@ -148,12 +150,12 @@ public class GameBoardView extends GameBoard {
         CardCell cc3 = new CardCell(CardType.COMMUNITY, "Community Chest 3");
         CardCell c3 = new CardCell(CardType.CHANCE, "Chance 3");
 
-        cellArray[1] = cc1;
-        cellArray[16] = cc2;
-        cellArray[32] = cc3;
-        cellArray[6] = c1;
-        cellArray[21] = c2;
-        cellArray[35] = c3;
+        cells[1] = cc1;
+        cells[16] = cc2;
+        cells[32] = cc3;
+        cells[6] = c1;
+        cells[21] = c2;
+        cells[35] = c3;
     }
 
     private void setRRCells() {
@@ -166,19 +168,19 @@ public class GameBoardView extends GameBoard {
     }
 
     private void addJailCell() {
-        cellArray[9] = jailCell;
+        cells[9] = jailCell;
     }
 
     private void addFreeParkingCell() {
-        cellArray[19] = freeParkingCell;
+        cells[19] = freeParkingCell;
     }
 
     private void addGoToJailCell() {
-        cellArray[29] = goToJailCell;
+        cells[29] = goToJailCell;
     }
 
     private void addCells() {
-        for (Cell cell : cellArray) {
+        for (Cell cell : cells) {
             super.addCell(cell);
         }
     }

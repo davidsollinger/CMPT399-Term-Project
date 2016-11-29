@@ -8,7 +8,7 @@ import logic.cell.JailCell;
 import logic.card.MovePlayerCard;
 import logic.cell.PropertyCell;
 
-public class GameBoardCCMovePlayer extends GameBoard { // Not used?
+public class GameBoardCCMovePlayer extends GameBoard {
 
     public GameBoardCCMovePlayer() {
         super();
