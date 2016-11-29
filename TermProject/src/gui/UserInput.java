@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import jdk.internal.org.objectweb.asm.Opcodes;
 import logic.GameMaster;
 
 public class UserInput {
