@@ -20,7 +20,7 @@ public class UtilCellInfoFormatter extends CellInfoFormatter {
                 .append("'>")
                 .append(cell.getName())
                 .append("</font></b><br>")
-                .append("$").append(c.getPrice())
+                .append("Price: $").append(c.getPrice())
                 .append("<br>Owner: ").append(owner.getName())
                 .append("</html>");
         return buf.toString();

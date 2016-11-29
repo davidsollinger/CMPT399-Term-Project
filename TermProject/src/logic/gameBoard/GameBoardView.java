@@ -79,9 +79,9 @@ public class GameBoardView extends GameBoard {
         cellArray[22] = r2;
         cellArray[23] = r3;
 
-        PropertyCell y1 = new PropertyCell("Atlantic Avenue", 150, "yellow", 22, 260);
-        PropertyCell y2 = new PropertyCell("Ventnor Avenue", 150, "yellow", 22, 260);
-        PropertyCell y3 = new PropertyCell("Marvin Gardens", 150, "yellow", 24, 280);
+        PropertyCell y1 = new PropertyCell("Atlantic Avenue", 150, "orange", 22, 260);
+        PropertyCell y2 = new PropertyCell("Ventnor Avenue", 150, "orange", 22, 260);
+        PropertyCell y3 = new PropertyCell("Marvin Gardens", 150, "orange", 24, 280);
 
         cellArray[25] = y1;
         cellArray[26] = y2;

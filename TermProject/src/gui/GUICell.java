@@ -23,49 +23,61 @@ public class GUICell extends JPanel {
     private final int CELL_WIDTH = 100;
     private final int CELL_HEIGHT = 100;
     private final Cell cell;
-    private final JLabel[] lblPlayers = new JLabel[GameMaster.MAX_PLAYERS];
+    private final JLabel[] playerLabels = new JLabel[GameMaster.MAX_PLAYERS];
+    private static final Color[] playerColors = {new Color(0, 128, 0, 75), new Color(0, 0, 255, 75), 
+        new Color(255, 165, 0, 75), new Color(255, 0, 0, 75), new Color(255, 255, 0, 75), 
+        new Color(250, 128, 114, 75), new Color(0, 255, 255, 75), new Color(255, 0, 255, 75)};
     
-    private JLabel lblInfo;
+    private JLabel infoLabel;
 
     public GUICell(Cell cell) {
         this.cell = cell;
         super.setLayout(new OverlayLayout(this));
         super.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        JPanel pnlPlayer = new JPanel();
-        pnlPlayer.setLayout(new GridLayout(CELL_ROWS, CELL_COLS));
-        pnlPlayer.setOpaque(false);
-        createPlayerLabels(pnlPlayer);
-        super.add(pnlPlayer);
+        setPlayerPanel();
         super.setPreferredSize(new Dimension(CELL_WIDTH, CELL_HEIGHT));
         addCellInfo();
         super.doLayout();
     }
+    
+    private void setPlayerPanel () {
+        JPanel playerPanel = new JPanel();
+        playerPanel.setLayout(new GridLayout(CELL_ROWS, CELL_COLS));
+        playerPanel.setOpaque(false);
+        createPlayerLabels(playerPanel);
+        super.add(playerPanel);
+    }
 
     private void addCellInfo() {
-        lblInfo = new JLabel();
+        infoLabel = new JLabel();
         displayInfo();
-        JPanel pnlInfo = new JPanel();
-        pnlInfo.setLayout(new GridLayout(LABEL_ROWS, LABEL_COLS));
-        pnlInfo.add(lblInfo);
-        add(pnlInfo);
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new GridLayout(LABEL_ROWS, LABEL_COLS));
+        infoPanel.add(infoLabel);
+        add(infoPanel);
     }
 
     public void addPlayer(int index) {
-        Player player = GameMaster.INSTANCE.getPlayer(index);
-        lblPlayers[index].setText(player.getName().substring(0, 1));
-        lblPlayers[index].setOpaque(true);
+        playerLabels[index].setOpaque(true);
     }
 
-    private void createPlayerLabels(JPanel pnlPlayer) {
+    private void createPlayerLabels(JPanel playerPanel) {
         for (int i = 0; i < GameMaster.MAX_PLAYERS; i++) {
-            lblPlayers[i] = new JLabel();
-            lblPlayers[i].setBackground(Color.GREEN);
-            pnlPlayer.add(lblPlayers[i]);
+            playerLabels[i] = new JLabel();
+            playerLabels[i].setBackground(playerColors[i]);
+            playerPanel.add(playerLabels[i]);
+        }
+    }
+    
+    public static void setPlayerColors() {
+        for (int i = 0; i < GameMaster.INSTANCE.getNumberOfPlayers(); i++) {
+            Player player = GameMaster.INSTANCE.getPlayer(i);
+            player.setPlayerColor(playerColors[i]);
         }
     }
 
     public void displayInfo() {
-        lblInfo.setText(InfoFormatter.cellInfo(cell));
+        infoLabel.setText(InfoFormatter.cellInfo(cell));
         invalidate();
         repaint();
     }
@@ -75,8 +87,7 @@ public class GUICell extends JPanel {
     }
 
     public void removePlayer(int index) {
-        lblPlayers[index].setText("");
-        lblPlayers[index].setOpaque(false);
+        playerLabels[index].setOpaque(false);
         repaint();
     }
 

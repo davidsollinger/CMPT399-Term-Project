@@ -1,6 +1,7 @@
 package termproject;
 
 import Mocks.MockGUI;
+import java.awt.Color;
 import logic.GameMaster;
 import logic.cell.Cell;
 import logic.cell.PropertyCell;
@@ -96,5 +97,13 @@ public class PlayerTest {
         assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
         gameMaster.getCurrentPlayer().getProperty().resetProperty();
         assertEquals(0, gameMaster.getCurrentPlayer().getProperty().getAllProperties().length);
+    }
+    
+    @Test
+    public void testPlayerColor() {
+        Color [] playerColors = {new Color(0, 128, 0, 75), new Color(0, 0, 255, 75)};
+        Player player = new Player();
+        player.setPlayerColor(new Color(0, 128, 0, 75));
+        assertEquals(playerColors[0], player.getPlayerColor());
     }
 }
