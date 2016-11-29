@@ -65,7 +65,7 @@ public class GUICell extends JPanel {
     }
 
     public void displayInfo() {
-        lblInfo.setText(InfoFormatter.cellInfo(cell));
+        lblInfo.setText(InfoFormatter.getCellInfo(cell));
         invalidate();
         repaint();
     }

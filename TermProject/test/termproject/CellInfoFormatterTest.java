@@ -8,6 +8,7 @@ import logic.player.Player;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class CellInfoFormatterTest {
     
@@ -22,7 +23,7 @@ public class CellInfoFormatterTest {
 //        GoCell cell = new GoCell();
 ////        String goLabel = GoCellInfoFormatter.GO_CELL_LABEL;
 //        String goLabel = "<html><b>Go</b></html>";
-//        assertEquals(goLabel, InfoFormatter.cellInfo(cell));
+//        assertEquals(goLabel, InfoFormatter.getCellInfo(cell));
 //    }
 
     @Test
@@ -46,6 +47,6 @@ public class CellInfoFormatterTest {
         p.setName(ownerName);
         cell.setPlayer(p);
         cell.setNumHouses(numHouses);
-        assertEquals(propertyLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(propertyLabel, InfoFormatter.getCellInfo(cell));
     }
 }

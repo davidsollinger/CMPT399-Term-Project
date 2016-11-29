@@ -1,8 +1,8 @@
 package gui.infoFormatter;
 
 public class CellInfoFormatterFactory {
-    
-    public CellInfoFormatter getCellInfoFormatter (String cellInfoFormatterType) {
+
+    public CellInfoFormatter getCellInfoFormatter(String cellInfoFormatterType) {
         switch (cellInfoFormatterType) {
             case "Property":
                 return new PropertyCellInfoFormatter();
@@ -26,5 +26,5 @@ public class CellInfoFormatterFactory {
                 return new NullInfoFormatter();
         }
     }
-    
+
 }
