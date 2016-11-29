@@ -35,7 +35,7 @@ public class Main {
     }
 
     private static void checkTestMode(String[] args) {
-        if (args[0].equals("test")) {
+        if (args[0].equalsIgnoreCase("test")) {
             master.setTestMode(true);
         }
     }
