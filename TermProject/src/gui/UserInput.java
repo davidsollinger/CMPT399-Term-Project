@@ -8,85 +8,79 @@ public class UserInput {
 
     private final MainWindow window;
     private boolean valid;
+    private int numberOfPlayers;
 
     public UserInput(MainWindow window) {
         this.window = window;
         valid = false;
-        getPlayerInput();
+        setNumberOfPlayers();
+        if (0 != numberOfPlayers) {
+            setPlayersNames();
+        }
     }
 
     public boolean isValid() {
         return valid;
     }
 
-    private void getPlayerInput() {
-        int numPlayers = getNumberOfPlayers();
-        if (numPlayers == 0) {
-            return;
+    private void setNumberOfPlayers() {
+        numberOfPlayers = getNumberOfPlayersInput();
+        GameMaster.INSTANCE.setNumberOfPlayers(numberOfPlayers);
+    }
+
+    private int getNumberOfPlayersInput() {
+        int numOfPlayers = 0;
+        while (!isValidNumberOfPlayers(numOfPlayers)) {
+            String numberOfPlayersInput = JOptionPane.showInputDialog(window, "How many players?");
+            if (isCanceledClicked(numberOfPlayersInput)) {
+                return 0;
+            }
+            numOfPlayers = tryToGetInt(numberOfPlayersInput);
+            if ((numOfPlayers != -1) && !isValidNumberOfPlayers(numOfPlayers)) {
+                JOptionPane.showMessageDialog(window, "Please input a number between two and eight", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
-        for (int i = 0; i < numPlayers; i++) {
-            while (true) {
-                String playerName = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
+        return numOfPlayers;
+    }
+
+    private void setPlayersNames() throws HeadlessException {
+        String playerName;
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playerName = "";
+            while (!isValidPlayerName(playerName)) {
+                playerName = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
                 if (isCanceledClicked(playerName)) {
                     return;
                 }
-
-                if (checkPlayerName(playerName)) {
+                if (isValidPlayerName(playerName)) {
                     GameMaster.INSTANCE.getPlayer(i).setName(playerName);
-                    break;
+                } else {
+                    JOptionPane.showMessageDialog(window, "Please enter a string name", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
         valid = true;
     }
 
-    private int getNumberOfPlayers() {
-        int numPlayers = 0;
-        while (true) {
-            String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players?");
-            if (isCanceledClicked(numberOfPlayers)) {
-                return 0;
-            }
-
-            numPlayers = tryToGetInt(numPlayers, numberOfPlayers);
-            if (checkNumberOfPlayers(numPlayers)) {
-                GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
-                return numPlayers;
-            }
-        }
-    }
-
     private boolean isCanceledClicked(String input) {
-        return input == null;
-    }
-    
-    private boolean checkPlayerName(String playerName) {
-        if (playerName.isEmpty() || playerName.matches(".*\\d+.*")) {
-            JOptionPane.showMessageDialog(window,
-                    "Please enter a string name", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
+        return null == input;
     }
 
-    private boolean checkNumberOfPlayers(int numPlayers) {
-        if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYERS) {
-            JOptionPane.showMessageDialog(window,
-                    "Please input a number between two and eight", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
+    private boolean isValidPlayerName(String playerName) {
+        return (!playerName.isEmpty()) && (!playerName.matches(".*\\d+.*"));
     }
 
-    private int tryToGetInt(int numPlayers, String numberOfPlayers) throws HeadlessException {
+    private boolean isValidNumberOfPlayers(int numPlayers) {
+        return (numPlayers >= 2) && (numPlayers <= GameMaster.MAX_PLAYERS);
+    }
+
+    private int tryToGetInt(String numberOfPlayers) throws HeadlessException {
         try {
-            return Integer.parseInt(numberOfPlayers);
+            return Integer.parseUnsignedInt(numberOfPlayers);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(window,
-                    "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(window, "Please input a number between two and eight", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        return numPlayers;
+        return -1;
     }
 
 }
