@@ -126,11 +126,17 @@ public enum GameMaster {
     public void btnTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal();
-        RespondDialog rDialog = gui.openRespondDialog(deal);
-        if (rDialog.hasResponded()) {
-            completeTrade(deal);
-            updateGUI();
+        if(checkDeal(deal)) {
+            RespondDialog rDialog = gui.openRespondDialog(deal);
+            if (rDialog.hasResponded()) {
+                completeTrade(deal);
+                updateGUI();
+            }
         }
+    }
+    
+    private boolean checkDeal(TradeDeal deal) {
+        return deal.getAmount() > 0;
     }
 
     public void completeTrade(TradeDeal deal) {
