@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
+import jdk.internal.org.objectweb.asm.Opcodes;
 import logic.GameMaster;
 
 public class UserInput {
@@ -21,12 +22,15 @@ public class UserInput {
 
     private void getPlayerInput() {
         int numPlayers = getNumberOfPlayers();
+        if (numPlayers == 0) {
+            return;
+        }
+        
         for (int i = 0; i < numPlayers; i++) {
             while (true) {
                 String playerName = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
                 if (isCanceledClicked(playerName)) {
-                    i = numPlayers; // Need explain
-                    break;
+                    return;
                 }
 
                 if (checkPlayerName(playerName)) {
@@ -34,17 +38,13 @@ public class UserInput {
                     break;
                 }
             }
-            if (i == numPlayers - 1) { // Need explain
-                valid = true;
-            }
         }
-
+        valid = true;
     }
 
     private int getNumberOfPlayers() {
-        int numPlayers;
+        int numPlayers = 0;
         while (true) {
-            numPlayers = 0;
             String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players?");
             if (isCanceledClicked(numberOfPlayers)) {
                 return 0;
@@ -61,7 +61,7 @@ public class UserInput {
     private boolean isCanceledClicked(String input) {
         return input == null;
     }
-
+    
     private boolean checkPlayerName(String playerName) {
         if (playerName.isEmpty() || playerName.matches(".*\\d+.*")) {
             JOptionPane.showMessageDialog(window,
