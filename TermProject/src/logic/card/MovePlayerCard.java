@@ -1,14 +1,13 @@
 package logic.card;
 
-import logic.cell.Cell;
 import logic.GameMaster;
+import logic.cell.Cell;
 import logic.player.Player;
 
 public class MovePlayerCard extends Card {
 
     private final String destination;
     private final CardType cardType;
-
 
     public MovePlayerCard(String destination, CardType cardType) {
         this.destination = destination;
@@ -33,6 +32,7 @@ public class MovePlayerCard extends Card {
         return newCell - currentCell;
     }
 
+    // Bad conditional name?
     private static boolean iscurrentCellGreaterThanNewCell(int currentCell, int newCell) {
         return currentCell > newCell;
     }

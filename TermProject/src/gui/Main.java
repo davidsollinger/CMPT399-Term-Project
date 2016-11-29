@@ -4,9 +4,9 @@ import java.awt.HeadlessException;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import logic.GameMaster;
 import logic.gameBoard.GameBoard;
 import logic.gameBoard.GameBoardView;
-import logic.GameMaster;
 import logic.gameBoard.NullGameBoard;
 
 public class Main {
@@ -19,20 +19,24 @@ public class Main {
         master = GameMaster.INSTANCE;
         window = new MainWindow();
         gameBoard = new GameBoardView();
+        
         if (args.length > 0) {
-            if (args[0].equals("test")) {
-                master.setTestMode(true);
-            }
+            checkTestMode(args);
             gameBoard = tryToGetArgClass(args);
         }
-
         master.setGameBoard(gameBoard);
         UserInput input = new UserInput(window);
 
-        if (input.getValid() == false) {
+        if (!input.isValid()) {
             window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
         } else {
             beginGame();
+        }
+    }
+
+    private static void checkTestMode(String[] args) {
+        if (args[0].equals("test")) {
+            master.setTestMode(true);
         }
     }
 

@@ -21,7 +21,7 @@ public class MoneyCard extends Card {
         Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
         currentPlayer.setMoney(currentPlayer.getMoney() + amount);
     }
-    
+
     @Override
     public CardType getCardType() {
         return cardType;

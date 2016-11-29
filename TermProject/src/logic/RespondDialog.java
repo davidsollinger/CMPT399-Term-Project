@@ -2,5 +2,5 @@ package logic;
 
 public interface RespondDialog {
 
-    boolean getResponse();
+    boolean hasResponded();
 }

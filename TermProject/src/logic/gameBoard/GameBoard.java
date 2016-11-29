@@ -28,9 +28,9 @@ public class GameBoard {
     public void addCard(Card card) {
         if (card.getCardType().equals(CardType.COMMUNITY)) {
             communityChestCards.add(card);
-        } else {
-            chanceCards.add(card);
+            return;
         }
+        chanceCards.add(card);
     }
 
     public final void addCell(Cell cell) {
@@ -75,10 +75,10 @@ public class GameBoard {
         int counter = 0;
         for (int i = 0; i < getCellNumber(); i++) {
             Cell c = getCell(i);
-                if (c.getColorGroup().equals(color)) {
-                    monopolyCells[counter] = (PropertyCell) c;
-                    counter++;
-                }
+            if (c.getColorGroup().equals(color)) { // Remove conditional on removal of instanceof
+                monopolyCells[counter] = (PropertyCell) c;
+                counter++;
+            }
         }
         return monopolyCells;
     }
@@ -91,20 +91,20 @@ public class GameBoard {
         return 0;
     }
 
-    public Cell queryCell(String string) {
+    public Cell queryCell(String cellName) {
         for (int i = 0; i < cells.size(); i++) {
-            Cell temp = cells.get(i);
-            if (temp.getName().equals(string)) {
-                return temp;
+            Cell cell = cells.get(i);
+            if (cell.getName().equals(cellName)) {
+                return cell;
             }
         }
         return new NullCell();
     }
 
-    public int queryCellIndex(String string) {
+    public int queryCellIndex(String cellName) {
         for (int i = 0; i < cells.size(); i++) {
-            Cell temp = cells.get(i);
-            if (temp.getName().equals(string)) {
+            Cell cell = cells.get(i);
+            if (cell.getName().equals(cellName)) {
                 return i;
             }
         }

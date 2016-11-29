@@ -9,7 +9,7 @@ public class MockRespondDialog implements RespondDialog {
     }
 
     @Override
-    public boolean getResponse() {
+    public boolean hasResponded() {
         return true;
     }
 }

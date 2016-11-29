@@ -30,7 +30,7 @@ public class UtilityCell extends Cell {
         }
         return 0;
     }
-    
+
     @Override
     public String getColorGroup() {
         return "UTILITY";
@@ -45,15 +45,20 @@ public class UtilityCell extends Cell {
     }
 
     @Override
+    protected void checkIfCurrentPlayer(Player currentPlayer) {
+        if (!isCurrentPlayer(currentPlayer)) {
+            GameMaster.INSTANCE.utilRollDice();
+            int diceRoll = GameMaster.INSTANCE.getUtilDiceRoll();
+            currentPlayer.getActions().payRentTo(getPlayer(), getRent(diceRoll));
+        }
+    }
+
+    @Override
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-            if (!isCurrentPlayer(currentPlayer)) {
-                GameMaster.INSTANCE.utilRollDice();
-                int diceRoll = GameMaster.INSTANCE.getUtilDiceRoll();
-                currentPlayer.getActions().payRentTo(getPlayer(), getRent(diceRoll));
-            }
+            checkIfCurrentPlayer(currentPlayer);
         }
     }
 }

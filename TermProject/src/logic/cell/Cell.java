@@ -23,7 +23,7 @@ public class Cell {
     public boolean isAvailable() {
         return available;
     }
-    
+
     // Used as override
     public String getColorGroup() {
         return "";
@@ -52,6 +52,15 @@ public class Cell {
 
     protected boolean isCurrentPlayer(Player currentPlayer) {
         return getPlayer() == currentPlayer;
+    }
+
+    // used as override
+    protected int getRent() {
+        return 0;
+    }
+
+    // Used as override
+    protected void checkIfCurrentPlayer(Player currentPlayer) {
     }
 
 }

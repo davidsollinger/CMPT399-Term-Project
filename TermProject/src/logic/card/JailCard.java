@@ -9,7 +9,6 @@ public class JailCard extends Card {
 
     public JailCard(CardType cardType) {
         this.cardType = cardType;
-
     }
 
     @Override

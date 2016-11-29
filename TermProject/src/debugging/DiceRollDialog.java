@@ -46,23 +46,27 @@ public class DiceRollDialog extends JDialog {
 
         btnOK.addActionListener((ActionEvent e) -> {
             int amount = tryToGetInt();
-            if (amount == -1 || amount == 0) {
+            if (amount <= 0) {
                 return;
             }
             if (amount > 0) {
                 diceRoll = new int[2];
-                if ((amount % 2) == 0) {
-                    diceRoll[0] = amount / 2;
-                    diceRoll[1] = amount / 2;
-                } else {
-                    diceRoll[0] = amount / 2;
-                    diceRoll[1] = (amount / 2) + 1;
-                }
+                isUserInputEven(amount);
             }
             setVisible(false);
         });
 
         super.pack();
+    }
+
+    private void isUserInputEven(int amount) {
+        if ((amount % 2) == 0) {
+            diceRoll[0] = amount / 2;
+            diceRoll[1] = amount / 2;
+            return;
+        }
+        diceRoll[0] = amount / 2;
+        diceRoll[1] = (amount / 2) + 1;
     }
 
     private int tryToGetInt() throws HeadlessException {
@@ -71,8 +75,8 @@ public class DiceRollDialog extends JDialog {
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(DiceRollDialog.this,
                     "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
-            return -1;
         }
+        return -1;
     }
 
     public int[] getDiceRoll() {

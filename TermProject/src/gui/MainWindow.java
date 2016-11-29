@@ -1,8 +1,8 @@
 package gui;
 
-import gui.trade.GUITradeDialog;
-import gui.trade.GUIRespondDialog;
 import debugging.DiceRollDialog;
+import gui.trade.GUIRespondDialog;
+import gui.trade.GUITradeDialog;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -17,12 +17,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import logic.cell.Cell;
-import logic.gameBoard.GameBoard;
 import logic.GameMaster;
 import logic.MonopolyGUI;
-import logic.player.Player;
 import logic.RespondDialog;
+import logic.cell.Cell;
+import logic.gameBoard.GameBoard;
+import logic.player.Player;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 

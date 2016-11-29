@@ -14,10 +14,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import logic.cell.Cell;
 import logic.GameMaster;
-import logic.trade.NullTradeDeal;
+import logic.cell.Cell;
 import logic.player.Player;
+import logic.trade.NullTradeDeal;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 
@@ -68,19 +68,20 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             Cell cell = (Cell) comboProperties.getSelectedItem();
             Player player = (Player) comboSellers.getSelectedItem();
             Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-            if (amount <= 0 || amount > currentPlayer.getMoney()) {
+            if (!curPlayerHasEnough(amount, currentPlayer)) {
                 JOptionPane.showMessageDialog(GUITradeDialog.this,
                         "Amount should be greater than zero but less than "
                         + currentPlayer.getMoney(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             } else {
-                deal = new TradeDeal();
-                deal.setAmount(amount);
-                deal.setPropertyName(cell.getName());
-                deal.setSellerIndex(GameMaster.INSTANCE.getPlayerIndex(player));
+                createTradeDealText(amount, cell, player);
             }
             setVisible(false);
         });
+    }
+
+    private static boolean curPlayerHasEnough(int amount, Player currentPlayer) {
+        return amount > 0 && amount < currentPlayer.getMoney();
     }
 
     private void createTradeDealText(int amount, Cell cell, Player player) {
@@ -88,10 +89,6 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         deal.setAmount(amount);
         deal.setPropertyName(cell.getName());
         deal.setSellerIndex(GameMaster.INSTANCE.getPlayerIndex(player));
-    }
-
-    private boolean curPlayerHasEnough(Player currentPlayer, int amount) {
-        return currentPlayer.getMoney() > amount;
     }
 
     private void buildTradePropertyContentPane() {

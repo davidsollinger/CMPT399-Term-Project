@@ -11,6 +11,7 @@ public class PropertyCell extends Cell {
     private int rent;
     private int price;
 
+    // Default?
     public PropertyCell() {
         this("", 0, "", 0, 0);
     }
@@ -41,18 +42,24 @@ public class PropertyCell extends Cell {
         return price;
     }
 
+    @Override
     public int getRent() {
         int rentToCharge = rent;
         String[] monopolies = getPlayer().getProperty().getMonopolies();
         for (String monopolie : monopolies) {
-            if (monopolie.equals(colorGroup)) {
-                rentToCharge = rent * 2;
-            }
+            rentToCharge = checkForDoubleRent(monopolie);
         }
         if (ownsHouses()) {
             rentToCharge = rent * (numHouses + 1);
         }
         return rentToCharge;
+    }
+
+    private int checkForDoubleRent(String monopolie) {
+        if (monopolie.equals(colorGroup)) {
+            return rent * 2;
+        }
+        return rent;
     }
 
     public void setNumHouses(int numHouses) {
@@ -78,15 +85,21 @@ public class PropertyCell extends Cell {
     private boolean ownsHouses() {
         return numHouses > 0;
     }
+    
+    @Override
+    protected void checkIfCurrentPlayer(Player currentPlayer) {
+        if (!isCurrentPlayer(currentPlayer)) {
+            currentPlayer.getActions().payRentTo(getPlayer(), getRent());
+        }
+    }
 
     @Override
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-            if (!isCurrentPlayer(currentPlayer)) {
-                currentPlayer.getActions().payRentTo(getPlayer(), getRent());
-            }
+            checkIfCurrentPlayer(currentPlayer);
         }
     }
+
 }

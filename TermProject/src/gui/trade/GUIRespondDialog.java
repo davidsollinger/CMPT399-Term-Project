@@ -48,7 +48,7 @@ public class GUIRespondDialog extends JDialog implements RespondDialog {
     }
     
     @Override
-    public boolean getResponse() {
+    public boolean hasResponded() {
         return response;
     }
     

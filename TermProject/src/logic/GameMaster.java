@@ -1,22 +1,23 @@
 package logic;
 
-import logic.gameBoard.GameBoard;
-import logic.player.Player;
-import logic.cell.Cell;
-import logic.trade.TradeDialog;
-import logic.trade.TradeDeal;
-import logic.card.CardType;
-import logic.card.Card;
-import logic.cell.CardCell;
 import java.util.ArrayList;
 import java.util.List;
+import logic.card.Card;
+import logic.card.CardType;
+import logic.cell.CardCell;
+import logic.cell.Cell;
+import logic.gameBoard.GameBoard;
+import logic.player.Player;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 
 public enum GameMaster {
     INSTANCE;
 
     public static final int MAX_PLAYERS = 8;
-
+    
     private final int INIT_AMOUNT_OF_MONEY = 1500;
+    private final int GO_CELL_AMOUNT = 200;
 
     private final Die[] dice;
     private GameBoard gameBoard;
@@ -37,16 +38,24 @@ public enum GameMaster {
     public Card btnDrawCardClicked() {
         gui.setDrawCardEnabled(false);
         CardCell cell = (CardCell) getCurrentPlayer().getPosition();
-        Card card;
-        if (cell.getType().equals(CardType.COMMUNITY)) {
-            card = getGameBoard().drawCCCard();
-            card.applyAction();
-        } else {
-            card = getGameBoard().drawChanceCard();
-            card.applyAction();
-        }
+        Card card = getCardAction(cell);
         gui.setEndTurnEnabled(true);
         return card;
+    }
+
+    private Card getCardAction(CardCell cell) {
+        Card card;
+        if (isCellTypeCommunity(cell)) {
+            card = getGameBoard().drawCCCard();
+        } else {
+            card = getGameBoard().drawChanceCard();
+        }
+        card.applyAction();
+        return card;
+    }
+
+    private static boolean isCellTypeCommunity(CardCell cell) {
+        return cell.getType().equals(CardType.COMMUNITY);
     }
 
     public void btnEndTurnClicked() {
@@ -54,11 +63,10 @@ public enum GameMaster {
         getCurrentPlayer().getPosition().playAction();
         if (getCurrentPlayer().isBankrupt()) {
             setButtonPropertiesFalse();
-            updateGUI();
         } else {
             switchTurn();
-            updateGUI();
         }
+        updateGUI();
     }
 
     private void setButtonPropertiesFalse() {
@@ -95,7 +103,7 @@ public enum GameMaster {
 
     public void btnRollDiceClicked() {
         int[] rolls = rollDice();
-        if ((rolls[0] + rolls[1]) > 0) {
+        if (isRollAmountPositive(rolls)) { // Redundant conditional?
             Player player = getCurrentPlayer();
             gui.setRollDiceEnabled(false);
             StringBuilder msg = new StringBuilder();
@@ -110,11 +118,16 @@ public enum GameMaster {
         }
     }
 
+    // Redundant?
+    private static boolean isRollAmountPositive(int[] rolls) {
+        return (rolls[0] + rolls[1]) > 0;
+    }
+
     public void btnTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal();
         RespondDialog rDialog = gui.openRespondDialog(deal);
-        if (rDialog.getResponse()) {
+        if (rDialog.hasResponded()) {
             completeTrade(deal);
             updateGUI();
         }
@@ -196,13 +209,21 @@ public enum GameMaster {
         Cell currentPosition = player.getPosition();
         int positionIndex = gameBoard.queryCellIndex(currentPosition.getName());
         int newIndex = (positionIndex + diceValue) % gameBoard.getCellNumber();
-        if (newIndex <= positionIndex || diceValue > gameBoard.getCellNumber()) {
-            player.setMoney(player.getMoney() + 200);
-        }
+        checkPlayerPassGoCell(newIndex, positionIndex, diceValue, player);
         player.setPosition(gameBoard.getCell(newIndex));
         gui.movePlayer(getPlayerIndex(player), positionIndex, newIndex);
         playerMoved(player);
         updateGUI();
+    }
+
+    private void checkPlayerPassGoCell(int newIndex, int positionIndex, int diceValue, Player player) {
+        if (hasEnoughMoney(newIndex, positionIndex) || diceValue > gameBoard.getCellNumber()) {
+            player.setMoney(player.getMoney() + GO_CELL_AMOUNT);
+        }
+    }
+
+    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
+        return newIndex <= positionIndex;
     }
 
     public void playerMoved(Player player) {
@@ -211,15 +232,23 @@ public enum GameMaster {
         if (cell instanceof CardCell) {
             gui.setDrawCardEnabled(true);
         } else {
-            if (cell.isAvailable()) {
-                int price = cell.getPrice();
-                if (price <= player.getMoney() && price > 0) {
-                    gui.enablePurchaseBtn(playerIndex);
-                }
-            }
+            checkCellIsAvailible(cell, player, playerIndex);
             gui.enableEndTurnBtn(playerIndex);
         }
         gui.setTradeEnabled(turn, false);
+    }
+
+    private void checkCellIsAvailible(Cell cell, Player player, int playerIndex) {
+        if (cell.isAvailable()) {
+            int price = cell.getPrice();
+            checkAvailibleForPurchase(price, player, playerIndex);
+        }
+    }
+
+    private void checkAvailibleForPurchase(int price, Player player, int playerIndex) {
+        if (hasEnoughMoney(price, player.getMoney()) && price > 0) {
+            gui.enablePurchaseBtn(playerIndex);
+        }
     }
 
     public void reset() {

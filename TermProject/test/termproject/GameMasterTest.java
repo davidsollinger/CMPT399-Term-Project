@@ -14,6 +14,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class GameMasterTest {
 
@@ -69,7 +72,7 @@ public class GameMasterTest {
         RespondDialog respond = gui.openRespondDialog(deal);
         Player player1 = gameMaster.getPlayer(0);
         Player player2 = gameMaster.getPlayer(1);
-        assertTrue(respond.getResponse());
+        assertTrue(respond.hasResponded());
         gameMaster.completeTrade(deal);
         assertEquals(1440 + deal.getAmount(), player1.getMoney());
         assertEquals(1500 - deal.getAmount(), player2.getMoney());
