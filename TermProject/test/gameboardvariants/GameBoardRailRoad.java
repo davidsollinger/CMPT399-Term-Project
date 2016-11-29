@@ -1,11 +1,11 @@
 package gameboardvariants;
 
-import termproject.FreeParkingCell;
-import termproject.GameBoard;
-import termproject.GoToJailCell;
-import termproject.JailCell;
-import termproject.PropertyCell;
-import termproject.RailRoadCell;
+import logic.cell.FreeParkingCell;
+import logic.gameBoard.GameBoard;
+import logic.cell.GoToJailCell;
+import logic.cell.JailCell;
+import logic.cell.PropertyCell;
+import logic.cell.RailRoadCell;
 
 public class GameBoardRailRoad extends GameBoard {
 

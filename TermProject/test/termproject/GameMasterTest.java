@@ -2,6 +2,13 @@ package termproject;
 
 import Mocks.MockGUI;
 import java.util.List;
+import logic.GameMaster;
+import logic.MonopolyGUI;
+import logic.RespondDialog;
+import logic.gameBoard.GameBoardView;
+import logic.player.Player;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -62,7 +69,7 @@ public class GameMasterTest {
         RespondDialog respond = gui.openRespondDialog(deal);
         Player player1 = gameMaster.getPlayer(0);
         Player player2 = gameMaster.getPlayer(1);
-        assertTrue(respond.getResponse());
+        assertTrue(respond.hasResponded());
         gameMaster.completeTrade(deal);
         assertEquals(1440 + deal.getAmount(), player1.getMoney());
         assertEquals(1500 - deal.getAmount(), player2.getMoney());

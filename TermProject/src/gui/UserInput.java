@@ -2,11 +2,11 @@ package gui;
 
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import termproject.GameMaster;
+import logic.GameMaster;
 
 public class UserInput {
 
-    private MainWindow window;
+    private final MainWindow window;
     private boolean valid;
 
     public UserInput(MainWindow window) {
@@ -15,7 +15,7 @@ public class UserInput {
         getPlayerInput();
     }
 
-    public boolean getValid() {
+    public boolean isValid() {
         return valid;
     }
 
@@ -24,8 +24,8 @@ public class UserInput {
         for (int i = 0; i < numPlayers; i++) {
             while (true) {
                 String playerName = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
-                if ((checkForNoInput(playerName))) {
-                    i = numPlayers;
+                if (isCanceledClicked(playerName)) {
+                    i = numPlayers; // Need explain
                     break;
                 }
 
@@ -34,7 +34,7 @@ public class UserInput {
                     break;
                 }
             }
-            if (i == numPlayers - 1) {
+            if (i == numPlayers - 1) { // Need explain
                 valid = true;
             }
         }
@@ -46,25 +46,20 @@ public class UserInput {
         while (true) {
             numPlayers = 0;
             String numberOfPlayers = JOptionPane.showInputDialog(window, "How many players?");
-            if (checkForNoInput(numberOfPlayers)) {
-                break;
+            if (isCanceledClicked(numberOfPlayers)) {
+                return 0;
             }
 
             numPlayers = tryToGetInt(numPlayers, numberOfPlayers);
-            if (checkNumberOfPlayer(numPlayers)) {
+            if (checkNumberOfPlayers(numPlayers)) {
                 GameMaster.INSTANCE.setNumberOfPlayers(numPlayers);
-                break;
+                return numPlayers;
             }
         }
-        return numPlayers;
     }
 
-    private boolean checkForNoInput(String input) {
-        if (input == null) {
-            return true;
-        }
-
-        return false;
+    private boolean isCanceledClicked(String input) {
+        return input == null;
     }
 
     private boolean checkPlayerName(String playerName) {
@@ -76,8 +71,8 @@ public class UserInput {
         return true;
     }
 
-    private boolean checkNumberOfPlayer(int numPlayers) {
-        if (numPlayers < 2 || numPlayers > GameMaster.INSTANCE.MAX_PLAYERS) {
+    private boolean checkNumberOfPlayers(int numPlayers) {
+        if (numPlayers < 2 || numPlayers > GameMaster.MAX_PLAYERS) {
             JOptionPane.showMessageDialog(window,
                     "Please input a number between two and eight", "Error", JOptionPane.ERROR_MESSAGE);
             return false;

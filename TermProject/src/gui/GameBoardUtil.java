@@ -3,8 +3,8 @@ package gui;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import termproject.Cell;
-import termproject.GameBoard;
+import logic.cell.Cell;
+import logic.gameBoard.GameBoard;
 
 public class GameBoardUtil {
 
@@ -18,7 +18,6 @@ public class GameBoardUtil {
 
     public static List<Cell> getEastCells(GameBoard board) {
         Dimension d = calculateDimension(board.getCellNumber());
-        int longSide = d.width;
         int shortSide = d.height;
         List<Cell> cells = new ArrayList<>();
         for (int i = board.getCellNumber() - shortSide; i <= board.getCellNumber() - 1; i++) {
@@ -41,7 +40,6 @@ public class GameBoardUtil {
     public static List<Cell> getSouthCells(GameBoard board) {
         Dimension d = calculateDimension(board.getCellNumber());
         int longSide = d.width;
-        int shortSide = d.height;
         List<Cell> cells = new ArrayList<>();
         for (int i = longSide + 1; i >= 0; i--) {
             cells.add(board.getCell(i));

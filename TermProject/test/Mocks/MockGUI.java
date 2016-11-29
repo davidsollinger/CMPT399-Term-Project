@@ -1,10 +1,10 @@
 package Mocks;
 
-import termproject.MonopolyGUI;
-import termproject.Player;
-import termproject.RespondDialog;
-import termproject.TradeDeal;
-import termproject.TradeDialog;
+import logic.MonopolyGUI;
+import logic.player.Player;
+import logic.RespondDialog;
+import logic.trade.TradeDeal;
+import logic.trade.TradeDialog;
 
 public class MockGUI implements MonopolyGUI {
 

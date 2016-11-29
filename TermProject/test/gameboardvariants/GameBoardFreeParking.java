@@ -1,9 +1,9 @@
 package gameboardvariants;
 
-import termproject.FreeParkingCell;
-import termproject.GameBoard;
-import termproject.GoToJailCell;
-import termproject.JailCell;
+import logic.cell.FreeParkingCell;
+import logic.gameBoard.GameBoard;
+import logic.cell.GoToJailCell;
+import logic.cell.JailCell;
 
 public class GameBoardFreeParking extends GameBoard { // Not used?
 
