@@ -15,13 +15,16 @@ public class GUIRespondDialog extends JDialog implements RespondDialog {
     
     private static final long serialVersionUID = 1L;
     
-    private boolean response;
+    private final int TXTAREA_WIDTH = 300;
+    private final int TXTAREA_HEIGHT = 200;
     private final JTextArea txtMessage = new JTextArea();
+    
+    private boolean response;
     
     public GUIRespondDialog() {
         JButton btnYes = new JButton("Yes");
         JButton btnNo = new JButton("No");
-        txtMessage.setPreferredSize(new Dimension(300, 200));
+        txtMessage.setPreferredSize(new Dimension(TXTAREA_WIDTH, TXTAREA_HEIGHT));
         txtMessage.setEditable(false);
         txtMessage.setLineWrap(true);
         

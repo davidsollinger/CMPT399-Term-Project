@@ -20,12 +20,13 @@ public enum GameMaster {
     private final int GO_CELL_AMOUNT = 200;
 
     private final Die[] dice;
-    private GameBoard gameBoard;
-    private MonopolyGUI gui;
     private final List<Player> players = new ArrayList<>();
+    
     private int turn = 0;
     private int utilDiceRoll;
     private boolean testMode;
+    private GameBoard gameBoard;
+    private MonopolyGUI gui;
 
     private GameMaster() {
         dice = new Die[]{new Die(), new Die()};
@@ -103,7 +104,7 @@ public enum GameMaster {
 
     public void btnRollDiceClicked() {
         int[] rolls = rollDice();
-        if (isRollAmountPositive(rolls)) { // Redundant conditional?
+        if (isRollAmountPositive(rolls)) {
             Player player = getCurrentPlayer();
             gui.setRollDiceEnabled(false);
             StringBuilder msg = new StringBuilder();
@@ -118,7 +119,6 @@ public enum GameMaster {
         }
     }
 
-    // Redundant?
     private static boolean isRollAmountPositive(int[] rolls) {
         return (rolls[0] + rolls[1]) > 0;
     }

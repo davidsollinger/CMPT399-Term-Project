@@ -14,13 +14,12 @@ import logic.gameBoard.GameBoard;
 public class PlayerProperty {
 
     private final int MAX_AMOUNT_OF_HOUSES = 5;
-    
     private final Map<String, Integer> colorGroups = new HashMap<>();
+    private final Player player;
+    
     private List<PropertyCell> properties = new ArrayList<>();
     private List<RailRoadCell> railroads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
-
-    private final Player player;
 
     public PlayerProperty(Player player) {
         this.player = player;

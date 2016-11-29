@@ -7,13 +7,17 @@ import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
 
 public class GameBoardUtil {
+    
+    private static final int FOUR_CORNERS = 4;
+    private static final int SQUARE_SIDES = 4;
+    private static final int NUMBER_OF_LONGSIDES = 2;
 
     public static Dimension calculateDimension(int cellNumber) {
         int aCellNumber = cellNumber;
-        aCellNumber -= 4;
-        int shortSide = aCellNumber / 4;
-        int longSide = (aCellNumber - (shortSide * 2)) / 2;
-        return new Dimension(longSide, shortSide);
+        aCellNumber -= FOUR_CORNERS;
+        int oneShortSide = aCellNumber / SQUARE_SIDES;
+        int oneLongSide = (aCellNumber - (oneShortSide * 2)) / NUMBER_OF_LONGSIDES;
+        return new Dimension(oneLongSide, oneShortSide);
     }
 
     public static List<Cell> getEastCells(GameBoard board) {

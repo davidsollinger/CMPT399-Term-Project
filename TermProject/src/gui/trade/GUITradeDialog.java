@@ -107,7 +107,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
     private int tryToGetInt() throws HeadlessException {
         try {
             return Integer.parseInt(txtAmount.getText());
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(GUITradeDialog.this,
                     "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
         }

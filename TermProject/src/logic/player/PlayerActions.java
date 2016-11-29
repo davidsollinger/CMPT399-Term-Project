@@ -9,6 +9,8 @@ import logic.cell.UtilityCell;
 
 public class PlayerActions {
 
+    private final int NONE = 0;
+    
     private final Player player;
 
     public PlayerActions(Player player) {
@@ -18,7 +20,7 @@ public class PlayerActions {
     public void getOutOfJail() {
         player.setMoney(player.getMoney() - JailCell.BAIL);
         if (player.isBankrupt()) {
-            player.setMoney(0);
+            player.setMoney(NONE);
             player.getProperty().exchangeProperty(new NullPlayer());
         }
         player.setInJail(false);
@@ -34,7 +36,7 @@ public class PlayerActions {
             owner.addMoney(rentValue);
         }
         if (player.isBankrupt()) {
-            player.setMoney(0);
+            player.setMoney(NONE);
             player.getProperty().exchangeProperty(owner);
         }
     }

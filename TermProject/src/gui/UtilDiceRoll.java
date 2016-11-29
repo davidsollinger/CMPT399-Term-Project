@@ -28,10 +28,10 @@ public class UtilDiceRoll extends JDialog {
         contentPane.setLayout(new BorderLayout());
         contentPane.add(lblPrompt, BorderLayout.CENTER);
         contentPane.add(pnlButtons, BorderLayout.SOUTH);
-        btnDice.addActionListener((ActionEvent arg0) -> {
+        btnDice.addActionListener((ActionEvent e) -> {
             rollDice();
         });
-        btnOK.addActionListener((ActionEvent arg0) -> {
+        btnOK.addActionListener((ActionEvent e) -> {
             okClicked();
         });
         super.pack();
