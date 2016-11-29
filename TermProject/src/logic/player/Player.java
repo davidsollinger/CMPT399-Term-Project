@@ -1,11 +1,11 @@
 package logic.player;
 
-import logic.gameBoard.GameBoard;
 import logic.GameMaster;
 import logic.cell.Cell;
+import logic.gameBoard.GameBoard;
 
 public class Player {
-
+    
     private boolean inJail;
     private int money;
     private String name;

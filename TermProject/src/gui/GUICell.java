@@ -8,28 +8,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import logic.cell.Cell;
 import logic.GameMaster;
+import logic.cell.Cell;
 import logic.player.Player;
 
 public class GUICell extends JPanel {
 
     private static final long serialVersionUID = 1L;
-
+    
+    private final int CELL_ROWS = 2;
+    private final int CELL_COLS = 4;
+    private final int LABEL_ROWS = 1;
+    private final int LABEL_COLS = 1;
+    private final int CELL_WIDTH = 100;
+    private final int CELL_HEIGHT = 100;
     private final Cell cell;
-    private JLabel lblInfo;
     private final JLabel[] lblPlayers = new JLabel[GameMaster.MAX_PLAYERS];
+    
+    private JLabel lblInfo;
 
     public GUICell(Cell cell) {
         this.cell = cell;
         super.setLayout(new OverlayLayout(this));
         super.setBorder(new BevelBorder(BevelBorder.LOWERED));
         JPanel pnlPlayer = new JPanel();
-        pnlPlayer.setLayout(new GridLayout(2, 4));
+        pnlPlayer.setLayout(new GridLayout(CELL_ROWS, CELL_COLS));
         pnlPlayer.setOpaque(false);
         createPlayerLabels(pnlPlayer);
         super.add(pnlPlayer);
-        super.setPreferredSize(new Dimension(100, 100));
+        super.setPreferredSize(new Dimension(CELL_WIDTH, CELL_HEIGHT));
         addCellInfo();
         super.doLayout();
     }
@@ -38,7 +45,7 @@ public class GUICell extends JPanel {
         lblInfo = new JLabel();
         displayInfo();
         JPanel pnlInfo = new JPanel();
-        pnlInfo.setLayout(new GridLayout(1, 1));
+        pnlInfo.setLayout(new GridLayout(LABEL_ROWS, LABEL_COLS));
         pnlInfo.add(lblInfo);
         add(pnlInfo);
     }

@@ -12,6 +12,9 @@ import logic.player.Player;
 public class BuyHouseDialog extends JDialog {
 
     private static final long serialVersionUID = 1L;
+    
+    private final int ROWS = 3;
+    private final int COLS = 2;
 
     private JComboBox<String> cboMonopoly;
     private JComboBox<Integer> cboNumber;
@@ -21,7 +24,7 @@ public class BuyHouseDialog extends JDialog {
     public BuyHouseDialog(Player player) {
         this.player = player;
         Container c = super.getContentPane();
-        c.setLayout(new GridLayout(3, 2));
+        c.setLayout(new GridLayout(ROWS, COLS));
         c.add(new JLabel("Select monopoly"));
         c.add(buildMonopolyComboBox());
         c.add(new JLabel("Number of houses"));
@@ -46,8 +49,7 @@ public class BuyHouseDialog extends JDialog {
     }
 
     private JComboBox<Integer> buildNumberComboBox() {
-        cboNumber = new JComboBox<>(new Integer[]{
-            1, 2, 3, 4, 5});
+        cboNumber = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
         return cboNumber;
     }
 

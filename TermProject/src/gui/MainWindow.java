@@ -30,6 +30,8 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     private static final long serialVersionUID = 1L;
 
+    private final int ROWS = 1;
+    private final int COLS = 1;
     private final JPanel eastPanel = new JPanel();
     private final List<GUICell> guiCells = new ArrayList<>();
 
@@ -206,10 +208,10 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     public void setupGameBoard(GameBoard board) {
         Dimension dimension = GameBoardUtil.calculateDimension(board.getCellNumber());
-        northPanel.setLayout(new GridLayout(1, dimension.width + 2));
-        southPanel.setLayout(new GridLayout(1, dimension.width + 2));
-        westPanel.setLayout(new GridLayout(dimension.height, 1));
-        eastPanel.setLayout(new GridLayout(dimension.height, 1));
+        northPanel.setLayout(new GridLayout(ROWS, dimension.width + 2));
+        southPanel.setLayout(new GridLayout(ROWS, dimension.width + 2));
+        westPanel.setLayout(new GridLayout(dimension.height, COLS));
+        eastPanel.setLayout(new GridLayout(dimension.height, COLS));
         addCells(northPanel, GameBoardUtil.getNorthCells(board));
         addCells(southPanel, GameBoardUtil.getSouthCells(board));
         addCells(eastPanel, GameBoardUtil.getEastCells(board));
@@ -246,8 +248,8 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         for (PlayerPanel playerPanel : playerPanels) {
             playerPanel.displayInfo();
         }
-        for (int j = 0; j < guiCells.size(); j++) {
-            GUICell cell = guiCells.get(j);
+        for (int i = 0; i < guiCells.size(); i++) {
+            GUICell cell = guiCells.get(i);
             cell.displayInfo();
         }
     }
