@@ -16,14 +16,17 @@ public class DiceRollDialog extends JDialog {
 
     private static final long serialVersionUID = 1L;
 
+    private final int ROWS = 2;
+    private final int COLS = 2;
+
     private JButton btnOK, btnCancel;
     private JTextField txtDiceRoll;
     private int[] diceRoll;
 
     public DiceRollDialog(Frame parent) {
         super(parent);
-
         super.setTitle("Dice Roll Dialog");
+
         txtDiceRoll = new JTextField(2);
         btnOK = new JButton("OK");
         btnCancel = new JButton("Cancel");
@@ -31,7 +34,7 @@ public class DiceRollDialog extends JDialog {
         super.setModal(true);
 
         Container contentPane = super.getContentPane();
-        contentPane.setLayout(new GridLayout(2, 2));
+        contentPane.setLayout(new GridLayout(ROWS, COLS));
         contentPane.add(new JLabel("Amount"));
         contentPane.add(txtDiceRoll);
         contentPane.add(btnOK);
@@ -51,7 +54,7 @@ public class DiceRollDialog extends JDialog {
             }
             if (amount > 0) {
                 diceRoll = new int[2];
-                isUserInputEven(amount);
+                setDiceRollValues(amount);
             }
             setVisible(false);
         });
@@ -59,8 +62,8 @@ public class DiceRollDialog extends JDialog {
         super.pack();
     }
 
-    private void isUserInputEven(int amount) {
-        if ((amount % 2) == 0) {
+    private void setDiceRollValues(int amount) {
+        if ((amount % 2) == 0) { // Amount is even
             diceRoll[0] = amount / 2;
             diceRoll[1] = amount / 2;
             return;
@@ -71,8 +74,8 @@ public class DiceRollDialog extends JDialog {
 
     private int tryToGetInt() throws HeadlessException {
         try {
-            return Integer.parseInt(txtDiceRoll.getText());
-        } catch (NumberFormatException nfe) {
+            return Integer.parseUnsignedInt(txtDiceRoll.getText());
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(DiceRollDialog.this,
                     "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
         }
