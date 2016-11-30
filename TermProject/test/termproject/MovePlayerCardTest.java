@@ -38,6 +38,7 @@ public class MovePlayerCardTest {
     public void testMovePlayerCardAction() {
         Card card = gameMaster.drawCCCard();
         assertEquals(movePlayerCard, card);
+
         card.applyAction();
         Cell cell = gameMaster.getCurrentPlayer().getPosition();
         assertEquals(gameMaster.getGameBoard().queryCell("Blue 1"), cell);
@@ -48,8 +49,10 @@ public class MovePlayerCardTest {
         gameMaster.movePlayer(0, 2);
         assertTrue(gameMaster.getGUI().isDrawCardButtonEnabled());
         assertFalse(gameMaster.getGUI().isEndTurnButtonEnabled());
+
         gameMaster.btnDrawCardClicked();
         assertFalse(gameMaster.getGUI().isDrawCardButtonEnabled());
+
         Cell cell = gameMaster.getCurrentPlayer().getPosition();
         assertEquals(gameMaster.getGameBoard().queryCell("Blue 1"), cell);
         assertTrue(gameMaster.getGUI().isEndTurnButtonEnabled());

@@ -15,13 +15,13 @@ public enum GameMaster {
     INSTANCE;
 
     public static final int MAX_PLAYERS = 8;
-    
+
     private final int INIT_AMOUNT_OF_MONEY = 1500;
     private final int GO_CELL_AMOUNT = 200;
 
     private final Die[] dice;
     private final List<Player> players = new ArrayList<>();
-    
+
     private int turn = 0;
     private int utilDiceRoll;
     private boolean testMode;
@@ -126,7 +126,7 @@ public enum GameMaster {
     public void btnTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal();
-        if(checkDeal(deal)) {
+        if (checkDeal(deal)) {
             RespondDialog rDialog = gui.openRespondDialog(deal);
             if (rDialog.hasResponded()) {
                 completeTrade(deal);
@@ -134,7 +134,7 @@ public enum GameMaster {
             }
         }
     }
-    
+
     private boolean checkDeal(TradeDeal deal) {
         return deal.getAmount() > 0;
     }
@@ -142,8 +142,8 @@ public enum GameMaster {
     public void completeTrade(TradeDeal deal) {
         Player seller = getPlayer(deal.getPlayerIndex());
         Cell property = gameBoard.queryCell(deal.getPropertyName());
-        seller.getProperty().sellProperty(property, deal.getAmount());
-        getCurrentPlayer().getProperty().buyProperty(property, deal.getAmount());
+        seller.getActions().sellProperty(property, deal.getAmount());
+        getCurrentPlayer().getActions().buyProperty(property, deal.getAmount());
     }
 
     public Card drawCCCard() {
@@ -224,7 +224,7 @@ public enum GameMaster {
 
     private void checkPlayerPassGoCell(int newIndex, int positionIndex, int diceValue, Player player) {
         if (hasEnoughMoney(newIndex, positionIndex) || diceValue > gameBoard.getCellNumber()) {
-            player.setMoney(player.getMoney() + GO_CELL_AMOUNT);
+            player.addMoney(GO_CELL_AMOUNT);
         }
     }
 

@@ -6,7 +6,7 @@ import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
 
 public class Player {
-    
+
     private boolean inJail;
     private int money;
     private String name;
@@ -46,9 +46,11 @@ public class Player {
     public PlayerActions getActions() {
         return actions;
     }
-    
+
     public Color getPlayerColor() {
-        return playerColor;
+        return new Color(playerColor.getRed(), playerColor.getGreen(),
+                playerColor.getBlue(), 200);
+        //return playerColor;
     }
 
     public final void setInJail(boolean inJail) {
@@ -66,7 +68,7 @@ public class Player {
     public void setPosition(Cell newPosition) {
         this.position = newPosition;
     }
-    
+
     public void setPlayerColor(Color playerColor) {
         this.playerColor = playerColor;
     }
@@ -85,6 +87,10 @@ public class Player {
 
     public void addMoney(int amount) {
         setMoney(getMoney() + amount);
+    }
+
+    public void subtractMoney(int amount) {
+        setMoney(getMoney() - amount);
     }
 
     @Override

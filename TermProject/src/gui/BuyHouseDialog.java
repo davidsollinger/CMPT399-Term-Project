@@ -68,7 +68,7 @@ public class BuyHouseDialog extends JDialog {
     private void okClicked() {
         String monopoly = (String) monopolyComboBox.getSelectedItem();
         int number = numberComboBox.getSelectedIndex() + 1;
-        player.getProperty().purchaseHouse(monopoly, number);
+        player.getProperty().addHouse(monopoly, number);
         dispose();
     }
 }

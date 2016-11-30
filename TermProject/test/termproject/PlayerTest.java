@@ -84,7 +84,7 @@ public class PlayerTest {
         gameMaster.movePlayer(0, 1);
         gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
-        gameMaster.getCurrentPlayer().getProperty().purchaseHouse("blue", 2);
+        gameMaster.getCurrentPlayer().getProperty().addHouse("blue", 2);
         assertEquals("blue", gameMaster.getCurrentPlayer().getProperty().getMonopolies()[0]);
         assertEquals(880, gameMaster.getCurrentPlayer().getMoney());
     }
@@ -94,14 +94,15 @@ public class PlayerTest {
         gameMaster.setNumberOfPlayers(1);
         gameMaster.movePlayer(0, 1);
         gameMaster.getCurrentPlayer().getActions().purchase();
-        assertEquals(gameMaster.getGameBoard().getCell(1), gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
+        assertEquals(gameMaster.getGameBoard().getCell(1),
+                gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
         gameMaster.getCurrentPlayer().getProperty().resetProperty();
         assertEquals(0, gameMaster.getCurrentPlayer().getProperty().getAllProperties().length);
     }
-    
+
     @Test
     public void testPlayerColor() {
-        Color [] playerColors = {new Color(0, 128, 0, 75), new Color(0, 0, 255, 75)};
+        Color[] playerColors = {new Color(0, 128, 0, 75), new Color(0, 0, 255, 75)};
         Player player = new Player();
         player.setPlayerColor(new Color(0, 128, 0, 75));
         assertEquals(playerColors[0], player.getPlayerColor());

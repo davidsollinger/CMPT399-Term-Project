@@ -39,8 +39,8 @@ public class GoToJailCardTest {
 
     @Test
     public void testJailCardLabel() {
-        assertEquals("Go to Jail immediately without collecting"
-                + " $200 when passing the GO cell", jailCard.getLabel());
+        assertEquals("Go directly to Jail. Do not pass go,"
+                + " do not collect $200", jailCard.getLabel());
     }
 
     @Test
