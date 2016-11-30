@@ -21,13 +21,16 @@ public class GameboardCreationTest {
         assertSame(board.queryCell("Blue 3"), northCells.get(0));
         assertSame(board.queryCell("Green 1"), northCells.get(1));
         assertSame(board.queryCell("Green 2"), northCells.get(2));
+
         List<Cell> westCells = GameBoardUtil.getWestCells(board);
         assertEquals(0, westCells.size());
+
         List<Cell> southCells = GameBoardUtil.getSouthCells(board);
         assertEquals(3, southCells.size());
         assertSame(board.queryCell("Blue 2"), southCells.get(0));
         assertSame(board.queryCell("Blue 1"), southCells.get(1));
         assertSame(board.queryCell("Go"), southCells.get(2));
+
         List<Cell> eastCells = GameBoardUtil.getEastCells(board);
         assertEquals(0, eastCells.size());
     }
@@ -42,10 +45,12 @@ public class GameboardCreationTest {
         assertSame(board.queryCell("Red 3"), northCells.get(2));
         assertSame(board.queryCell("Purple 1"), northCells.get(3));
         assertSame(board.queryCell("Purple 2"), northCells.get(4));
+
         List<Cell> westCells = GameBoardUtil.getWestCells(board);
         assertEquals(2, westCells.size());
         assertSame(board.queryCell("Green 3"), westCells.get(0));
         assertSame(board.queryCell("Green 2"), westCells.get(1));
+
         List<Cell> southCells = GameBoardUtil.getSouthCells(board);
         assertEquals(5, southCells.size());
         assertSame(board.queryCell("Green 1"), southCells.get(0));
@@ -53,6 +58,7 @@ public class GameboardCreationTest {
         assertSame(board.queryCell("Blue 2"), southCells.get(2));
         assertSame(board.queryCell("Blue 1"), southCells.get(3));
         assertSame(board.queryCell("Go"), southCells.get(4));
+
         List<Cell> eastCells = GameBoardUtil.getEastCells(board);
         assertEquals(2, eastCells.size());
         assertSame(board.queryCell("Yellow 1"), eastCells.get(0));

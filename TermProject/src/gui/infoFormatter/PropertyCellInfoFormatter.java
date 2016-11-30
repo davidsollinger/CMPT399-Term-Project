@@ -17,7 +17,7 @@ public class PropertyCellInfoFormatter extends CellInfoFormatter {
                 .append("Price: $")
                 .append(propertyCell.getPrice())
                 .append("<br>Owner: ")
-                .append(propertyCell.getName())
+                .append(propertyCell.getPlayer().getName())
                 .append("<br>Houses: ")
                 .append(propertyCell.getNumHouses())
                 .append("</html>");

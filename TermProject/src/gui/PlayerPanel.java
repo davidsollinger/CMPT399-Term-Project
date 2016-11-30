@@ -58,7 +58,7 @@ public class PlayerPanel extends JPanel {
         JPanel actionPanel = new JPanel();
         JPanel infoPanel = new JPanel();
         JPanel namePanel = new JPanel();
-        namePanel.setBackground(player.getPlayerColor());
+        //namePanel.setBackground(player.getPlayerColor());
         JPanel panelProperties = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.add(namePanel, BorderLayout.NORTH);
@@ -141,14 +141,21 @@ public class PlayerPanel extends JPanel {
     }
 
     public void displayInfo() {
-        nameLabel.setText(player.getName());
-        moneyLabel.setText("$ " + player.getMoney());
+        setPlayerLabels();
         StringBuilder buf = new StringBuilder();
         Cell[] cells = player.getProperty().getAllProperties();
         for (Cell cell : cells) {
             buf.append(cell).append("\n");
         }
         propertyText.setText(buf.toString());
+    }
+    
+    private void setPlayerLabels() {
+        nameLabel.setText(player.getName());
+        moneyLabel.setText("$ " + player.getMoney());
+        
+        nameLabel.setForeground(player.getPlayerColor());
+        moneyLabel.setForeground(player.getPlayerColor());
     }
 
     public boolean isBuyHouseButtonEnabled() {

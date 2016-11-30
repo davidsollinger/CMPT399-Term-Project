@@ -19,9 +19,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CellTextTest {
-    
+
     Player player;
-    
+
     @Before
     public void setUp() {
         GameMaster gameMaster = GameMaster.INSTANCE;
@@ -35,7 +35,7 @@ public class CellTextTest {
         GoCell cell = new GoCell();
         cell.setName("Go");
         String goLabel = "<html><font color='black'><b>Go</b></font></html>";
-        assertEquals(goLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(goLabel, InfoFormatter.getCellInfo(cell));
     }
 
     @Test
@@ -51,14 +51,14 @@ public class CellTextTest {
                 + "<br>Owner: " + ownerName
                 + "<br>Houses: " + numHouses
                 + "</html>";
-        
+
         PropertyCell cell = new PropertyCell(propertyName, 0, propertyColor, 0, propertyValue);
 
         cell.setPlayer(player);
         cell.setNumHouses(numHouses);
-        assertEquals(propertyLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(propertyLabel, InfoFormatter.getCellInfo(cell));
     }
-    
+
     @Test
     public void testRailRRCellText() {
         String railRoadName = "RR1";
@@ -73,9 +73,9 @@ public class CellTextTest {
         RailRoadCell cell = new RailRoadCell(railRoadName);
         RailRoadCell.setPrice(railRoadValue);
         cell.setPlayer(player);
-        assertEquals(railRoadLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(railRoadLabel, InfoFormatter.getCellInfo(cell));
     }
-    
+
     @Test
     public void testUtilCellText() {
         String utilityName = "Utility 1";
@@ -90,42 +90,42 @@ public class CellTextTest {
         UtilityCell cell = new UtilityCell(utilityName);
         UtilityCell.setPrice(utilityValue);
         cell.setPlayer(player);
-        assertEquals(utilityLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(utilityLabel, InfoFormatter.getCellInfo(cell));
     }
-    
+
     @Test
     public void testCardCellText() {
         CardCell cell;
         String communityLabel = "<html><font color='teal'><b>Community Chest</b></font></html>";
         cell = new CardCell(CardType.COMMUNITY, "Community Chest 1");
-        assertEquals(communityLabel, InfoFormatter.cellInfo(cell));
-        
+        assertEquals(communityLabel, InfoFormatter.getCellInfo(cell));
+
         String chanceLabel = "<html><font color='teal'><b>Chance</b></font></html>";
         cell = new CardCell(CardType.COMMUNITY, "Chance 1");
-        assertEquals(chanceLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(chanceLabel, InfoFormatter.getCellInfo(cell));
     }
-    
+
     @Test
     public void testGoToJailCellText() {
         String goToJailLabel = "<html><font color='black'><b>Go To Jail</b></font></html>";
         GoToJailCell cell = new GoToJailCell();
         cell.setName("Go To Jail");
-        assertEquals(goToJailLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(goToJailLabel, InfoFormatter.getCellInfo(cell));
     }
-    
+
     @Test
     public void testJailText() {
         String jailLabel = "<html><font color='black'><b>Jail</b></font></html>";
         JailCell cell = new JailCell();
         cell.setName("Jail");
-        assertEquals(jailLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(jailLabel, InfoFormatter.getCellInfo(cell));
     }
-    
+
     @Test
     public void testFreeParkingText() {
         String freeParkingLabel = "<html><font color='black'><b>Free Parking</b></font></html>";
         FreeParkingCell cell = new FreeParkingCell();
         cell.setName("Free Parking");
-        assertEquals(freeParkingLabel, InfoFormatter.cellInfo(cell));
+        assertEquals(freeParkingLabel, InfoFormatter.getCellInfo(cell));
     }
 }
