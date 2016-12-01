@@ -17,9 +17,6 @@ public class CardCell extends Cell {
     
     @Override
     public String getName() {
-        if (super.getName().contains("Community Chest")) {
-            return "Community Chest";
-        }
-        return "Chance";
-    }
+        return super.getName();
+    }  
 }

@@ -109,15 +109,15 @@ public class PlayerProperty {
     }
 
     protected void removeProperty(Cell cell) {
-        properties.add((PropertyCell) cell);
+        properties.remove((PropertyCell) cell);
     }
 
     protected void removeRailRoad(Cell cell) {
-        railRoads.add((RailRoadCell) cell);
+        railRoads.remove((RailRoadCell) cell);
     }
 
     protected void removeUtility(Cell cell) {
-        utilities.add((UtilityCell) cell);
+        utilities.remove((UtilityCell) cell);
     }
 
     private void checkCellRRorUtil(String color) {
