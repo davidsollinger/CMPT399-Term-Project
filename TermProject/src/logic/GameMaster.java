@@ -47,7 +47,7 @@ public enum GameMaster {
     private Card getCardAction(CardCell cell) {
         Card card;
         if (isCellTypeCommunity(cell)) {
-            card = getGameBoard().drawCCCard();
+            card = getGameBoard().drawCommunityChestCard();
         } else {
             card = getGameBoard().drawChanceCard();
         }
@@ -109,10 +109,10 @@ public enum GameMaster {
             gui.setRollDiceEnabled(false);
             StringBuilder msg = new StringBuilder();
             msg.append(player.getName())
-                    .append(", you rolled ")
-                    .append(rolls[0])
-                    .append(" and ")
-                    .append(rolls[1]);
+               .append(", you rolled ")
+               .append(rolls[0])
+               .append(" and ")
+               .append(rolls[1]);
             gui.showMessage(msg.toString());
             movePlayer(player, rolls[0] + rolls[1]);
             gui.setBuyHouseEnabled(false);
@@ -147,7 +147,7 @@ public enum GameMaster {
     }
 
     public Card drawCCCard() {
-        return gameBoard.drawCCCard();
+        return gameBoard.drawCommunityChestCard();
     }
 
     public Card drawChanceCard() {
@@ -315,7 +315,6 @@ public enum GameMaster {
     public void startGame() {
         gui.startGame();
         gui.enablePlayerTurn(0);
-        gui.setTradeEnabled(0, true);
     }
 
     public void switchTurn() {
