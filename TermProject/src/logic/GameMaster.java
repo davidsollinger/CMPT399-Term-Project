@@ -339,4 +339,12 @@ public enum GameMaster {
     public void setTestMode(boolean b) {
         testMode = b;
     }
+    
+    public void setDemoMode() {
+        getCurrentPlayer().getActions().buyProperty(gameBoard.queryCell("St. Charles Place"), gameBoard.queryCell("St. Charles Place").getPrice());
+        getCurrentPlayer().getActions().buyProperty(gameBoard.queryCell("States Avenue"), gameBoard.queryCell("States Avenue").getPrice());
+        getCurrentPlayer().getActions().buyProperty(gameBoard.queryCell("Virginia Avenue"), gameBoard.queryCell("Virginia Avenue").getPrice());
+        getCurrentPlayer().setMoney(INIT_AMOUNT_OF_MONEY);
+        setTestMode(true);
+    }
 }
