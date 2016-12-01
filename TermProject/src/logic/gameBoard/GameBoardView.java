@@ -181,7 +181,11 @@ public class GameBoardView extends GameBoard {
 
     private void addCells() {
         for (Cell cell : cells) {
-            super.addCell(cell);
+            if (cell instanceof PropertyCell) {
+                super.addPropertyCell((PropertyCell) cell);
+            } else {
+                super.addCell(cell);
+            }
         }
     }
 

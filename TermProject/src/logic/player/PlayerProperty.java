@@ -20,6 +20,7 @@ public class PlayerProperty {
     private List<PropertyCell> properties = new ArrayList<>();
     private List<RailRoadCell> railRoads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
+    private List<String> monopolies = new ArrayList<>();
 
     public PlayerProperty(Player player) {
         this.player = player;
@@ -34,11 +35,10 @@ public class PlayerProperty {
     }
 
     public String[] getMonopolies() {
-        List<String> monopolies = new ArrayList<>();
         List<String> colors = new ArrayList<>(colorGroups.keySet());
         while (!colors.isEmpty()) {
             String color = colors.remove(0);
-            checkCellRRorUtil(color, monopolies);
+            checkCellRRorUtil(color);
         }
         return monopolies.toArray(new String[monopolies.size()]);
     }
@@ -120,18 +120,17 @@ public class PlayerProperty {
         utilities.add((UtilityCell) cell);
     }
 
-    private void checkCellRRorUtil(String color, List<String> monopolies) { //violates SRP?
+    private void checkCellRRorUtil(String color) { //violates SRP?
         RailRoadCell rrCell = new RailRoadCell("");
         UtilityCell utilCell = new UtilityCell("");
         if (!(color.equals(rrCell.getColorGroup())) && !(color.equals(utilCell.getColorGroup()))) {
             Integer num = colorGroups.get(color);
             GameBoard gameBoard = GameMaster.INSTANCE.getGameBoard();
-            checkSameColorGroup(num, gameBoard, color, monopolies);
+            checkSameColorGroup(num, gameBoard, color);
         }
     }
 
-    private void checkSameColorGroup(Integer num, GameBoard gameBoard,
-            String color, List<String> monopolies) {
+    private void checkSameColorGroup(Integer num, GameBoard gameBoard, String color) {
         if (num == gameBoard.getPropertyNumberForColor(color)) {
             monopolies.add(color);
         }
