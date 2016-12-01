@@ -17,7 +17,7 @@ public class GameboardTest {
     @Before
     public void setUp() throws Exception {
         gameBoard = new GameBoard();
-        cell = new PropertyCell("Temp cell", 0, "blue", 0, 0);
+        cell = new PropertyCell("TempCell", 0, "blue", 0, 0);
     }
 
     @Test

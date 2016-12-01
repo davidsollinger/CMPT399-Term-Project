@@ -19,7 +19,7 @@ public class Main {
         master = GameMaster.INSTANCE;
         window = new MainWindow();
         gameBoard = new GameBoardView();
-        
+
         checkArgs(args);
         master.setGameBoard(gameBoard);
         UserInput input = new UserInput(window);
