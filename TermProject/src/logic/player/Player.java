@@ -50,7 +50,6 @@ public class Player {
     public Color getPlayerColor() {
         return new Color(playerColor.getRed(), playerColor.getGreen(),
                 playerColor.getBlue(), 200);
-        //return playerColor;
     }
 
     public final void setInJail(boolean inJail) {
