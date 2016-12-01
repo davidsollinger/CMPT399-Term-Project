@@ -7,12 +7,13 @@ import logic.gameBoard.GameBoard;
 
 public class Player {
 
+    private final PlayerProperty property;
+    private final PlayerActions actions;
+    
     private boolean inJail;
     private int money;
     private String name;
     private Cell position;
-    private final PlayerProperty property;
-    private final PlayerActions actions;
     private Color playerColor;
 
     public Player() {
@@ -25,6 +26,10 @@ public class Player {
 
     public static Player createNullPlayer() {
         return new NullPlayer();
+    }
+    
+    public final void setInJail(boolean inJail) {
+        this.inJail = inJail;
     }
 
     public String getName() {
@@ -50,10 +55,6 @@ public class Player {
     public Color getPlayerColor() {
         return new Color(playerColor.getRed(), playerColor.getGreen(),
                 playerColor.getBlue(), playerColor.getAlpha());
-    }
-
-    public final void setInJail(boolean inJail) {
-        this.inJail = inJail;
     }
 
     public void setMoney(int money) {
