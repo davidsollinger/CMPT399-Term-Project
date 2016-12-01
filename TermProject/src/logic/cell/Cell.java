@@ -23,8 +23,8 @@ public class Cell {
     public boolean isAvailable() {
         return available;
     }
-
-    // Used as override
+    
+    // Used as Override
     public String getColorGroup() {
         return "";
     }

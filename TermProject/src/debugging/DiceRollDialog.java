@@ -63,13 +63,17 @@ public class DiceRollDialog extends JDialog {
     }
 
     private void setDiceRollValues(int amount) {
-        if ((amount % 2) == 0) { // Amount is even
+        if (isAmountEven(amount)) {
             diceRoll[0] = amount / 2;
             diceRoll[1] = amount / 2;
             return;
         }
         diceRoll[0] = amount / 2;
         diceRoll[1] = (amount / 2) + 1;
+    }
+
+    private boolean isAmountEven(int amount) {
+        return (amount % 2) == 0;
     }
 
     private int tryToGetInt() throws HeadlessException {

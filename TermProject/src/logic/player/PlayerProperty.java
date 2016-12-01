@@ -14,13 +14,13 @@ import logic.gameBoard.GameBoard;
 public class PlayerProperty {
 
     private final int MAX_AMOUNT_OF_HOUSES = 5;
-    private final Map<String, Integer> colorGroups = new HashMap<>();
     private final Player player;
+    private final Map<String, Integer> colorGroups = new HashMap<>();
+    private final List<String> monopolies = new ArrayList<>();
 
     private List<PropertyCell> properties = new ArrayList<>();
     private List<RailRoadCell> railRoads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
-    private List<String> monopolies = new ArrayList<>();
 
     public PlayerProperty(Player player) {
         this.player = player;
@@ -47,7 +47,7 @@ public class PlayerProperty {
         return properties.get(index);
     }
 
-    public int getPropertyNumber() {
+    public int getNumberOfProperties() {
         return properties.size();
     }
 
@@ -98,7 +98,7 @@ public class PlayerProperty {
     }
 
     public void exchangeProperty(Player player) {
-        for (int i = 0; i < getPropertyNumber(); i++) {
+        for (int i = 0; i < getNumberOfProperties(); i++) {
             PropertyCell cell = getPropertyCell(i);
             cell.setPlayer(player);
             player.getProperty().addProperty(cell);
@@ -120,11 +120,11 @@ public class PlayerProperty {
         utilities.add((UtilityCell) cell);
     }
 
-    private void checkCellRRorUtil(String color) { //violates SRP?
+    private void checkCellRRorUtil(String color) {
         RailRoadCell rrCell = new RailRoadCell("");
         UtilityCell utilCell = new UtilityCell("");
         if (!(color.equals(rrCell.getColorGroup())) && !(color.equals(utilCell.getColorGroup()))) {
-            Integer num = colorGroups.get(color);
+            int num = colorGroups.get(color);
             GameBoard gameBoard = GameMaster.INSTANCE.getGameBoard();
             checkSameColorGroup(num, gameBoard, color);
         }

@@ -69,7 +69,7 @@ public class PlayerTest {
         gameMaster.getCurrentPlayer().getActions().purchase();
         gameMaster.btnEndTurnClicked();
         gameMaster.getPlayer(0).getProperty().exchangeProperty(gameMaster.getPlayer(1));
-        assertEquals(1, gameMaster.getCurrentPlayer().getProperty().getPropertyNumber());
+        assertEquals(1, gameMaster.getCurrentPlayer().getProperty().getNumberOfProperties());
     }
 
     public void testPurchaseHouse() {
@@ -104,9 +104,9 @@ public class PlayerTest {
 
     @Test
     public void testPlayerColor() {
-        Color[] playerColors = {new Color(0, 128, 0, 200), new Color(0, 0, 255, 200)};
+        Color playerColors = new Color(0, 128, 0, 75);
         Player player = new Player();
         player.setPlayerColor(new Color(0, 128, 0, 75));
-        assertEquals(playerColors[0], player.getPlayerColor());
+        assertEquals(playerColors, player.getPlayerColor());
     }
 }

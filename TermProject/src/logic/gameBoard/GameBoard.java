@@ -15,7 +15,6 @@ import logic.cell.PropertyCell;
 public class GameBoard {
 
     private final List<Cell> cells = new ArrayList<>();
-    //the key of colorGroups is the name of the color group.
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private final List<Card> communityChestCards = new ArrayList<>();
     private final List<Card> chanceCards = new ArrayList<>();
@@ -47,7 +46,7 @@ public class GameBoard {
         colorGroups.put(cell.getColorGroup(), propertyNumber + 1);
     }
 
-    public Card drawCCCard() {
+    public Card drawCommunityChestCard() {
         Card card = communityChestCards.get(0);
         communityChestCards.remove(0);
         addCard(card);
@@ -75,7 +74,7 @@ public class GameBoard {
         int counter = 0;
         for (int i = 0; i < getCellNumber(); i++) {
             Cell c = getCell(i);
-            if (c.getColorGroup().equals(color)) { // Remove conditional on removal of instanceof
+            if (c.getColorGroup().equals(color)) {
                 monopolyCells[counter] = (PropertyCell) c;
                 counter++;
             }

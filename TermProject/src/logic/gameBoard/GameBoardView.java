@@ -1,22 +1,21 @@
 package logic.gameBoard;
 
-import logic.cell.Cell;
 import logic.card.CardType;
-import logic.card.MoneyCard;
 import logic.card.JailCard;
+import logic.card.MoneyCard;
 import logic.card.MovePlayerCard;
-import logic.cell.FreeParkingCell;
 import logic.cell.CardCell;
+import logic.cell.Cell;
+import logic.cell.FreeParkingCell;
+import logic.cell.GoToJailCell;
 import logic.cell.JailCell;
 import logic.cell.PropertyCell;
 import logic.cell.RailRoadCell;
 import logic.cell.UtilityCell;
-import logic.cell.GoToJailCell;
 
 public class GameBoardView extends GameBoard {
     
     private final int TOTAL_CELLS = 39;
-    
     private final Cell[] cells = new Cell[TOTAL_CELLS];
 
     private JailCell jailCell;

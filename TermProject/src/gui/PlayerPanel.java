@@ -10,14 +10,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
+import logic.GameMaster;
 import logic.card.Card;
 import logic.cell.Cell;
-import logic.GameMaster;
 import logic.player.Player;
 
 public class PlayerPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
+
     private final int TEXT_AREA_ROWS = 30;
     private final int TEXT_AREA_COLS = 70;
     private final int PNL_ACTION_ROWS = 3;
@@ -53,17 +54,16 @@ public class PlayerPanel extends JPanel {
         initPlayerPanelButtons();
         addActionListeners();
     }
-    
+
     private void setUpPanels() {
         JPanel actionPanel = new JPanel();
         JPanel infoPanel = new JPanel();
         JPanel namePanel = new JPanel();
-        //namePanel.setBackground(player.getPlayerColor());
         JPanel panelProperties = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.add(namePanel, BorderLayout.NORTH);
         infoPanel.add(panelProperties, BorderLayout.CENTER);
-        
+
         panelProperties.setLayout(new OverlayLayout(panelProperties));
 
         namePanel.add(nameLabel);
@@ -145,15 +145,15 @@ public class PlayerPanel extends JPanel {
         StringBuilder buf = new StringBuilder();
         Cell[] cells = player.getProperty().getAllProperties();
         for (Cell cell : cells) {
-            buf.append(cell).append("\n");
+            buf.append(cell)
+               .append("\n");
         }
         propertyText.setText(buf.toString());
     }
-    
+
     private void setPlayerLabels() {
         nameLabel.setText(player.getName());
         moneyLabel.setText("$ " + player.getMoney());
-        
         nameLabel.setForeground(player.getPlayerColor());
         moneyLabel.setForeground(player.getPlayerColor());
     }

@@ -10,7 +10,6 @@ import logic.cell.UtilityCell;
 public class PlayerActions {
 
     private final int NONE = 0;
-
     private final Player player;
 
     public PlayerActions(Player player) {
@@ -19,12 +18,12 @@ public class PlayerActions {
 
     public void getOutOfJail() {
         player.subtractMoney(JailCell.BAIL);
-        checkPlayerIsBankrupt(new NullPlayer());
+        checkPlayerBankrupt(new NullPlayer());
         player.setInJail(false);
         GameMaster.INSTANCE.updateGUI();
     }
 
-    private void checkPlayerIsBankrupt(Player otherPlayer) { //need a better name for this
+    private void checkPlayerBankrupt(Player otherPlayer) {
         if (player.isBankrupt()) {
             player.setMoney(NONE);
             exchangePropertyToPlayer(otherPlayer);
@@ -38,12 +37,11 @@ public class PlayerActions {
     public void payRentTo(Player owner, int rentValue) {
         if (player.getMoney() < rentValue) {
             owner.addMoney(player.getMoney());
-            player.subtractMoney(rentValue);
         } else {
             owner.addMoney(rentValue);
-            player.subtractMoney(rentValue);
         }
-        checkPlayerIsBankrupt(owner);
+        player.subtractMoney(rentValue);
+        checkPlayerBankrupt(owner);
     }
 
     public void purchase() {

@@ -36,6 +36,14 @@ public class GUIRespondDialog extends JDialog implements RespondDialog {
         pnlButtons.add(btnNo);
         contentPane.add(pnlButtons, BorderLayout.SOUTH);
         
+        addActionListeners(btnYes, btnNo);
+        
+        super.setModal(true);
+        super.pack();
+        super.setLocationRelativeTo(null);
+    }
+
+    private void addActionListeners(JButton btnYes, JButton btnNo) {
         btnYes.addActionListener((ActionEvent e) -> {
             response = true;
             setVisible(false);
@@ -45,9 +53,6 @@ public class GUIRespondDialog extends JDialog implements RespondDialog {
             response = false;
             setVisible(false);
         });
-        
-        super.setModal(true);
-        super.pack();
     }
     
     @Override
