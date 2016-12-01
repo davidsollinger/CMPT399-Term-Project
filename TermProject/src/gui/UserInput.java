@@ -7,6 +7,7 @@ import logic.GameMaster;
 public class UserInput {
 
     private final MainWindow window;
+    
     private boolean valid;
     private int numberOfPlayers;
 

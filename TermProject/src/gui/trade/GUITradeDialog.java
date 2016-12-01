@@ -25,17 +25,20 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
 
     private static final long serialVersionUID = 1L;
 
+    private final int ROWS = 4;
+    private final int COLS = 2;
     private final JButton btnOK, btnCancel;
     private final JComboBox<Player> comboSellers;
     private final JComboBox<Cell> comboProperties;
-    private TradeDeal deal;
     private final JTextField txtAmount;
+
+    private TradeDeal deal;
 
     public GUITradeDialog(Frame parent) {
         super(parent);
         super.setTitle("Trade Property");
         super.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        
+
         deal = new NullTradeDeal();
         comboSellers = new JComboBox<>();
         comboProperties = new JComboBox<>();
@@ -48,12 +51,12 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         buildTradePropertyContentPane();
 
         addActionListeners();
-        
+
         comboSellers.addItemListener((ItemEvent e) -> {
             Player player = (Player) e.getItem();
             updatePropertiesCombo(player);
         });
-        
+
         super.pack();
         super.setLocationRelativeTo(null);
     }
@@ -71,11 +74,10 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             if (!curPlayerHasEnough(amount, currentPlayer)) {
                 JOptionPane.showMessageDialog(GUITradeDialog.this,
                         "Amount should be greater than zero but less than "
-                        + currentPlayer.getMoney(), "Error", JOptionPane.ERROR_MESSAGE);
+                                + currentPlayer.getMoney(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
-            } else {
-                createTradeDealText(amount, cell, player);
             }
+            createTradeDealText(amount, cell, player);
             setVisible(false);
         });
     }
@@ -93,7 +95,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
 
     private void buildTradePropertyContentPane() {
         Container contentPane = super.getContentPane();
-        contentPane.setLayout(new GridLayout(4, 2));
+        contentPane.setLayout(new GridLayout(ROWS, COLS));
         contentPane.add(new JLabel("Sellers"));
         contentPane.add(comboSellers);
         contentPane.add(new JLabel("Properties"));

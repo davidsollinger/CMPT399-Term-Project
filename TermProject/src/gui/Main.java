@@ -20,17 +20,25 @@ public class Main {
         window = new MainWindow();
         gameBoard = new GameBoardView();
         
-        if (args.length > 0) {
-            checkTestMode(args);
-            gameBoard = tryToGetArgClass(args);
-        }
+        checkArgs(args);
         master.setGameBoard(gameBoard);
         UserInput input = new UserInput(window);
 
+        checkUserInput(input);
+    }
+
+    private static void checkUserInput(UserInput input) {
         if (!input.isValid()) {
             window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
         } else {
             beginGame();
+        }
+    }
+
+    private static void checkArgs(String[] args) throws HeadlessException {
+        if (args.length > 0) {
+            checkTestMode(args);
+            gameBoard = tryToGetArgClass(args);
         }
     }
 

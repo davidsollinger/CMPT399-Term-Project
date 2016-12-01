@@ -30,8 +30,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     private static final long serialVersionUID = 1L;
 
-    private final int ROWS = 1;
-    private final int COLS = 1;
+    private final int GAMEBOARD_ROWS = 1;
+    private final int GAMEBOARD_COLS = 1;
+    private final int PLAYER_PANEL_ROWS = 2;
     private final JPanel eastPanel = new JPanel();
     private final List<GUICell> guiCells = new ArrayList<>();
 
@@ -49,6 +50,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         Container container = super.getContentPane();
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolKit.getScreenSize();
+        
         super.setSize(dimension);
         container.add(northPanel, BorderLayout.NORTH);
         container.add(southPanel, BorderLayout.SOUTH);
@@ -75,7 +77,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         GameMaster master = GameMaster.INSTANCE;
         JPanel infoPanel = new JPanel();
         int players = master.getNumberOfPlayers();
-        infoPanel.setLayout(new GridLayout(2, (players + 1) / 2));
+        infoPanel.setLayout(new GridLayout(PLAYER_PANEL_ROWS, (players + 1) / 2));
         getContentPane().add(infoPanel, BorderLayout.CENTER);
         playerPanels = new PlayerPanel[master.getNumberOfPlayers()];
         for (int i = 0; i < master.getNumberOfPlayers(); i++) {
@@ -208,12 +210,11 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     public void setupGameBoard(GameBoard board) {
         GUICell.setPlayerColors();
-
         Dimension dimension = GameBoardUtil.calculateDimension(board.getCellNumber());
-        northPanel.setLayout(new GridLayout(ROWS, dimension.width + 2));
-        southPanel.setLayout(new GridLayout(ROWS, dimension.width + 2));
-        westPanel.setLayout(new GridLayout(dimension.height, COLS));
-        eastPanel.setLayout(new GridLayout(dimension.height, COLS));
+        northPanel.setLayout(new GridLayout(GAMEBOARD_ROWS, dimension.width + 2));
+        southPanel.setLayout(new GridLayout(GAMEBOARD_ROWS, dimension.width + 2));
+        westPanel.setLayout(new GridLayout(dimension.height, GAMEBOARD_COLS));
+        eastPanel.setLayout(new GridLayout(dimension.height, GAMEBOARD_COLS));
         addCells(northPanel, GameBoardUtil.getNorthCells(board));
         addCells(southPanel, GameBoardUtil.getSouthCells(board));
         addCells(eastPanel, GameBoardUtil.getEastCells(board));

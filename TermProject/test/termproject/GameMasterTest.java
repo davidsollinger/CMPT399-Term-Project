@@ -74,6 +74,11 @@ public class GameMasterTest {
         gameMaster.completeTrade(deal);
         assertEquals(1440 + deal.getAmount(), player1.getMoney());
         assertEquals(1500 - deal.getAmount(), player2.getMoney());
+        System.out.println("This is player1.getProperty(): " + player1.getProperty());
+        System.out.println("This is deal.getPropertyName(): " + deal.getPropertyName());
+        System.out.println("This is player1.getProperty().checkProperty(deal.getPropertyName()): " + player1.getProperty().checkProperty(deal.getPropertyName()));
+        System.out.println("This is player2.getProperty(): " + player2.getProperty());
+        System.out.println("This is player2.getProperty().checkProperty(deal.getPropertyName()): " + player2.getProperty().checkProperty(deal.getPropertyName()));
         assertFalse(player1.getProperty().checkProperty(deal.getPropertyName()));
         assertTrue(player2.getProperty().checkProperty(deal.getPropertyName()));
     }
