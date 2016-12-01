@@ -54,7 +54,7 @@ public class Player {
 
     public Color getPlayerColor() {
         return new Color(playerColor.getRed(), playerColor.getGreen(),
-                playerColor.getBlue(), playerColor.getAlpha());
+                playerColor.getBlue(), 200);
     }
 
     public void setMoney(int money) {
