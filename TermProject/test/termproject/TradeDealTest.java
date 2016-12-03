@@ -1,6 +1,6 @@
 package termproject;
 
-import logic.GameController;
+import controller.GameController;
 import logic.gameBoard.NullGameBoard;
 import logic.trade.TradeDeal;
 import static org.junit.Assert.assertEquals;

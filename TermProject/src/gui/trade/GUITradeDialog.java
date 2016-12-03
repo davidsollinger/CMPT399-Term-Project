@@ -14,7 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 import logic.player.Player;
 import logic.trade.NullTradeDeal;

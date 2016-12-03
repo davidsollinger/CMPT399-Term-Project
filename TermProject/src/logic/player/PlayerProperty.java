@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 import logic.cell.PropertyCell;
 import logic.cell.RailRoadCell;

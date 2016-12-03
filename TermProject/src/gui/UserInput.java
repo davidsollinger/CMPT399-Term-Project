@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
-import logic.GameController;
+import controller.GameController;
 
 public class UserInput {
 

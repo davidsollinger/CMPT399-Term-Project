@@ -1,4 +1,4 @@
-package logic;
+package controller;
 
 import gui.PlayerColor;
 import java.util.ArrayList;

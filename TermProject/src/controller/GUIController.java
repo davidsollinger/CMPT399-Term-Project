@@ -1,5 +1,8 @@
-package logic;
+package controller;
 
+import logic.Die;
+import logic.MonopolyGUI;
+import logic.RespondDialog;
 import logic.card.Card;
 import logic.cell.CardCell;
 import logic.player.Player;

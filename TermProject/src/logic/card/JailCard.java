@@ -1,6 +1,6 @@
 package logic.card;
 
-import logic.GameController;
+import controller.GameController;
 import logic.player.Player;
 
 public class JailCard extends Card {

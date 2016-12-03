@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCGainMoney;
-import logic.GameController;
+import controller.GameController;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.MoneyCard;

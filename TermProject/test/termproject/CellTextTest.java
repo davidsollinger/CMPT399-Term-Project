@@ -1,7 +1,7 @@
 package termproject;
 
 import gui.infoFormatter.InfoFormatter;
-import logic.GameController;
+import controller.GameController;
 import logic.card.CardType;
 import logic.cell.CardCell;
 import logic.cell.FreeParkingCell;

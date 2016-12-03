@@ -4,7 +4,7 @@ import java.awt.HeadlessException;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import logic.GameController;
+import controller.GameController;
 import logic.gameBoard.GameBoard;
 import logic.gameBoard.GameBoardView;
 import logic.gameBoard.NullGameBoard;
