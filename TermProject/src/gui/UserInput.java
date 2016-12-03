@@ -1,13 +1,19 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.HeadlessException;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 import logic.GameMaster;
 
 public class UserInput {
 
     private final MainWindow window;
-    
+
     private boolean valid;
     private int numberOfPlayers;
 
@@ -55,12 +61,20 @@ public class UserInput {
                 }
                 if (isValidPlayerName(playerName)) {
                     GameMaster.INSTANCE.getPlayer(i).setName(playerName);
+                    setPlayerColor(i);
                 } else {
                     JOptionPane.showMessageDialog(window, "Please enter a string name", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
         valid = true;
+    }
+
+    private void setPlayerColor(int index) {
+        JComboBox colorComboBox = new JComboBox(GameMaster.INSTANCE.getPlayerColors().toArray());
+        colorComboBox.setRenderer(new CellRenderer());
+        JOptionPane.showMessageDialog(window, colorComboBox, "Select a player color", JOptionPane.QUESTION_MESSAGE);
+        GameMaster.INSTANCE.setPlayerColor((PlayerColor) colorComboBox.getSelectedItem(), index);
     }
 
     private boolean isCanceledClicked(String input) {
@@ -84,4 +98,33 @@ public class UserInput {
         return -1;
     }
 
+}
+
+class CellRenderer extends JLabel implements ListCellRenderer {
+
+    private boolean background;
+
+    public CellRenderer() {
+        setOpaque(true);
+        background = false;
+    }
+
+    @Override
+    public void setBackground(Color color) {
+        if (!background) {
+            return;
+        }
+        super.setBackground(color);
+    }
+
+    @Override
+    public Component getListCellRendererComponent(JList list, Object value,
+            int index, boolean isSelected, boolean cellHasFocus) {
+        PlayerColor color = (PlayerColor) value;
+        background = true;
+        setText(color.toString());
+        setBackground(color.getColor());
+        background = false;
+        return this;
+    }
 }

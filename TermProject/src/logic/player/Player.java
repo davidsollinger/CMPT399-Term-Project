@@ -54,7 +54,7 @@ public class Player {
 
     public Color getPlayerColor() {
         return new Color(playerColor.getRed(), playerColor.getGreen(),
-                playerColor.getBlue(), playerColor.getAlpha());
+                playerColor.getBlue(), 75);
     }
 
     public void setMoney(int money) {
@@ -79,6 +79,10 @@ public class Player {
 
     public boolean isInJail() {
         return inJail;
+    }
+    
+    public boolean isColorSet() {
+        return null != playerColor;
     }
 
     public boolean canBuyHouse() {

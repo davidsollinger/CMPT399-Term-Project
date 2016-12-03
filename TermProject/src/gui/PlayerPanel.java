@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -146,16 +147,19 @@ public class PlayerPanel extends JPanel {
         Cell[] cells = player.getProperty().getAllProperties();
         for (Cell cell : cells) {
             buf.append(cell)
-               .append("\n");
+                    .append("\n");
         }
         propertyText.setText(buf.toString());
     }
 
     private void setPlayerLabels() {
+        Color color = new Color(player.getPlayerColor().getRed(), player.getPlayerColor().getGreen(),
+                player.getPlayerColor().getBlue(), 200);
+
         nameLabel.setText(player.getName());
         moneyLabel.setText("$ " + player.getMoney());
-        nameLabel.setForeground(player.getPlayerColor());
-        moneyLabel.setForeground(player.getPlayerColor());
+        nameLabel.setForeground(color);
+        moneyLabel.setForeground(color);
     }
 
     public boolean isBuyHouseButtonEnabled() {

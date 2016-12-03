@@ -1,6 +1,7 @@
 package gui.infoFormatter;
 
 import logic.cell.Cell;
+import logic.cell.CardCell;
 
 public class CellInfoFormatter {
 
@@ -19,7 +20,14 @@ public class CellInfoFormatter {
     }
 
     public String format(Cell cell) {
-        return "<html><font color='" + color + "'><b>" + cell.getName() + "</b></font></html>";
+        return "<html><font color='" + color + "'><b>" + getCellName(cell) + "</b></font></html>";
+    }
+
+    private String getCellName(Cell cell) {
+        if (cell instanceof CardCell) {
+            return cell.getName().substring(0, cell.getName().length() - 1);
+        }
+        return cell.getName();
     }
 
 }
