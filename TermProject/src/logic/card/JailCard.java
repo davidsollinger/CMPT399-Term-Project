@@ -1,6 +1,6 @@
 package logic.card;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.player.Player;
 
 public class JailCard extends Card {
@@ -13,8 +13,9 @@ public class JailCard extends Card {
 
     @Override
     public void applyAction() {
-        Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-        GameMaster.INSTANCE.sendToJail(currentPlayer);
+        GameController gameController = GameController.INSTANCE;
+        Player currentPlayer = gameController.getCurrentPlayer();
+        gameController.getPlayerController().sendToJail(currentPlayer);
     }
 
     @Override

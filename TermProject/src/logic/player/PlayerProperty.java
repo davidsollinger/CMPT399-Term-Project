@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import logic.GameMaster;
+import logic.GameController;
 import logic.cell.Cell;
 import logic.cell.PropertyCell;
 import logic.cell.RailRoadCell;
@@ -15,6 +15,7 @@ public class PlayerProperty {
 
     private final int MAX_AMOUNT_OF_HOUSES = 5;
     private final Player player;
+    private final GameController gameController;
     private final Map<String, Integer> colorGroups = new HashMap<>();
     private final List<String> monopolies = new ArrayList<>();
 
@@ -24,6 +25,7 @@ public class PlayerProperty {
 
     public PlayerProperty(Player player) {
         this.player = player;
+        gameController = GameController.INSTANCE;
     }
 
     public Cell[] getAllProperties() {
@@ -90,8 +92,8 @@ public class PlayerProperty {
     }
 
     public void addHouse(String selectedMonopoly, int houses) {
-        GameBoard gb = GameMaster.INSTANCE.getGameBoard();
-        PropertyCell[] cells = gb.getPropertiesInMonopoly(selectedMonopoly);
+        GameBoard gameBoard = gameController.getGameBoardController().getGameBoard();
+        PropertyCell[] cells = gameBoard.getPropertiesInMonopoly(selectedMonopoly);
         if ((player.getMoney() >= (cells.length * (cells[0].getHousePrice() * houses)))) {
             checkCellsHouseLimit(cells, houses);
         }
@@ -125,7 +127,7 @@ public class PlayerProperty {
         UtilityCell utilCell = new UtilityCell("");
         if (!(color.equals(rrCell.getColorGroup())) && !(color.equals(utilCell.getColorGroup()))) {
             int num = colorGroups.get(color);
-            GameBoard gameBoard = GameMaster.INSTANCE.getGameBoard();
+            GameBoard gameBoard = gameController.getGameBoardController().getGameBoard();
             checkSameColorGroup(num, gameBoard, color);
         }
     }
@@ -157,7 +159,7 @@ public class PlayerProperty {
         if (newNumber <= MAX_AMOUNT_OF_HOUSES) {
             cell.setNumHouses(newNumber);
             player.subtractMoney((cell.getHousePrice() * houses));
-            GameMaster.INSTANCE.updateGUI();
+            gameController.getGUIController().updateGUI();
         }
     }
 

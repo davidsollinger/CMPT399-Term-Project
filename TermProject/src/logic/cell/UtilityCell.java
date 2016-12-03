@@ -1,17 +1,20 @@
 package logic.cell;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.player.Player;
 
 public class UtilityCell extends Cell {
 
     private static int price;
-    
+
     private final int ONE_UTILITY = 1;
     private final int BOTH_UTILITIES = 2;
 
+    private final GameController gameController;
+
     public UtilityCell(String name) {
         super.setName(name);
+        gameController = GameController.INSTANCE;
     }
 
     public static void setPrice(int price) {
@@ -48,8 +51,8 @@ public class UtilityCell extends Cell {
     @Override
     protected void checkIfCurrentPlayer(Player currentPlayer) {
         if (!isCurrentPlayer(currentPlayer)) {
-            GameMaster.INSTANCE.utilRollDice();
-            int diceRoll = GameMaster.INSTANCE.getUtilDiceRoll();
+            gameController.utilRollDice();
+            int diceRoll = gameController.getUtilDiceRoll();
             currentPlayer.getActions().payRentTo(getPlayer(), getRent(diceRoll));
         }
     }
@@ -58,7 +61,7 @@ public class UtilityCell extends Cell {
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
-            currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
+            currentPlayer = gameController.getCurrentPlayer();
             checkIfCurrentPlayer(currentPlayer);
         }
     }
