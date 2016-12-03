@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import logic.GameController;
+import controller.GameController;
 import logic.card.Card;
 import logic.cell.Cell;
 import logic.player.Player;

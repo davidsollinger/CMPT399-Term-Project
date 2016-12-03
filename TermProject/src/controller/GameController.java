@@ -1,4 +1,4 @@
-package logic;
+package controller;
 
 import logic.card.Card;
 import logic.card.CardType;

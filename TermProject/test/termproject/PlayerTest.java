@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import java.awt.Color;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 import logic.cell.PropertyCell;
 import logic.gameBoard.GameBoard;

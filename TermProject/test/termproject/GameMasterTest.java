@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import java.util.List;
-import logic.GameController;
+import controller.GameController;
 import logic.MonopolyGUI;
 import logic.RespondDialog;
 import logic.gameBoard.GameBoardView;

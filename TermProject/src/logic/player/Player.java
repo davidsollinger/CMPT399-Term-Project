@@ -1,7 +1,7 @@
 package logic.player;
 
 import java.awt.Color;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
 

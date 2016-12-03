@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardRailRoad;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.RailRoadCell;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;

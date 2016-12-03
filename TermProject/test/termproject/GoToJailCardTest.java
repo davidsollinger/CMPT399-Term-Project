@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCJail;
-import logic.GameController;
+import controller.GameController;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.JailCard;

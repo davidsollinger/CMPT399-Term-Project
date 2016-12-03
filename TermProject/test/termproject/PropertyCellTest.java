@@ -1,7 +1,7 @@
 package termproject;
 
 import Mocks.MockGUI;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.PropertyCell;
 import logic.gameBoard.SimpleGameBoard;
 import static org.junit.Assert.assertEquals;

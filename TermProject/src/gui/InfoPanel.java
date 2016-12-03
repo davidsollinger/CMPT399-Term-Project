@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.GridLayout;
 import javax.swing.JPanel;
-import logic.GameController;
+import controller.GameController;
 
 public class InfoPanel extends JPanel {
 

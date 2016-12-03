@@ -1,6 +1,6 @@
 package Mocks;
 
-import logic.GameController;
+import controller.GameController;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 

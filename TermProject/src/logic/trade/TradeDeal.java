@@ -1,6 +1,6 @@
 package logic.trade;
 
-import logic.GameController;
+import controller.GameController;
 
 public class TradeDeal {
 

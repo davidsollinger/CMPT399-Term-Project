@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 
 public class GUICell extends JPanel {

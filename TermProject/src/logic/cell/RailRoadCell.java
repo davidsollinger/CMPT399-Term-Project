@@ -1,6 +1,6 @@
 package logic.cell;
 
-import logic.GameController;
+import controller.GameController;
 import logic.player.Player;
 
 public class RailRoadCell extends Cell {

@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardUtility;
-import logic.GameController;
+import controller.GameController;
 import logic.cell.UtilityCell;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

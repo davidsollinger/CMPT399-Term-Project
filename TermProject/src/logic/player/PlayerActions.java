@@ -1,6 +1,6 @@
 package logic.player;
 
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 import logic.cell.JailCell;
 import logic.cell.PropertyCell;

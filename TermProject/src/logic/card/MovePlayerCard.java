@@ -1,6 +1,6 @@
 package logic.card;
 
-import logic.GameController;
+import controller.GameController;
 import logic.cell.Cell;
 import logic.player.Player;
 

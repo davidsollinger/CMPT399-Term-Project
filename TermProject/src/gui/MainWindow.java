@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import logic.GameController;
+import controller.GameController;
 import logic.MonopolyGUI;
 import logic.RespondDialog;
 import logic.cell.Cell;
