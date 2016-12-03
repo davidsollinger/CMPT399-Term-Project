@@ -15,9 +15,9 @@ public class GUICell extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private static final PlayerColor[] PLAYER_COLORS = {PlayerColor.GREEN,
-        PlayerColor.BLUE, PlayerColor.YELLOW, PlayerColor.RED, PlayerColor.TAN,
+        PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN,
         PlayerColor.PEACH, PlayerColor.TEAL, PlayerColor.PINK};
-    
+
     private final int CELL_ROWS = 2;
     private final int CELL_COLS = 4;
     private final int LABEL_ROWS = 1;
@@ -56,23 +56,22 @@ public class GUICell extends JPanel {
         add(infoPanel);
     }
 
-    public void addPlayerLabels(int index) {
+    public void setPlayerLabelsOpaque(int index) {
         playerLabels[index].setOpaque(true);
     }
 
     private void createPlayerLabels(JPanel playerPanel) {
         for (int i = 0; i < GameMaster.MAX_PLAYERS; i++) {
             playerLabels[i] = new JLabel();
-            playerLabels[i].setBackground(PLAYER_COLORS[i].getColor());
+            if (checkPlayerColor(i)) {
+                playerLabels[i].setBackground(GameMaster.INSTANCE.getPlayer(i).getPlayerColor());
+            }
             playerPanel.add(playerLabels[i]);
         }
     }
 
-    public static void setPlayerColors() {
-        for (int i = 0; i < GameMaster.INSTANCE.getNumberOfPlayers(); i++) {
-            Player player = GameMaster.INSTANCE.getPlayer(i);
-            player.setPlayerColor(PLAYER_COLORS[i].getColor());
-        }
+    private boolean checkPlayerColor(int index) {
+        return index < GameMaster.INSTANCE.getNumberOfPlayers() && GameMaster.INSTANCE.getPlayer(index).isColorSet();
     }
 
     public void displayInfo() {

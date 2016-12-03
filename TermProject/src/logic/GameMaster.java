@@ -1,6 +1,8 @@
 package logic;
 
+import gui.PlayerColor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import logic.card.Card;
 import logic.card.CardType;
@@ -21,6 +23,10 @@ public enum GameMaster {
 
     private final Die[] dice;
     private final List<Player> players = new ArrayList<>();
+
+    private final List<PlayerColor> playerColors = new ArrayList<>(Arrays.asList(PlayerColor.GREEN,
+            PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN, PlayerColor.PEACH,
+            PlayerColor.TEAL, PlayerColor.PINK));
 
     private int turn = 0;
     private int utilDiceRoll;
@@ -109,10 +115,10 @@ public enum GameMaster {
             gui.setRollDiceEnabled(false);
             StringBuilder msg = new StringBuilder();
             msg.append(player.getName())
-               .append(", you rolled ")
-               .append(rolls[0])
-               .append(" and ")
-               .append(rolls[1]);
+                    .append(", you rolled ")
+                    .append(rolls[0])
+                    .append(" and ")
+                    .append(rolls[1]);
             gui.showMessage(msg.toString());
             movePlayer(player, rolls[0] + rolls[1]);
             gui.setBuyHouseEnabled(false);
@@ -336,7 +342,25 @@ public enum GameMaster {
         utilDiceRoll = gui.showUtilDiceRoll();
     }
 
-    public void setTestMode(boolean b) {
-        testMode = b;
+    public void setTestMode(boolean value) {
+        testMode = value;
+    }
+
+    public List<PlayerColor> getPlayerColors() {
+        return playerColors;
+    }
+
+    public PlayerColor getPlayerColor(int index) {
+        return playerColors.get(index);
+    }
+
+    public void setPlayerColor(PlayerColor color, int index) {
+        System.out.println(color.getColor().getAlpha());
+        getPlayer(index).setPlayerColor(color.getColor());
+        removePlayerColor(color);
+    }
+
+    public void removePlayerColor(PlayerColor color) {
+        playerColors.remove(color);
     }
 }

@@ -50,7 +50,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         Container container = super.getContentPane();
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolKit.getScreenSize();
-        
+
         super.setSize(dimension);
         container.add(northPanel, BorderLayout.NORTH);
         container.add(southPanel, BorderLayout.SOUTH);
@@ -138,7 +138,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         GUICell fromCell = queryCell(from);
         GUICell toCell = queryCell(to);
         fromCell.removePlayer(index);
-        toCell.addPlayerLabels(index);
+        toCell.setPlayerLabelsOpaque(index);
     }
 
     @Override
@@ -209,7 +209,6 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     public void setupGameBoard(GameBoard board) {
-        GUICell.setPlayerColors();
         Dimension dimension = GameBoardUtil.calculateDimension(board.getCellNumber());
         northPanel.setLayout(new GridLayout(GAMEBOARD_ROWS, dimension.width + 2));
         southPanel.setLayout(new GridLayout(GAMEBOARD_ROWS, dimension.width + 2));
