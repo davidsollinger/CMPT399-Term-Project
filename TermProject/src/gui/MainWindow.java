@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import logic.GameMaster;
+import logic.GameController;
 import logic.MonopolyGUI;
 import logic.RespondDialog;
 import logic.cell.Cell;
@@ -41,7 +41,10 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     private final JPanel southPanel = new JPanel();
     private final JPanel westPanel = new JPanel();
 
+    private final GameController gameController;
+
     public MainWindow() {
+        gameController = GameController.INSTANCE;
         northPanel.setBorder(new LineBorder(Color.BLACK));
         southPanel.setBorder(new LineBorder(Color.BLACK));
         westPanel.setBorder(new LineBorder(Color.BLACK));
@@ -73,15 +76,62 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         }
     }
 
+    @Override
+    public int[] getDiceRoll() {
+        DiceRollDialog dialog = new DiceRollDialog(this);
+        dialog.setVisible(true);
+        return dialog.getDiceRoll();
+    }
+
+    @Override
+    public void setBuyHouseEnabled(boolean enabled) {
+        int currentPlayerIndex = gameController.getTurn();
+        playerPanels[currentPlayerIndex].setBuyHouseEnabled(enabled);
+    }
+
+    @Override
+    public void setDrawCardEnabled(boolean enabled) {
+        int currentPlayerIndex = gameController.getTurn();
+        playerPanels[currentPlayerIndex].setDrawCardEnabled(enabled);
+    }
+
+    @Override
+    public void setEndTurnEnabled(boolean enabled) {
+        int currentPlayerIndex = gameController.getTurn();
+        playerPanels[currentPlayerIndex].setEndTurnEnabled(enabled);
+    }
+
+    @Override
+    public void setGetOutOfJailEnabled(boolean enabled) {
+        int currentPlayerIndex = gameController.getTurn();
+        playerPanels[currentPlayerIndex].setGetOutOfJailEnabled(enabled);
+    }
+
+    @Override
+    public void setPurchasePropertyEnabled(boolean enabled) {
+        int currentPlayerIndex = gameController.getTurn();
+        playerPanels[currentPlayerIndex].setPurchasePropertyEnabled(enabled);
+    }
+
+    @Override
+    public void setRollDiceEnabled(boolean enabled) {
+        int currentPlayerIndex = gameController.getTurn();
+        playerPanels[currentPlayerIndex].setRollDiceEnabled(enabled);
+    }
+
+    @Override
+    public void setTradeEnabled(int index, boolean enabled) {
+        playerPanels[index].setTradeEnabled(enabled);
+    }
+
     private void buildPlayerPanels() {
-        GameMaster master = GameMaster.INSTANCE;
         JPanel infoPanel = new JPanel();
-        int players = master.getNumberOfPlayers();
+        int players = gameController.getNumberOfPlayers();
         infoPanel.setLayout(new GridLayout(PLAYER_PANEL_ROWS, (players + 1) / 2));
         getContentPane().add(infoPanel, BorderLayout.CENTER);
-        playerPanels = new PlayerPanel[master.getNumberOfPlayers()];
-        for (int i = 0; i < master.getNumberOfPlayers(); i++) {
-            playerPanels[i] = new PlayerPanel(master.getPlayer(i));
+        playerPanels = new PlayerPanel[gameController.getNumberOfPlayers()];
+        for (int i = 0; i < gameController.getNumberOfPlayers(); i++) {
+            playerPanels[i] = new PlayerPanel(gameController.getPlayerController().getPlayer(i));
             infoPanel.add(playerPanels[i]);
             playerPanels[i].displayInfo();
         }
@@ -104,27 +154,20 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
-    public int[] getDiceRoll() {
-        DiceRollDialog dialog = new DiceRollDialog(this);
-        dialog.setVisible(true);
-        return dialog.getDiceRoll();
-    }
-
-    @Override
     public boolean isDrawCardButtonEnabled() {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
+        int currentPlayerIndex = gameController.getTurn();
         return playerPanels[currentPlayerIndex].isDrawCardButtonEnabled();
     }
 
     @Override
     public boolean isEndTurnButtonEnabled() {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
+        int currentPlayerIndex = gameController.getTurn();
         return playerPanels[currentPlayerIndex].isEndTurnButtonEnabled();
     }
 
     @Override
     public boolean isGetOutOfJailButtonEnabled() {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
+        int currentPlayerIndex = gameController.getTurn();
         return playerPanels[currentPlayerIndex].isGetOutOfJailButtonEnabled();
     }
 
@@ -157,7 +200,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     private GUICell queryCell(int index) {
-        Cell cell = GameMaster.INSTANCE.getGameBoard().getCell(index);
+        Cell cell = gameController.getGameBoardController().getGameBoard().getCell(index);
         for (int i = 0; i < guiCells.size(); i++) {
             GUICell guiCell = guiCells.get(i);
             if (guiCell.getCell() == cell) {
@@ -165,47 +208,6 @@ public class MainWindow extends JFrame implements MonopolyGUI {
             }
         }
         return new NullGUICell(cell);
-    }
-
-    @Override
-    public void setBuyHouseEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
-        playerPanels[currentPlayerIndex].setBuyHouseEnabled(b);
-    }
-
-    @Override
-    public void setDrawCardEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
-        playerPanels[currentPlayerIndex].setDrawCardEnabled(b);
-    }
-
-    @Override
-    public void setEndTurnEnabled(boolean enabled) {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
-        playerPanels[currentPlayerIndex].setEndTurnEnabled(enabled);
-    }
-
-    @Override
-    public void setGetOutOfJailEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
-        playerPanels[currentPlayerIndex].setGetOutOfJailEnabled(b);
-    }
-
-    @Override
-    public void setPurchasePropertyEnabled(boolean enabled) {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
-        playerPanels[currentPlayerIndex].setPurchasePropertyEnabled(enabled);
-    }
-
-    @Override
-    public void setRollDiceEnabled(boolean b) {
-        int currentPlayerIndex = GameMaster.INSTANCE.getCurrentPlayerIndex();
-        playerPanels[currentPlayerIndex].setRollDiceEnabled(b);
-    }
-
-    @Override
-    public void setTradeEnabled(int index, boolean b) {
-        playerPanels[index].setTradeEnabled(b);
     }
 
     public void setupGameBoard(GameBoard board) {
@@ -239,7 +241,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     @Override
     public void startGame() {
-        int numberOfPlayers = GameMaster.INSTANCE.getNumberOfPlayers();
+        int numberOfPlayers = gameController.getNumberOfPlayers();
         for (int i = 0; i < numberOfPlayers; i++) {
             movePlayer(i, 0, 0);
         }

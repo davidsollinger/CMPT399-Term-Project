@@ -7,21 +7,21 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import logic.GameMaster;
+import logic.GameController;
 
 public class UtilDiceRoll extends JDialog {
 
     private static final long serialVersionUID = 1L;
-    
+
     private final JButton btnDice = new JButton("Roll the Dice!");
     private final JButton btnOK = new JButton("OK");
     private final JLabel labelPrompt = new JLabel();
-    
+
     private int diceValue;
 
     public UtilDiceRoll() {
         super.setModal(true);
-        
+
         btnOK.setEnabled(false);
         labelPrompt.setText("Please roll the dice to determine your utility bill.");
         Container contentPane = super.getContentPane();
@@ -39,19 +39,20 @@ public class UtilDiceRoll extends JDialog {
         });
         super.pack();
     }
-    
+
     public static int showDialog() {
         UtilDiceRoll diceRollDialog = new UtilDiceRoll();
         diceRollDialog.setVisible(true);
         return diceRollDialog.getDiceValue();
     }
-    
+
     public void okClicked() {
         dispose();
     }
 
     public void rollDice() {
-        int[] diceRoll = GameMaster.INSTANCE.rollDice();
+        GameController gameController = GameController.INSTANCE;
+        int[] diceRoll = gameController.getGUIController().rollDice();
         diceValue = diceRoll[0] + diceRoll[1];
         labelPrompt.setText("You rolled " + getDiceValue());
         btnDice.setEnabled(false);

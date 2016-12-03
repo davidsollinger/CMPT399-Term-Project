@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCGainMoney;
-import logic.GameMaster;
+import logic.GameController;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.MoneyCard;
@@ -13,18 +13,18 @@ import org.junit.Test;
 public class CardsTest {
 
     private Card ccCard, chanceCard;
-    private GameMaster gameMaster;
+    private GameController gameController;
 
     @Before
     public void setUp() {
-        gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new GameBoardCCGainMoney());
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.reset();
-        gameMaster.setGUI(new MockGUI());
+        gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new GameBoardCCGainMoney());
+        gameController.setNumberOfPlayers(1);
+        gameController.reset();
+        gameController.getGUIController().setGUI(new MockGUI());
         ccCard = new MoneyCard("Get 50 dollars", 50, CardType.COMMUNITY);
         chanceCard = new MoneyCard("Lose 50 dollars", -50, CardType.CHANCE);
-        gameMaster.getGameBoard().addCard(ccCard);
+        gameController.getGameBoardController().getGameBoard().addCard(ccCard);
     }
 
     @Test

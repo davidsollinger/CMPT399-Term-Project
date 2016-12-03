@@ -29,8 +29,8 @@ public class GameboardTest {
 
     @Test
     public void testCellsForMonopoly() {
-        GameBoard gb = new SimpleGameBoard();
-        PropertyCell[] properties = gb.getPropertiesInMonopoly("blue");
+        GameBoard gameBoard = new SimpleGameBoard();
+        PropertyCell[] properties = gameBoard.getPropertiesInMonopoly("blue");
         assertEquals("Blue 1", properties[0].getName());
         assertEquals("Blue 2", properties[1].getName());
         assertEquals("Blue 3", properties[2].getName());

@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
-import logic.GameMaster;
+import logic.GameController;
 
 public class UserInput {
 
@@ -16,9 +16,11 @@ public class UserInput {
 
     private boolean valid;
     private int numberOfPlayers;
+    private final GameController gameController;
 
     public UserInput(MainWindow window) {
         this.window = window;
+        gameController = GameController.INSTANCE;
         valid = false;
         setNumberOfPlayers();
         if (0 != numberOfPlayers) {
@@ -32,7 +34,7 @@ public class UserInput {
 
     private void setNumberOfPlayers() {
         numberOfPlayers = getNumberOfPlayersInput();
-        GameMaster.INSTANCE.setNumberOfPlayers(numberOfPlayers);
+        gameController.setNumberOfPlayers(numberOfPlayers);
     }
 
     private int getNumberOfPlayersInput() {
@@ -60,7 +62,7 @@ public class UserInput {
                     return;
                 }
                 if (isValidPlayerName(playerName)) {
-                    GameMaster.INSTANCE.getPlayer(i).setName(playerName);
+                    gameController.getPlayerController().getPlayer(i).setName(playerName);
                     setPlayerColor(i);
                 } else {
                     JOptionPane.showMessageDialog(window, "Please enter a string name", "Error", JOptionPane.ERROR_MESSAGE);
@@ -71,10 +73,10 @@ public class UserInput {
     }
 
     private void setPlayerColor(int index) {
-        JComboBox colorComboBox = new JComboBox(GameMaster.INSTANCE.getPlayerColors().toArray());
+        JComboBox colorComboBox = new JComboBox(gameController.getPlayerController().getPlayerColors().toArray());
         colorComboBox.setRenderer(new CellRenderer());
         JOptionPane.showMessageDialog(window, colorComboBox, "Select a player color", JOptionPane.QUESTION_MESSAGE);
-        GameMaster.INSTANCE.setPlayerColor((PlayerColor) colorComboBox.getSelectedItem(), index);
+        gameController.getPlayerController().setPlayerColor((PlayerColor) colorComboBox.getSelectedItem(), index);
     }
 
     private boolean isCanceledClicked(String input) {
@@ -86,7 +88,7 @@ public class UserInput {
     }
 
     private boolean isValidNumberOfPlayers(int numPlayers) {
-        return (numPlayers >= 2) && (numPlayers <= GameMaster.MAX_PLAYERS);
+        return (numPlayers >= 2) && (numPlayers <= gameController.MAX_PLAYERS);
     }
 
     private int tryToGetInt(String numberOfPlayers) throws HeadlessException {

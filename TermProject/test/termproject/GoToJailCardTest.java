@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCJail;
-import logic.GameMaster;
+import logic.GameController;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.JailCard;
@@ -15,26 +15,26 @@ import org.junit.Test;
 
 public class GoToJailCardTest {
 
-    private GameMaster gameMaster;
+    private GameController gameController;
     private final Card jailCard = new JailCard(CardType.COMMUNITY);
 
     @Before
     public void setUp() {
-        gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new GameBoardCCJail());
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.reset();
-        gameMaster.setGUI(new MockGUI());
-        gameMaster.getGameBoard().addCard(jailCard);
+        gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new GameBoardCCJail());
+        gameController.setNumberOfPlayers(1);
+        gameController.reset();
+        gameController.getGUIController().setGUI(new MockGUI());
+        gameController.getGameBoardController().getGameBoard().addCard(jailCard);
     }
 
     @Test
     public void testJailCardAction() {
-        Card card = gameMaster.drawCCCard();
+        Card card = gameController.drawCCCard();
         assertEquals(jailCard, card);
         card.applyAction();
-        Cell cell = gameMaster.getCurrentPlayer().getPosition();
-        assertEquals(gameMaster.getGameBoard().queryCell("Jail"), cell);
+        Cell cell = gameController.getCurrentPlayer().getPosition();
+        assertEquals(gameController.getGameBoardController().getGameBoard().queryCell("Jail"), cell);
     }
 
     @Test
@@ -45,13 +45,13 @@ public class GoToJailCardTest {
 
     @Test
     public void testJailCardUI() {
-        gameMaster.movePlayer(0, 1);
-        assertTrue(gameMaster.getGUI().isDrawCardButtonEnabled());
-        assertFalse(gameMaster.getGUI().isEndTurnButtonEnabled());
-        gameMaster.btnDrawCardClicked();
-        assertFalse(gameMaster.getGUI().isDrawCardButtonEnabled());
-        Cell cell = gameMaster.getCurrentPlayer().getPosition();
-        assertEquals(gameMaster.getGameBoard().queryCell("Jail"), cell);
-        assertTrue(gameMaster.getGUI().isEndTurnButtonEnabled());
+        gameController.getPlayerController().movePlayer(0, 1);
+        assertTrue(gameController.getGUIController().getGUI().isDrawCardButtonEnabled());
+        assertFalse(gameController.getGUIController().getGUI().isEndTurnButtonEnabled());
+        gameController.getGUIController().btnDrawCardClicked();
+        assertFalse(gameController.getGUIController().getGUI().isDrawCardButtonEnabled());
+        Cell cell = gameController.getCurrentPlayer().getPosition();
+        assertEquals(gameController.getGameBoardController().getGameBoard().queryCell("Jail"), cell);
+        assertTrue(gameController.getGUIController().getGUI().isEndTurnButtonEnabled());
     }
 }

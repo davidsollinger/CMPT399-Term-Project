@@ -1,6 +1,6 @@
 package logic.card;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.player.Player;
 
 public class MoneyCard extends Card {
@@ -18,7 +18,7 @@ public class MoneyCard extends Card {
 
     @Override
     public void applyAction() {
-        Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
+        Player currentPlayer = GameController.INSTANCE.getCurrentPlayer();
         currentPlayer.setMoney(currentPlayer.getMoney() + amount);
     }
 

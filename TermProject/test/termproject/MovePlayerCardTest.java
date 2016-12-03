@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCMovePlayer;
-import logic.GameMaster;
+import logic.GameController;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.MovePlayerCard;
@@ -15,18 +15,18 @@ import org.junit.Test;
 
 public class MovePlayerCardTest {
 
-    private GameMaster gameMaster;
+    private GameController gameController;
     private Card movePlayerCard;
 
     @Before
     public void setUp() {
-        gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new GameBoardCCMovePlayer());
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.reset();
-        gameMaster.setGUI(new MockGUI());
+        gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new GameBoardCCMovePlayer());
+        gameController.setNumberOfPlayers(1);
+        gameController.reset();
+        gameController.getGUIController().setGUI(new MockGUI());
         movePlayerCard = new MovePlayerCard("Blue 1", CardType.COMMUNITY);
-        gameMaster.getGameBoard().addCard(movePlayerCard);
+        gameController.getGameBoardController().getGameBoard().addCard(movePlayerCard);
     }
 
     @Test
@@ -36,26 +36,26 @@ public class MovePlayerCardTest {
 
     @Test
     public void testMovePlayerCardAction() {
-        Card card = gameMaster.drawCCCard();
+        Card card = gameController.drawCCCard();
         assertEquals(movePlayerCard, card);
 
         card.applyAction();
-        Cell cell = gameMaster.getCurrentPlayer().getPosition();
-        assertEquals(gameMaster.getGameBoard().queryCell("Blue 1"), cell);
+        Cell cell = gameController.getCurrentPlayer().getPosition();
+        assertEquals(gameController.getGameBoardController().getGameBoard().queryCell("Blue 1"), cell);
     }
 
     @Test
     public void testMovePlayerCardUI() {
-        gameMaster.movePlayer(0, 2);
-        assertTrue(gameMaster.getGUI().isDrawCardButtonEnabled());
-        assertFalse(gameMaster.getGUI().isEndTurnButtonEnabled());
+        gameController.getPlayerController().movePlayer(0, 2);
+        assertTrue(gameController.getGUIController().getGUI().isDrawCardButtonEnabled());
+        assertFalse(gameController.getGUIController().getGUI().isEndTurnButtonEnabled());
 
-        gameMaster.btnDrawCardClicked();
-        assertFalse(gameMaster.getGUI().isDrawCardButtonEnabled());
+        gameController.getGUIController().btnDrawCardClicked();
+        assertFalse(gameController.getGUIController().getGUI().isDrawCardButtonEnabled());
 
-        Cell cell = gameMaster.getCurrentPlayer().getPosition();
-        assertEquals(gameMaster.getGameBoard().queryCell("Blue 1"), cell);
-        assertTrue(gameMaster.getGUI().isEndTurnButtonEnabled());
-        assertEquals(1700, gameMaster.getCurrentPlayer().getMoney());
+        Cell cell = gameController.getCurrentPlayer().getPosition();
+        assertEquals(gameController.getGameBoardController().getGameBoard().queryCell("Blue 1"), cell);
+        assertTrue(gameController.getGUIController().getGUI().isEndTurnButtonEnabled());
+        assertEquals(1700, gameController.getCurrentPlayer().getMoney());
     }
 }

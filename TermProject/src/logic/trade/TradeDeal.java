@@ -1,6 +1,6 @@
 package logic.trade;
 
-import logic.GameMaster;
+import logic.GameController;
 
 public class TradeDeal {
 
@@ -21,10 +21,10 @@ public class TradeDeal {
     }
 
     public String makeMessage() {
-        GameMaster gameMaster = GameMaster.INSTANCE;
-        return gameMaster.getCurrentPlayer() + " wishes to purchase "
-                + propertyName + " from " + gameMaster.getPlayer(playerIndex)
-                + " for " + amount + ".  " + gameMaster.getPlayer(playerIndex)
+        GameController gameController = GameController.INSTANCE;
+        return gameController.getCurrentPlayer() + " wishes to purchase "
+                + propertyName + " from " + gameController.getPlayerController().getPlayer(playerIndex)
+                + " for " + amount + ".  " + gameController.getPlayerController().getPlayer(playerIndex)
                 + ", do you wish to trade your property?";
     }
 
