@@ -3,6 +3,7 @@ package controller;
 import gui.PlayerColor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import logic.cell.Cell;
 import logic.player.Player;
@@ -20,7 +21,7 @@ public class PlayerController {
     }
 
     public List<Player> getPlayerList() {
-        return players;
+        return Collections.unmodifiableList(players);
     }
 
     public Player getPlayer(int index) {
@@ -32,7 +33,7 @@ public class PlayerController {
     }
 
     public List<PlayerColor> getPlayerColors() {
-        return playerColors;
+        return Collections.unmodifiableList(playerColors);
     }
 
     public PlayerColor getPlayerColor(int index) {
@@ -57,7 +58,6 @@ public class PlayerController {
     }
 
     public void setPlayerColor(PlayerColor color, int index) {
-        System.out.println(color.getColor().getAlpha());
         getPlayer(index).setPlayerColor(color.getColor());
         removePlayerColor(color);
     }
@@ -69,7 +69,6 @@ public class PlayerController {
 
     public void movePlayer(Player player, int diceValue) {
         Cell currentPosition = player.getPosition();
-        System.out.println(GameController.INSTANCE.getGameBoardController().getGameBoard().getCell(0));
         int positionIndex = GameController.INSTANCE.getGameBoardController().getGameBoard().queryCellIndex(currentPosition.getName());
         int newIndex = (positionIndex + diceValue) % GameController.INSTANCE.getGameBoardController().getGameBoard().getCellNumber();
         GameController.INSTANCE.checkPlayerPassGoCell(newIndex, positionIndex, diceValue, player);
