@@ -1,7 +1,7 @@
 package termproject;
 
 import gui.infoFormatter.InfoFormatter;
-import logic.GameMaster;
+import logic.GameController;
 import logic.card.CardType;
 import logic.cell.CardCell;
 import logic.cell.FreeParkingCell;
@@ -24,8 +24,8 @@ public class CellTextTest {
 
     @Before
     public void setUp() {
-        GameMaster gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new NullGameBoard());
+        GameController gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new NullGameBoard());
         player = new Player();
         player.setName("Owner 1");
     }

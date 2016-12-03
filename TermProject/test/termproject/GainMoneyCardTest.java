@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import gameboardvariants.GameBoardCCGainMoney;
-import logic.GameMaster;
+import logic.GameController;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.MoneyCard;
@@ -15,56 +15,56 @@ import org.junit.Test;
 public class GainMoneyCardTest {
 
     private Card gainMoneyCard;
-    private GameMaster gameMaster;
+    private GameController gameController;
 
     @Before
     public void setUp() {
-        gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new GameBoardCCGainMoney());
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.reset();
-        gameMaster.setGUI(new MockGUI());
+        gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new GameBoardCCGainMoney());
+        gameController.setNumberOfPlayers(1);
+        gameController.reset();
+        gameController.getGUIController().setGUI(new MockGUI());
         gainMoneyCard = new MoneyCard("Get 50 dollars", 50, CardType.COMMUNITY);
-        gameMaster.getGameBoard().addCard(gainMoneyCard);
+        gameController.getGameBoardController().getGameBoard().addCard(gainMoneyCard);
     }
 
     @Test
     public void testGainMoneyCardAction() {
-        int origMoney = gameMaster.getCurrentPlayer().getMoney();
-        Card card = gameMaster.drawCCCard();
+        int origMoney = gameController.getCurrentPlayer().getMoney();
+        Card card = gameController.drawCCCard();
         card.applyAction();
-        assertEquals(origMoney + 50, gameMaster.getCurrentPlayer().getMoney());
+        assertEquals(origMoney + 50, gameController.getCurrentPlayer().getMoney());
     }
-    
+
     @Test
     public void testGainMoneyCard() {
-        Card card = gameMaster.drawCCCard();
+        Card card = gameController.drawCCCard();
         assertEquals(gainMoneyCard, card);
     }
 
     @Test
     public void testGainMoneyCardDrawCardButtonEnabled() {
-        gameMaster.movePlayer(0, 1);
-        assertTrue(gameMaster.getGUI().isDrawCardButtonEnabled());
+        gameController.getPlayerController().movePlayer(0, 1);
+        assertTrue(gameController.getGUIController().getGUI().isDrawCardButtonEnabled());
     }
-    
+
     @Test
     public void testGainMoneyCardEndTurnButtonDisabled() {
-        gameMaster.movePlayer(0, 1);
-        assertFalse(gameMaster.getGUI().isEndTurnButtonEnabled());
+        gameController.getPlayerController().movePlayer(0, 1);
+        assertFalse(gameController.getGUIController().getGUI().isEndTurnButtonEnabled());
     }
-    
+
     @Test
     public void testGainMoneyCardDrawCardButtonDisabled() {
-        gameMaster.movePlayer(0, 1);
-        gameMaster.btnDrawCardClicked();
-        assertFalse(gameMaster.getGUI().isDrawCardButtonEnabled());
+        gameController.getPlayerController().movePlayer(0, 1);
+        gameController.getGUIController().btnDrawCardClicked();
+        assertFalse(gameController.getGUIController().getGUI().isDrawCardButtonEnabled());
     }
-    
+
     @Test
     public void testGainMoneyCardEndTurnButtonEnabled() {
-        gameMaster.movePlayer(0, 1);
-        gameMaster.btnDrawCardClicked();
-        assertTrue(gameMaster.getGUI().isEndTurnButtonEnabled());
+        gameController.getPlayerController().movePlayer(0, 1);
+        gameController.getGUIController().btnDrawCardClicked();
+        assertTrue(gameController.getGUIController().getGUI().isEndTurnButtonEnabled());
     }
 }

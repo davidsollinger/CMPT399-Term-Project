@@ -1,6 +1,6 @@
 package logic.cell;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.player.Player;
 
 public class PropertyCell extends Cell {
@@ -80,7 +80,7 @@ public class PropertyCell extends Cell {
     private boolean ownsHouses() {
         return numHouses > 0;
     }
-    
+
     @Override
     protected void checkIfCurrentPlayer(Player currentPlayer) {
         if (!isCurrentPlayer(currentPlayer)) {
@@ -92,7 +92,7 @@ public class PropertyCell extends Cell {
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
-            currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
+            currentPlayer = GameController.INSTANCE.getCurrentPlayer();
             checkIfCurrentPlayer(currentPlayer);
         }
     }

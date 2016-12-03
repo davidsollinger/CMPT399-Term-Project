@@ -14,7 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import logic.GameMaster;
+import logic.GameController;
 import logic.cell.Cell;
 import logic.player.Player;
 import logic.trade.NullTradeDeal;
@@ -31,6 +31,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
     private final JComboBox<Player> comboSellers;
     private final JComboBox<Cell> comboProperties;
     private final JTextField txtAmount;
+    private final GameController gameController;
 
     private TradeDeal deal;
 
@@ -38,6 +39,8 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         super(parent);
         super.setTitle("Trade Property");
         super.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+
+        gameController = GameController.INSTANCE;
 
         deal = new NullTradeDeal();
         comboSellers = new JComboBox<>();
@@ -70,11 +73,11 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             int amount = tryToGetInt();
             Cell cell = (Cell) comboProperties.getSelectedItem();
             Player player = (Player) comboSellers.getSelectedItem();
-            Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
+            Player currentPlayer = gameController.getCurrentPlayer();
             if (!curPlayerHasEnough(amount, currentPlayer)) {
                 JOptionPane.showMessageDialog(GUITradeDialog.this,
                         "Amount should be greater than zero but less than "
-                                + currentPlayer.getMoney(), "Error", JOptionPane.ERROR_MESSAGE);
+                        + currentPlayer.getMoney(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             createTradeDealText(amount, cell, player);
@@ -90,7 +93,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         deal = new TradeDeal();
         deal.setAmount(amount);
         deal.setPropertyName(cell.getName());
-        deal.setSellerIndex(GameMaster.INSTANCE.getPlayerIndex(player));
+        deal.setSellerIndex(gameController.getPlayerController().getPlayerIndex(player));
     }
 
     private void buildTradePropertyContentPane() {
@@ -124,7 +127,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
     }
 
     private List<Player> addAllSellers() {
-        List<Player> sellers = GameMaster.INSTANCE.getSellerList();
+        List<Player> sellers = gameController.getPlayerController().getSellerList();
         sellers.stream().forEach((player) -> {
             comboSellers.addItem(player);
         });

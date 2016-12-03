@@ -2,7 +2,7 @@ package termproject;
 
 import Mocks.MockGUI;
 import java.awt.Color;
-import logic.GameMaster;
+import logic.GameController;
 import logic.cell.Cell;
 import logic.cell.PropertyCell;
 import logic.gameBoard.GameBoard;
@@ -16,33 +16,33 @@ import org.junit.Test;
 
 public class PlayerTest {
 
-    private GameMaster gameMaster;
+    private GameController gameController;
 
     @Before
     public void setUp() throws Exception {
-        gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new SimpleGameBoard());
-        gameMaster.setGUI(new MockGUI());
-        gameMaster.setTestMode(true);
-        gameMaster.reset();
+        gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new SimpleGameBoard());
+        gameController.getGUIController().setGUI(new MockGUI());
+        gameController.setTestMode(true);
+        gameController.reset();
     }
 
     @Test
     public void testPurchaseProperty() {
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.movePlayer(0, 3);
-        Player player = gameMaster.getPlayer(0);
+        gameController.setNumberOfPlayers(1);
+        gameController.getPlayerController().movePlayer(0, 3);
+        Player player = gameController.getPlayerController().getPlayer(0);
         player.getActions().purchase();
         assertEquals(1380, player.getMoney());
         assertEquals("Blue 3", player.getProperty().getPropertyCell(0).getName());
         PropertyCell cell
-                = (PropertyCell) gameMaster.getGameBoard().queryCell("Blue 3");
+                = (PropertyCell) gameController.getGameBoardController().getGameBoard().queryCell("Blue 3");
         assertSame(player, cell.getPlayer());
     }
 
     @Test
     public void testSameGoCell() {
-        GameBoard gameboard = gameMaster.getGameBoard();
+        GameBoard gameboard = gameController.getGameBoardController().getGameBoard();
         Player player1 = new Player();
         Player player2 = new Player();
         Cell go = gameboard.queryCell("Go");
@@ -52,54 +52,54 @@ public class PlayerTest {
 
     @Test
     public void testPayRentTo() {
-        gameMaster.setNumberOfPlayers(2);
-        gameMaster.movePlayer(0, 4);
-        gameMaster.getCurrentPlayer().getActions().purchase();
-        gameMaster.btnEndTurnClicked();
-        gameMaster.movePlayer(1, 4);
-        gameMaster.btnEndTurnClicked();
-        assertTrue(gameMaster.getPlayer(1).isBankrupt());
-        assertEquals(2800, gameMaster.getPlayer(0).getMoney());
+        gameController.setNumberOfPlayers(2);
+        gameController.getPlayerController().movePlayer(0, 4);
+        gameController.getCurrentPlayer().getActions().purchase();
+        gameController.getGUIController().btnEndTurnClicked();
+        gameController.getPlayerController().movePlayer(1, 4);
+        gameController.getGUIController().btnEndTurnClicked();
+        assertTrue(gameController.getPlayerController().getPlayer(1).isBankrupt());
+        assertEquals(2800, gameController.getPlayerController().getPlayer(0).getMoney());
     }
 
     @Test
     public void testExchangeProperty() {
-        gameMaster.setNumberOfPlayers(2);
-        gameMaster.movePlayer(0, 3);
-        gameMaster.getCurrentPlayer().getActions().purchase();
-        gameMaster.btnEndTurnClicked();
-        gameMaster.getPlayer(0).getProperty().exchangeProperty(gameMaster.getPlayer(1));
-        assertEquals(1, gameMaster.getCurrentPlayer().getProperty().getNumberOfProperties());
+        gameController.setNumberOfPlayers(2);
+        gameController.getPlayerController().movePlayer(0, 3);
+        gameController.getCurrentPlayer().getActions().purchase();
+        gameController.getGUIController().btnEndTurnClicked();
+        gameController.getPlayerController().getPlayer(0).getProperty().
+                exchangeProperty(gameController.getPlayerController().getPlayer(1));
+        assertEquals(1, gameController.getCurrentPlayer().getProperty().getNumberOfProperties());
     }
 
     public void testPurchaseHouse() {
-        System.out.println("Began test for House Purchase");
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.startGame();
-        gameMaster.movePlayer(gameMaster.getCurrentPlayerIndex(), 1);
-        gameMaster.getCurrentPlayer().getActions().purchase();
-        gameMaster.btnEndTurnClicked();
-        gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().getActions().purchase();
-        gameMaster.btnEndTurnClicked();
-        gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().getActions().purchase();
-        gameMaster.btnEndTurnClicked();
-        assertEquals(true, gameMaster.getCurrentPlayer().canBuyHouse());
-        gameMaster.getCurrentPlayer().getProperty().addHouse("blue", 2);
-        assertEquals("blue", gameMaster.getCurrentPlayer().getProperty().getMonopolies()[0]);
-        assertEquals(880, gameMaster.getCurrentPlayer().getMoney());
+        gameController.setNumberOfPlayers(1);
+        gameController.startGame();
+        gameController.getPlayerController().movePlayer(gameController.getTurn(), 1);
+        gameController.getCurrentPlayer().getActions().purchase();
+        gameController.getGUIController().btnEndTurnClicked();
+        gameController.getPlayerController().movePlayer(0, 1);
+        gameController.getCurrentPlayer().getActions().purchase();
+        gameController.getGUIController().btnEndTurnClicked();
+        gameController.getPlayerController().movePlayer(0, 1);
+        gameController.getCurrentPlayer().getActions().purchase();
+        gameController.getGUIController().btnEndTurnClicked();
+        assertEquals(true, gameController.getCurrentPlayer().canBuyHouse());
+        gameController.getCurrentPlayer().getProperty().addHouse("blue", 2);
+        assertEquals("blue", gameController.getCurrentPlayer().getProperty().getMonopolies()[0]);
+        assertEquals(880, gameController.getCurrentPlayer().getMoney());
     }
 
     @Test
     public void testResetProperty() {
-        gameMaster.setNumberOfPlayers(1);
-        gameMaster.movePlayer(0, 1);
-        gameMaster.getCurrentPlayer().getActions().purchase();
-        assertEquals(gameMaster.getGameBoard().getCell(1),
-                gameMaster.getCurrentPlayer().getProperty().getAllProperties()[0]);
-        gameMaster.getCurrentPlayer().getProperty().resetProperty();
-        assertEquals(0, gameMaster.getCurrentPlayer().getProperty().getAllProperties().length);
+        gameController.setNumberOfPlayers(1);
+        gameController.getPlayerController().movePlayer(0, 1);
+        gameController.getCurrentPlayer().getActions().purchase();
+        assertEquals(gameController.getGameBoardController().getGameBoard().getCell(1),
+                gameController.getCurrentPlayer().getProperty().getAllProperties()[0]);
+        gameController.getCurrentPlayer().getProperty().resetProperty();
+        assertEquals(0, gameController.getCurrentPlayer().getProperty().getAllProperties().length);
     }
 
     @Test

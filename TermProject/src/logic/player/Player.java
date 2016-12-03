@@ -1,7 +1,7 @@
 package logic.player;
 
 import java.awt.Color;
-import logic.GameMaster;
+import logic.GameController;
 import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
 
@@ -9,7 +9,7 @@ public class Player {
 
     private final PlayerProperty property;
     private final PlayerActions actions;
-    
+
     private boolean inJail;
     private int money;
     private String name;
@@ -17,9 +17,10 @@ public class Player {
     private Color playerColor;
 
     public Player() {
-        GameBoard gb = GameMaster.INSTANCE.getGameBoard();
+        GameController gameController = GameController.INSTANCE;
+        GameBoard gameBoard = gameController.getGameBoardController().getGameBoard();
         setInJail(false);
-        position = gb.queryCell("Go");
+        position = gameBoard.queryCell("Go");
         property = new PlayerProperty(this);
         actions = new PlayerActions(this);
     }
@@ -27,7 +28,7 @@ public class Player {
     public static Player createNullPlayer() {
         return new NullPlayer();
     }
-    
+
     public final void setInJail(boolean inJail) {
         this.inJail = inJail;
     }
@@ -74,13 +75,13 @@ public class Player {
     }
 
     public boolean isBankrupt() {
-        return getMoney() <= 0;
+        return money <= 0;
     }
 
     public boolean isInJail() {
         return inJail;
     }
-    
+
     public boolean isColorSet() {
         return null != playerColor;
     }
@@ -90,15 +91,15 @@ public class Player {
     }
 
     public void addMoney(int amount) {
-        setMoney(getMoney() + amount);
+        money += amount;
     }
 
     public void subtractMoney(int amount) {
-        setMoney(getMoney() - amount);
+        money -= amount;
     }
 
     @Override
     public String toString() {
-        return getName();
+        return name;
     }
 }

@@ -1,6 +1,6 @@
 package logic.player;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.cell.Cell;
 import logic.cell.JailCell;
 import logic.cell.PropertyCell;
@@ -17,10 +17,11 @@ public class PlayerActions {
     }
 
     public void getOutOfJail() {
+        GameController gameController = GameController.INSTANCE;
         player.subtractMoney(JailCell.BAIL);
         checkPlayerBankrupt(new NullPlayer());
         player.setInJail(false);
-        GameMaster.INSTANCE.updateGUI();
+        gameController.getGUIController().updateGUI();
     }
 
     private void checkPlayerBankrupt(Player otherPlayer) {

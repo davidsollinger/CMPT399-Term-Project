@@ -1,6 +1,6 @@
 package termproject;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.gameBoard.NullGameBoard;
 import logic.trade.TradeDeal;
 import static org.junit.Assert.assertEquals;
@@ -11,12 +11,12 @@ public class TradeDealTest {
 
     @Before
     public void setUp() {
-        GameMaster gameMaster = GameMaster.INSTANCE;
-        gameMaster.setGameBoard(new NullGameBoard());
-        gameMaster.reset();
-        gameMaster.setNumberOfPlayers(2);
-        gameMaster.getPlayer(0).setName("Buyer");
-        gameMaster.getPlayer(1).setName("Seller");
+        GameController gameController = GameController.INSTANCE;
+        gameController.getGameBoardController().setGameBoard(new NullGameBoard());
+        gameController.reset();
+        gameController.setNumberOfPlayers(2);
+        gameController.getPlayerController().getPlayer(0).setName("Buyer");
+        gameController.getPlayerController().getPlayer(1).setName("Seller");
     }
 
     @Test

@@ -7,16 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import logic.GameMaster;
+import logic.GameController;
 import logic.cell.Cell;
-import logic.player.Player;
 
 public class GUICell extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private static final PlayerColor[] PLAYER_COLORS = {PlayerColor.GREEN,
-        PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN,
-        PlayerColor.PEACH, PlayerColor.TEAL, PlayerColor.PINK};
 
     private final int CELL_ROWS = 2;
     private final int CELL_COLS = 4;
@@ -25,12 +21,15 @@ public class GUICell extends JPanel {
     private final int CELL_WIDTH = 100;
     private final int CELL_HEIGHT = 100;
     private final Cell cell;
-    private final JLabel[] playerLabels = new JLabel[GameMaster.MAX_PLAYERS];
+    private final JLabel[] playerLabels = new JLabel[GameController.MAX_PLAYERS];
 
     private JLabel infoLabel;
 
+    private GameController gameController;
+
     public GUICell(Cell cell) {
         this.cell = cell;
+        gameController = GameController.INSTANCE;
         super.setLayout(new OverlayLayout(this));
         super.setBorder(new BevelBorder(BevelBorder.LOWERED));
         setPlayerPanel();
@@ -61,17 +60,19 @@ public class GUICell extends JPanel {
     }
 
     private void createPlayerLabels(JPanel playerPanel) {
-        for (int i = 0; i < GameMaster.MAX_PLAYERS; i++) {
+        for (int i = 0; i < GameController.MAX_PLAYERS; i++) {
             playerLabels[i] = new JLabel();
             if (checkPlayerColor(i)) {
-                playerLabels[i].setBackground(GameMaster.INSTANCE.getPlayer(i).getPlayerColor());
+                playerLabels[i].setBackground(gameController.getPlayerController().
+                        getPlayer(i).getPlayerColor());
             }
             playerPanel.add(playerLabels[i]);
         }
     }
 
     private boolean checkPlayerColor(int index) {
-        return index < GameMaster.INSTANCE.getNumberOfPlayers() && GameMaster.INSTANCE.getPlayer(index).isColorSet();
+        return (index < gameController.getNumberOfPlayers())
+                && (gameController.getPlayerController().getPlayer(index).isColorSet());
     }
 
     public void displayInfo() {

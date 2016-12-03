@@ -1,6 +1,6 @@
 package logic.cell;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.player.Player;
 
 public class GoToJailCell extends Cell {
@@ -11,7 +11,8 @@ public class GoToJailCell extends Cell {
 
     @Override
     public void playAction() {
-        Player currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
-        GameMaster.INSTANCE.sendToJail(currentPlayer);
+        GameController gameController = GameController.INSTANCE;
+        Player currentPlayer = gameController.getCurrentPlayer();
+        gameController.getPlayerController().sendToJail(currentPlayer);
     }
 }

@@ -4,7 +4,7 @@ import java.awt.HeadlessException;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import logic.GameMaster;
+import logic.GameController;
 import logic.gameBoard.GameBoard;
 import logic.gameBoard.GameBoardView;
 import logic.gameBoard.NullGameBoard;
@@ -12,16 +12,16 @@ import logic.gameBoard.NullGameBoard;
 public class Main {
 
     private static MainWindow window;
-    private static GameMaster master;
+    private static GameController gameController;
     private static GameBoard gameBoard;
 
     public static void main(String[] args) {
-        master = GameMaster.INSTANCE;
+        gameController = GameController.INSTANCE;
         window = new MainWindow();
         gameBoard = new GameBoardView();
 
         checkArgs(args);
-        master.setGameBoard(gameBoard);
+        gameController.getGameBoardController().setGameBoard(gameBoard);
         UserInput input = new UserInput(window);
 
         checkUserInput(input);
@@ -44,7 +44,7 @@ public class Main {
 
     private static void checkTestMode(String[] args) {
         if (args[0].equalsIgnoreCase("test")) {
-            master.setTestMode(true);
+            gameController.setTestMode(true);
         }
     }
 
@@ -52,9 +52,9 @@ public class Main {
         window.setupGameBoard(gameBoard);
         window.setVisible(true);
         window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        master.setGUI(window);
-        master.setTestMode(true);
-        master.startGame();
+        gameController.getGUIController().setGUI(window);
+        gameController.setTestMode(true);
+        gameController.startGame();
     }
 
     private static GameBoard tryToGetArgClass(String[] args) throws HeadlessException {

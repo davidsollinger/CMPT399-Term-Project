@@ -25,7 +25,8 @@ public class CellInfoFormatter {
 
     private String getCellName(Cell cell) {
         if (cell instanceof CardCell) {
-            return cell.getName().substring(0, cell.getName().length() - 1);
+            System.out.println(cell.getName());
+            return cell.getName().substring(0, cell.getName().length() - 2);
         }
         return cell.getName();
     }

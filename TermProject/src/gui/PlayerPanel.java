@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import logic.GameMaster;
+import logic.GameController;
 import logic.card.Card;
 import logic.cell.Cell;
 import logic.player.Player;
@@ -37,8 +37,12 @@ public class PlayerPanel extends JPanel {
     private final Player player;
     private final JTextArea propertyText;
 
+    private final GameController gameController;
+
     public PlayerPanel(Player player) {
         this.player = player;
+        gameController = GameController.INSTANCE;
+
         btnRollDice = new JButton("Roll Dice");
         btnPurchaseProperty = new JButton("Purchase Property");
         btnEndTurn = new JButton("End Turn");
@@ -110,34 +114,34 @@ public class PlayerPanel extends JPanel {
 
     private void addActionListeners() {
         btnRollDice.addActionListener((ActionEvent e) -> {
-            GameMaster.INSTANCE.btnRollDiceClicked();
+            gameController.getGUIController().btnRollDiceClicked();
         });
 
         btnEndTurn.addActionListener((ActionEvent e) -> {
-            GameMaster.INSTANCE.btnEndTurnClicked();
+            gameController.getGUIController().btnEndTurnClicked();
         });
 
         btnPurchaseProperty.addActionListener((ActionEvent e) -> {
-            GameMaster.INSTANCE.btnPurchasePropertyClicked();
+            gameController.getGUIController().btnPurchasePropertyClicked();
         });
 
         btnBuyHouse.addActionListener((ActionEvent e) -> {
-            GameMaster.INSTANCE.btnBuyHouseClicked();
+            gameController.getGUIController().btnBuyHouseClicked();
         });
 
         btnGetOutOfJail.addActionListener((ActionEvent e) -> {
-            GameMaster.INSTANCE.btnGetOutOfJailClicked();
+            gameController.getGUIController().btnGetOutOfJailClicked();
         });
 
         btnDrawCard.addActionListener((ActionEvent e) -> {
-            Card card = GameMaster.INSTANCE.btnDrawCardClicked();
+            Card card = gameController.getGUIController().btnDrawCardClicked();
             JOptionPane
                     .showMessageDialog(PlayerPanel.this, card.getLabel());
             displayInfo();
         });
 
         btnTrade.addActionListener((ActionEvent e) -> {
-            GameMaster.INSTANCE.btnTradeClicked();
+            gameController.getGUIController().btnTradeClicked();
         });
     }
 
@@ -190,20 +194,20 @@ public class PlayerPanel extends JPanel {
         return btnTrade.isEnabled();
     }
 
-    public void setBuyHouseEnabled(boolean b) {
-        btnBuyHouse.setEnabled(b);
+    public void setBuyHouseEnabled(boolean enabled) {
+        btnBuyHouse.setEnabled(enabled);
     }
 
-    public void setDrawCardEnabled(boolean b) {
-        btnDrawCard.setEnabled(b);
+    public void setDrawCardEnabled(boolean enabled) {
+        btnDrawCard.setEnabled(enabled);
     }
 
     public void setEndTurnEnabled(boolean enabled) {
         btnEndTurn.setEnabled(enabled);
     }
 
-    public void setGetOutOfJailEnabled(boolean b) {
-        btnGetOutOfJail.setEnabled(b);
+    public void setGetOutOfJailEnabled(boolean enabled) {
+        btnGetOutOfJail.setEnabled(enabled);
     }
 
     public void setPurchasePropertyEnabled(boolean enabled) {
@@ -214,7 +218,7 @@ public class PlayerPanel extends JPanel {
         btnRollDice.setEnabled(enabled);
     }
 
-    public void setTradeEnabled(boolean b) {
-        btnTrade.setEnabled(b);
+    public void setTradeEnabled(boolean enabled) {
+        btnTrade.setEnabled(enabled);
     }
 }

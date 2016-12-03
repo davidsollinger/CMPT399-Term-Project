@@ -1,6 +1,6 @@
 package logic.cell;
 
-import logic.GameMaster;
+import logic.GameController;
 import logic.player.Player;
 
 public class RailRoadCell extends Cell {
@@ -19,7 +19,7 @@ public class RailRoadCell extends Cell {
     public static void setPrice(int price) {
         RailRoadCell.price = price;
     }
-    
+
     @Override
     public String getColorGroup() {
         return "RAILROAD";
@@ -34,7 +34,7 @@ public class RailRoadCell extends Cell {
     public int getRent() {
         return RailRoadCell.baseRent * (int) Math.pow(2, getPlayer().getProperty().getNumberOfRR() - 1);
     }
-    
+
     @Override
     protected void checkIfCurrentPlayer(Player currentPlayer) {
         if (!isCurrentPlayer(currentPlayer)) {
@@ -46,7 +46,7 @@ public class RailRoadCell extends Cell {
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
-            currentPlayer = GameMaster.INSTANCE.getCurrentPlayer();
+            currentPlayer = GameController.INSTANCE.getCurrentPlayer();
             checkIfCurrentPlayer(currentPlayer);
         }
     }
