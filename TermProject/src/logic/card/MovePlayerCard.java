@@ -21,7 +21,7 @@ public class MovePlayerCard extends Card {
         Player currentPlayer = gameController.getCurrentPlayer();
         Cell currentPosition = currentPlayer.getPosition();
         int diceValue = calculateDiceValue(currentPosition);
-        gameController.getPlayerController().movePlayer(currentPlayer, diceValue);
+        gameController.movePlayer(currentPlayer, diceValue);
     }
 
     private int calculateDiceValue(Cell currentPosition) {

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CellTextTest {
+public class CellInfoFormatterTest {
 
     Player player;
 
@@ -60,7 +60,7 @@ public class CellTextTest {
     }
 
     @Test
-    public void testRailRRCellText() {
+    public void testRRCellText() {
         String railRoadName = "RR1";
         String railRoadColor = "lime";
         int railRoadValue = 200;

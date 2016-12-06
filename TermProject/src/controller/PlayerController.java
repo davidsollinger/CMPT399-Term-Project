@@ -4,7 +4,6 @@ import gui.PlayerColor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import logic.cell.Cell;
 import logic.player.Player;
 
 public class PlayerController {
@@ -61,24 +60,12 @@ public class PlayerController {
         getPlayer(index).setPlayerColor(color.getColor());
         removePlayerColor(color);
     }
-
+    
     public void movePlayer(int playerIndex, int diceValue) {
         Player player = players.get(playerIndex);
-        movePlayer(player, diceValue);
+        GameController.INSTANCE.movePlayer(player, diceValue);
     }
-
-    public void movePlayer(Player player, int diceValue) {
-        Cell currentPosition = player.getPosition();
-        System.out.println(GameController.INSTANCE.getGameBoardController().getGameBoard().getCell(0));
-        int positionIndex = GameController.INSTANCE.getGameBoardController().getGameBoard().queryCellIndex(currentPosition.getName());
-        int newIndex = (positionIndex + diceValue) % GameController.INSTANCE.getGameBoardController().getGameBoard().getCellNumber();
-        GameController.INSTANCE.checkPlayerPassGoCell(newIndex, positionIndex, diceValue, player);
-        player.setPosition(GameController.INSTANCE.getGameBoardController().getGameBoard().getCell(newIndex));
-        GameController.INSTANCE.getGUIController().getGUI().movePlayer(getPlayerIndex(player), positionIndex, newIndex);
-        GameController.INSTANCE.playerMoved(player);
-        GameController.INSTANCE.getGUIController().updateGUI();
-    }
-
+    
     public void sendToJail(Player player) {
         int oldPosition = GameController.INSTANCE.getGameBoardController().getGameBoard().queryCellIndex(GameController.INSTANCE.getCurrentPlayer().getPosition().getName());
         player.setPosition(GameController.INSTANCE.getGameBoardController().getGameBoard().queryCell("Jail"));
