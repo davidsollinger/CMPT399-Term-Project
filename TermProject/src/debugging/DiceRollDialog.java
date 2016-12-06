@@ -26,10 +26,10 @@ public class DiceRollDialog extends JDialog {
     public DiceRollDialog(Frame parent) {
         super(parent);
         super.setTitle("Dice Roll Dialog");
-
         txtDiceRoll = new JTextField(2);
         btnOK = new JButton("OK");
         btnCancel = new JButton("Cancel");
+        diceRoll = new int[2];
 
         super.setModal(true);
 
@@ -42,7 +42,6 @@ public class DiceRollDialog extends JDialog {
 
         btnCancel.addActionListener((ActionEvent e) -> {
             setVisible(false);
-            diceRoll = new int[2];
             diceRoll[0] = 0;
             diceRoll[1] = 0;
         });
@@ -61,12 +60,12 @@ public class DiceRollDialog extends JDialog {
 
         super.pack();
     }
-    
+
     public int[] getDiceRoll() {
         return Arrays.copyOf(diceRoll, diceRoll.length);
     }
 
-    private void setDiceRollValues(int amount) {
+    public void setDiceRollValues(int amount) {
         if (isAmountEven(amount)) {
             diceRoll[0] = amount / 2;
             diceRoll[1] = amount / 2;

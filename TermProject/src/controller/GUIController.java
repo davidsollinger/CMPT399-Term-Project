@@ -1,7 +1,7 @@
 package controller;
 
+import gui.MainWindow;
 import logic.Die;
-import gui.MonopolyGUI;
 import logic.trade.RespondDialog;
 import logic.card.Card;
 import logic.cell.CardCell;
@@ -13,13 +13,13 @@ public class GUIController {
 
     private final Die[] dice;
     
-    private MonopolyGUI gui;
+    private MainWindow gui;
 
     public GUIController() {
         dice = new Die[]{new Die(), new Die()};
     }
 
-    public MonopolyGUI getGUI() {
+    public MainWindow getGUI() {
         return gui;
     }
 
@@ -34,7 +34,7 @@ public class GUIController {
         return getNewDiceRoll();
     }
 
-    public void setGUI(MonopolyGUI gui) {
+    public void setGUI(MainWindow gui) {
         this.gui = gui;
     }
     
