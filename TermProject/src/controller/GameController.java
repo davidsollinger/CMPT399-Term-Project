@@ -112,8 +112,29 @@ public enum GameController {
     public Card drawChanceCard() {
         return gameBoardController.getGameBoard().drawChanceCard();
     }
+    
+    public void movePlayer(Player player, int diceValue) {
+        Cell currentPosition = player.getPosition();
+        int positionIndex = gameBoardController.getGameBoard().queryCellIndex(currentPosition.getName());
+        int newIndex = (positionIndex + diceValue) % gameBoardController.getGameBoard().getCellNumber();
+        checkPlayerPassGoCell(newIndex, positionIndex, diceValue, player);
+        player.setPosition(gameBoardController.getGameBoard().getCell(newIndex));
+        guiController.getGUI().movePlayer(playerController.getPlayerIndex(player), positionIndex, newIndex);
+        playerMoved(player);
+        guiController.updateGUI();
+    }
+    
+    private void checkPlayerPassGoCell(int newIndex, int positionIndex, int diceValue, Player player) {
+        if (hasEnoughMoney(newIndex, positionIndex) || diceValue > gameBoardController.getGameBoard().getCellNumber()) {
+            player.addMoney(GO_CELL_AMOUNT);
+        }
+    }
 
-    public void playerMoved(Player player) {
+    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
+        return newIndex <= positionIndex;
+    }
+
+    private void playerMoved(Player player) {
         Cell cell = player.getPosition();
         int playerIndex = playerController.getPlayerIndex(player);
         if (cell instanceof CardCell) {
@@ -136,16 +157,6 @@ public enum GameController {
         if (hasEnoughMoney(price, player.getMoney()) && price > 0) {
             guiController.getGUI().enablePurchaseBtn(playerIndex);
         }
-    }
-
-    public void checkPlayerPassGoCell(int newIndex, int positionIndex, int diceValue, Player player) {
-        if (hasEnoughMoney(newIndex, positionIndex) || diceValue > gameBoardController.getGameBoard().getCellNumber()) {
-            player.addMoney(GO_CELL_AMOUNT);
-        }
-    }
-
-    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
-        return newIndex <= positionIndex;
     }
 
     public void reset() {
