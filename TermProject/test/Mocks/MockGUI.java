@@ -1,12 +1,12 @@
 package Mocks;
 
-import gui.MonopolyGUI;
 import logic.trade.RespondDialog;
+import gui.MainWindow;
 import logic.player.Player;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 
-public class MockGUI implements MonopolyGUI {
+public class MockGUI extends MainWindow {
 
     private final boolean[] btnTradeState = new boolean[2];
     
