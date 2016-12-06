@@ -49,7 +49,6 @@ public class Main {
         window.setVisible(true);
         window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         gameController.getGUIController().setGUI(window);
-        gameController.setTestMode(true);
         gameController.startGame();
     }
     

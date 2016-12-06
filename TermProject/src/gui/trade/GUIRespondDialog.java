@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import logic.RespondDialog;
+import logic.trade.RespondDialog;
 import logic.trade.TradeDeal;
 
 public class GUIRespondDialog extends JDialog implements RespondDialog {

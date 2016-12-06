@@ -1,7 +1,7 @@
 package termproject;
 
-import gui.infoFormatter.InfoFormatter;
 import controller.GameController;
+import gui.infoFormatter.InfoFormatter;
 import logic.card.CardType;
 import logic.cell.CardCell;
 import logic.cell.FreeParkingCell;
@@ -11,7 +11,6 @@ import logic.cell.JailCell;
 import logic.cell.PropertyCell;
 import logic.cell.RailRoadCell;
 import logic.cell.UtilityCell;
-
 import logic.gameBoard.NullGameBoard;
 import logic.player.Player;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +19,7 @@ import org.junit.Test;
 
 public class CellInfoFormatterTest {
 
-    Player player;
+    private Player player;
 
     @Before
     public void setUp() {

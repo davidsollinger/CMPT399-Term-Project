@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-class CellRenderer extends JLabel implements ListCellRenderer {
+class CellRenderer extends JLabel implements ListCellRenderer<PlayerColor> {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,11 +18,10 @@ class CellRenderer extends JLabel implements ListCellRenderer {
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        PlayerColor color = (PlayerColor) value;
+    public Component getListCellRendererComponent(JList<? extends PlayerColor> list, PlayerColor value, int index, boolean isSelected, boolean cellHasFocus) {
         backgroundColor = true;
-        setText(color.toString());
-        setBackground(color.getColor());
+        setText(value.toString());
+        setBackground(value.getColor());
         backgroundColor = false;
         return this;
     }

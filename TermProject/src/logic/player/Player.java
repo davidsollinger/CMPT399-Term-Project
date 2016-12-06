@@ -33,11 +33,10 @@ public class Player {
         this.inJail = inJail;
     }
 
-
     public int getMoney() {
         return money;
     }
-    
+
     public String getName() {
         return name;
     }
