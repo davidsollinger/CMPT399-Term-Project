@@ -3,15 +3,19 @@ package gui;
 import controller.GameController;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import logic.card.Card;
 import logic.cell.Cell;
 import logic.player.Player;
@@ -34,7 +38,7 @@ public class PlayerPanel extends JPanel {
     private final JLabel moneyLabel;
     private final JLabel nameLabel;
     private final Player player;
-    private final JTextArea propertyText;
+    private final JTextPane propertyText;
     private final GameController gameController;
 
     public PlayerPanel(Player player) {
@@ -50,12 +54,25 @@ public class PlayerPanel extends JPanel {
         btnTrade = new JButton("Trade");
         nameLabel = new JLabel();
         moneyLabel = new JLabel();
-        propertyText = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLS);
-        setUpPanels();
+        propertyText = new JTextPane();
+        propertyText.setSize(TEXT_AREA_ROWS, TEXT_AREA_COLS);
+        Font font = new Font("Serif", Font.ITALIC, 20);
+        setJTextPaneFont(propertyText, font, Color.RED);
         propertyText.setEnabled(false);
-
+        setUpPanels();
         initPlayerPanelButtons();
         addActionListeners();
+    }
+    
+    private void setJTextPaneFont(JTextPane jtp, Font font, Color color) {
+        MutableAttributeSet attrs = jtp.getInputAttributes();
+        StyleConstants.setFontFamily(attrs, font.getFamily());
+        StyleConstants.setFontSize(attrs, font.getSize());
+        StyleConstants.setItalic(attrs, (font.getStyle() & Font.ITALIC) != 0);
+        StyleConstants.setBold(attrs, (font.getStyle() & Font.BOLD) != 0);
+        StyleConstants.setForeground(attrs, color);
+        StyledDocument doc = jtp.getStyledDocument();
+        doc.setCharacterAttributes(0, doc.getLength() + 1, attrs, false);
     }
     
     public void displayInfo() {
