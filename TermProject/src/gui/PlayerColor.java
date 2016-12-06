@@ -19,6 +19,7 @@ public enum PlayerColor {
     }
 
     public Color getColor() {
-        return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(),
+                         color.getAlpha());
     }
 }

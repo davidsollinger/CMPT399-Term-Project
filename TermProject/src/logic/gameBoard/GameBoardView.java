@@ -189,7 +189,6 @@ public class GameBoardView extends GameBoard {
     }
 
     private void addCards() {
-
         super.addCard(new MoneyCard("Win $50", 50, CardType.COMMUNITY));
         super.addCard(new MoneyCard("Win $20", 20, CardType.COMMUNITY));
         super.addCard(new MoneyCard("Win $10", 10, CardType.COMMUNITY));

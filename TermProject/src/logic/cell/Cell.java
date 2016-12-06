@@ -19,24 +19,7 @@ public class Cell {
     public int getPrice() {
         return 0;
     }
-
-    public boolean isAvailable() {
-        return available;
-    }
     
-    // Used as Override
-    public String getColorGroup() {
-        return "";
-    }
-
-    // Used as override
-    public void playAction() {
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -44,16 +27,28 @@ public class Cell {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-    @Override
-    public String toString() {
-        return getName();
+    
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+    
     protected boolean isCurrentPlayer(Player currentPlayer) {
         return getPlayer() == currentPlayer;
     }
-
+    
+    // Used as Override
+    public String getColorGroup() {
+        return "";
+    }
+    
+    // Used as override
+    public void playAction() {
+    }
+    
     // used as override
     protected int getRent() {
         return 0;
@@ -62,5 +57,11 @@ public class Cell {
     // Used as override
     protected void checkIfCurrentPlayer(Player currentPlayer) {
     }
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
+
 
 }

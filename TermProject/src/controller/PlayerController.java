@@ -3,6 +3,7 @@ package controller;
 import gui.PlayerColor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import logic.player.Player;
 
@@ -10,28 +11,29 @@ public class PlayerController {
 
     private final List<Player> players = new ArrayList<>();
 
-    private final List<PlayerColor> playerColors = new ArrayList<>(Arrays.asList(PlayerColor.GREEN,
-            PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN, PlayerColor.PEACH,
-            PlayerColor.TEAL, PlayerColor.PINK));
+    private final List<PlayerColor> playerColors = new ArrayList<>(
+            Arrays.asList(PlayerColor.GREEN, PlayerColor.BLUE,
+                PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN,
+                PlayerColor.PEACH, PlayerColor.TEAL, PlayerColor.PINK));
 
+    public List<Player> getPlayerList() {
+        return Collections.unmodifiableList(players);
+    }
+    
     public int getNumberOfSellers() {
         return players.size() - 1;
     }
-
-    public List<Player> getPlayerList() {
-        return players;
+    
+    public int getPlayerIndex(Player player) {
+        return players.indexOf(player);
     }
 
     public Player getPlayer(int index) {
         return players.get(index);
     }
 
-    public int getPlayerIndex(Player player) {
-        return players.indexOf(player);
-    }
-
     public List<PlayerColor> getPlayerColors() {
-        return playerColors;
+        return Collections.unmodifiableList(playerColors);
     }
 
     public PlayerColor getPlayerColor(int index) {
@@ -46,6 +48,11 @@ public class PlayerController {
         });
         return sellers;
     }
+    
+    public void setPlayerColor(PlayerColor color, int index) {
+        getPlayer(index).setPlayerColor(color.getColor());
+        removePlayerColor(color);
+    }
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -53,12 +60,6 @@ public class PlayerController {
 
     public void clearPlayers() {
         players.clear();
-    }
-
-    public void setPlayerColor(PlayerColor color, int index) {
-        System.out.println(color.getColor().getAlpha());
-        getPlayer(index).setPlayerColor(color.getColor());
-        removePlayerColor(color);
     }
     
     public void movePlayer(int playerIndex, int diceValue) {

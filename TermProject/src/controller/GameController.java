@@ -11,23 +11,37 @@ public enum GameController {
     INSTANCE;
 
     public static final int MAX_PLAYERS = 8;
-
-    private int turn = 0;
-    private int utilDiceRoll;
-
-    private boolean testMode;
-
+    
     private final int GO_CELL_AMOUNT = 200;
     private final int INIT_AMOUNT_OF_MONEY = 1500;
-
     private final PlayerController playerController;
     private final GUIController guiController;
     private final GameBoardController gameBoardController;
+
+    private int turn = 0;
+    private int utilDiceRoll;
+    private boolean testMode;
 
     private GameController() {
         playerController = new PlayerController();
         guiController = new GUIController();
         gameBoardController = new GameBoardController();
+    }
+    
+    public int getInitAmountOfMoney() {
+        return INIT_AMOUNT_OF_MONEY;
+    }
+
+    public int getNumberOfPlayers() {
+        return playerController.getPlayerList().size();
+    }
+
+    public int getUtilDiceRoll() {
+        return utilDiceRoll;
+    }
+    
+    public int getTurn() {
+        return turn;
     }
 
     public PlayerController getPlayerController() {
@@ -46,18 +60,6 @@ public enum GameController {
         return playerController.getPlayer(turn);
     }
 
-    public int getInitAmountOfMoney() {
-        return INIT_AMOUNT_OF_MONEY;
-    }
-
-    public int getNumberOfPlayers() {
-        return playerController.getPlayerList().size();
-    }
-
-    public int getUtilDiceRoll() {
-        return utilDiceRoll;
-    }
-
     public Card getCardAction(CardCell cell) {
         Card card;
         if (isCellTypeCommunity(cell)) {
@@ -67,14 +69,6 @@ public enum GameController {
         }
         card.applyAction();
         return card;
-    }
-
-    private static boolean isCellTypeCommunity(CardCell cell) {
-        return cell.getType().equals(CardType.COMMUNITY);
-    }
-
-    public int getTurn() {
-        return turn;
     }
 
     public void setNumberOfPlayers(int number) {
@@ -93,9 +87,13 @@ public enum GameController {
     public void setTestMode(boolean enabled) {
         testMode = enabled;
     }
+    
+    public Card drawCCCard() {
+        return gameBoardController.getGameBoard().drawCommunityChestCard();
+    }
 
-    public boolean isTestModeEnabled() {
-        return testMode;
+    public Card drawChanceCard() {
+        return gameBoardController.getGameBoard().drawChanceCard();
     }
 
     public void completeTrade(TradeDeal deal) {
@@ -104,37 +102,8 @@ public enum GameController {
         seller.getActions().sellProperty(property, deal.getAmount());
         getCurrentPlayer().getActions().buyProperty(property, deal.getAmount());
     }
-
-    public Card drawCCCard() {
-        return gameBoardController.getGameBoard().drawCommunityChestCard();
-    }
-
-    public Card drawChanceCard() {
-        return gameBoardController.getGameBoard().drawChanceCard();
-    }
     
-    public void movePlayer(Player player, int diceValue) {
-        Cell currentPosition = player.getPosition();
-        int positionIndex = gameBoardController.getGameBoard().queryCellIndex(currentPosition.getName());
-        int newIndex = (positionIndex + diceValue) % gameBoardController.getGameBoard().getCellNumber();
-        checkPlayerPassGoCell(newIndex, positionIndex, diceValue, player);
-        player.setPosition(gameBoardController.getGameBoard().getCell(newIndex));
-        guiController.getGUI().movePlayer(playerController.getPlayerIndex(player), positionIndex, newIndex);
-        playerMoved(player);
-        guiController.updateGUI();
-    }
-    
-    private void checkPlayerPassGoCell(int newIndex, int positionIndex, int diceValue, Player player) {
-        if (hasEnoughMoney(newIndex, positionIndex) || diceValue > gameBoardController.getGameBoard().getCellNumber()) {
-            player.addMoney(GO_CELL_AMOUNT);
-        }
-    }
-
-    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
-        return newIndex <= positionIndex;
-    }
-
-    private void playerMoved(Player player) {
+    public void playerMoved(Player player) {
         Cell cell = player.getPosition();
         int playerIndex = playerController.getPlayerIndex(player);
         if (cell instanceof CardCell) {
@@ -144,19 +113,6 @@ public enum GameController {
             guiController.getGUI().enableEndTurnBtn(playerIndex);
         }
         guiController.getGUI().setTradeEnabled(turn, false);
-    }
-
-    private void checkCellIsAvailible(Cell cell, Player player, int playerIndex) {
-        if (cell.isAvailable()) {
-            int price = cell.getPrice();
-            checkAvailibleForPurchase(price, player, playerIndex);
-        }
-    }
-
-    private void checkAvailibleForPurchase(int price, Player player, int playerIndex) {
-        if (hasEnoughMoney(price, player.getMoney()) && price > 0) {
-            guiController.getGUI().enablePurchaseBtn(playerIndex);
-        }
     }
 
     public void reset() {
@@ -187,4 +143,47 @@ public enum GameController {
     public void utilRollDice() {
         utilDiceRoll = guiController.getGUI().showUtilDiceRoll();
     }
+    
+    public void movePlayer(Player player, int diceValue) {
+        Cell currentPosition = player.getPosition();
+        int positionIndex = gameBoardController.getGameBoard().queryCellIndex(currentPosition.getName());
+        int newIndex = (positionIndex + diceValue) % gameBoardController.getGameBoard().getCellNumber();
+        checkPlayerPassGoCell(newIndex, positionIndex, diceValue, player);
+        player.setPosition(gameBoardController.getGameBoard().getCell(newIndex));
+        guiController.getGUI().movePlayer(playerController.getPlayerIndex(player), positionIndex, newIndex);
+        playerMoved(player);
+        guiController.updateGUI();
+    }
+    
+    public void checkPlayerPassGoCell(int newIndex, int positionIndex, int diceValue, Player player) {
+        if (hasEnoughMoney(newIndex, positionIndex) || diceValue > gameBoardController.getGameBoard().getCellNumber()) {
+            player.addMoney(GO_CELL_AMOUNT);
+        }
+    }
+    
+    public boolean isTestModeEnabled() {
+        return testMode;
+    }
+    
+    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
+        return newIndex <= positionIndex;
+    }
+    
+    private void checkCellIsAvailible(Cell cell, Player player, int playerIndex) {
+        if (cell.isAvailable()) {
+            int price = cell.getPrice();
+            checkAvailibleForPurchase(price, player, playerIndex);
+        }
+    }
+
+    private void checkAvailibleForPurchase(int price, Player player, int playerIndex) {
+        if (hasEnoughMoney(price, player.getMoney()) && price > 0) {
+            guiController.getGUI().enablePurchaseBtn(playerIndex);
+        }
+    }
+    
+    private static boolean isCellTypeCommunity(CardCell cell) {
+        return cell.getType().equals(CardType.COMMUNITY);
+    }
+    
 }

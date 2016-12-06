@@ -1,10 +1,10 @@
 package gui;
 
+import controller.GameController;
 import java.awt.HeadlessException;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import controller.GameController;
 import logic.gameBoard.GameBoard;
 import logic.gameBoard.GameBoardView;
 import logic.gameBoard.NullGameBoard;
@@ -26,37 +26,7 @@ public class Main {
 
         checkUserInput(input);
     }
-
-    private static void checkUserInput(UserInput input) {
-        if (!input.isValid()) {
-            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
-        } else {
-            beginGame();
-        }
-    }
-
-    private static void checkArgs(String[] args) throws HeadlessException {
-        if (args.length > 0) {
-            checkTestMode(args);
-            gameBoard = tryToGetArgClass(args);
-        }
-    }
-
-    private static void checkTestMode(String[] args) {
-        if (args[0].equalsIgnoreCase("test")) {
-            gameController.setTestMode(true);
-        }
-    }
-
-    private static void beginGame() {
-        window.setupGameBoard(gameBoard);
-        window.setVisible(true);
-        window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        gameController.getGUIController().setGUI(window);
-        gameController.setTestMode(true);
-        gameController.startGame();
-    }
-
+    
     private static GameBoard tryToGetArgClass(String[] args) throws HeadlessException {
         try {
             Class<?> c = Class.forName(args[1]);
@@ -72,5 +42,35 @@ public class Main {
             System.exit(0);
         }
         return new NullGameBoard();
+    }
+
+    private static void beginGame() {
+        window.setUpGameBoard(gameBoard);
+        window.setVisible(true);
+        window.setExtendedState(window.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        gameController.getGUIController().setGUI(window);
+        gameController.setTestMode(true);
+        gameController.startGame();
+    }
+    
+    private static void checkUserInput(UserInput input) {
+        if (!input.isValid()) {
+            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+        } else {
+            beginGame();
+        }
+    }
+    
+    private static void checkArgs(String[] args) throws HeadlessException {
+        if (args.length > 0) {
+            checkTestMode(args);
+            gameBoard = tryToGetArgClass(args);
+        }
+    }
+    
+    private static void checkTestMode(String[] args) {
+        if (args[0].equalsIgnoreCase("test")) {
+            gameController.setTestMode(true);
+        }
     }
 }

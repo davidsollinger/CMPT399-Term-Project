@@ -11,25 +11,10 @@ public class GameBoardUtil {
     private static final int FOUR_CORNERS = 4;
     private static final int SQUARE_SIDES = 4;
     private static final int NUMBER_OF_LONGSIDES = 2;
-
-    public static Dimension calculateDimension(int cellNumber) {
-        int aCellNumber = cellNumber;
-        aCellNumber -= FOUR_CORNERS;
-        int oneShortSide = aCellNumber / SQUARE_SIDES;
-        int oneLongSide = (aCellNumber - (oneShortSide * 2)) / NUMBER_OF_LONGSIDES;
-        return new Dimension(oneLongSide, oneShortSide);
+    
+    private GameBoardUtil() {
     }
-
-    public static List<Cell> getEastCells(GameBoard board) {
-        Dimension dimension = calculateDimension(board.getCellNumber());
-        int shortSide = dimension.height;
-        List<Cell> cells = new ArrayList<>();
-        for (int i = board.getCellNumber() - shortSide; i <= board.getCellNumber() - 1; i++) {
-            cells.add(board.getCell(i));
-        }
-        return cells;
-    }
-
+    
     public static List<Cell> getNorthCells(GameBoard board) {
         Dimension dimension = calculateDimension(board.getCellNumber());
         int longSide = dimension.width;
@@ -50,7 +35,7 @@ public class GameBoardUtil {
         }
         return cells;
     }
-
+    
     public static List<Cell> getWestCells(GameBoard board) {
         Dimension dimension = calculateDimension(board.getCellNumber());
         int longSide = dimension.width;
@@ -60,5 +45,23 @@ public class GameBoardUtil {
             cells.add(board.getCell(i));
         }
         return cells;
+    }
+
+    public static List<Cell> getEastCells(GameBoard board) {
+        Dimension dimension = calculateDimension(board.getCellNumber());
+        int shortSide = dimension.height;
+        List<Cell> cells = new ArrayList<>();
+        for (int i = board.getCellNumber() - shortSide; i <= board.getCellNumber() - 1; i++) {
+            cells.add(board.getCell(i));
+        }
+        return cells;
+    }
+    
+    public static Dimension calculateDimension(int cellNumber) {
+        int aCellNumber = cellNumber;
+        aCellNumber -= FOUR_CORNERS;
+        int oneShortSide = aCellNumber / SQUARE_SIDES;
+        int oneLongSide = (aCellNumber - (oneShortSide * 2)) / NUMBER_OF_LONGSIDES;
+        return new Dimension(oneLongSide, oneShortSide);
     }
 }

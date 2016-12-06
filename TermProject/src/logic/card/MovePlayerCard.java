@@ -16,12 +16,8 @@ public class MovePlayerCard extends Card {
         gameController = GameController.INSTANCE;
     }
 
-    @Override
-    public void applyAction() {
-        Player currentPlayer = gameController.getCurrentPlayer();
-        Cell currentPosition = currentPlayer.getPosition();
-        int diceValue = calculateDiceValue(currentPosition);
-        gameController.movePlayer(currentPlayer, diceValue);
+    private static boolean iscurrentCellGreaterThanNewCell(int currentCell, int newCell) {
+        return currentCell > newCell;
     }
 
     private int calculateDiceValue(Cell currentPosition) {
@@ -34,10 +30,6 @@ public class MovePlayerCard extends Card {
         return newCell - currentCell;
     }
 
-    private static boolean iscurrentCellGreaterThanNewCell(int currentCell, int newCell) {
-        return currentCell > newCell;
-    }
-
     @Override
     public CardType getCardType() {
         return cardType;
@@ -46,6 +38,14 @@ public class MovePlayerCard extends Card {
     @Override
     public String getLabel() {
         return "Go to " + destination;
+    }
+
+    @Override
+    public void applyAction() {
+        Player currentPlayer = gameController.getCurrentPlayer();
+        Cell currentPosition = currentPlayer.getPosition();
+        int diceValue = calculateDiceValue(currentPosition);
+        gameController.movePlayer(currentPlayer, diceValue);
     }
 
 }

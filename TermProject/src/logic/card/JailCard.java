@@ -12,13 +12,6 @@ public class JailCard extends Card {
     }
 
     @Override
-    public void applyAction() {
-        GameController gameController = GameController.INSTANCE;
-        Player currentPlayer = gameController.getCurrentPlayer();
-        gameController.getPlayerController().sendToJail(currentPlayer);
-    }
-
-    @Override
     public CardType getCardType() {
         return cardType;
     }
@@ -26,5 +19,12 @@ public class JailCard extends Card {
     @Override
     public String getLabel() {
         return "Go directly to Jail. Do not pass go, do not collect $200";
+    }
+
+    @Override
+    public void applyAction() {
+        GameController gameController = GameController.INSTANCE;
+        Player currentPlayer = gameController.getCurrentPlayer();
+        gameController.getPlayerController().sendToJail(currentPlayer);
     }
 }

@@ -1,10 +1,10 @@
 package logic.player;
 
+import controller.GameController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import controller.GameController;
 import logic.cell.Cell;
 import logic.cell.PropertyCell;
 import logic.cell.RailRoadCell;
@@ -27,6 +27,20 @@ public class PlayerProperty {
         this.player = player;
         gameController = GameController.INSTANCE;
     }
+    
+    public int getNumberOfProperties() {
+        return properties.size();
+    }
+
+    public int getNumberOfRR() {
+        RailRoadCell rrCell = new RailRoadCell("");
+        return getPropertyNumberForColor(rrCell.getColorGroup());
+    }
+
+    public int getNumberOfUtil() {
+        UtilityCell utilCell = new UtilityCell("");
+        return getPropertyNumberForColor(utilCell.getColorGroup());
+    }
 
     public Cell[] getAllProperties() {
         List<Cell> list = new ArrayList<>();
@@ -48,49 +62,13 @@ public class PlayerProperty {
     public PropertyCell getPropertyCell(int index) {
         return properties.get(index);
     }
-
-    public int getNumberOfProperties() {
-        return properties.size();
+    
+    public void resetProperty() {
+        properties = new ArrayList<>();
+        railRoads = new ArrayList<>();
+        utilities = new ArrayList<>();
     }
-
-    public int getNumberOfRR() {
-        RailRoadCell rrCell = new RailRoadCell("");
-        return getPropertyNumberForColor(rrCell.getColorGroup());
-    }
-
-    public int getNumberOfUtil() {
-        UtilityCell utilCell = new UtilityCell("");
-        return getPropertyNumberForColor(utilCell.getColorGroup());
-    }
-
-    private int getPropertyNumberForColor(String name) {
-        Integer number = colorGroups.get(name);
-        if (number != null) {
-            return number;
-        }
-        return 0;
-    }
-
-    protected void addProperty(Cell cell) {
-        properties.add((PropertyCell) cell);
-        addColorGroups(cell);
-    }
-
-    protected void addRailRoad(Cell cell) {
-        railRoads.add((RailRoadCell) cell);
-        addColorGroups(cell);
-    }
-
-    protected void addUtility(Cell cell) {
-        utilities.add((UtilityCell) cell);
-        addColorGroups(cell);
-    }
-
-    private void addColorGroups(Cell cell) {
-        colorGroups.put(cell.getColorGroup(),
-                getPropertyNumberForColor(cell.getColorGroup()) + 1);
-    }
-
+    
     public void addHouse(String selectedMonopoly, int houses) {
         GameBoard gameBoard = gameController.getGameBoardController().getGameBoard();
         PropertyCell[] cells = gameBoard.getPropertiesInMonopoly(selectedMonopoly);
@@ -109,7 +87,32 @@ public class PlayerProperty {
         }
         properties.clear();
     }
+    
+    public boolean checkProperty(String property) {
+        for (int i = 0; i < properties.size(); i++) {
+            Cell cell = properties.get(i);
+            if (cell.getName().equals(property)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    protected void addProperty(Cell cell) {
+        properties.add((PropertyCell) cell);
+        addColorGroups(cell);
+    }
 
+    protected void addRailRoad(Cell cell) {
+        railRoads.add((RailRoadCell) cell);
+        addColorGroups(cell);
+    }
+
+    protected void addUtility(Cell cell) {
+        utilities.add((UtilityCell) cell);
+        addColorGroups(cell);
+    }
+    
     protected void removeProperty(Cell cell) {
         properties.remove((PropertyCell) cell);
     }
@@ -120,6 +123,19 @@ public class PlayerProperty {
 
     protected void removeUtility(Cell cell) {
         utilities.remove((UtilityCell) cell);
+    }
+    
+    private int getPropertyNumberForColor(String name) {
+        Integer number = colorGroups.get(name);
+        if (number != null) {
+            return number;
+        }
+        return 0;
+    }
+
+    private void addColorGroups(Cell cell) {
+        colorGroups.put(cell.getColorGroup(),
+                getPropertyNumberForColor(cell.getColorGroup()) + 1);
     }
 
     private void checkCellRRorUtil(String color) {
@@ -138,16 +154,6 @@ public class PlayerProperty {
         }
     }
 
-    public boolean checkProperty(String property) {
-        for (int i = 0; i < properties.size(); i++) {
-            Cell cell = properties.get(i);
-            if (cell.getName().equals(property)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void checkCellsHouseLimit(PropertyCell[] cells, int houses) {
         for (PropertyCell cell : cells) {
             int newNumber = cell.getNumHouses() + houses;
@@ -161,11 +167,5 @@ public class PlayerProperty {
             player.subtractMoney((cell.getHousePrice() * houses));
             gameController.getGUIController().updateGUI();
         }
-    }
-
-    public void resetProperty() {
-        properties = new ArrayList<>();
-        railRoads = new ArrayList<>();
-        utilities = new ArrayList<>();
     }
 }

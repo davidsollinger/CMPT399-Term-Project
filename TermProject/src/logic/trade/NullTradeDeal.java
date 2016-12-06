@@ -8,13 +8,13 @@ public class NullTradeDeal extends TradeDeal {
     }
 
     @Override
-    public String getPropertyName() {
-        return "";
-    }
-
-    @Override
     public int getPlayerIndex() {
         return 0;
+    }
+    
+    @Override
+    public String getPropertyName() {
+        return "";
     }
 
     @Override

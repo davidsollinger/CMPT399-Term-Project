@@ -9,7 +9,6 @@ public class UtilityCell extends Cell {
 
     private final int ONE_UTILITY = 1;
     private final int BOTH_UTILITIES = 2;
-
     private final GameController gameController;
 
     public UtilityCell(String name) {
@@ -20,12 +19,7 @@ public class UtilityCell extends Cell {
     public static void setPrice(int price) {
         UtilityCell.price = price;
     }
-
-    @Override
-    public int getPrice() {
-        return price;
-    }
-
+    
     public int getRent(int diceRoll) {
         if (ownsAllUtilities()) {
             return diceRoll * 10;
@@ -34,12 +28,7 @@ public class UtilityCell extends Cell {
         }
         return 0;
     }
-
-    @Override
-    public String getColorGroup() {
-        return "UTILITY";
-    }
-
+    
     private boolean ownsOneUtility() {
         return getPlayer().getProperty().getNumberOfUtil() == ONE_UTILITY;
     }
@@ -47,14 +36,15 @@ public class UtilityCell extends Cell {
     private boolean ownsAllUtilities() {
         return getPlayer().getProperty().getNumberOfUtil() == BOTH_UTILITIES;
     }
+    
+    @Override
+    public int getPrice() {
+        return price;
+    }
 
     @Override
-    protected void checkIfCurrentPlayer(Player currentPlayer) {
-        if (!isCurrentPlayer(currentPlayer)) {
-            gameController.utilRollDice();
-            int diceRoll = gameController.getUtilDiceRoll();
-            currentPlayer.getActions().payRentTo(getPlayer(), getRent(diceRoll));
-        }
+    public String getColorGroup() {
+        return "UTILITY";
     }
 
     @Override
@@ -63,6 +53,15 @@ public class UtilityCell extends Cell {
         if (!isAvailable()) {
             currentPlayer = gameController.getCurrentPlayer();
             checkIfCurrentPlayer(currentPlayer);
+        }
+    }
+    
+    @Override
+    protected void checkIfCurrentPlayer(Player currentPlayer) {
+        if (!isCurrentPlayer(currentPlayer)) {
+            gameController.utilRollDice();
+            int diceRoll = gameController.getUtilDiceRoll();
+            currentPlayer.getActions().payRentTo(getPlayer(), getRent(diceRoll));
         }
     }
 }

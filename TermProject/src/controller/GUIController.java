@@ -11,9 +11,9 @@ import logic.trade.TradeDialog;
 
 public class GUIController {
 
-    private MonopolyGUI gui;
-
     private final Die[] dice;
+    
+    private MonopolyGUI gui;
 
     public GUIController() {
         dice = new Die[]{new Die(), new Die()};
@@ -26,21 +26,28 @@ public class GUIController {
     public int[] getNewDiceRoll() {
         return new int[]{dice[0].getRoll(), dice[1].getRoll()};
     }
+    
+    public int[] rollDice() {
+        if (GameController.INSTANCE.isTestModeEnabled()) {
+            return gui.getDiceRoll();
+        }
+        return getNewDiceRoll();
+    }
 
     public void setGUI(MonopolyGUI gui) {
         this.gui = gui;
     }
-
-    public void btnBuyHouseClicked() {
-        gui.showBuyHouseDialog(GameController.INSTANCE.getCurrentPlayer());
-    }
-
+    
     public Card btnDrawCardClicked() {
         gui.setDrawCardEnabled(false);
         CardCell cell = (CardCell) GameController.INSTANCE.getCurrentPlayer().getPosition();
         Card card = GameController.INSTANCE.getCardAction(cell);
         gui.setEndTurnEnabled(true);
         return card;
+    }
+
+    public void btnBuyHouseClicked() {
+        gui.showBuyHouseDialog(GameController.INSTANCE.getCurrentPlayer());
     }
 
     public void btnEndTurnClicked() {
@@ -52,16 +59,6 @@ public class GUIController {
         updateGUI();
     }
 
-    private void setAllButtonEnabled(boolean enabled) {
-        gui.setRollDiceEnabled(enabled);
-        gui.setPurchasePropertyEnabled(enabled);
-        gui.setEndTurnEnabled(enabled);
-        gui.setTradeEnabled(GameController.INSTANCE.getTurn(), enabled);
-        gui.setBuyHouseEnabled(enabled);
-        gui.setDrawCardEnabled(enabled);
-        gui.setGetOutOfJailEnabled(enabled);
-    }
-
     public void btnGetOutOfJailClicked() {
         GameController.INSTANCE.getCurrentPlayer().getActions().getOutOfJail();
         if (GameController.INSTANCE.getCurrentPlayer().isBankrupt()) {
@@ -69,12 +66,6 @@ public class GUIController {
         } else {
             playerIsOutOfJail();
         }
-    }
-
-    private void playerIsOutOfJail() {
-        gui.setRollDiceEnabled(true);
-        gui.setBuyHouseEnabled(GameController.INSTANCE.getCurrentPlayer().canBuyHouse());
-        gui.setGetOutOfJailEnabled(GameController.INSTANCE.getCurrentPlayer().isInJail());
     }
 
     public void btnPurchasePropertyClicked() {
@@ -101,10 +92,6 @@ public class GUIController {
         }
     }
 
-    private static boolean isRollAmountPositive(int[] rolls) {
-        return (rolls[0] + rolls[1]) > 0;
-    }
-
     public void btnTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal();
@@ -116,20 +103,33 @@ public class GUIController {
             }
         }
     }
-
+    
+    public void updateGUI() {
+        gui.update();
+    }
+    
+    private void playerIsOutOfJail() {
+        gui.setRollDiceEnabled(true);
+        gui.setBuyHouseEnabled(GameController.INSTANCE.getCurrentPlayer().canBuyHouse());
+        gui.setGetOutOfJailEnabled(GameController.INSTANCE.getCurrentPlayer().isInJail());
+    }
+    
+    private void setAllButtonEnabled(boolean enabled) {
+        gui.setRollDiceEnabled(enabled);
+        gui.setPurchasePropertyEnabled(enabled);
+        gui.setEndTurnEnabled(enabled);
+        gui.setTradeEnabled(GameController.INSTANCE.getTurn(), enabled);
+        gui.setBuyHouseEnabled(enabled);
+        gui.setDrawCardEnabled(enabled);
+        gui.setGetOutOfJailEnabled(enabled);
+    }
+    
     private boolean checkDeal(TradeDeal deal) {
         return deal.getAmount() > 0;
     }
-
-    public int[] rollDice() {
-        if (GameController.INSTANCE.isTestModeEnabled()) {
-            return gui.getDiceRoll();
-        }
-        return getNewDiceRoll();
-    }
-
-    public void updateGUI() {
-        gui.update();
+    
+    private static boolean isRollAmountPositive(int[] rolls) {
+        return (rolls[0] + rolls[1]) > 0;
     }
 
 }

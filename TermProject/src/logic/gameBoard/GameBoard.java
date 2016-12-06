@@ -24,6 +24,36 @@ public class GameBoard {
         addCell(go);
     }
 
+    public int getCellNumber() {
+        return cells.size();
+    }
+
+    public int getPropertyNumberForColor(String name) {
+        Integer number = colorGroups.get(name);
+        if (number != null) {
+            return number;
+        }
+        return 0;
+    }
+
+    public Cell getCell(int newIndex) {
+        return cells.get(newIndex);
+    }
+
+    public PropertyCell[] getPropertiesInMonopoly(String color) {
+        PropertyCell[] monopolyCells
+                = new PropertyCell[getPropertyNumberForColor(color)];
+        int counter = 0;
+        for (int i = 0; i < getCellNumber(); i++) {
+            Cell c = getCell(i);
+            if (c.getColorGroup().equals(color)) {
+                monopolyCells[counter] = (PropertyCell) c;
+                counter++;
+            }
+        }
+        return monopolyCells;
+    }
+
     public void addCard(Card card) {
         if (card.getCardType().equals(CardType.COMMUNITY)) {
             communityChestCards.add(card);
@@ -41,11 +71,6 @@ public class GameBoard {
         cells.add(cell);
     }
 
-    private void setPropertyCellColor(PropertyCell cell) {
-        int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
-        colorGroups.put(cell.getColorGroup(), propertyNumber + 1);
-    }
-
     public Card drawCommunityChestCard() {
         Card card = communityChestCards.get(0);
         communityChestCards.remove(0);
@@ -58,36 +83,6 @@ public class GameBoard {
         chanceCards.remove(0);
         addCard(card);
         return card;
-    }
-
-    public Cell getCell(int newIndex) {
-        return cells.get(newIndex);
-    }
-
-    public int getCellNumber() {
-        return cells.size();
-    }
-
-    public PropertyCell[] getPropertiesInMonopoly(String color) {
-        PropertyCell[] monopolyCells
-                = new PropertyCell[getPropertyNumberForColor(color)];
-        int counter = 0;
-        for (int i = 0; i < getCellNumber(); i++) {
-            Cell c = getCell(i);
-            if (c.getColorGroup().equals(color)) {
-                monopolyCells[counter] = (PropertyCell) c;
-                counter++;
-            }
-        }
-        return monopolyCells;
-    }
-
-    public int getPropertyNumberForColor(String name) {
-        Integer number = colorGroups.get(name);
-        if (number != null) {
-            return number;
-        }
-        return 0;
     }
 
     public Cell queryCell(String cellName) {
@@ -117,6 +112,11 @@ public class GameBoard {
     protected void shuffleCardPiles() {
         Collections.shuffle(communityChestCards);
         Collections.shuffle(chanceCards);
+    }
+
+    private void setPropertyCellColor(PropertyCell cell) {
+        int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
+        colorGroups.put(cell.getColorGroup(), propertyNumber + 1);
     }
 
 }

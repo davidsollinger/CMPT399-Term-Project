@@ -1,22 +1,17 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
+import controller.GameController;
 import java.awt.HeadlessException;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListCellRenderer;
-import controller.GameController;
 
 public class UserInput {
 
     private final MainWindow window;
-
+    private final GameController gameController;
+    
     private boolean valid;
     private int numberOfPlayers;
-    private final GameController gameController;
 
     public UserInput(MainWindow window) {
         this.window = window;
@@ -31,12 +26,7 @@ public class UserInput {
     public boolean isValid() {
         return valid;
     }
-
-    private void setNumberOfPlayers() {
-        numberOfPlayers = getNumberOfPlayersInput();
-        gameController.setNumberOfPlayers(numberOfPlayers);
-    }
-
+    
     private int getNumberOfPlayersInput() {
         int numOfPlayers = 0;
         while (!isValidNumberOfPlayers(numOfPlayers)) {
@@ -50,6 +40,11 @@ public class UserInput {
             }
         }
         return numOfPlayers;
+    }
+
+    private void setNumberOfPlayers() {
+        numberOfPlayers = getNumberOfPlayersInput();
+        gameController.setNumberOfPlayers(numberOfPlayers);
     }
 
     private void setPlayersNames() throws HeadlessException {
@@ -79,6 +74,15 @@ public class UserInput {
         gameController.getPlayerController().setPlayerColor((PlayerColor) colorComboBox.getSelectedItem(), index);
     }
 
+    private int tryToGetInt(String numberOfPlayers) throws HeadlessException {
+        try {
+            return Integer.parseUnsignedInt(numberOfPlayers);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(window, "Please input a number between two and eight", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return -1;
+    }
+    
     private boolean isCanceledClicked(String input) {
         return null == input;
     }
@@ -88,45 +92,7 @@ public class UserInput {
     }
 
     private boolean isValidNumberOfPlayers(int numPlayers) {
-        return (numPlayers >= 2) && (numPlayers <= gameController.MAX_PLAYERS);
+        return (numPlayers >= 2) && (numPlayers <= GameController.MAX_PLAYERS);
     }
 
-    private int tryToGetInt(String numberOfPlayers) throws HeadlessException {
-        try {
-            return Integer.parseUnsignedInt(numberOfPlayers);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(window, "Please input a number between two and eight", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return -1;
-    }
-
-}
-
-class CellRenderer extends JLabel implements ListCellRenderer {
-
-    private boolean background;
-
-    public CellRenderer() {
-        setOpaque(true);
-        background = false;
-    }
-
-    @Override
-    public void setBackground(Color color) {
-        if (!background) {
-            return;
-        }
-        super.setBackground(color);
-    }
-
-    @Override
-    public Component getListCellRendererComponent(JList list, Object value,
-            int index, boolean isSelected, boolean cellHasFocus) {
-        PlayerColor color = (PlayerColor) value;
-        background = true;
-        setText(color.toString());
-        setBackground(color.getColor());
-        background = false;
-        return this;
-    }
 }
