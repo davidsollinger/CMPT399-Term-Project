@@ -18,10 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import logic.trade.RespondDialog;
 import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
 import logic.player.Player;
+import logic.trade.RespondDialog;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 
@@ -77,6 +77,11 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         addCells(eastPanel, GameBoardUtil.getEastCells(board));
         addCells(westPanel, GameBoardUtil.getWestCells(board));
         buildPlayerPanels();
+    }
+    
+    public void endGame() {
+        JOptionPane.showMessageDialog(this, "Game Over", "information", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
     
     private GUICell queryCell(int index) {

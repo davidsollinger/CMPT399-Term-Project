@@ -2,10 +2,10 @@ package controller;
 
 import gui.MainWindow;
 import logic.Die;
-import logic.trade.RespondDialog;
 import logic.card.Card;
 import logic.cell.CardCell;
 import logic.player.Player;
+import logic.trade.RespondDialog;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 
@@ -53,6 +53,10 @@ public class GUIController {
     public void btnEndTurnClicked() {
         setAllButtonEnabled(false);
         GameController.INSTANCE.getCurrentPlayer().getPosition().playAction();
+        if (GameController.INSTANCE.isGameOver()) {
+            gui.endGame();
+            return;
+        }
         if (!GameController.INSTANCE.getCurrentPlayer().isBankrupt()) {
             GameController.INSTANCE.switchTurn();
         }

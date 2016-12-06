@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.cell.CardCell;
@@ -13,7 +14,7 @@ public enum GameController {
     public static final int MAX_PLAYERS = 8;
     
     private final int GO_CELL_AMOUNT = 200;
-    private final int INIT_AMOUNT_OF_MONEY = 1500;
+    private final int INIT_AMOUNT_OF_MONEY = 200;
     private final PlayerController playerController;
     private final GUIController guiController;
     private final GameBoardController gameBoardController;
@@ -163,6 +164,13 @@ public enum GameController {
     
     public boolean isTestModeEnabled() {
         return testMode;
+    }
+    
+    public boolean isGameOver() {
+        int numOfBankruptPlayers = 0;
+        List<Player> players = playerController.getPlayerList();
+        numOfBankruptPlayers = players.stream().filter((player) -> (player.isBankrupt())).map((_item) -> 1).reduce(numOfBankruptPlayers, Integer::sum);
+        return numOfBankruptPlayers == (players.size() - 1);
     }
     
     private boolean hasEnoughMoney(int newIndex, int positionIndex) {
