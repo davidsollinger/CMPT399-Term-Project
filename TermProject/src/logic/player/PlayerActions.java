@@ -53,31 +53,43 @@ public class PlayerActions {
         }
     }
 
-    public void buyProperty(Cell property, int amount) {
-        property.setPlayer(player);
-        if (property instanceof PropertyCell) {
-            player.getProperty().addProperty(property);
+    public void buyProperty(Cell cell, int amount) {
+        cell.setPlayer(player);
+        if (isCellInstanceOfPropertyCell(cell)) {
+            player.getProperty().addProperty(cell);
         }
-        if (property instanceof RailRoadCell) {
-            player.getProperty().addRailRoad(property);
+        if (isCellInstanceOfRRCell(cell)) {
+            player.getProperty().addRailRoad(cell);
         }
-        if (property instanceof UtilityCell) {
-            player.getProperty().addUtility(property);
+        if (isCellInstanceOfUtilityCell(cell)) {
+            player.getProperty().addUtility(cell);
         }
         player.subtractMoney(amount);
     }
 
-    public void sellProperty(Cell property, int amount) {
-        property.setPlayer(new NullPlayer());
-        if (property instanceof PropertyCell) {
-            player.getProperty().removeProperty(property);
+    public void sellProperty(Cell cell, int amount) {
+        cell.setPlayer(new NullPlayer());
+        if (isCellInstanceOfPropertyCell(cell)) {
+            player.getProperty().removeProperty(cell);
         }
-        if (property instanceof RailRoadCell) {
-            player.getProperty().removeRailRoad(property);
+        if (isCellInstanceOfRRCell(cell)) {
+            player.getProperty().removeRailRoad(cell);
         }
-        if (property instanceof UtilityCell) {
-            player.getProperty().removeUtility(property);
+        if (isCellInstanceOfUtilityCell(cell)) {
+            player.getProperty().removeUtility(cell);
         }
         player.addMoney(amount);
+    }
+    
+    private boolean isCellInstanceOfPropertyCell(Cell cell) {
+        return cell instanceof PropertyCell;
+    }
+    
+    private boolean isCellInstanceOfRRCell(Cell cell) {
+        return cell instanceof RailRoadCell;
+    }
+    
+    private boolean isCellInstanceOfUtilityCell(Cell cell) {
+        return cell instanceof UtilityCell;
     }
 }

@@ -96,7 +96,7 @@ public class GUIController {
                     .append(" and ")
                     .append(rolls[1]);
             gui.showMessage(msg.toString());
-            GameController.INSTANCE.getPlayerController().movePlayer(player, rolls[0] + rolls[1]);
+            GameController.INSTANCE.movePlayer(player, rolls[0] + rolls[1]);
             gui.setBuyHouseEnabled(false);
         }
     }
