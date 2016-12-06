@@ -26,7 +26,6 @@ public class DiceRollDialog extends JDialog {
     public DiceRollDialog(Frame parent) {
         super(parent);
         super.setTitle("Dice Roll Dialog");
-        System.out.println("Going through constructor");
         txtDiceRoll = new JTextField(2);
         btnOK = new JButton("OK");
         btnCancel = new JButton("Cancel");
