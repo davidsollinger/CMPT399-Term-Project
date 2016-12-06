@@ -1,5 +1,6 @@
 package gui;
 
+import controller.GameController;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -7,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import controller.GameController;
 
 public class UtilDiceRoll extends JDialog {
 
@@ -45,6 +45,10 @@ public class UtilDiceRoll extends JDialog {
         diceRollDialog.setVisible(true);
         return diceRollDialog.getDiceValue();
     }
+    
+    public int getDiceValue() {
+        return diceValue;
+    }
 
     public void okClicked() {
         dispose();
@@ -57,9 +61,5 @@ public class UtilDiceRoll extends JDialog {
         labelPrompt.setText("You rolled " + getDiceValue());
         btnDice.setEnabled(false);
         btnOK.setEnabled(true);
-    }
-
-    public int getDiceValue() {
-        return diceValue;
     }
 }

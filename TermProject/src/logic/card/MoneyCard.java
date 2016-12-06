@@ -6,7 +6,6 @@ import logic.player.Player;
 public class MoneyCard extends Card {
 
     private final int amount;
-
     private final String label;
     private final CardType cardType;
 
@@ -17,12 +16,6 @@ public class MoneyCard extends Card {
     }
 
     @Override
-    public void applyAction() {
-        Player currentPlayer = GameController.INSTANCE.getCurrentPlayer();
-        currentPlayer.setMoney(currentPlayer.getMoney() + amount);
-    }
-
-    @Override
     public CardType getCardType() {
         return cardType;
     }
@@ -30,5 +23,11 @@ public class MoneyCard extends Card {
     @Override
     public String getLabel() {
         return label;
+    }
+
+    @Override
+    public void applyAction() {
+        Player currentPlayer = GameController.INSTANCE.getCurrentPlayer();
+        currentPlayer.setMoney(currentPlayer.getMoney() + amount);
     }
 }

@@ -1,7 +1,7 @@
 package logic.player;
 
-import java.awt.Color;
 import controller.GameController;
+import java.awt.Color;
 import logic.cell.Cell;
 import logic.gameBoard.GameBoard;
 
@@ -33,12 +33,13 @@ public class Player {
         this.inJail = inJail;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public int getMoney() {
         return money;
+    }
+    
+    public String getName() {
+        return name;
     }
 
     public PlayerProperty getProperty() {

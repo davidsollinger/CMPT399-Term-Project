@@ -19,9 +19,9 @@ public class DiceRollDialog extends JDialog {
     private final int ROWS = 2;
     private final int COLS = 2;
 
+    private int[] diceRoll;
     private JButton btnOK, btnCancel;
     private JTextField txtDiceRoll;
-    private int[] diceRoll;
 
     public DiceRollDialog(Frame parent) {
         super(parent);
@@ -61,6 +61,10 @@ public class DiceRollDialog extends JDialog {
 
         super.pack();
     }
+    
+    public int[] getDiceRoll() {
+        return Arrays.copyOf(diceRoll, diceRoll.length);
+    }
 
     private void setDiceRollValues(int amount) {
         if (isAmountEven(amount)) {
@@ -84,9 +88,5 @@ public class DiceRollDialog extends JDialog {
                     "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return -1;
-    }
-
-    public int[] getDiceRoll() {
-        return Arrays.copyOf(diceRoll, diceRoll.length);
     }
 }

@@ -15,11 +15,10 @@ public class BuyHouseDialog extends JDialog {
     
     private final int ROWS = 3;
     private final int COLS = 2;
-
+    private final Player player;
+    
     private JComboBox<String> monopolyComboBox;
     private JComboBox<Integer> numberComboBox;
-
-    private final Player player;
 
     public BuyHouseDialog(Player player) {
         this.player = player;

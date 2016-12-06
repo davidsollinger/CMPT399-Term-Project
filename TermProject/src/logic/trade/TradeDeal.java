@@ -19,15 +19,7 @@ public class TradeDeal {
     public String getPropertyName() {
         return propertyName;
     }
-
-    public String makeMessage() {
-        GameController gameController = GameController.INSTANCE;
-        return gameController.getCurrentPlayer() + " wishes to purchase "
-                + propertyName + " from " + gameController.getPlayerController().getPlayer(playerIndex)
-                + " for " + amount + ".  " + gameController.getPlayerController().getPlayer(playerIndex)
-                + ", do you wish to trade your property?";
-    }
-
+    
     public void setAmount(int amount) {
         this.amount = amount;
     }
@@ -40,4 +32,11 @@ public class TradeDeal {
         this.playerIndex = playerIndex;
     }
 
+    public String makeMessage() {
+        GameController gameController = GameController.INSTANCE;
+        return gameController.getCurrentPlayer() + " wishes to purchase "
+                + propertyName + " from " + gameController.getPlayerController().getPlayer(playerIndex)
+                + " for " + amount + ".  " + gameController.getPlayerController().getPlayer(playerIndex)
+                + ", do you wish to trade your property?";
+    }
 }

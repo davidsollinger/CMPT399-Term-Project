@@ -42,6 +42,10 @@ public class GUIRespondDialog extends JDialog implements RespondDialog {
         super.pack();
         super.setLocationRelativeTo(null);
     }
+    
+    public void setDeal(TradeDeal deal) {
+        txtMessage.setText(deal.makeMessage());
+    }
 
     private void addActionListeners(JButton btnYes, JButton btnNo) {
         btnYes.addActionListener((ActionEvent e) -> {
@@ -58,10 +62,6 @@ public class GUIRespondDialog extends JDialog implements RespondDialog {
     @Override
     public boolean hasResponded() {
         return response;
-    }
-    
-    public void setDeal(TradeDeal deal) {
-        txtMessage.setText(deal.makeMessage());
     }
     
 }

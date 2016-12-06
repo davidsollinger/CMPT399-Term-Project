@@ -36,18 +36,18 @@ public class RailRoadCell extends Cell {
     }
 
     @Override
-    protected void checkIfCurrentPlayer(Player currentPlayer) {
-        if (!isCurrentPlayer(currentPlayer)) {
-            currentPlayer.getActions().payRentTo(getPlayer(), getRent());
-        }
-    }
-
-    @Override
     public void playAction() {
         Player currentPlayer;
         if (!isAvailable()) {
             currentPlayer = GameController.INSTANCE.getCurrentPlayer();
             checkIfCurrentPlayer(currentPlayer);
+        }
+    }
+    
+    @Override
+    protected void checkIfCurrentPlayer(Player currentPlayer) {
+        if (!isCurrentPlayer(currentPlayer)) {
+            currentPlayer.getActions().payRentTo(getPlayer(), getRent());
         }
     }
 }

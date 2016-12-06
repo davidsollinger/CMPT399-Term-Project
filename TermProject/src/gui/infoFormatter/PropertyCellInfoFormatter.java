@@ -4,6 +4,10 @@ import logic.cell.Cell;
 import logic.cell.PropertyCell;
 
 public class PropertyCellInfoFormatter extends CellInfoFormatter {
+    
+    public PropertyCellInfoFormatter() {
+        super();
+    }
 
     @Override
     public String format(Cell cell) {

@@ -11,24 +11,25 @@ public class PlayerController {
 
     private final List<Player> players = new ArrayList<>();
 
-    private final List<PlayerColor> playerColors = new ArrayList<>(Arrays.asList(PlayerColor.GREEN,
-            PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN, PlayerColor.PEACH,
-            PlayerColor.TEAL, PlayerColor.PINK));
-
-    public int getNumberOfSellers() {
-        return players.size() - 1;
-    }
+    private final List<PlayerColor> playerColors = new ArrayList<>(
+            Arrays.asList(PlayerColor.GREEN, PlayerColor.BLUE,
+                PlayerColor.ORANGE, PlayerColor.RED, PlayerColor.TAN,
+                PlayerColor.PEACH, PlayerColor.TEAL, PlayerColor.PINK));
 
     public List<Player> getPlayerList() {
         return Collections.unmodifiableList(players);
     }
+    
+    public int getNumberOfSellers() {
+        return players.size() - 1;
+    }
+    
+    public int getPlayerIndex(Player player) {
+        return players.indexOf(player);
+    }
 
     public Player getPlayer(int index) {
         return players.get(index);
-    }
-
-    public int getPlayerIndex(Player player) {
-        return players.indexOf(player);
     }
 
     public List<PlayerColor> getPlayerColors() {
@@ -47,6 +48,11 @@ public class PlayerController {
         });
         return sellers;
     }
+    
+    public void setPlayerColor(PlayerColor color, int index) {
+        getPlayer(index).setPlayerColor(color.getColor());
+        removePlayerColor(color);
+    }
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -54,11 +60,6 @@ public class PlayerController {
 
     public void clearPlayers() {
         players.clear();
-    }
-
-    public void setPlayerColor(PlayerColor color, int index) {
-        getPlayer(index).setPlayerColor(color.getColor());
-        removePlayerColor(color);
     }
     
     public void movePlayer(int playerIndex, int diceValue) {

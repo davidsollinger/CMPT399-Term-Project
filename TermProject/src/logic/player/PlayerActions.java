@@ -24,17 +24,6 @@ public class PlayerActions {
         gameController.getGUIController().updateGUI();
     }
 
-    private void checkPlayerBankrupt(Player otherPlayer) {
-        if (player.isBankrupt()) {
-            player.setMoney(NONE);
-            exchangePropertyToPlayer(otherPlayer);
-        }
-    }
-
-    private void exchangePropertyToPlayer(Player otherPlayer) {
-        player.getProperty().exchangeProperty(otherPlayer);
-    }
-
     public void payRentTo(Player owner, int rentValue) {
         if (player.getMoney() < rentValue) {
             owner.addMoney(player.getMoney());
@@ -79,6 +68,17 @@ public class PlayerActions {
             player.getProperty().removeUtility(cell);
         }
         player.addMoney(amount);
+    }
+    
+    private void exchangePropertyToPlayer(Player otherPlayer) {
+        player.getProperty().exchangeProperty(otherPlayer);
+    }
+    
+    private void checkPlayerBankrupt(Player otherPlayer) {
+        if (player.isBankrupt()) {
+            player.setMoney(NONE);
+            exchangePropertyToPlayer(otherPlayer);
+        }
     }
     
     private boolean isCellInstanceOfPropertyCell(Cell cell) {

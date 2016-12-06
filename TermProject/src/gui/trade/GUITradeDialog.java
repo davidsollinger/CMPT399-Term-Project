@@ -1,5 +1,6 @@
 package gui.trade;
 
+import controller.GameController;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -14,7 +15,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import controller.GameController;
 import logic.cell.Cell;
 import logic.player.Player;
 import logic.trade.NullTradeDeal;
@@ -64,6 +64,35 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         super.setLocationRelativeTo(null);
     }
 
+    private static boolean curPlayerHasEnough(int amount, Player currentPlayer) {
+        return amount > 0 && amount < currentPlayer.getMoney();
+    }
+
+    private int tryToGetInt() throws HeadlessException {
+        try {
+            return Integer.parseInt(txtAmount.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(GUITradeDialog.this,
+                    "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return -1;
+    }
+    
+    private List<Player> addAllSellers() {
+        List<Player> sellers = gameController.getPlayerController().getSellerList();
+        sellers.stream().forEach((player) -> {
+            comboSellers.addItem(player);
+        });
+        return sellers;
+    }
+
+    private void buildTradeProperty() {
+        List<Player> sellers = addAllSellers();
+        if (!sellers.isEmpty()) {
+            updatePropertiesCombo(sellers.get(0));
+        }
+    }
+    
     private void addActionListeners() {
         btnCancel.addActionListener((ActionEvent e) -> {
             GUITradeDialog.this.setVisible(false);
@@ -84,18 +113,7 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
             setVisible(false);
         });
     }
-
-    private static boolean curPlayerHasEnough(int amount, Player currentPlayer) {
-        return amount > 0 && amount < currentPlayer.getMoney();
-    }
-
-    private void createTradeDealText(int amount, Cell cell, Player player) {
-        deal = new TradeDeal();
-        deal.setAmount(amount);
-        deal.setPropertyName(cell.getName());
-        deal.setSellerIndex(gameController.getPlayerController().getPlayerIndex(player));
-    }
-
+    
     private void buildTradePropertyContentPane() {
         Container contentPane = super.getContentPane();
         contentPane.setLayout(new GridLayout(ROWS, COLS));
@@ -108,37 +126,14 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         contentPane.add(btnOK);
         contentPane.add(btnCancel);
     }
-
-    private int tryToGetInt() throws HeadlessException {
-        try {
-            return Integer.parseInt(txtAmount.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(GUITradeDialog.this,
-                    "Amount should be an integer", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return -1;
+    
+    private void createTradeDealText(int amount, Cell cell, Player player) {
+        deal = new TradeDeal();
+        deal.setAmount(amount);
+        deal.setPropertyName(cell.getName());
+        deal.setSellerIndex(gameController.getPlayerController().getPlayerIndex(player));
     }
-
-    private void buildTradeProperty() {
-        List<Player> sellers = addAllSellers();
-        if (!sellers.isEmpty()) {
-            updatePropertiesCombo(sellers.get(0));
-        }
-    }
-
-    private List<Player> addAllSellers() {
-        List<Player> sellers = gameController.getPlayerController().getSellerList();
-        sellers.stream().forEach((player) -> {
-            comboSellers.addItem(player);
-        });
-        return sellers;
-    }
-
-    @Override
-    public TradeDeal getTradeDeal() {
-        return deal;
-    }
-
+    
     private void updatePropertiesCombo(Player player) {
         comboProperties.removeAllItems();
         Cell[] cells = player.getProperty().getAllProperties();
@@ -146,6 +141,11 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
         for (Cell cell : cells) {
             comboProperties.addItem(cell);
         }
+    }
+
+    @Override
+    public TradeDeal getTradeDeal() {
+        return deal;
     }
 
 }

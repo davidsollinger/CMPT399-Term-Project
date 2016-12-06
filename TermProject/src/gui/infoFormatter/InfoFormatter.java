@@ -21,6 +21,14 @@ public class InfoFormatter {
             addFormatters();
         }
     }
+    
+    private InfoFormatter() {
+    }
+    
+    public static String getCellInfo(Cell cell) {
+        CellInfoFormatter formatter = CELL_INFOFORMATTERS.get(cell.getClass());
+        return formatter.format(cell);
+    }
 
     private static void addFormatters() {
         CellInfoFormatterFactory cellInfoFormatterFactory = new CellInfoFormatterFactory();
@@ -41,11 +49,6 @@ public class InfoFormatter {
                 UtilityCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Utility"));
         CELL_INFOFORMATTERS.put(
                 CardCell.class, cellInfoFormatterFactory.getCellInfoFormatter("Community Chest"));
-    }
-
-    public static String getCellInfo(Cell cell) {
-        CellInfoFormatter formatter = CELL_INFOFORMATTERS.get(cell.getClass());
-        return formatter.format(cell);
     }
 
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import controller.GameController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -11,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
-import controller.GameController;
 import logic.card.Card;
 import logic.cell.Cell;
 import logic.player.Player;
@@ -24,7 +24,6 @@ public class PlayerPanel extends JPanel {
     private final int TEXT_AREA_COLS = 70;
     private final int PNL_ACTION_ROWS = 3;
     private final int PNL_ACTION_COLS = 3;
-
     private final JButton btnBuyHouse;
     private final JButton btnDrawCard;
     private final JButton btnEndTurn;
@@ -36,7 +35,6 @@ public class PlayerPanel extends JPanel {
     private final JLabel nameLabel;
     private final Player player;
     private final JTextArea propertyText;
-
     private final GameController gameController;
 
     public PlayerPanel(Player player) {
@@ -58,6 +56,83 @@ public class PlayerPanel extends JPanel {
 
         initPlayerPanelButtons();
         addActionListeners();
+    }
+    
+    public void displayInfo() {
+        setPlayerLabels();
+        StringBuilder buf = new StringBuilder();
+        Cell[] cells = player.getProperty().getAllProperties();
+        for (Cell cell : cells) {
+            buf.append(cell)
+                    .append("\n");
+        }
+        propertyText.setText(buf.toString());
+    }
+
+    public void setBuyHouseEnabled(boolean enabled) {
+        btnBuyHouse.setEnabled(enabled);
+    }
+
+    public void setDrawCardEnabled(boolean enabled) {
+        btnDrawCard.setEnabled(enabled);
+    }
+
+    public void setEndTurnEnabled(boolean enabled) {
+        btnEndTurn.setEnabled(enabled);
+    }
+
+    public void setGetOutOfJailEnabled(boolean enabled) {
+        btnGetOutOfJail.setEnabled(enabled);
+    }
+
+    public void setPurchasePropertyEnabled(boolean enabled) {
+        btnPurchaseProperty.setEnabled(enabled);
+    }
+
+    public void setRollDiceEnabled(boolean enabled) {
+        btnRollDice.setEnabled(enabled);
+    }
+
+    public void setTradeEnabled(boolean enabled) {
+        btnTrade.setEnabled(enabled);
+    }
+    
+    public boolean isBuyHouseButtonEnabled() {
+        return btnBuyHouse.isEnabled();
+    }
+
+    public boolean isDrawCardButtonEnabled() {
+        return btnDrawCard.isEnabled();
+    }
+
+    public boolean isEndTurnButtonEnabled() {
+        return btnEndTurn.isEnabled();
+    }
+
+    public boolean isGetOutOfJailButtonEnabled() {
+        return btnGetOutOfJail.isEnabled();
+    }
+
+    public boolean isPurchasePropertyButtonEnabled() {
+        return btnPurchaseProperty.isEnabled();
+    }
+
+    public boolean isRollDiceButtonEnabled() {
+        return btnRollDice.isEnabled();
+    }
+
+    public boolean isTradeButtonEnabled() {
+        return btnTrade.isEnabled();
+    }
+    
+    private void setPlayerLabels() {
+        Color color = new Color(player.getPlayerColor().getRed(), player.getPlayerColor().getGreen(),
+                player.getPlayerColor().getBlue(), 200);
+
+        nameLabel.setText(player.getName());
+        moneyLabel.setText("$ " + player.getMoney());
+        nameLabel.setForeground(color);
+        moneyLabel.setForeground(color);
     }
 
     private void setUpPanels() {
@@ -143,82 +218,5 @@ public class PlayerPanel extends JPanel {
         btnTrade.addActionListener((ActionEvent e) -> {
             gameController.getGUIController().btnTradeClicked();
         });
-    }
-
-    public void displayInfo() {
-        setPlayerLabels();
-        StringBuilder buf = new StringBuilder();
-        Cell[] cells = player.getProperty().getAllProperties();
-        for (Cell cell : cells) {
-            buf.append(cell)
-                    .append("\n");
-        }
-        propertyText.setText(buf.toString());
-    }
-
-    private void setPlayerLabels() {
-        Color color = new Color(player.getPlayerColor().getRed(), player.getPlayerColor().getGreen(),
-                player.getPlayerColor().getBlue(), 200);
-
-        nameLabel.setText(player.getName());
-        moneyLabel.setText("$ " + player.getMoney());
-        nameLabel.setForeground(color);
-        moneyLabel.setForeground(color);
-    }
-
-    public boolean isBuyHouseButtonEnabled() {
-        return btnBuyHouse.isEnabled();
-    }
-
-    public boolean isDrawCardButtonEnabled() {
-        return btnDrawCard.isEnabled();
-    }
-
-    public boolean isEndTurnButtonEnabled() {
-        return btnEndTurn.isEnabled();
-    }
-
-    public boolean isGetOutOfJailButtonEnabled() {
-        return btnGetOutOfJail.isEnabled();
-    }
-
-    public boolean isPurchasePropertyButtonEnabled() {
-        return btnPurchaseProperty.isEnabled();
-    }
-
-    public boolean isRollDiceButtonEnabled() {
-        return btnRollDice.isEnabled();
-    }
-
-    public boolean isTradeButtonEnabled() {
-        return btnTrade.isEnabled();
-    }
-
-    public void setBuyHouseEnabled(boolean enabled) {
-        btnBuyHouse.setEnabled(enabled);
-    }
-
-    public void setDrawCardEnabled(boolean enabled) {
-        btnDrawCard.setEnabled(enabled);
-    }
-
-    public void setEndTurnEnabled(boolean enabled) {
-        btnEndTurn.setEnabled(enabled);
-    }
-
-    public void setGetOutOfJailEnabled(boolean enabled) {
-        btnGetOutOfJail.setEnabled(enabled);
-    }
-
-    public void setPurchasePropertyEnabled(boolean enabled) {
-        btnPurchaseProperty.setEnabled(enabled);
-    }
-
-    public void setRollDiceEnabled(boolean enabled) {
-        btnRollDice.setEnabled(enabled);
-    }
-
-    public void setTradeEnabled(boolean enabled) {
-        btnTrade.setEnabled(enabled);
     }
 }
