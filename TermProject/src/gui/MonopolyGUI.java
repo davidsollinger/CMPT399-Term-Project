@@ -1,5 +1,6 @@
-package logic;
+package gui;
 
+import logic.trade.RespondDialog;
 import logic.player.Player;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;

@@ -1,8 +1,8 @@
 package termproject;
 
 import Mocks.MockGUI;
-import gameboardvariants.GameBoardCCJail;
 import controller.GameController;
+import gameboardvariants.GameBoardCCJail;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.card.JailCard;
@@ -15,8 +15,9 @@ import org.junit.Test;
 
 public class GoToJailCardTest {
 
-    private GameController gameController;
     private final Card jailCard = new JailCard(CardType.COMMUNITY);
+    
+    private GameController gameController;
 
     @Before
     public void setUp() {
