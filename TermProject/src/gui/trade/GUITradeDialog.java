@@ -28,10 +28,10 @@ public class GUITradeDialog extends JDialog implements TradeDialog {
     private final int ROWS = 4;
     private final int COLS = 2;
     private final JButton btnOK, btnCancel;
-    private final JComboBox<Player> comboSellers;
-    private final JComboBox<Cell> comboProperties;
     private final JTextField txtAmount;
     private final GameController gameController;
+    private final JComboBox<Player> comboSellers;
+    private final JComboBox<Cell> comboProperties;
 
     private TradeDeal deal;
 
