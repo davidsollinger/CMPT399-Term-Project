@@ -2,9 +2,9 @@ package gui.infoFormatter;
 
 import logic.cell.Cell;
 
-public class RRCellInfoFormatter extends CellInfoFormatter {
+public class ServiceCellInfoFormatter extends CellInfoFormatter {
 
-    public RRCellInfoFormatter(String color) {
+    public ServiceCellInfoFormatter(String color) {
         super(color);
     }
 
