@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import logic.card.Card;
 import logic.card.CardType;
 import logic.cell.CardCell;
@@ -130,6 +131,9 @@ public enum GameController {
     }
 
     public void switchTurn() {
+        while (nextPlayer().isBankrupt()) {
+            turn = (turn + 1) % getNumberOfPlayers();
+        }
         turn = (turn + 1) % getNumberOfPlayers();
         if (!getCurrentPlayer().isInJail()) {
             guiController.getGUI().enablePlayerTurn(turn);
@@ -165,8 +169,17 @@ public enum GameController {
         return testMode;
     }
     
-    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
-        return newIndex <= positionIndex;
+    public boolean isGameOver() {
+        int numOfBankruptPlayers = 0;
+        List<Player> players = playerController.getPlayerList();
+        numOfBankruptPlayers = players.stream().filter((player) -> (player.isBankrupt())).map((_item) -> 1).reduce(numOfBankruptPlayers, Integer::sum);
+        return numOfBankruptPlayers == (players.size() - 1);
+    }
+    
+    private Player nextPlayer() {
+        int turnCopy = turn;
+        turnCopy = (turnCopy + 1) % getNumberOfPlayers();
+        return playerController.getPlayer(turnCopy);
     }
     
     private void checkCellIsAvailible(Cell cell, Player player, int playerIndex) {
@@ -177,9 +190,13 @@ public enum GameController {
     }
 
     private void checkAvailibleForPurchase(int price, Player player, int playerIndex) {
-        if (hasEnoughMoney(price, player.getMoney()) && price > 0) {
+        if (hasEnoughMoney(price, player.getMoney())) {
             guiController.getGUI().enablePurchaseBtn(playerIndex);
         }
+    }
+    
+    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
+        return newIndex < positionIndex;
     }
     
     private static boolean isCellTypeCommunity(CardCell cell) {

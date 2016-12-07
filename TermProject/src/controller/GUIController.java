@@ -2,10 +2,10 @@ package controller;
 
 import gui.MainWindow;
 import logic.Die;
-import logic.trade.RespondDialog;
 import logic.card.Card;
 import logic.cell.CardCell;
 import logic.player.Player;
+import logic.trade.RespondDialog;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 
@@ -53,9 +53,10 @@ public class GUIController {
     public void btnEndTurnClicked() {
         setAllButtonEnabled(false);
         GameController.INSTANCE.getCurrentPlayer().getPosition().playAction();
-        if (!GameController.INSTANCE.getCurrentPlayer().isBankrupt()) {
-            GameController.INSTANCE.switchTurn();
+        if (GameController.INSTANCE.isGameOver()) {
+            gui.endGame();
         }
+        GameController.INSTANCE.switchTurn();
         updateGUI();
     }
 
@@ -85,7 +86,9 @@ public class GUIController {
                     .append(", you rolled ")
                     .append(rolls[0])
                     .append(" and ")
-                    .append(rolls[1]);
+                    .append(rolls[1])
+                    .append(", for a total of ")
+                    .append(rolls[0] + rolls[1]);
             gui.showMessage(msg.toString());
             GameController.INSTANCE.movePlayer(player, rolls[0] + rolls[1]);
             gui.setBuyHouseEnabled(false);
