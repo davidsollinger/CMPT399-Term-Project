@@ -55,11 +55,8 @@ public class GUIController {
         GameController.INSTANCE.getCurrentPlayer().getPosition().playAction();
         if (GameController.INSTANCE.isGameOver()) {
             gui.endGame();
-            return;
         }
-        if (!GameController.INSTANCE.getCurrentPlayer().isBankrupt()) {
-            GameController.INSTANCE.switchTurn();
-        }
+        GameController.INSTANCE.switchTurn();
         updateGUI();
     }
 
@@ -89,7 +86,9 @@ public class GUIController {
                     .append(", you rolled ")
                     .append(rolls[0])
                     .append(" and ")
-                    .append(rolls[1]);
+                    .append(rolls[1])
+                    .append(", for a total of ")
+                    .append(rolls[0] + rolls[1]);
             gui.showMessage(msg.toString());
             GameController.INSTANCE.movePlayer(player, rolls[0] + rolls[1]);
             gui.setBuyHouseEnabled(false);

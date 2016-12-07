@@ -1,8 +1,8 @@
 package Mocks;
 
-import logic.trade.RespondDialog;
 import gui.MainWindow;
 import logic.player.Player;
+import logic.trade.RespondDialog;
 import logic.trade.TradeDeal;
 import logic.trade.TradeDialog;
 
@@ -125,5 +125,10 @@ public class MockGUI extends MainWindow {
     // Ignore override
     @Override
     public void update() {
+    }
+    
+    // Ignore override
+    @Override
+    public void endGame() {
     }
 }

@@ -1,5 +1,6 @@
 package logic.cell;
 
+import logic.player.NullPlayer;
 import logic.player.Player;
 
 public class Cell {
@@ -30,6 +31,12 @@ public class Cell {
     
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+    
+    
+    public void reset() {
+        setPlayer(new NullPlayer());
+        setAvailable(false);
     }
 
     public boolean isAvailable() {

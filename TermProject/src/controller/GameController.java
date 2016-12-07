@@ -14,7 +14,7 @@ public enum GameController {
     public static final int MAX_PLAYERS = 8;
     
     private final int GO_CELL_AMOUNT = 200;
-    private final int INIT_AMOUNT_OF_MONEY = 200;
+    private final int INIT_AMOUNT_OF_MONEY = 1500;
     private final PlayerController playerController;
     private final GUIController guiController;
     private final GameBoardController gameBoardController;
@@ -131,6 +131,9 @@ public enum GameController {
     }
 
     public void switchTurn() {
+        while (nextPlayer().isBankrupt()) {
+            turn = (turn + 1) % getNumberOfPlayers();
+        }
         turn = (turn + 1) % getNumberOfPlayers();
         if (!getCurrentPlayer().isInJail()) {
             guiController.getGUI().enablePlayerTurn(turn);
@@ -173,8 +176,10 @@ public enum GameController {
         return numOfBankruptPlayers == (players.size() - 1);
     }
     
-    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
-        return newIndex <= positionIndex;
+    private Player nextPlayer() {
+        int turnCopy = turn;
+        turnCopy = (turnCopy + 1) % getNumberOfPlayers();
+        return playerController.getPlayer(turnCopy);
     }
     
     private void checkCellIsAvailible(Cell cell, Player player, int playerIndex) {
@@ -185,9 +190,13 @@ public enum GameController {
     }
 
     private void checkAvailibleForPurchase(int price, Player player, int playerIndex) {
-        if (hasEnoughMoney(price, player.getMoney()) && price > 0) {
+        if (hasEnoughMoney(price, player.getMoney())) {
             guiController.getGUI().enablePurchaseBtn(playerIndex);
         }
+    }
+    
+    private boolean hasEnoughMoney(int newIndex, int positionIndex) {
+        return newIndex < positionIndex;
     }
     
     private static boolean isCellTypeCommunity(CardCell cell) {

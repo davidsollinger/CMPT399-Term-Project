@@ -1,6 +1,7 @@
 package logic.cell;
 
 import controller.GameController;
+import logic.player.NullPlayer;
 import logic.player.Player;
 
 public class PropertyCell extends Cell {
@@ -79,6 +80,13 @@ public class PropertyCell extends Cell {
             rentToCharge = rent * (numHouses + 1);
         }
         return rentToCharge;
+    }
+    
+    @Override
+    public void reset() {
+        setPlayer(new NullPlayer());
+        setAvailable(false);
+        setNumHouses(0);
     }
 
     @Override

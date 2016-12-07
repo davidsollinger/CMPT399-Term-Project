@@ -35,8 +35,8 @@ public class PlayerActions {
     }
 
     public void purchase() {
+        Cell cell = player.getPosition();
         if (player.getPosition().isAvailable()) {
-            Cell cell = player.getPosition();
             cell.setAvailable(false);
             buyProperty(cell, cell.getPrice());
         }
@@ -78,6 +78,10 @@ public class PlayerActions {
         if (player.isBankrupt()) {
             player.setMoney(NONE);
             exchangePropertyToPlayer(otherPlayer);
+            Cell [] properties = player.getProperty().getAllProperties();
+            for (Cell propertie : properties) {
+                propertie.reset();
+            }
         }
     }
     
